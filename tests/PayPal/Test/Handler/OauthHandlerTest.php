@@ -31,7 +31,7 @@ class OauthHandlerTest extends TestCase
      */
     public $config;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->apiContext = new ApiContext(
             new OAuthTokenCredential(
@@ -41,7 +41,7 @@ class OauthHandlerTest extends TestCase
         );
     }
 
-    public function modeProvider()
+    public function modeProvider(): array
     {
         return [
             [ ['mode' => 'sandbox'] ],
@@ -56,7 +56,7 @@ class OauthHandlerTest extends TestCase
      * @dataProvider modeProvider
      * @param $configs
      */
-    public function testGetEndpoint($configs)
+    public function testGetEndpoint(array $configs): void
     {
         $config = $configs + [
             'cache.enabled' => true,

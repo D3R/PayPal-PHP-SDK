@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 class ArrayUtilTest extends TestCase
 {
 
-    public function testIsAssocArray()
+    public function testIsAssocArray(): void
     {
         $arr = [1, 2, 3];
         $this->assertEquals(false, ArrayUtil::isAssocArray($arr));

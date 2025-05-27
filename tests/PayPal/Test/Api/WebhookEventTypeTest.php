@@ -20,7 +20,7 @@ class WebhookEventTypeTest extends TestCase
      * Gets Json String of Object WebhookEventType
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"name":"TestSample","description":"TestSample","status":"TestSample"}';
     }
@@ -29,7 +29,7 @@ class WebhookEventTypeTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return WebhookEventType
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\WebhookEventType
     {
         return new WebhookEventType(self::getJson());
     }
@@ -39,7 +39,7 @@ class WebhookEventTypeTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return WebhookEventType
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\WebhookEventType
     {
         $obj = new WebhookEventType(self::getJson());
         $this->assertNotNull($obj);
@@ -54,7 +54,7 @@ class WebhookEventTypeTest extends TestCase
      * @depends testSerializationDeserialization
      * @param WebhookEventType $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getName(), "TestSample");
         $this->assertEquals($obj->getDescription(), "TestSample");
@@ -65,7 +65,7 @@ class WebhookEventTypeTest extends TestCase
      * @dataProvider mockProvider
      * @param WebhookEventType $obj
      */
-    public function testSubscribedEventTypes($obj, $mockApiContext)
+    public function testSubscribedEventTypes(\PayPal\Api\WebhookEventType $obj, $mockApiContext): void
     {
         $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -84,7 +84,7 @@ class WebhookEventTypeTest extends TestCase
      * @dataProvider mockProvider
      * @param WebhookEventType $obj
      */
-    public function testAvailableEventTypes($obj, $mockApiContext)
+    public function testAvailableEventTypes(\PayPal\Api\WebhookEventType $obj, $mockApiContext): void
     {
         $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -100,7 +100,7 @@ class WebhookEventTypeTest extends TestCase
         $this->assertNotNull($result);
     }
 
-    public function mockProvider()
+    public function mockProvider(): array
     {
         $obj = self::getObject();
         $mockApiContext = $this->getMockBuilder('ApiContext')

@@ -20,7 +20,7 @@ class WebhookTest extends TestCase
      * Gets Json String of Object Webhook
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"id":"TestSample","url":"http://www.google.com","event_types":' .WebhookEventTypeTest::getJson() . ',"links":' .LinksTest::getJson() . '}';
     }
@@ -29,7 +29,7 @@ class WebhookTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return Webhook
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\Webhook
     {
         return new Webhook(self::getJson());
     }
@@ -39,7 +39,7 @@ class WebhookTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return Webhook
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\Webhook
     {
         $obj = new Webhook(self::getJson());
         $this->assertNotNull($obj);
@@ -55,7 +55,7 @@ class WebhookTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Webhook $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getId(), "TestSample");
         $this->assertEquals($obj->getUrl(), "http://www.google.com");
@@ -67,7 +67,7 @@ class WebhookTest extends TestCase
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Url is not a fully qualified URL
      */
-    public function testUrlValidationForUrl()
+    public function testUrlValidationForUrl(): void
     {
         $obj = new Webhook();
         $obj->setUrl(null);
@@ -76,7 +76,7 @@ class WebhookTest extends TestCase
      * @dataProvider mockProvider
      * @param Webhook $obj
      */
-    public function testCreate($obj, $mockApiContext)
+    public function testCreate(\PayPal\Api\Webhook $obj, $mockApiContext): void
     {
         $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -95,7 +95,7 @@ class WebhookTest extends TestCase
      * @dataProvider mockProvider
      * @param Webhook $obj
      */
-    public function testGet($obj, $mockApiContext)
+    public function testGet(\PayPal\Api\Webhook $obj, $mockApiContext): void
     {
         $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -114,7 +114,7 @@ class WebhookTest extends TestCase
      * @dataProvider mockProvider
      * @param Webhook $obj
      */
-    public function testGetAll($obj, $mockApiContext)
+    public function testGetAll(\PayPal\Api\Webhook $obj, $mockApiContext): void
     {
         $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -134,7 +134,7 @@ class WebhookTest extends TestCase
      * @dataProvider mockProvider
      * @param Webhook $obj
      */
-    public function testUpdate($obj, $mockApiContext)
+    public function testUpdate(\PayPal\Api\Webhook $obj, $mockApiContext): void
     {
         $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -154,7 +154,7 @@ class WebhookTest extends TestCase
      * @dataProvider mockProvider
      * @param Webhook $obj
      */
-    public function testDelete($obj, $mockApiContext)
+    public function testDelete(\PayPal\Api\Webhook $obj, $mockApiContext): void
     {
         $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -170,7 +170,7 @@ class WebhookTest extends TestCase
         $this->assertNotNull($result);
     }
 
-    public function mockProvider()
+    public function mockProvider(): array
     {
         $obj = self::getObject();
         $mockApiContext = $this->getMockBuilder('ApiContext')

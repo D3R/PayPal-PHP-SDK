@@ -16,7 +16,7 @@ class AgreementTest extends TestCase
      * Gets Json String of Object Agreement
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"id":"TestSample","state":"TestSample","name":"TestSample","description":"TestSample","start_date":"TestSample","payer":' .PayerTest::getJson() . ',"shipping_address":' .AddressTest::getJson() . ',"override_merchant_preferences":' .MerchantPreferencesTest::getJson() . ',"override_charge_models":' .OverrideChargeModelTest::getJson() . ',"plan":' .PlanTest::getJson() . ',"create_time":"TestSample","agreement_details":{"outstanding_balance":{"currency":"USD","value":"0.00"},"cycles_remaining":"12","cycles_completed":"0","next_billing_date":"2015-06-17T10:00:00Z","last_payment_date":"2015-03-18T20:20:17Z","last_payment_amount":{"currency":"USD","value":"1.00"},"final_payment_date":"2017-04-17T10:00:00Z","failed_payment_count":"0"},"update_time":"TestSample","links":' .LinksTest::getJson() . '}';
     }
@@ -25,7 +25,7 @@ class AgreementTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return Agreement
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\Agreement
     {
         return new Agreement(self::getJson());
     }
@@ -35,7 +35,7 @@ class AgreementTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return Agreement
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\Agreement
     {
         $obj = new Agreement(self::getJson());
         $this->assertNotNull($obj);
@@ -60,7 +60,7 @@ class AgreementTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Agreement $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getId(), "TestSample");
         $this->assertEquals($obj->getState(), "TestSample");
@@ -81,7 +81,7 @@ class AgreementTest extends TestCase
      * @dataProvider mockProvider
      * @param Agreement $obj
      */
-    public function testCreate($obj, $mockApiContext)
+    public function testCreate(\PayPal\Api\Agreement $obj, $mockApiContext): void
     {
         $mockPayPalRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -100,7 +100,7 @@ class AgreementTest extends TestCase
      * @dataProvider mockProvider
      * @param Agreement $obj
      */
-    public function testExecute($obj, $mockApiContext)
+    public function testExecute(\PayPal\Api\Agreement $obj, $mockApiContext): void
     {
         $mockPayPalRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -119,7 +119,7 @@ class AgreementTest extends TestCase
      * @dataProvider mockProvider
      * @param Agreement $obj
      */
-    public function testGet($obj, $mockApiContext)
+    public function testGet(\PayPal\Api\Agreement $obj, $mockApiContext): void
     {
         $mockPayPalRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -138,7 +138,7 @@ class AgreementTest extends TestCase
      * @dataProvider mockProvider
      * @param Agreement $obj
      */
-    public function testUpdate($obj, $mockApiContext)
+    public function testUpdate(\PayPal\Api\Agreement $obj, $mockApiContext): void
     {
         $mockPayPalRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -158,7 +158,7 @@ class AgreementTest extends TestCase
      * @dataProvider mockProvider
      * @param Agreement $obj
      */
-    public function testSuspend($obj, $mockApiContext)
+    public function testSuspend(\PayPal\Api\Agreement $obj, $mockApiContext): void
     {
         $mockPayPalRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -178,7 +178,7 @@ class AgreementTest extends TestCase
      * @dataProvider mockProvider
      * @param Agreement $obj
      */
-    public function testReActivate($obj, $mockApiContext)
+    public function testReActivate(\PayPal\Api\Agreement $obj, $mockApiContext): void
     {
         $mockPayPalRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -198,7 +198,7 @@ class AgreementTest extends TestCase
      * @dataProvider mockProvider
      * @param Agreement $obj
      */
-    public function testCancel($obj, $mockApiContext)
+    public function testCancel(\PayPal\Api\Agreement $obj, $mockApiContext): void
     {
         $mockPayPalRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -218,7 +218,7 @@ class AgreementTest extends TestCase
      * @dataProvider mockProvider
      * @param Agreement $obj
      */
-    public function testBillBalance($obj, $mockApiContext)
+    public function testBillBalance(\PayPal\Api\Agreement $obj, $mockApiContext): void
     {
         $mockPayPalRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -238,7 +238,7 @@ class AgreementTest extends TestCase
      * @dataProvider mockProvider
      * @param Agreement $obj
      */
-    public function testSetBalance($obj, $mockApiContext)
+    public function testSetBalance(\PayPal\Api\Agreement $obj, $mockApiContext): void
     {
         $mockPayPalRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -258,7 +258,7 @@ class AgreementTest extends TestCase
      * @dataProvider mockProvider
      * @param Agreement $obj
      */
-    public function testTransactions($obj, $mockApiContext)
+    public function testTransactions(\PayPal\Api\Agreement $obj, $mockApiContext): void
     {
         $mockPayPalRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -274,7 +274,7 @@ class AgreementTest extends TestCase
         $this->assertNotNull($result);
     }
 
-    public function mockProvider()
+    public function mockProvider(): array
     {
         $obj = self::getObject();
         $mockApiContext = $this->getMockBuilder('ApiContext')

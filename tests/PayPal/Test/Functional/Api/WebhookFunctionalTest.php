@@ -29,7 +29,7 @@ class WebhookFunctionalTest extends TestCase
 
     public $apiContext;
 
-    public function setUp()
+    public function setUp(): void
     {
         $className = $this->getClassName();
         $testName = $this->getName();
@@ -46,7 +46,7 @@ class WebhookFunctionalTest extends TestCase
      * Returns just the classname of the test you are executing. It removes the namespaces.
      * @return string
      */
-    public function getClassName()
+    public function getClassName(): string
     {
         return join('', array_slice(explode('\\', static::class), -1));
     }
@@ -73,7 +73,7 @@ class WebhookFunctionalTest extends TestCase
         return $result;
     }
 
-    public function deleteAll()
+    public function deleteAll(): void
     {
         $result = Webhook::getAll($this->apiContext, $this->mockPayPalRestCall);
         foreach ($result->getWebhooks() as $webhookObject) {
@@ -134,7 +134,7 @@ class WebhookFunctionalTest extends TestCase
      * @depends testGet
      * @param $webhook Webhook
      */
-    public function testUpdate($webhook)
+    public function testUpdate($webhook): void
     {
         $patches = [];
         foreach ($this->operation['request']['body'] as $request) {
@@ -169,7 +169,7 @@ class WebhookFunctionalTest extends TestCase
      * @depends testGet
      * @param $webhook Webhook
      */
-    public function testDelete($webhook)
+    public function testDelete($webhook): void
     {
         $result = $webhook->delete($this->apiContext, $this->mockPayPalRestCall);
         $this->assertTrue($result);

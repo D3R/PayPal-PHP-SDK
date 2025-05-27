@@ -27,14 +27,14 @@ class BillingAgreementsFunctionalTest extends TestCase
 
     public $mockPayPalRestCall;
 
-    public function setUp()
+    public function setUp(): void
     {
         $className = $this->getClassName();
         $testName = $this->getName();
         $this->setupTest($className, $testName);
     }
 
-    public function setupTest($className, $testName)
+    public function setupTest($className, $testName): void
     {
         $operationString = file_get_contents(__DIR__ . "/../resources/$className/$testName.json");
         $this->operation = json_decode($operationString, true);
@@ -49,7 +49,7 @@ class BillingAgreementsFunctionalTest extends TestCase
      * Returns just the classname of the test you are executing. It removes the namespaces.
      * @return string
      */
-    public function getClassName()
+    public function getClassName(): string
     {
         return join('', array_slice(explode('\\', static::class), -1));
     }
@@ -121,7 +121,7 @@ class BillingAgreementsFunctionalTest extends TestCase
      * @depends testGet
      * @param $agreement Agreement
      */
-    public function testUpdate($agreement)
+    public function testUpdate($agreement): void
     {
         /** @var Patch[] $request */
         $request = $this->operation['request']['body'][0];
@@ -170,7 +170,7 @@ class BillingAgreementsFunctionalTest extends TestCase
      * @param $agreement Agreement
      * @return Agreement
      */
-    public function testGetTransactions($agreement)
+    public function testGetTransactions($agreement): void
     {
         $params = ['start_date' => date('Y-m-d', strtotime('-15 years')), 'end_date' => date('Y-m-d', strtotime('+5 days'))];
         $result = Agreement::searchTransactions($agreement->getId(), $params, $this->apiContext, $this->mockPayPalRestCall);

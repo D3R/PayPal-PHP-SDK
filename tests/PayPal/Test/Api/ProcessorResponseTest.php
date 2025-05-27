@@ -16,7 +16,7 @@ class ProcessorResponseTest extends TestCase
      * Gets Json String of Object ProcessorResponse
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"response_code":"TestSample","avs_code":"TestSample","cvv_code":"TestSample","advice_code":"TestSample","eci_submitted":"TestSample","vpas":"TestSample"}';
     }
@@ -25,7 +25,7 @@ class ProcessorResponseTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return ProcessorResponse
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\ProcessorResponse
     {
         return new ProcessorResponse(self::getJson());
     }
@@ -35,7 +35,7 @@ class ProcessorResponseTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return ProcessorResponse
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\ProcessorResponse
     {
         $obj = new ProcessorResponse(self::getJson());
         $this->assertNotNull($obj);
@@ -53,7 +53,7 @@ class ProcessorResponseTest extends TestCase
      * @depends testSerializationDeserialization
      * @param ProcessorResponse $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getResponseCode(), "TestSample");
         $this->assertEquals($obj->getAvsCode(), "TestSample");

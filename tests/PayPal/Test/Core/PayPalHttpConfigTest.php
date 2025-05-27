@@ -14,7 +14,7 @@ class PayPalHttpConfigTest extends TestCase
 
     protected $object;
 
-    private $config = [
+    private array $config = [
         'http.ConnectionTimeOut' => '30',
         'http.Retry' => '5',
     ];
@@ -23,7 +23,7 @@ class PayPalHttpConfigTest extends TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
     }
 
@@ -31,14 +31,14 @@ class PayPalHttpConfigTest extends TestCase
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
     }
 
     /**
      * @test
      */
-    public function testHeaderFunctions()
+    public function testHeaderFunctions(): void
     {
         $o = new PayPalHttpConfig();
         $o->addHeader('key1', 'value1');
@@ -65,7 +65,7 @@ class PayPalHttpConfigTest extends TestCase
     /**
      * @test
      */
-    public function testCurlOpts()
+    public function testCurlOpts(): void
     {
         $o = new PayPalHttpConfig();
         $o->setCurlOptions(['k' => 'v']);
@@ -75,7 +75,7 @@ class PayPalHttpConfigTest extends TestCase
         $this->assertEquals('v', $curlOpts['k']);
     }
 
-    public function testRemoveCurlOpts()
+    public function testRemoveCurlOpts(): void
     {
         $o = new PayPalHttpConfig();
         $o->setCurlOptions(['k' => 'v']);
@@ -91,7 +91,7 @@ class PayPalHttpConfigTest extends TestCase
     /**
      * @test
      */
-    public function testUserAgent()
+    public function testUserAgent(): void
     {
         $ua = 'UAString';
         $o = new PayPalHttpConfig();
@@ -104,7 +104,7 @@ class PayPalHttpConfigTest extends TestCase
     /**
      * @test
      */
-    public function testSSLOpts()
+    public function testSSLOpts(): void
     {
         $sslCert = '../cacert.pem';
         $sslPass = 'passPhrase';
@@ -120,7 +120,7 @@ class PayPalHttpConfigTest extends TestCase
     /**
      * @test
      */
-    public function testProxyOpts()
+    public function testProxyOpts(): void
     {
         $proxy = 'http://me:secret@hostname:8081';
 

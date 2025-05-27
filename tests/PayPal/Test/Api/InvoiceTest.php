@@ -17,7 +17,7 @@ class InvoiceTest extends TestCase
      * Gets Json String of Object Invoice
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"id":"TestSample","number":"TestSample","template_id":"TestSample","uri":"TestSample","status":"TestSample","merchant_info":' .MerchantInfoTest::getJson() . ',"billing_info":' .BillingInfoTest::getJson() . ',"cc_info":' .ParticipantTest::getJson() . ',"shipping_info":' .ShippingInfoTest::getJson() . ',"items":' .InvoiceItemTest::getJson() . ',"invoice_date":"TestSample","payment_term":' .PaymentTermTest::getJson() . ',"reference":"TestSample","discount":' .CostTest::getJson() . ',"shipping_cost":' .ShippingCostTest::getJson() . ',"custom":' .CustomAmountTest::getJson() . ',"allow_partial_payment":true,"minimum_amount_due":' .CurrencyTest::getJson() . ',"tax_calculated_after_discount":true,"tax_inclusive":true,"terms":"TestSample","note":"TestSample","merchant_memo":"TestSample","logo_url":"http://www.google.com","total_amount":' .CurrencyTest::getJson() . ',"payments":' .PaymentDetailTest::getJson() . ',"refunds":' .RefundDetailTest::getJson() . ',"metadata":' .MetadataTest::getJson() . ',"additional_data":"TestSample","gratuity":' .CurrencyTest::getJson() . ',"paid_amount":' .PaymentSummaryTest::getJson() . ',"refunded_amount":' .PaymentSummaryTest::getJson() . ',"attachments":' .FileAttachmentTest::getJson() . '}';
     }
@@ -26,7 +26,7 @@ class InvoiceTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return Invoice
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\Invoice
     {
         return new Invoice(self::getJson());
     }
@@ -36,7 +36,7 @@ class InvoiceTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return Invoice
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\Invoice
     {
         $obj = new Invoice(self::getJson());
         $this->assertNotNull($obj);
@@ -80,7 +80,7 @@ class InvoiceTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Invoice $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getId(), "TestSample");
         $this->assertEquals($obj->getNumber(), "TestSample");
@@ -120,7 +120,7 @@ class InvoiceTest extends TestCase
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage LogoUrl is not a fully qualified URL
      */
-    public function testUrlValidationForLogoUrl()
+    public function testUrlValidationForLogoUrl(): void
     {
         $obj = new Invoice();
         $obj->setLogoUrl(null);
@@ -129,7 +129,7 @@ class InvoiceTest extends TestCase
      * @dataProvider mockProvider
      * @param Invoice $obj
      */
-    public function testCreate($obj, $mockApiContext)
+    public function testCreate(\PayPal\Api\Invoice $obj, $mockApiContext): void
     {
         $mockPayPalRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -148,7 +148,7 @@ class InvoiceTest extends TestCase
      * @dataProvider mockProvider
      * @param Invoice $obj
      */
-    public function testSearch($obj, $mockApiContext)
+    public function testSearch(\PayPal\Api\Invoice $obj, $mockApiContext): void
     {
         $mockPayPalRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -168,7 +168,7 @@ class InvoiceTest extends TestCase
      * @dataProvider mockProvider
      * @param Invoice $obj
      */
-    public function testSend($obj, $mockApiContext)
+    public function testSend(\PayPal\Api\Invoice $obj, $mockApiContext): void
     {
         $mockPayPalRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -187,7 +187,7 @@ class InvoiceTest extends TestCase
      * @dataProvider mockProvider
      * @param Invoice $obj
      */
-    public function testRemind($obj, $mockApiContext)
+    public function testRemind(\PayPal\Api\Invoice $obj, $mockApiContext): void
     {
         $mockPayPalRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -207,7 +207,7 @@ class InvoiceTest extends TestCase
      * @dataProvider mockProvider
      * @param Invoice $obj
      */
-    public function testCancel($obj, $mockApiContext)
+    public function testCancel(\PayPal\Api\Invoice $obj, $mockApiContext): void
     {
         $mockPayPalRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -227,7 +227,7 @@ class InvoiceTest extends TestCase
      * @dataProvider mockProvider
      * @param Invoice $obj
      */
-    public function testRecordPayment($obj, $mockApiContext)
+    public function testRecordPayment(\PayPal\Api\Invoice $obj, $mockApiContext): void
     {
         $mockPayPalRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -247,7 +247,7 @@ class InvoiceTest extends TestCase
      * @dataProvider mockProvider
      * @param Invoice $obj
      */
-    public function testRecordRefund($obj, $mockApiContext)
+    public function testRecordRefund(\PayPal\Api\Invoice $obj, $mockApiContext): void
     {
         $mockPayPalRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -267,7 +267,7 @@ class InvoiceTest extends TestCase
      * @dataProvider mockProvider
      * @param Invoice $obj
      */
-    public function testGet($obj, $mockApiContext)
+    public function testGet(\PayPal\Api\Invoice $obj, $mockApiContext): void
     {
         $mockPayPalRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -286,7 +286,7 @@ class InvoiceTest extends TestCase
      * @dataProvider mockProvider
      * @param Invoice $obj
      */
-    public function testGetAll($obj, $mockApiContext)
+    public function testGetAll(\PayPal\Api\Invoice $obj, $mockApiContext): void
     {
         $mockPayPalRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -305,7 +305,7 @@ class InvoiceTest extends TestCase
      * @dataProvider mockProvider
      * @param Invoice $obj
      */
-    public function testUpdate($obj, $mockApiContext)
+    public function testUpdate(\PayPal\Api\Invoice $obj, $mockApiContext): void
     {
         $mockPayPalRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -324,7 +324,7 @@ class InvoiceTest extends TestCase
      * @dataProvider mockProvider
      * @param Invoice $obj
      */
-    public function testDelete($obj, $mockApiContext)
+    public function testDelete(\PayPal\Api\Invoice $obj, $mockApiContext): void
     {
         $mockPayPalRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -343,7 +343,7 @@ class InvoiceTest extends TestCase
      * @dataProvider mockProvider
      * @param Invoice $obj
      */
-    public function testQrCode($obj, $mockApiContext)
+    public function testQrCode(\PayPal\Api\Invoice $obj, $mockApiContext): void
     {
         $mockPayPalRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -362,7 +362,7 @@ class InvoiceTest extends TestCase
      * @dataProvider mockProvider
      * @param Invoice $obj
      */
-    public function testGenerateNumber($obj, $mockApiContext)
+    public function testGenerateNumber(\PayPal\Api\Invoice $obj, $mockApiContext): void
     {
         $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -378,7 +378,7 @@ class InvoiceTest extends TestCase
         $this->assertNotNull($result);
     }
 
-    public function mockProvider()
+    public function mockProvider(): array
     {
         $obj = self::getObject();
         $mockApiContext = $this->getMockBuilder('ApiContext')

@@ -12,7 +12,7 @@ class Setup
 
     public static $mode = 'mock';
 
-    public static function SetUpForFunctionalTests(TestCase &$test)
+    public static function SetUpForFunctionalTests(TestCase &$test): void
     {
         $configs = [
             'mode' => 'sandbox',

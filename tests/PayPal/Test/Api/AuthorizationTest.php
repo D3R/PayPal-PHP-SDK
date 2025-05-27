@@ -17,7 +17,7 @@ class AuthorizationTest extends TestCase
      * Gets Json String of Object Authorization
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"id":"TestSample","amount":' .AmountTest::getJson() . ',"payment_mode":"TestSample","state":"TestSample","reason_code":"TestSample","pending_reason":"TestSample","protection_eligibility":"TestSample","protection_eligibility_type":"TestSample","fmf_details":' .FmfDetailsTest::getJson() . ',"parent_payment":"TestSample","valid_until":"TestSample","create_time":"TestSample","update_time":"TestSample","reference_id":"TestSample","receipt_id":"TestSample","links":' .LinksTest::getJson() . '}';
     }
@@ -26,7 +26,7 @@ class AuthorizationTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return Authorization
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\Authorization
     {
         return new Authorization(self::getJson());
     }
@@ -36,7 +36,7 @@ class AuthorizationTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return Authorization
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\Authorization
     {
         $obj = new Authorization(self::getJson());
         $this->assertNotNull($obj);
@@ -64,7 +64,7 @@ class AuthorizationTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Authorization $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getId(), "TestSample");
         $this->assertEquals($obj->getAmount(), AmountTest::getObject());
@@ -88,7 +88,7 @@ class AuthorizationTest extends TestCase
      * @dataProvider mockProvider
      * @param Authorization $obj
      */
-    public function testGet($obj, $mockApiContext)
+    public function testGet(\PayPal\Api\Authorization $obj, $mockApiContext): void
     {
         $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -107,7 +107,7 @@ class AuthorizationTest extends TestCase
      * @dataProvider mockProvider
      * @param Authorization $obj
      */
-    public function testCapture($obj, $mockApiContext)
+    public function testCapture(\PayPal\Api\Authorization $obj, $mockApiContext): void
     {
         $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -127,7 +127,7 @@ class AuthorizationTest extends TestCase
      * @dataProvider mockProvider
      * @param Authorization $obj
      */
-    public function testVoid($obj, $mockApiContext)
+    public function testVoid(\PayPal\Api\Authorization $obj, $mockApiContext): void
     {
         $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -146,7 +146,7 @@ class AuthorizationTest extends TestCase
      * @dataProvider mockProvider
      * @param Authorization $obj
      */
-    public function testReauthorize($obj, $mockApiContext)
+    public function testReauthorize(\PayPal\Api\Authorization $obj, $mockApiContext): void
     {
         $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -162,7 +162,7 @@ class AuthorizationTest extends TestCase
         $this->assertNotNull($result);
     }
 
-    public function mockProvider()
+    public function mockProvider(): array
     {
         $obj = self::getObject();
         $mockApiContext = $this->getMockBuilder('ApiContext')

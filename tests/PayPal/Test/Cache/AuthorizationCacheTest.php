@@ -17,7 +17,7 @@ class AuthorizationCacheTest extends TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
     }
 
@@ -25,11 +25,11 @@ class AuthorizationCacheTest extends TestCase
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
     }
 
-    public static function EnabledProvider()
+    public static function EnabledProvider(): array
     {
         return [
             [['cache.enabled' => 'true'], true],
@@ -37,7 +37,7 @@ class AuthorizationCacheTest extends TestCase
         ];
     }
 
-    public static function CachePathProvider()
+    public static function CachePathProvider(): array
     {
         return [
             [['cache.FileName' => 'temp.cache'], 'temp.cache']
@@ -48,7 +48,7 @@ class AuthorizationCacheTest extends TestCase
      *
      * @dataProvider EnabledProvider
      */
-    public function testIsEnabled($config, $expected)
+    public function testIsEnabled(array $config, bool $expected): void
     {
         $result = AuthorizationCache::isEnabled($config);
         $this->assertEquals($expected, $result);
@@ -57,20 +57,20 @@ class AuthorizationCacheTest extends TestCase
     /**
      * @dataProvider CachePathProvider
      */
-    public function testCachePath($config, $expected)
+    public function testCachePath(array $config, string $expected): void
     {
         $result = AuthorizationCache::cachePath($config);
         $this->assertContains($expected, $result);
     }
 
-    public function testCacheDisabled()
+    public function testCacheDisabled(): void
     {
         // 'cache.enabled' => true,
         AuthorizationCache::push('clientId', 'accessToken', 'tokenCreateTime', 'tokenExpiresIn', ['cache.enabled' => false]);
         AuthorizationCache::pull(['cache.enabled' => false], 'clientId');
     }
 
-    public function testCachePush()
+    public function testCachePush(): void
     {
         AuthorizationCache::push('clientId', 'accessToken', 'tokenCreateTime', 'tokenExpiresIn', ['cache.enabled' => true, 'cache.FileName' => AuthorizationCacheTest::CACHE_FILE]);
         $contents = file_get_contents(AuthorizationCacheTest::CACHE_FILE);
@@ -82,7 +82,7 @@ class AuthorizationCacheTest extends TestCase
         $this->assertEquals('tokenExpiresIn', $tokens['clientId']['tokenExpiresIn']);
     }
 
-    public function testCachePullNonExisting()
+    public function testCachePullNonExisting(): void
     {
         $result = AuthorizationCache::pull(['cache.enabled' => true, 'cache.FileName' => AuthorizationCacheTest::CACHE_FILE], 'clientIdUndefined');
         $this->assertNull($result);
@@ -91,7 +91,7 @@ class AuthorizationCacheTest extends TestCase
     /**
      * @depends testCachePush
      */
-    public function testCachePull()
+    public function testCachePull(): void
     {
         $result = AuthorizationCache::pull(['cache.enabled' => true, 'cache.FileName' => AuthorizationCacheTest::CACHE_FILE], 'clientId');
         $this->assertNotNull($result);

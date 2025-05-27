@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 class FormatConverterTest extends TestCase
 {
 
-    public static function classMethodListProvider()
+    public static function classMethodListProvider(): array
     {
         return [
             [new Item(), 'Price'],
@@ -35,7 +35,7 @@ class FormatConverterTest extends TestCase
         ];
     }
 
-    public static function CurrencyListWithNoDecimalsProvider()
+    public static function CurrencyListWithNoDecimalsProvider(): array
     {
         return [
             ['JPY'],
@@ -44,7 +44,10 @@ class FormatConverterTest extends TestCase
         ];
     }
 
-    public static function apiModelSettersProvider()
+    /**
+     * @return list<array>
+     */
+    public static function apiModelSettersProvider(): array
     {
         $provider = [];
         foreach (NumericValidatorTest::positiveProvider() as $value) {
@@ -55,7 +58,10 @@ class FormatConverterTest extends TestCase
         return $provider;
     }
 
-    public static function apiModelSettersInvalidProvider()
+    /**
+     * @return list<array>
+     */
+    public static function apiModelSettersInvalidProvider(): array
     {
         $provider = [];
         foreach (NumericValidatorTest::invalidProvider() as $value) {
@@ -70,7 +76,7 @@ class FormatConverterTest extends TestCase
      *
      * @dataProvider \PayPal\Test\Validation\NumericValidatorTest::positiveProvider
      */
-    public function testFormatToTwoDecimalPlaces($input, $expected)
+    public function testFormatToTwoDecimalPlaces($input, $expected): void
     {
         $result = FormatConverter::formatToNumber($input);
         $this->assertEquals($expected, $result);
@@ -79,7 +85,7 @@ class FormatConverterTest extends TestCase
     /**
      * @dataProvider CurrencyListWithNoDecimalsProvider
      */
-    public function testPriceWithNoDecimalCurrencyInvalid($input)
+    public function testPriceWithNoDecimalCurrencyInvalid(string $input): void
     {
         try {
             FormatConverter::formatToPrice("1.234", $input);
@@ -91,7 +97,7 @@ class FormatConverterTest extends TestCase
     /**
      * @dataProvider CurrencyListWithNoDecimalsProvider
      */
-    public function testPriceWithNoDecimalCurrencyValid($input)
+    public function testPriceWithNoDecimalCurrencyValid(string $input): void
     {
         $result = FormatConverter::formatToPrice("1.0000000", $input);
         $this->assertEquals("1", $result);
@@ -101,20 +107,20 @@ class FormatConverterTest extends TestCase
      *
      * @dataProvider \PayPal\Test\Validation\NumericValidatorTest::positiveProvider
      */
-    public function testFormatToNumber($input, $expected)
+    public function testFormatToNumber($input, $expected): void
     {
         $result = FormatConverter::formatToNumber($input);
         $this->assertEquals($expected, $result);
     }
 
-    public function testFormatToNumberDecimals()
+    public function testFormatToNumberDecimals(): void
     {
         $result = FormatConverter::formatToNumber("0.0", 4);
         $this->assertEquals("0.0000", $result);
     }
 
 
-    public function testFormat()
+    public function testFormat(): void
     {
         $result = FormatConverter::format("12.0123", "%0.2f");
         $this->assertEquals("12.01", $result);
@@ -127,7 +133,7 @@ class FormatConverterTest extends TestCase
      * @param string $method Method Name where the format is being applied
      * @param array $values array of ['input', 'expectedResponse'] is provided
      */
-    public function testSettersOfKnownApiModel($class, $method, $values)
+    public function testSettersOfKnownApiModel($class, string $method, array $values): void
     {
         $obj = new $class();
         $setter = "set" . $method;
@@ -140,7 +146,7 @@ class FormatConverterTest extends TestCase
      * @dataProvider apiModelSettersInvalidProvider
      * @expectedException \InvalidArgumentException
      */
-    public function testSettersOfKnownApiModelInvalid($class, $methodName, $values)
+    public function testSettersOfKnownApiModelInvalid($class, string $methodName, $values): void
     {
         $obj = new $class();
         $setter = "set" . $methodName;

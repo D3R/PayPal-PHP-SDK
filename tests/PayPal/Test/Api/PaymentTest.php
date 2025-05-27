@@ -16,7 +16,7 @@ class PaymentTest extends TestCase
      * Gets Json String of Object Payment
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"id":"TestSample","intent":"TestSample","payer":' . PayerTest::getJson() . ',"potential_payer_info":' . PotentialPayerInfoTest::getJson() . ',"payee":' . PayeeTest::getJson() . ',"cart":"TestSample","transactions":[' . TransactionTest::getJson() . '],"failed_transactions":' . ErrorTest::getJson() . ',"billing_agreement_tokens":["TestSample"],"credit_financing_offered":' . CreditFinancingOfferedTest::getJson() . ',"payment_instruction":' . PaymentInstructionTest::getJson() . ',"state":"TestSample","experience_profile_id":"TestSample","note_to_payer":"TestSample","redirect_urls":' . RedirectUrlsTest::getJson() . ',"failure_reason":"TestSample","create_time":"TestSample","update_time":"TestSample","links":' . LinksTest::getJson() . '}';
     }
@@ -25,26 +25,26 @@ class PaymentTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return Payment
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\Payment
     {
         return new Payment(self::getJson());
     }
 
-    public function testGetToken_returnsNullIfApprovalLinkNull()
+    public function testGetToken_returnsNullIfApprovalLinkNull(): void
     {
         $payment = new Payment();
         $token = $payment->getToken();
         $this->assertNull($token);
     }
 
-    public function testGetToken_returnsNullIfApprovalLinkDoesNotHaveToken()
+    public function testGetToken_returnsNullIfApprovalLinkDoesNotHaveToken(): void
     {
         $payment = new Payment('{"links": [ { "href": "https://api.sandbox.paypal.com/v1/payments//cgi-bin/webscr?cmd=_express-checkout", "rel": "approval_url", "method": "REDIRECT" } ]}');
         $token = $payment->getToken();
         $this->assertNull($token);
     }
 
-    public function testGetToken_returnsNullIfApprovalLinkHasAToken()
+    public function testGetToken_returnsNullIfApprovalLinkHasAToken(): void
     {
         $payment = new Payment('{"links": [ { "href": "https://api.sandbox.paypal.com/v1/payments//cgi-bin/webscr?cmd=_express-checkout&token=EC-60385559L1062554J", "rel": "approval_url", "method": "REDIRECT" } ]}');
         $token = $payment->getToken();
@@ -56,7 +56,7 @@ class PaymentTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return Payment
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\Payment
     {
         $obj = new Payment(self::getJson());
         $this->assertNotNull($obj);
@@ -87,7 +87,7 @@ class PaymentTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Payment $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getId(), "TestSample");
         $this->assertEquals($obj->getIntent(), "TestSample");
@@ -114,7 +114,7 @@ class PaymentTest extends TestCase
      * @dataProvider mockProvider
      * @param Payment $obj
      */
-    public function testCreate($obj, $mockApiContext)
+    public function testCreate(\PayPal\Api\Payment $obj, $mockApiContext): void
     {
         $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -133,7 +133,7 @@ class PaymentTest extends TestCase
      * @dataProvider mockProvider
      * @param Payment $obj
      */
-    public function testGet($obj, $mockApiContext)
+    public function testGet(\PayPal\Api\Payment $obj, $mockApiContext): void
     {
         $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -152,7 +152,7 @@ class PaymentTest extends TestCase
      * @dataProvider mockProvider
      * @param Payment $obj
      */
-    public function testUpdate($obj, $mockApiContext)
+    public function testUpdate(\PayPal\Api\Payment $obj, $mockApiContext): void
     {
         $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -172,7 +172,7 @@ class PaymentTest extends TestCase
      * @dataProvider mockProvider
      * @param Payment $obj
      */
-    public function testExecute($obj, $mockApiContext)
+    public function testExecute(\PayPal\Api\Payment $obj, $mockApiContext): void
     {
         $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -192,7 +192,7 @@ class PaymentTest extends TestCase
      * @dataProvider mockProvider
      * @param Payment $obj
      */
-    public function testList($obj, $mockApiContext)
+    public function testList(\PayPal\Api\Payment $obj, $mockApiContext): void
     {
         $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -209,7 +209,7 @@ class PaymentTest extends TestCase
         $this->assertNotNull($result);
     }
 
-    public function mockProvider()
+    public function mockProvider(): array
     {
         $obj = self::getObject();
         $mockApiContext = $this->getMockBuilder('ApiContext')
