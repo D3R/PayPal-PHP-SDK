@@ -23,7 +23,7 @@ class Credit extends PayPalModel
      * 
      * @return $this
      */
-    public function setId($id): static
+    public function setId($id)
     {
         $this->id = $id;
         return $this;
@@ -47,7 +47,7 @@ class Credit extends PayPalModel
      * 
      * @return $this
      */
-    public function setType($type): static
+    public function setType($type)
     {
         $this->type = $type;
         return $this;

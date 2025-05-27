@@ -23,7 +23,7 @@ class AgreementStateDescriptor extends PayPalModel
      * 
      * @return $this
      */
-    public function setNote($note): static
+    public function setNote($note)
     {
         $this->note = $note;
         return $this;
@@ -46,7 +46,7 @@ class AgreementStateDescriptor extends PayPalModel
      * 
      * @return $this
      */
-    public function setAmount($amount): static
+    public function setAmount($amount)
     {
         $this->amount = $amount;
         return $this;

@@ -27,7 +27,7 @@ class WebhookEventType extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setName($name): static
+    public function setName($name)
     {
         $this->name = $name;
         return $this;
@@ -50,7 +50,7 @@ class WebhookEventType extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setDescription($description): static
+    public function setDescription($description)
     {
         $this->description = $description;
         return $this;
@@ -73,7 +73,7 @@ class WebhookEventType extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setStatus($status): static
+    public function setStatus($status)
     {
         $this->status = $status;
         return $this;
@@ -95,13 +95,14 @@ class WebhookEventType extends PayPalResourceModel
      * @param string $webhookId
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return WebhookEventTypeList
      */
-    public static function subscribedEventTypes($webhookId, $apiContext = null, $restCall = null): \PayPal\Api\WebhookEventTypeList
+    public static function subscribedEventTypes($webhookId, $apiContext = null, $restCall = null)
     {
         ArgumentValidator::validate($webhookId, 'webhookId');
         $payLoad = "";
         $json = self::executeCall(
-            sprintf('/v1/notifications/webhooks/%s/event-types', $webhookId),
+            "/v1/notifications/webhooks/$webhookId/event-types",
             "GET",
             $payLoad,
             null,
@@ -118,8 +119,9 @@ class WebhookEventType extends PayPalResourceModel
      *
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return WebhookEventTypeList
      */
-    public static function availableEventTypes($apiContext = null, $restCall = null): \PayPal\Api\WebhookEventTypeList
+    public static function availableEventTypes($apiContext = null, $restCall = null)
     {
         $payLoad = "";
         $json = self::executeCall(

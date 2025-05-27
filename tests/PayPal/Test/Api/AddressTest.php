@@ -13,24 +13,27 @@ class AddressTest extends TestCase
 {
     /**
      * Gets Json String of Object Address
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"line1":"TestSample","line2":"TestSample","city":"TestSample","country_code":"TestSample","postal_code":"TestSample","state":"TestSample","phone":"TestSample","normalization_status":"TestSample","status":"TestSample","type":"TestSample"}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return Address
      */
-    public static function getObject(): \PayPal\Api\Address
+    public static function getObject()
     {
         return new Address(self::getJson());
     }
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return Address
      */
-    public function testSerializationDeserialization(): \PayPal\Api\Address
+    public function testSerializationDeserialization()
     {
         $obj = new Address(self::getJson());
         $this->assertNotNull($obj);
@@ -52,7 +55,7 @@ class AddressTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Address $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getLine1(), "TestSample");
         $this->assertEquals($obj->getLine2(), "TestSample");

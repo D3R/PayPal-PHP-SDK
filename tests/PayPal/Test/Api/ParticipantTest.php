@@ -15,16 +15,18 @@ class ParticipantTest extends TestCase
 {
     /**
      * Gets Json String of Object Participant
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"email":"TestSample","first_name":"TestSample","last_name":"TestSample","business_name":"TestSample","phone":' .PhoneTest::getJson() . ',"fax":' .PhoneTest::getJson() . ',"website":"TestSample","additional_info":"TestSample","address":' .AddressTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return Participant
      */
-    public static function getObject(): \PayPal\Api\Participant
+    public static function getObject()
     {
         return new Participant(self::getJson());
     }
@@ -32,8 +34,9 @@ class ParticipantTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return Participant
      */
-    public function testSerializationDeserialization(): \PayPal\Api\Participant
+    public function testSerializationDeserialization()
     {
         $obj = new Participant(self::getJson());
         $this->assertNotNull($obj);
@@ -54,7 +57,7 @@ class ParticipantTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Participant $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getEmail(), "TestSample");
         $this->assertEquals($obj->getFirstName(), "TestSample");

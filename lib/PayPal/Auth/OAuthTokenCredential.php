@@ -56,8 +56,10 @@ class OAuthTokenCredential extends PayPalResourceModel
 
     /**
      * Instance of cipher used to encrypt/decrypt data while storing in cache.
+     *
+     * @var Cipher
      */
-    private \PayPal\Security\Cipher $cipher;
+    private $cipher;
 
     /**
      * Construct
@@ -112,7 +114,6 @@ class OAuthTokenCredential extends PayPalResourceModel
         if ($this->accessToken && (time() - $this->tokenCreateTime) < ($this->tokenExpiresIn - self::$expiryBufferTime)) {
             return $this->accessToken;
         }
-
         // Check for persisted data first
         $token = AuthorizationCache::pull($config, $this->clientId);
         if ($token) {
@@ -179,7 +180,6 @@ class OAuthTokenCredential extends PayPalResourceModel
             //Override the authorizationCode if value is explicitly set
             $params['code'] = $authorizationCode;
         }
-
         $payload = http_build_query(array_merge($allowedParams, array_intersect_key($params, $allowedParams)));
 
         $response = $this->getToken($config, $this->clientId, $this->clientSecret, $payload);
@@ -196,8 +196,9 @@ class OAuthTokenCredential extends PayPalResourceModel
      *
      * @param array $config
      * @param string|null $refreshToken
+     * @return string
      */
-    public function updateAccessToken($config, $refreshToken = null): void
+    public function updateAccessToken($config, $refreshToken = null)
     {
         $this->generateAccessToken($config, $refreshToken);
         return $this->accessToken;
@@ -210,10 +211,11 @@ class OAuthTokenCredential extends PayPalResourceModel
      * @param string $clientId
      * @param string $clientSecret
      * @param string $payload
+     * @return mixed
      * @throws PayPalConfigurationException
      * @throws \PayPal\Exception\PayPalConnectionException
      */
-    protected function getToken($config, $clientId, $clientSecret, $payload): mixed
+    protected function getToken($config, $clientId, $clientSecret, $payload)
     {
         $httpConfig = new PayPalHttpConfig(null, 'POST', $config);
 
@@ -227,17 +229,17 @@ class OAuthTokenCredential extends PayPalResourceModel
         /** @var IPayPalHandler $handler */
         foreach ($handlers as $handler) {
             if (!is_object($handler)) {
-                $fullHandler = "\\" . $handler;
+                $fullHandler = "\\" . (string)$handler;
                 $handler = new $fullHandler(new ApiContext($this));
             }
-
             $handler->handle($httpConfig, $payload, ['clientId' => $clientId, 'clientSecret' => $clientSecret]);
         }
 
         $connection = new PayPalHttpConnection($httpConfig, $config);
         $res = $connection->execute($payload);
+        $response = json_decode($res, true);
 
-        return json_decode($res, true);
+        return $response;
     }
 
 
@@ -246,6 +248,7 @@ class OAuthTokenCredential extends PayPalResourceModel
      *
      * @param array $config
      * @param null|string $refreshToken
+     * @return null
      * @throws PayPalConnectionException
      */
     private function generateAccessToken($config, $refreshToken = null)
@@ -257,11 +260,9 @@ class OAuthTokenCredential extends PayPalResourceModel
             $params['grant_type'] = 'refresh_token';
             $params['refresh_token'] = $refreshToken;
         }
-
         if ($this->targetSubject != null) {
             $params['target_subject'] = $this->targetSubject;
         }
-
         $payload = http_build_query($params);
         $response = $this->getToken($config, $this->clientId, $this->clientSecret, $payload);
 
@@ -274,7 +275,6 @@ class OAuthTokenCredential extends PayPalResourceModel
             $this->accessToken = $response["access_token"];
             $this->tokenExpiresIn = $response["expires_in"];
         }
-
         $this->tokenCreateTime = time();
 
         return $this->accessToken;
@@ -284,8 +284,9 @@ class OAuthTokenCredential extends PayPalResourceModel
      * Helper method to encrypt data using clientSecret as key
      *
      * @param $data
+     * @return string
      */
-    public function encrypt($data): string
+    public function encrypt($data)
     {
         return $this->cipher->encrypt($data);
     }
@@ -296,7 +297,7 @@ class OAuthTokenCredential extends PayPalResourceModel
      * @param $data
      * @return string
      */
-    public function decrypt($data): string|false
+    public function decrypt($data)
     {
         return $this->cipher->decrypt($data);
     }

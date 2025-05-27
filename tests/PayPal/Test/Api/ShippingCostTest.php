@@ -14,16 +14,18 @@ class ShippingCostTest extends TestCase
 {
     /**
      * Gets Json String of Object ShippingCost
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"amount":' .CurrencyTest::getJson() . ',"tax":' .TaxTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return ShippingCost
      */
-    public static function getObject(): \PayPal\Api\ShippingCost
+    public static function getObject()
     {
         return new ShippingCost(self::getJson());
     }
@@ -31,8 +33,9 @@ class ShippingCostTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return ShippingCost
      */
-    public function testSerializationDeserialization(): \PayPal\Api\ShippingCost
+    public function testSerializationDeserialization()
     {
         $obj = new ShippingCost(self::getJson());
         $this->assertNotNull($obj);
@@ -46,7 +49,7 @@ class ShippingCostTest extends TestCase
      * @depends testSerializationDeserialization
      * @param ShippingCost $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getAmount(), CurrencyTest::getObject());
         $this->assertEquals($obj->getTax(), TaxTest::getObject());

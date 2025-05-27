@@ -27,7 +27,7 @@ class RefundRequest extends PayPalModel
      * 
      * @return $this
      */
-    public function setAmount($amount): static
+    public function setAmount($amount)
     {
         $this->amount = $amount;
         return $this;
@@ -50,7 +50,7 @@ class RefundRequest extends PayPalModel
      * 
      * @return $this
      */
-    public function setDescription($description): static
+    public function setDescription($description)
     {
         $this->description = $description;
         return $this;
@@ -74,7 +74,7 @@ class RefundRequest extends PayPalModel
      * 
      * @return $this
      */
-    public function setRefundSource($refund_source): static
+    public function setRefundSource($refund_source)
     {
         $this->refund_source = $refund_source;
         return $this;
@@ -97,7 +97,7 @@ class RefundRequest extends PayPalModel
      * 
      * @return $this
      */
-    public function setReason($reason): static
+    public function setReason($reason)
     {
         $this->reason = $reason;
         return $this;
@@ -120,7 +120,7 @@ class RefundRequest extends PayPalModel
      * 
      * @return $this
      */
-    public function setInvoiceNumber($invoice_number): static
+    public function setInvoiceNumber($invoice_number)
     {
         $this->invoice_number = $invoice_number;
         return $this;
@@ -143,7 +143,7 @@ class RefundRequest extends PayPalModel
      * 
      * @return $this
      */
-    public function setRefundAdvice($refund_advice): static
+    public function setRefundAdvice($refund_advice)
     {
         $this->refund_advice = $refund_advice;
         return $this;

@@ -15,16 +15,18 @@ class FlowConfigTest extends TestCase
 {
     /**
      * Gets Json String of Object FlowConfig
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"landing_page_type":"TestSample","bank_txn_pending_url":"http://www.google.com","user_action":"TestSample","return_uri_http_method":"TestSample"}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return FlowConfig
      */
-    public static function getObject(): \PayPal\Api\FlowConfig
+    public static function getObject()
     {
         return new FlowConfig(self::getJson());
     }
@@ -32,8 +34,9 @@ class FlowConfigTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return FlowConfig
      */
-    public function testSerializationDeserialization(): \PayPal\Api\FlowConfig
+    public function testSerializationDeserialization()
     {
         $obj = new FlowConfig(self::getJson());
         $this->assertNotNull($obj);
@@ -49,7 +52,7 @@ class FlowConfigTest extends TestCase
      * @depends testSerializationDeserialization
      * @param FlowConfig $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getLandingPageType(), "TestSample");
         $this->assertEquals($obj->getBankTxnPendingUrl(), "http://www.google.com");
@@ -61,7 +64,7 @@ class FlowConfigTest extends TestCase
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage BankTxnPendingUrl is not a fully qualified URL
      */
-    public function testUrlValidationForBankTxnPendingUrl(): void
+    public function testUrlValidationForBankTxnPendingUrl()
     {
         $obj = new FlowConfig();
         $obj->setBankTxnPendingUrl(null);

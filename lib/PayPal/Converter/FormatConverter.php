@@ -9,8 +9,9 @@ class FormatConverter
      *
      * @param $value
      * @param $formatter
+     * @return string
      */
-    public static function format($value, $formatter): string
+    public static function format($value, $formatter)
     {
         return sprintf($formatter, $value);
     }
@@ -22,13 +23,13 @@ class FormatConverter
      *
      * @param     $value
      * @param int $decimals
+     * @return null|string
      */
-    public static function formatToNumber($value, $decimals = 2): ?string
+    public static function formatToNumber($value, $decimals = 2)
     {
         if (trim($value) != null) {
             return number_format($value, $decimals, '.', '');
         }
-
         return null;
     }
 
@@ -39,23 +40,23 @@ class FormatConverter
      * any specific currency level rules as required here.
      *
      * @param      $value
+     * @param null $currency
+     * @return null|string
      */
-    public static function formatToPrice($value, $currency = null): ?string
+    public static function formatToPrice($value, $currency = null)
     {
         $decimals = 2;
         $currencyDecimals = ['JPY' => 0, 'TWD' => 0, 'HUF' => 0];
         if ($currency && array_key_exists($currency, $currencyDecimals)) {
             if (str_contains($value, ".") && (floor($value) != $value)) {
                 //throw exception if it has decimal values for JPY, TWD and HUF which does not ends with .00
-                throw new \InvalidArgumentException(sprintf('value cannot have decimals for %s currency', $currency));
+                throw new \InvalidArgumentException("value cannot have decimals for $currency currency");
             }
-
             $decimals = $currencyDecimals[$currency];
         } elseif (!str_contains($value, ".")) {
             // Check if value has decimal values. If not no need to assign 2 decimals with .00 at the end
             $decimals = 0;
         }
-
         return self::formatToNumber($value, $decimals);
     }
 }

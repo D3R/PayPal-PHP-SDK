@@ -37,11 +37,12 @@ class RestHandler implements IPayPalHandler
      * @param PayPalHttpConfig $httpConfig
      * @param string                    $request
      * @param mixed                     $options
+     * @return mixed|void
      * @throws PayPalConfigurationException
      * @throws PayPalInvalidCredentialException
      * @throws PayPalMissingCredentialException
      */
-    public function handle($httpConfig, $request, $options): void
+    public function handle($httpConfig, $request, $options)
     {
         $credential = $this->apiContext->getCredential();
         $config = $this->apiContext->getConfig();
@@ -74,14 +75,13 @@ class RestHandler implements IPayPalHandler
             $httpConfig->addHeader("User-Agent", PayPalUserAgent::getValue(PayPalConstants::SDK_NAME, PayPalConstants::SDK_VERSION));
         }
 
-        if (is_null($httpConfig->getHeader('Authorization'))) {
+        if (!is_null($credential) && $credential instanceof OAuthTokenCredential && is_null($httpConfig->getHeader('Authorization'))) {
             $httpConfig->addHeader('Authorization', "Bearer " . $credential->getAccessToken($config), false);
         }
 
         if (($httpConfig->getMethod() == 'POST' || $httpConfig->getMethod() == 'PUT') && !is_null($this->apiContext->getRequestId())) {
             $httpConfig->addHeader('PayPal-Request-Id', $this->apiContext->getRequestId());
         }
-
         // Add any additional Headers that they may have provided
         $headers = $this->apiContext->getRequestHeaders();
         foreach ($headers as $key => $value) {

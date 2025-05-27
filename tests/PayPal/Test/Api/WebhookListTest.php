@@ -15,16 +15,18 @@ class WebhookListTest extends TestCase
 {
     /**
      * Gets Json String of Object WebhookList
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"webhooks":' .WebhookTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return WebhookList
      */
-    public static function getObject(): \PayPal\Api\WebhookList
+    public static function getObject()
     {
         return new WebhookList(self::getJson());
     }
@@ -32,8 +34,9 @@ class WebhookListTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return WebhookList
      */
-    public function testSerializationDeserialization(): \PayPal\Api\WebhookList
+    public function testSerializationDeserialization()
     {
         $obj = new WebhookList(self::getJson());
         $this->assertNotNull($obj);
@@ -46,7 +49,7 @@ class WebhookListTest extends TestCase
      * @depends testSerializationDeserialization
      * @param WebhookList $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getWebhooks(), WebhookTest::getObject());
     }

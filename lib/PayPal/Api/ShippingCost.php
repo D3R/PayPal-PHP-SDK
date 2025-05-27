@@ -23,7 +23,7 @@ class ShippingCost extends PayPalModel
      * 
      * @return $this
      */
-    public function setAmount($amount): static
+    public function setAmount($amount)
     {
         $this->amount = $amount;
         return $this;
@@ -46,7 +46,7 @@ class ShippingCost extends PayPalModel
      * 
      * @return $this
      */
-    public function setTax($tax): static
+    public function setTax($tax)
     {
         $this->tax = $tax;
         return $this;

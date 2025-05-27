@@ -29,7 +29,7 @@ class PaymentDefinition extends PayPalModel
      * 
      * @return $this
      */
-    public function setId($id): static
+    public function setId($id)
     {
         $this->id = $id;
         return $this;
@@ -52,7 +52,7 @@ class PaymentDefinition extends PayPalModel
      * 
      * @return $this
      */
-    public function setName($name): static
+    public function setName($name)
     {
         $this->name = $name;
         return $this;
@@ -75,7 +75,7 @@ class PaymentDefinition extends PayPalModel
      * 
      * @return $this
      */
-    public function setType($type): static
+    public function setType($type)
     {
         $this->type = $type;
         return $this;
@@ -98,7 +98,7 @@ class PaymentDefinition extends PayPalModel
      * 
      * @return $this
      */
-    public function setFrequencyInterval($frequency_interval): static
+    public function setFrequencyInterval($frequency_interval)
     {
         $this->frequency_interval = $frequency_interval;
         return $this;
@@ -121,7 +121,7 @@ class PaymentDefinition extends PayPalModel
      * 
      * @return $this
      */
-    public function setFrequency($frequency): static
+    public function setFrequency($frequency)
     {
         $this->frequency = $frequency;
         return $this;
@@ -144,7 +144,7 @@ class PaymentDefinition extends PayPalModel
      * 
      * @return $this
      */
-    public function setCycles($cycles): static
+    public function setCycles($cycles)
     {
         $this->cycles = $cycles;
         return $this;
@@ -167,7 +167,7 @@ class PaymentDefinition extends PayPalModel
      * 
      * @return $this
      */
-    public function setAmount($amount): static
+    public function setAmount($amount)
     {
         $this->amount = $amount;
         return $this;
@@ -190,7 +190,7 @@ class PaymentDefinition extends PayPalModel
      * 
      * @return $this
      */
-    public function setChargeModels($charge_models): static
+    public function setChargeModels($charge_models)
     {
         $this->charge_models = $charge_models;
         return $this;
@@ -212,7 +212,7 @@ class PaymentDefinition extends PayPalModel
      * @param \PayPal\Api\ChargeModel $chargeModel
      * @return $this
      */
-    public function addChargeModel($chargeModel): static
+    public function addChargeModel($chargeModel)
     {
         if (!$this->getChargeModels()) {
             return $this->setChargeModels([$chargeModel]);
@@ -229,7 +229,7 @@ class PaymentDefinition extends PayPalModel
      * @param \PayPal\Api\ChargeModel $chargeModel
      * @return $this
      */
-    public function removeChargeModel($chargeModel): static
+    public function removeChargeModel($chargeModel)
     {
         return $this->setChargeModels(
             array_diff($this->getChargeModels(), [$chargeModel])

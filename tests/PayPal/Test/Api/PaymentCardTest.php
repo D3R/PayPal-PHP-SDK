@@ -14,16 +14,18 @@ class PaymentCardTest extends TestCase
 {
     /**
      * Gets Json String of Object PaymentCard
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"id":"TestSample","number":"TestSample","type":"TestSample","expire_month":"123","expire_year":"123","start_month":"TestSample","start_year":"TestSample","cvv2":"TestSample","first_name":"TestSample","last_name":"TestSample","billing_country":"TestSample","billing_address":' .AddressTest::getJson() . ',"external_customer_id":"TestSample","status":"TestSample","card_product_class":"TestSample","valid_until":"TestSample","issue_number":"TestSample","links":' .LinksTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return PaymentCard
      */
-    public static function getObject(): \PayPal\Api\PaymentCard
+    public static function getObject()
     {
         return new PaymentCard(self::getJson());
     }
@@ -31,8 +33,9 @@ class PaymentCardTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return PaymentCard
      */
-    public function testSerializationDeserialization(): \PayPal\Api\PaymentCard
+    public function testSerializationDeserialization()
     {
         $obj = new PaymentCard(self::getJson());
         $this->assertNotNull($obj);
@@ -62,7 +65,7 @@ class PaymentCardTest extends TestCase
      * @depends testSerializationDeserialization
      * @param PaymentCard $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getId(), "TestSample");
         $this->assertEquals($obj->getNumber(), "TestSample");

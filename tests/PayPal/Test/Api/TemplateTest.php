@@ -15,16 +15,18 @@ class TemplateTest extends TestCase
 {
     /**
      * Gets Json String of Object Template
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"template_id":"TestSample","name":"TestSample","default":true,"template_data":' .TemplateDataTest::getJson() . ',"settings":' .TemplateSettingsTest::getJson() . ',"unit_of_measure":"TestSample","custom":true}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return Template
      */
-    public static function getObject(): \PayPal\Api\Template
+    public static function getObject()
     {
         return new Template(self::getJson());
     }
@@ -32,8 +34,9 @@ class TemplateTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return Template
      */
-    public function testSerializationDeserialization(): \PayPal\Api\Template
+    public function testSerializationDeserialization()
     {
         $obj = new Template(self::getJson());
         $this->assertNotNull($obj);
@@ -52,7 +55,7 @@ class TemplateTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Template $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getTemplateId(), "TestSample");
         $this->assertEquals($obj->getName(), "TestSample");

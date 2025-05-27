@@ -14,16 +14,18 @@ class PlanTest extends TestCase
 {
     /**
      * Gets Json String of Object Plan
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"id":"TestSample","name":"TestSample","description":"TestSample","type":"TestSample","state":"TestSample","create_time":"TestSample","update_time":"TestSample","payment_definitions":' .PaymentDefinitionTest::getJson() . ',"terms":' .TermsTest::getJson() . ',"merchant_preferences":' .MerchantPreferencesTest::getJson() . ',"links":' .LinksTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return Plan
      */
-    public static function getObject(): \PayPal\Api\Plan
+    public static function getObject()
     {
         return new Plan(self::getJson());
     }
@@ -31,8 +33,9 @@ class PlanTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return Plan
      */
-    public function testSerializationDeserialization(): \PayPal\Api\Plan
+    public function testSerializationDeserialization()
     {
         $obj = new Plan(self::getJson());
         $this->assertNotNull($obj);
@@ -55,7 +58,7 @@ class PlanTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Plan $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getId(), "TestSample");
         $this->assertEquals($obj->getName(), "TestSample");
@@ -72,8 +75,9 @@ class PlanTest extends TestCase
 
     /**
      * @dataProvider mockProvider
+     * @param Plan $obj
      */
-    public function testGet(\PayPal\Api\Plan $obj, ?\PHPUnit_Framework_MockObject_MockObject $mockApiContext): void
+    public function testGet($obj, $mockApiContext)
     {
         $mockPayPalRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -88,11 +92,11 @@ class PlanTest extends TestCase
         $result = $obj->get("planId", $mockApiContext, $mockPayPalRestCall);
         $this->assertNotNull($result);
     }
-
     /**
      * @dataProvider mockProvider
+     * @param Plan $obj
      */
-    public function testCreate(\PayPal\Api\Plan $obj, ?\PHPUnit_Framework_MockObject_MockObject $mockApiContext): void
+    public function testCreate($obj, $mockApiContext)
     {
         $mockPayPalRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -107,11 +111,11 @@ class PlanTest extends TestCase
         $result = $obj->create($mockApiContext, $mockPayPalRestCall);
         $this->assertNotNull($result);
     }
-
     /**
      * @dataProvider mockProvider
+     * @param Plan $obj
      */
-    public function testUpdate(\PayPal\Api\Plan $obj, ?\PHPUnit_Framework_MockObject_MockObject $mockApiContext): void
+    public function testUpdate($obj, $mockApiContext)
     {
         $mockPayPalRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -127,11 +131,11 @@ class PlanTest extends TestCase
         $result = $obj->update($patchRequest, $mockApiContext, $mockPayPalRestCall);
         $this->assertNotNull($result);
     }
-
     /**
      * @dataProvider mockProvider
+     * @param Plan $obj
      */
-    public function testList(\PayPal\Api\Plan $obj, ?\PHPUnit_Framework_MockObject_MockObject $mockApiContext): void
+    public function testList($obj, $mockApiContext)
     {
         $mockPayPalRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -148,7 +152,7 @@ class PlanTest extends TestCase
         $this->assertNotNull($result);
     }
 
-    public function mockProvider(): array
+    public function mockProvider()
     {
         $obj = self::getObject();
         $mockApiContext = $this->getMockBuilder('ApiContext')

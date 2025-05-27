@@ -14,16 +14,18 @@ class SearchTest extends TestCase
 {
     /**
      * Gets Json String of Object Search
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"email":"TestSample","recipient_first_name":"TestSample","recipient_last_name":"TestSample","recipient_business_name":"TestSample","number":"TestSample","status":"TestSample","lower_total_amount":' .CurrencyTest::getJson() . ',"upper_total_amount":' .CurrencyTest::getJson() . ',"start_invoice_date":"TestSample","end_invoice_date":"TestSample","start_due_date":"TestSample","end_due_date":"TestSample","start_payment_date":"TestSample","end_payment_date":"TestSample","start_creation_date":"TestSample","end_creation_date":"TestSample","page":"12.34","page_size":"12.34","total_count_required":true,"archived":true}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return Search
      */
-    public static function getObject(): \PayPal\Api\Search
+    public static function getObject()
     {
         return new Search(self::getJson());
     }
@@ -31,8 +33,9 @@ class SearchTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return Search
      */
-    public function testSerializationDeserialization(): \PayPal\Api\Search
+    public function testSerializationDeserialization()
     {
         $obj = new Search(self::getJson());
         $this->assertNotNull($obj);
@@ -64,7 +67,7 @@ class SearchTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Search $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getEmail(), "TestSample");
         $this->assertEquals($obj->getRecipientFirstName(), "TestSample");

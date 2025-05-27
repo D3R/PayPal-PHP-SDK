@@ -12,7 +12,7 @@ class PayPalLogger extends AbstractLogger
     /**
      * @var array Indexed list of all log levels.
      */
-    private array $loggingLevels = [
+    private $loggingLevels = [
         LogLevel::EMERGENCY,
         LogLevel::ALERT,
         LogLevel::CRITICAL,
@@ -39,8 +39,10 @@ class PayPalLogger extends AbstractLogger
 
     /**
      * Log Enabled
+     *
+     * @var bool
      */
-    private ?bool $isLoggingEnabled = null;
+    private $isLoggingEnabled;
 
     /**
      * @param string $className
@@ -53,7 +55,7 @@ class PayPalLogger extends AbstractLogger
         $this->initialize();
     }
 
-    public function initialize(): void
+    public function initialize()
     {
         $config = PayPalConfigManager::getInstance()->getConfigHashmap();
         if (!empty($config)) {
@@ -61,18 +63,20 @@ class PayPalLogger extends AbstractLogger
             if ($this->isLoggingEnabled) {
                 $this->loggerFile = $config['log.FileName'] ?: ini_get('error_log');
                 $loggingLevel = strtoupper($config['log.LogLevel']);
-                $this->loggingLevel = (isset($loggingLevel) && defined(\Psr\Log\LogLevel::class . '::' . $loggingLevel)) ?
-                    constant(\Psr\Log\LogLevel::class . '::' . $loggingLevel) :
+                $this->loggingLevel = (isset($loggingLevel) && defined("\\Psr\\Log\\LogLevel::$loggingLevel")) ?
+                    constant("\\Psr\\Log\\LogLevel::$loggingLevel") :
                     LogLevel::INFO;
             }
         }
     }
 
-    public function log($level, string|\Stringable $message, array $context = []): void
+    public function log($level, $message, array $context = [])
     {
-        // Checks if the message is at level below configured logging level
-        if ($this->isLoggingEnabled && array_search($level, $this->loggingLevels, true) <= array_search($this->loggingLevel, $this->loggingLevels, true)) {
-            error_log("[" . date('d-m-Y H:i:s') . "] " . $this->loggerName . " : " . strtoupper($level) . sprintf(': %s%s', $message, PHP_EOL), 3, $this->loggerFile);
+        if ($this->isLoggingEnabled) {
+            // Checks if the message is at level below configured logging level
+            if (array_search($level, $this->loggingLevels) <= array_search($this->loggingLevel, $this->loggingLevels)) {
+                error_log("[" . date('d-m-Y H:i:s') . "] " . $this->loggerName . " : " . strtoupper($level) . ": $message\n", 3, $this->loggerFile);
+            }
         }
     }
 }

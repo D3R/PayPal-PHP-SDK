@@ -15,18 +15,18 @@ class ApiContextTest extends TestCase
      */
     public $apiContext;
 
-    protected function setUp(): void
+    public function setUp()
     {
         $this->apiContext = new ApiContext();
     }
 
-    public function testGetRequestId(): void
+    public function testGetRequestId()
     {
         $requestId = $this->apiContext->getRequestId();
         $this->assertNull($requestId);
     }
 
-    public function testSetRequestId(): void
+    public function testSetRequestId()
     {
         $this->assertNull($this->apiContext->getRequestId());
 
@@ -36,7 +36,7 @@ class ApiContextTest extends TestCase
         $this->assertEquals($expectedRequestId, $requestId);
     }
 
-    public function testResetRequestId(): void
+    public function testResetRequestId()
     {
         $this->assertNull($this->apiContext->getRequestId());
 

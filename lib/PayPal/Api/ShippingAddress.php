@@ -20,7 +20,7 @@ class ShippingAddress extends Address
      * 
      * @return $this
      */
-    public function setId($id): static
+    public function setId($id)
     {
         $this->id = $id;
         return $this;
@@ -43,7 +43,7 @@ class ShippingAddress extends Address
      * 
      * @return $this
      */
-    public function setRecipientName($recipient_name): static
+    public function setRecipientName($recipient_name)
     {
         $this->recipient_name = $recipient_name;
         return $this;
@@ -66,7 +66,7 @@ class ShippingAddress extends Address
      * 
      * @return $this
      */
-    public function setDefaultAddress($default_address): static
+    public function setDefaultAddress($default_address)
     {
         $this->default_address = $default_address;
         return $this;
@@ -89,7 +89,7 @@ class ShippingAddress extends Address
      * 
      * @return $this
      */
-    public function setPreferredAddress($preferred_address): static
+    public function setPreferredAddress($preferred_address)
     {
         $this->preferred_address = $preferred_address;
         return $this;

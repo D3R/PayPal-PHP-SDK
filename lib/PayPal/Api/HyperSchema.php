@@ -27,7 +27,7 @@ class HyperSchema extends PayPalModel
      * 
      * @return $this
      */
-    public function setLinks($links): static
+    public function setLinks($links)
     {
         $this->links = $links;
         return $this;
@@ -49,7 +49,7 @@ class HyperSchema extends PayPalModel
      * @param \PayPal\Api\Links $links
      * @return $this
      */
-    public function addLink($links): static
+    public function addLink($links)
     {
         if (!$this->getLinks()) {
             return $this->setLinks([$links]);
@@ -66,7 +66,7 @@ class HyperSchema extends PayPalModel
      * @param \PayPal\Api\Links $links
      * @return $this
      */
-    public function removeLink($links): static
+    public function removeLink($links)
     {
         return $this->setLinks(
             array_diff($this->getLinks(), [$links])
@@ -80,7 +80,7 @@ class HyperSchema extends PayPalModel
      * 
      * @return $this
      */
-    public function setFragmentResolution($fragmentResolution): static
+    public function setFragmentResolution($fragmentResolution)
     {
         $this->fragmentResolution = $fragmentResolution;
         return $this;
@@ -103,7 +103,7 @@ class HyperSchema extends PayPalModel
      * 
      * @return $this
      */
-    public function setReadonly($readonly): static
+    public function setReadonly($readonly)
     {
         $this->readonly = $readonly;
         return $this;
@@ -126,7 +126,7 @@ class HyperSchema extends PayPalModel
      * 
      * @return $this
      */
-    public function setContentEncoding($contentEncoding): static
+    public function setContentEncoding($contentEncoding)
     {
         $this->contentEncoding = $contentEncoding;
         return $this;
@@ -149,7 +149,7 @@ class HyperSchema extends PayPalModel
      * 
      * @return $this
      */
-    public function setPathStart($pathStart): static
+    public function setPathStart($pathStart)
     {
         $this->pathStart = $pathStart;
         return $this;
@@ -172,7 +172,7 @@ class HyperSchema extends PayPalModel
      * 
      * @return $this
      */
-    public function setMediaType($mediaType): static
+    public function setMediaType($mediaType)
     {
         $this->mediaType = $mediaType;
         return $this;

@@ -14,16 +14,18 @@ class CarrierAccountTest extends TestCase
 {
     /**
      * Gets Json String of Object CarrierAccount
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"id":"TestSample","phone_number":"TestSample","external_customer_id":"TestSample","phone_source":"TestSample","country_code":' .CountryCodeTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return CarrierAccount
      */
-    public static function getObject(): \PayPal\Api\CarrierAccount
+    public static function getObject()
     {
         return new CarrierAccount(self::getJson());
     }
@@ -31,8 +33,9 @@ class CarrierAccountTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return CarrierAccount
      */
-    public function testSerializationDeserialization(): \PayPal\Api\CarrierAccount
+    public function testSerializationDeserialization()
     {
         $obj = new CarrierAccount(self::getJson());
         $this->assertNotNull($obj);
@@ -49,7 +52,7 @@ class CarrierAccountTest extends TestCase
      * @depends testSerializationDeserialization
      * @param CarrierAccount $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getId(), "TestSample");
         $this->assertEquals($obj->getPhoneNumber(), "TestSample");

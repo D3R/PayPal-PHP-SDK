@@ -27,7 +27,7 @@ class Payout extends PayPalResourceModel
      *
      * @return $this
      */
-    public function setSenderBatchHeader($sender_batch_header): static
+    public function setSenderBatchHeader($sender_batch_header)
     {
         $this->sender_batch_header = $sender_batch_header;
         return $this;
@@ -50,7 +50,7 @@ class Payout extends PayPalResourceModel
      *
      * @return $this
      */
-    public function setItems($items): static
+    public function setItems($items)
     {
         $this->items = $items;
         return $this;
@@ -72,7 +72,7 @@ class Payout extends PayPalResourceModel
      * @param \PayPal\Api\PayoutItem $payoutItem
      * @return $this
      */
-    public function addItem($payoutItem): static
+    public function addItem($payoutItem)
     {
         if (!$this->getItems()) {
             return $this->setItems([$payoutItem]);
@@ -89,7 +89,7 @@ class Payout extends PayPalResourceModel
      * @param \PayPal\Api\PayoutItem $payoutItem
      * @return $this
      */
-    public function removeItem($payoutItem): static
+    public function removeItem($payoutItem)
     {
         return $this->setItems(
             array_diff($this->getItems(), [$payoutItem])
@@ -102,8 +102,9 @@ class Payout extends PayPalResourceModel
      * @param array $params
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return PayoutBatch
      */
-    public function create($params = [], $apiContext = null, $restCall = null): \PayPal\Api\PayoutBatch
+    public function create($params = [], $apiContext = null, $restCall = null)
     {
         $params = $params ?: [];
         ArgumentValidator::validate($params, 'params');
@@ -112,7 +113,7 @@ class Payout extends PayPalResourceModel
             'sync_mode' => 1,
         ];
         $json = self::executeCall(
-            '/v1/payments/payouts?' . http_build_query(array_intersect_key($params, $allowedParams)),
+            "/v1/payments/payouts" . "?" . http_build_query(array_intersect_key($params, $allowedParams)),
             "POST",
             $payLoad,
             null,
@@ -129,8 +130,9 @@ class Payout extends PayPalResourceModel
      *
      * @param ApiContext $apiContext
      * @param PayPalRestCall $restCall
+     * @return PayoutBatch
      */
-    public function createSynchronous($apiContext = null, $restCall = null): \PayPal\Api\PayoutBatch
+    public function createSynchronous($apiContext = null, $restCall = null)
     {
         $params = ['sync_mode' => 'true'];
         return $this->create($params, $apiContext, $restCall);
@@ -139,15 +141,17 @@ class Payout extends PayPalResourceModel
     /**
      * Obtain the status of a specific batch resource by passing the payout batch ID to the request URI. You can issue this call multiple times to get the current status.
      *
+     * @param string $payoutBatchId
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return PayoutBatch
      */
-    public static function get(string $payoutBatchId, $apiContext = null, $restCall = null): \PayPal\Api\PayoutBatch
+    public static function get($payoutBatchId, $apiContext = null, $restCall = null)
     {
         ArgumentValidator::validate($payoutBatchId, 'payoutBatchId');
         $payLoad = "";
         $json = self::executeCall(
-            '/v1/payments/payouts/' . $payoutBatchId,
+            "/v1/payments/payouts/$payoutBatchId",
             "GET",
             $payLoad,
             null,

@@ -14,16 +14,18 @@ class RedirectUrlsTest extends TestCase
 {
     /**
      * Gets Json String of Object RedirectUrls
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"return_url":"http://www.google.com","cancel_url":"http://www.google.com"}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return RedirectUrls
      */
-    public static function getObject(): \PayPal\Api\RedirectUrls
+    public static function getObject()
     {
         return new RedirectUrls(self::getJson());
     }
@@ -31,8 +33,9 @@ class RedirectUrlsTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return RedirectUrls
      */
-    public function testSerializationDeserialization(): \PayPal\Api\RedirectUrls
+    public function testSerializationDeserialization()
     {
         $obj = new RedirectUrls(self::getJson());
         $this->assertNotNull($obj);
@@ -46,7 +49,7 @@ class RedirectUrlsTest extends TestCase
      * @depends testSerializationDeserialization
      * @param RedirectUrls $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getReturnUrl(), "http://www.google.com");
         $this->assertEquals($obj->getCancelUrl(), "http://www.google.com");
@@ -56,17 +59,16 @@ class RedirectUrlsTest extends TestCase
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage ReturnUrl is not a fully qualified URL
      */
-    public function testUrlValidationForReturnUrl(): void
+    public function testUrlValidationForReturnUrl()
     {
         $obj = new RedirectUrls();
         $obj->setReturnUrl(null);
     }
-
     /**
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage CancelUrl is not a fully qualified URL
      */
-    public function testUrlValidationForCancelUrl(): void
+    public function testUrlValidationForCancelUrl()
     {
         $obj = new RedirectUrls();
         $obj->setCancelUrl(null);

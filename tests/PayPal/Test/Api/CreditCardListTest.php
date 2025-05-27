@@ -14,16 +14,18 @@ class CreditCardListTest extends TestCase
 {
     /**
      * Gets Json String of Object CreditCardList
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"items":' .CreditCardTest::getJson() . ',"links":' .LinksTest::getJson() . ',"total_items":123,"total_pages":123}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return CreditCardList
      */
-    public static function getObject(): \PayPal\Api\CreditCardList
+    public static function getObject()
     {
         return new CreditCardList(self::getJson());
     }
@@ -31,8 +33,9 @@ class CreditCardListTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return CreditCardList
      */
-    public function testSerializationDeserialization(): \PayPal\Api\CreditCardList
+    public function testSerializationDeserialization()
     {
         $obj = new CreditCardList(self::getJson());
         $this->assertNotNull($obj);
@@ -48,7 +51,7 @@ class CreditCardListTest extends TestCase
      * @depends testSerializationDeserialization
      * @param CreditCardList $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getItems(), CreditCardTest::getObject());
         $this->assertEquals($obj->getLinks(), LinksTest::getObject());

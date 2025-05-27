@@ -32,7 +32,7 @@ class InvoiceItem extends PayPalModel
      * 
      * @return $this
      */
-    public function setName($name): static
+    public function setName($name)
     {
         $this->name = $name;
         return $this;
@@ -55,7 +55,7 @@ class InvoiceItem extends PayPalModel
      * 
      * @return $this
      */
-    public function setDescription($description): static
+    public function setDescription($description)
     {
         $this->description = $description;
         return $this;
@@ -78,7 +78,7 @@ class InvoiceItem extends PayPalModel
      * 
      * @return $this
      */
-    public function setQuantity($quantity): static
+    public function setQuantity($quantity)
     {
         NumericValidator::validate($quantity, "Quantity");
         $quantity = FormatConverter::formatToPrice($quantity);
@@ -103,7 +103,7 @@ class InvoiceItem extends PayPalModel
      * 
      * @return $this
      */
-    public function setUnitPrice($unit_price): static
+    public function setUnitPrice($unit_price)
     {
         $this->unit_price = $unit_price;
         return $this;
@@ -126,7 +126,7 @@ class InvoiceItem extends PayPalModel
      * 
      * @return $this
      */
-    public function setTax($tax): static
+    public function setTax($tax)
     {
         $this->tax = $tax;
         return $this;
@@ -149,7 +149,7 @@ class InvoiceItem extends PayPalModel
      * 
      * @return $this
      */
-    public function setDate($date): static
+    public function setDate($date)
     {
         $this->date = $date;
         return $this;
@@ -172,7 +172,7 @@ class InvoiceItem extends PayPalModel
      * 
      * @return $this
      */
-    public function setDiscount($discount): static
+    public function setDiscount($discount)
     {
         $this->discount = $discount;
         return $this;
@@ -195,7 +195,7 @@ class InvoiceItem extends PayPalModel
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setImageUrl($image_url): static
+    public function setImageUrl($image_url)
     {
         UrlValidator::validate($image_url, "ImageUrl");
         $this->image_url = $image_url;
@@ -220,7 +220,7 @@ class InvoiceItem extends PayPalModel
      * 
      * @return $this
      */
-    public function setUnitOfMeasure($unit_of_measure): static
+    public function setUnitOfMeasure($unit_of_measure)
     {
         $this->unit_of_measure = $unit_of_measure;
         return $this;

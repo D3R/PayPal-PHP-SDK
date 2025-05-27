@@ -16,11 +16,12 @@ class FuturePayment extends Payment
     /**
      * Extends the Payment object to create future payments
      *
+     * @param null $apiContext
      * @param string|null  $clientMetadataId
      * @param PayPalRestCall|null $restCall is the Rest Call Service that is used to make rest calls
      * @return $this
      */
-    public function create($apiContext = null, $clientMetadataId = null, $restCall = null): static
+    public function create($apiContext = null, $clientMetadataId = null, $restCall = null)
     {
         $headers = [];
         if ($clientMetadataId != null) {
@@ -28,7 +29,6 @@ class FuturePayment extends Payment
                 'PAYPAL-CLIENT-METADATA-ID' => $clientMetadataId
             ];
         }
-
         $payLoad = $this->toJSON();
         $json = self::executeCall(
             "/v1/payments/payment",

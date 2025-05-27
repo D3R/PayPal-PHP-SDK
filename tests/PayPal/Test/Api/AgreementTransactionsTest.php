@@ -14,16 +14,18 @@ class AgreementTransactionsTest extends TestCase
 {
     /**
      * Gets Json String of Object AgreementTransactions
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"agreement_transaction_list":' .AgreementTransactionTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return AgreementTransactions
      */
-    public static function getObject(): \PayPal\Api\AgreementTransactions
+    public static function getObject()
     {
         return new AgreementTransactions(self::getJson());
     }
@@ -31,8 +33,9 @@ class AgreementTransactionsTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return AgreementTransactions
      */
-    public function testSerializationDeserialization(): \PayPal\Api\AgreementTransactions
+    public function testSerializationDeserialization()
     {
         $obj = new AgreementTransactions(self::getJson());
         $this->assertNotNull($obj);
@@ -45,7 +48,7 @@ class AgreementTransactionsTest extends TestCase
      * @depends testSerializationDeserialization
      * @param AgreementTransactions $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getAgreementTransactionList(), AgreementTransactionTest::getObject());
     }

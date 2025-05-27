@@ -14,16 +14,18 @@ class InstallmentInfoTest extends TestCase
 {
     /**
      * Gets Json String of Object InstallmentInfo
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"installment_id":"TestSample","network":"TestSample","issuer":"TestSample","installment_options":' . InstallmentOptionTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return InstallmentInfo
      */
-    public static function getObject(): \PayPal\Api\InstallmentInfo
+    public static function getObject()
     {
         return new InstallmentInfo(self::getJson());
     }
@@ -31,8 +33,9 @@ class InstallmentInfoTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return InstallmentInfo
      */
-    public function testSerializationDeserialization(): \PayPal\Api\InstallmentInfo
+    public function testSerializationDeserialization()
     {
         $obj = new InstallmentInfo(self::getJson());
         $this->assertNotNull($obj);
@@ -48,7 +51,7 @@ class InstallmentInfoTest extends TestCase
      * @depends testSerializationDeserialization
      * @param InstallmentInfo $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getInstallmentId(), "TestSample");
         $this->assertEquals($obj->getNetwork(), "TestSample");

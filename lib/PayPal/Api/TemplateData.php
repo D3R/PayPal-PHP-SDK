@@ -42,7 +42,7 @@ class TemplateData extends PayPalModel
      * 
      * @return $this
      */
-    public function setMerchantInfo($merchant_info): static
+    public function setMerchantInfo($merchant_info)
     {
         $this->merchant_info = $merchant_info;
         return $this;
@@ -65,7 +65,7 @@ class TemplateData extends PayPalModel
      * 
      * @return $this
      */
-    public function setBillingInfo($billing_info): static
+    public function setBillingInfo($billing_info)
     {
         $this->billing_info = $billing_info;
         return $this;
@@ -87,7 +87,7 @@ class TemplateData extends PayPalModel
      * @param \PayPal\Api\BillingInfo $billingInfo
      * @return $this
      */
-    public function addBillingInfo($billingInfo): static
+    public function addBillingInfo($billingInfo)
     {
         if (!$this->getBillingInfo()) {
             return $this->setBillingInfo([$billingInfo]);
@@ -104,7 +104,7 @@ class TemplateData extends PayPalModel
      * @param \PayPal\Api\BillingInfo $billingInfo
      * @return $this
      */
-    public function removeBillingInfo($billingInfo): static
+    public function removeBillingInfo($billingInfo)
     {
         return $this->setBillingInfo(
             array_diff($this->getBillingInfo(), [$billingInfo])
@@ -118,7 +118,7 @@ class TemplateData extends PayPalModel
      * 
      * @return $this
      */
-    public function setCcInfo($cc_info): static
+    public function setCcInfo($cc_info)
     {
         $this->cc_info = $cc_info;
         return $this;
@@ -140,7 +140,7 @@ class TemplateData extends PayPalModel
      * @param string $email
      * @return $this
      */
-    public function addCcInfo($email): static
+    public function addCcInfo($email)
     {
         if (!$this->getCcInfo()) {
             return $this->setCcInfo([$email]);
@@ -157,7 +157,7 @@ class TemplateData extends PayPalModel
      * @param string $email
      * @return $this
      */
-    public function removeCcInfo($email): static
+    public function removeCcInfo($email)
     {
         return $this->setCcInfo(
             array_diff($this->getCcInfo(), [$email])
@@ -171,7 +171,7 @@ class TemplateData extends PayPalModel
      * 
      * @return $this
      */
-    public function setShippingInfo($shipping_info): static
+    public function setShippingInfo($shipping_info)
     {
         $this->shipping_info = $shipping_info;
         return $this;
@@ -194,7 +194,7 @@ class TemplateData extends PayPalModel
      * 
      * @return $this
      */
-    public function setItems($items): static
+    public function setItems($items)
     {
         $this->items = $items;
         return $this;
@@ -216,7 +216,7 @@ class TemplateData extends PayPalModel
      * @param \PayPal\Api\InvoiceItem $invoiceItem
      * @return $this
      */
-    public function addItem($invoiceItem): static
+    public function addItem($invoiceItem)
     {
         if (!$this->getItems()) {
             return $this->setItems([$invoiceItem]);
@@ -233,7 +233,7 @@ class TemplateData extends PayPalModel
      * @param \PayPal\Api\InvoiceItem $invoiceItem
      * @return $this
      */
-    public function removeItem($invoiceItem): static
+    public function removeItem($invoiceItem)
     {
         return $this->setItems(
             array_diff($this->getItems(), [$invoiceItem])
@@ -247,7 +247,7 @@ class TemplateData extends PayPalModel
      * 
      * @return $this
      */
-    public function setPaymentTerm($payment_term): static
+    public function setPaymentTerm($payment_term)
     {
         $this->payment_term = $payment_term;
         return $this;
@@ -270,7 +270,7 @@ class TemplateData extends PayPalModel
      * 
      * @return $this
      */
-    public function setReference($reference): static
+    public function setReference($reference)
     {
         $this->reference = $reference;
         return $this;
@@ -293,7 +293,7 @@ class TemplateData extends PayPalModel
      * 
      * @return $this
      */
-    public function setDiscount($discount): static
+    public function setDiscount($discount)
     {
         $this->discount = $discount;
         return $this;
@@ -316,7 +316,7 @@ class TemplateData extends PayPalModel
      * 
      * @return $this
      */
-    public function setShippingCost($shipping_cost): static
+    public function setShippingCost($shipping_cost)
     {
         $this->shipping_cost = $shipping_cost;
         return $this;
@@ -339,7 +339,7 @@ class TemplateData extends PayPalModel
      * 
      * @return $this
      */
-    public function setCustom($custom): static
+    public function setCustom($custom)
     {
         $this->custom = $custom;
         return $this;
@@ -362,7 +362,7 @@ class TemplateData extends PayPalModel
      * 
      * @return $this
      */
-    public function setAllowPartialPayment($allow_partial_payment): static
+    public function setAllowPartialPayment($allow_partial_payment)
     {
         $this->allow_partial_payment = $allow_partial_payment;
         return $this;
@@ -385,7 +385,7 @@ class TemplateData extends PayPalModel
      * 
      * @return $this
      */
-    public function setMinimumAmountDue($minimum_amount_due): static
+    public function setMinimumAmountDue($minimum_amount_due)
     {
         $this->minimum_amount_due = $minimum_amount_due;
         return $this;
@@ -408,7 +408,7 @@ class TemplateData extends PayPalModel
      * 
      * @return $this
      */
-    public function setTaxCalculatedAfterDiscount($tax_calculated_after_discount): static
+    public function setTaxCalculatedAfterDiscount($tax_calculated_after_discount)
     {
         $this->tax_calculated_after_discount = $tax_calculated_after_discount;
         return $this;
@@ -431,7 +431,7 @@ class TemplateData extends PayPalModel
      * 
      * @return $this
      */
-    public function setTaxInclusive($tax_inclusive): static
+    public function setTaxInclusive($tax_inclusive)
     {
         $this->tax_inclusive = $tax_inclusive;
         return $this;
@@ -454,7 +454,7 @@ class TemplateData extends PayPalModel
      * 
      * @return $this
      */
-    public function setTerms($terms): static
+    public function setTerms($terms)
     {
         $this->terms = $terms;
         return $this;
@@ -477,7 +477,7 @@ class TemplateData extends PayPalModel
      * 
      * @return $this
      */
-    public function setNote($note): static
+    public function setNote($note)
     {
         $this->note = $note;
         return $this;
@@ -500,7 +500,7 @@ class TemplateData extends PayPalModel
      * 
      * @return $this
      */
-    public function setMerchantMemo($merchant_memo): static
+    public function setMerchantMemo($merchant_memo)
     {
         $this->merchant_memo = $merchant_memo;
         return $this;
@@ -523,7 +523,7 @@ class TemplateData extends PayPalModel
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setLogoUrl($logo_url): static
+    public function setLogoUrl($logo_url)
     {
         UrlValidator::validate($logo_url, "LogoUrl");
         $this->logo_url = $logo_url;
@@ -547,7 +547,7 @@ class TemplateData extends PayPalModel
      * 
      * @return $this
      */
-    public function setTotalAmount($total_amount): static
+    public function setTotalAmount($total_amount)
     {
         $this->total_amount = $total_amount;
         return $this;
@@ -570,7 +570,7 @@ class TemplateData extends PayPalModel
      * 
      * @return $this
      */
-    public function setAttachments($attachments): static
+    public function setAttachments($attachments)
     {
         $this->attachments = $attachments;
         return $this;
@@ -592,7 +592,7 @@ class TemplateData extends PayPalModel
      * @param \PayPal\Api\FileAttachment $fileAttachment
      * @return $this
      */
-    public function addAttachment($fileAttachment): static
+    public function addAttachment($fileAttachment)
     {
         if (!$this->getAttachments()) {
             return $this->setAttachments([$fileAttachment]);
@@ -609,7 +609,7 @@ class TemplateData extends PayPalModel
      * @param \PayPal\Api\FileAttachment $fileAttachment
      * @return $this
      */
-    public function removeAttachment($fileAttachment): static
+    public function removeAttachment($fileAttachment)
     {
         return $this->setAttachments(
             array_diff($this->getAttachments(), [$fileAttachment])

@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 class NumericValidatorTest extends TestCase
 {
 
-    public static function positiveProvider(): array
+    public static function positiveProvider()
     {
         return [
             [".5", "0.50"],
@@ -31,7 +31,7 @@ class NumericValidatorTest extends TestCase
         ];
     }
 
-    public static function invalidProvider(): array
+    public static function invalidProvider()
     {
         return [
             ["01.j"],
@@ -45,7 +45,7 @@ class NumericValidatorTest extends TestCase
      *
      * @dataProvider positiveProvider
      */
-    public function testValidate(string|float|null $input): void
+    public function testValidate($input)
     {
         $this->assertTrue(NumericValidator::validate($input, "Test Value"));
     }
@@ -55,7 +55,7 @@ class NumericValidatorTest extends TestCase
      * @dataProvider invalidProvider
      * @expectedException \InvalidArgumentException
      */
-    public function testValidateException(string $input): void
+    public function testValidateException($input)
     {
         NumericValidator::validate($input, "Test Value");
     }

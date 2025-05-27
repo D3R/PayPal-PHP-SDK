@@ -14,24 +14,27 @@ class PayoutItemDetailsTest extends TestCase
 {
     /**
      * Gets Json String of Object PayoutItemDetails
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"payout_item_id":"TestSample","transaction_id":"TestSample","transaction_status":"TestSample","payout_item_fee":' .CurrencyTest::getJson() . ',"payout_batch_id":"TestSample","sender_batch_id":"TestSample","payout_item":' .PayoutItemTest::getJson() . ',"time_processed":"TestSample","errors":' .ErrorTest::getJson() . ',"links":' .LinksTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return PayoutItemDetails
      */
-    public static function getObject(): \PayPal\Api\PayoutItemDetails
+    public static function getObject()
     {
         return new PayoutItemDetails(self::getJson());
     }
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return PayoutItemDetails
      */
-    public function testSerializationDeserialization(): \PayPal\Api\PayoutItemDetails
+    public function testSerializationDeserialization()
     {
         $obj = new PayoutItemDetails(self::getJson());
         $this->assertNotNull($obj);
@@ -53,7 +56,7 @@ class PayoutItemDetailsTest extends TestCase
      * @depends testSerializationDeserialization
      * @param PayoutItemDetails $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getPayoutItemId(), "TestSample");
         $this->assertEquals($obj->getTransactionId(), "TestSample");

@@ -15,7 +15,7 @@ class PayPalLoggingManager
     /**
      * @var array of logging manager instances with class name as key
      */
-    private static array $instances = [];
+    private static $instances = [];
 
     /**
      * The logger to be used for all messages
@@ -23,6 +23,13 @@ class PayPalLoggingManager
      * @var LoggerInterface
      */
     private $logger;
+
+    /**
+     * Logger Name
+     *
+     * @var string
+     */
+    private $loggerName;
 
     /**
      * Returns the singleton object
@@ -35,7 +42,6 @@ class PayPalLoggingManager
         if (array_key_exists($loggerName, PayPalLoggingManager::$instances)) {
             return PayPalLoggingManager::$instances[$loggerName];
         }
-
         $instance = new self($loggerName);
         PayPalLoggingManager::$instances[$loggerName] = $instance;
         return $instance;
@@ -54,6 +60,7 @@ class PayPalLoggingManager
         /** @var PayPalLogFactory $factoryInstance */
         $factoryInstance = new $factory();
         $this->logger = $factoryInstance->getLogger($loggerName);
+        $this->loggerName = $loggerName;
     }
 
     /**
@@ -61,7 +68,7 @@ class PayPalLoggingManager
      *
      * @param string $message
      */
-    public function error(string|\Stringable $message): void
+    public function error($message)
     {
         $this->logger->error($message);
     }
@@ -71,7 +78,7 @@ class PayPalLoggingManager
      *
      * @param string $message
      */
-    public function warning(string|\Stringable $message): void
+    public function warning($message)
     {
         $this->logger->warning($message);
     }
@@ -81,7 +88,7 @@ class PayPalLoggingManager
      *
      * @param string $message
      */
-    public function info(string|\Stringable $message): void
+    public function info($message)
     {
         $this->logger->info($message);
     }
@@ -91,7 +98,7 @@ class PayPalLoggingManager
      *
      * @param string $message
      */
-    public function fine(string|\Stringable $message): void
+    public function fine($message)
     {
         $this->info($message);
     }
@@ -101,7 +108,7 @@ class PayPalLoggingManager
      *
      * @param string $message
      */
-    public function debug(string|\Stringable $message): void
+    public function debug($message)
     {
         $config = PayPalConfigManager::getInstance()->getConfigHashmap();
         // Disable debug in live mode.

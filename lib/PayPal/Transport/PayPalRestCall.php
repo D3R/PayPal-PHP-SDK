@@ -16,15 +16,24 @@ class PayPalRestCall
 
 
     /**
-     * Default Constructor
+     * Paypal Logger
+     *
+     * @var PayPalLoggingManager logger interface
      */
-    public function __construct(
-        /**
-         * API Context
-         */
-        private ApiContext $apiContext
-    )
+    private $logger;
+
+
+    /**
+     * Default Constructor
+     *
+     * @param ApiContext $apiContext
+     */
+    public function __construct(/**
+     * API Context
+     */
+    private ApiContext $apiContext)
     {
+        $this->logger = PayPalLoggingManager::getInstance(self::class);
     }
 
     /**
@@ -33,9 +42,10 @@ class PayPalRestCall
      * @param string $method   HTTP method - one of GET, POST, PUT, DELETE, PATCH etc
      * @param string $data     Request payload
      * @param array  $headers  HTTP headers
+     * @return mixed
      * @throws \PayPal\Exception\PayPalConnectionException
      */
-    public function execute($path, $method, $handlers = [], $data = '', $headers = []): string|bool
+    public function execute($path, $method, $handlers = [], $data = '', $headers = [])
     {
         $config = $this->apiContext->getConfig();
         $httpConfig = new PayPalHttpConfig(null, $method, $config);
@@ -54,15 +64,14 @@ class PayPalRestCall
         /** @var \Paypal\Handler\IPayPalHandler $handler */
         foreach ($handlers as $handler) {
             if (!is_object($handler)) {
-                $fullHandler = "\\" . $handler;
+                $fullHandler = "\\" . (string)$handler;
                 $handler = new $fullHandler($this->apiContext);
             }
-
             $handler->handle($httpConfig, $data, ['path' => $path, 'apiContext' => $this->apiContext]);
         }
-
         $connection = new PayPalHttpConnection($httpConfig, $config);
+        $response = $connection->execute($data);
 
-        return $connection->execute($data);
+        return $response;
     }
 }

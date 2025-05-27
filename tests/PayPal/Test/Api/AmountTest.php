@@ -14,16 +14,18 @@ class AmountTest extends TestCase
 {
     /**
      * Gets Json String of Object Amount
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"currency":"TestSample","total":"12.34","details":' . DetailsTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return Amount
      */
-    public static function getObject(): \PayPal\Api\Amount
+    public static function getObject()
     {
         return new Amount(self::getJson());
     }
@@ -31,8 +33,9 @@ class AmountTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return Amount
      */
-    public function testSerializationDeserialization(): \PayPal\Api\Amount
+    public function testSerializationDeserialization()
     {
         $obj = new Amount(self::getJson());
         $this->assertNotNull($obj);
@@ -47,7 +50,7 @@ class AmountTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Amount $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getCurrency(), "TestSample");
         $this->assertEquals($obj->getTotal(), "12.34");

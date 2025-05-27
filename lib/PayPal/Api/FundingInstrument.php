@@ -24,7 +24,7 @@ class FundingInstrument extends PayPalModel
      *
      * @return $this
      */
-    public function setCreditCard($credit_card): static
+    public function setCreditCard($credit_card)
     {
         $this->credit_card = $credit_card;
         return $this;
@@ -47,7 +47,7 @@ class FundingInstrument extends PayPalModel
      *
      * @return $this
      */
-    public function setCreditCardToken($credit_card_token): static
+    public function setCreditCardToken($credit_card_token)
     {
         $this->credit_card_token = $credit_card_token;
         return $this;
@@ -70,7 +70,7 @@ class FundingInstrument extends PayPalModel
      *
      * @return $this
      */
-    public function setPaymentCard($payment_card): static
+    public function setPaymentCard($payment_card)
     {
         $this->payment_card = $payment_card;
         return $this;
@@ -93,7 +93,7 @@ class FundingInstrument extends PayPalModel
      *
      * @return $this
      */
-    public function setBankAccount($bank_account): static
+    public function setBankAccount($bank_account)
     {
         $this->bank_account = $bank_account;
         return $this;
@@ -116,7 +116,7 @@ class FundingInstrument extends PayPalModel
      *
      * @return $this
      */
-    public function setBankAccountToken($bank_account_token): static
+    public function setBankAccountToken($bank_account_token)
     {
         $this->bank_account_token = $bank_account_token;
         return $this;
@@ -139,7 +139,7 @@ class FundingInstrument extends PayPalModel
      *
      * @return $this
      */
-    public function setCredit($credit): static
+    public function setCredit($credit)
     {
         $this->credit = $credit;
         return $this;
@@ -162,7 +162,7 @@ class FundingInstrument extends PayPalModel
      *
      * @return $this
      */
-    public function setIncentive($incentive): static
+    public function setIncentive($incentive)
     {
         $this->incentive = $incentive;
         return $this;
@@ -185,7 +185,7 @@ class FundingInstrument extends PayPalModel
      *
      * @return $this
      */
-    public function setExternalFunding($external_funding): static
+    public function setExternalFunding($external_funding)
     {
         $this->external_funding = $external_funding;
         return $this;
@@ -208,7 +208,7 @@ class FundingInstrument extends PayPalModel
      *
      * @return $this
      */
-    public function setCarrierAccountToken($carrier_account_token): static
+    public function setCarrierAccountToken($carrier_account_token)
     {
         $this->carrier_account_token = $carrier_account_token;
         return $this;
@@ -231,7 +231,7 @@ class FundingInstrument extends PayPalModel
      *
      * @return $this
      */
-    public function setCarrierAccount($carrier_account): static
+    public function setCarrierAccount($carrier_account)
     {
         $this->carrier_account = $carrier_account;
         return $this;
@@ -254,7 +254,7 @@ class FundingInstrument extends PayPalModel
      *
      * @return $this
      */
-    public function setPrivateLabelCard($private_label_card): static
+    public function setPrivateLabelCard($private_label_card)
     {
         $this->private_label_card = $private_label_card;
         return $this;
@@ -277,7 +277,7 @@ class FundingInstrument extends PayPalModel
      *
      * @return $this
      */
-    public function setBilling($billing): static
+    public function setBilling($billing)
     {
         $this->billing = $billing;
         return $this;
@@ -301,7 +301,7 @@ class FundingInstrument extends PayPalModel
      *
      * @return $this
      */
-    public function setAlternatePayment($alternate_payment): static
+    public function setAlternatePayment($alternate_payment)
     {
         $this->alternate_payment = $alternate_payment;
         return $this;

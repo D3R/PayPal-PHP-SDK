@@ -21,7 +21,7 @@ class TransactionBase extends CartBase
      * 
      * @return $this
      */
-    public function setRelatedResources($related_resources): static
+    public function setRelatedResources($related_resources)
     {
         $this->related_resources = $related_resources;
         return $this;

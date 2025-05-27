@@ -14,16 +14,18 @@ class AgreementStateDescriptorTest extends TestCase
 {
     /**
      * Gets Json String of Object AgreementStateDescriptor
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"note":"TestSample","amount":' .CurrencyTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return AgreementStateDescriptor
      */
-    public static function getObject(): \PayPal\Api\AgreementStateDescriptor
+    public static function getObject()
     {
         return new AgreementStateDescriptor(self::getJson());
     }
@@ -31,8 +33,9 @@ class AgreementStateDescriptorTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return AgreementStateDescriptor
      */
-    public function testSerializationDeserialization(): \PayPal\Api\AgreementStateDescriptor
+    public function testSerializationDeserialization()
     {
         $obj = new AgreementStateDescriptor(self::getJson());
         $this->assertNotNull($obj);
@@ -46,7 +49,7 @@ class AgreementStateDescriptorTest extends TestCase
      * @depends testSerializationDeserialization
      * @param AgreementStateDescriptor $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getNote(), "TestSample");
         $this->assertEquals($obj->getAmount(), CurrencyTest::getObject());

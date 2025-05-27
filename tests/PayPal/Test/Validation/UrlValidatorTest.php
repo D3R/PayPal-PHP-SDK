@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 class UrlValidatorTest extends TestCase
 {
 
-    public static function positiveProvider(): array
+    public static function positiveProvider()
     {
         return [
             ["https://www.paypal.com"],
@@ -24,7 +24,7 @@ class UrlValidatorTest extends TestCase
         ];
     }
 
-    public static function invalidProvider(): array
+    public static function invalidProvider()
     {
         return [
             ["www.paypal.com"],
@@ -38,7 +38,7 @@ class UrlValidatorTest extends TestCase
      *
      * @dataProvider positiveProvider
      */
-    public function testValidate(string $input): void
+    public function testValidate($input)
     {
         UrlValidator::validate($input, "Test Value");
     }
@@ -48,7 +48,7 @@ class UrlValidatorTest extends TestCase
      * @dataProvider invalidProvider
      * @expectedException \InvalidArgumentException
      */
-    public function testValidateException(?string $input): void
+    public function testValidateException($input)
     {
         UrlValidator::validate($input, "Test Value");
     }

@@ -24,26 +24,26 @@ class PaymentsFunctionalTest extends TestCase
 
     public $apiContext;
 
-    protected function setUp(): void
+    public function setUp()
     {
         $className = $this->getClassName();
         $testName = $this->getName();
-        $operationString = file_get_contents(__DIR__ . sprintf('/../resources/%s/%s.json', $className, $testName));
+        $operationString = file_get_contents(__DIR__ . "/../resources/$className/$testName.json");
         $this->operation = json_decode($operationString, true);
         $this->response = true;
         if (array_key_exists('body', $this->operation['response'])) {
             $this->response = json_encode($this->operation['response']['body']);
         }
-
         Setup::SetUpForFunctionalTests($this);
     }
 
     /**
      * Returns just the classname of the test you are executing. It removes the namespaces.
+     * @return string
      */
-    public function getClassName(): string
+    public function getClassName()
     {
-        return implode('', array_slice(explode('\\', static::class), -1));
+        return join('', array_slice(explode('\\', static::class), -1));
     }
 
     public function testCreate()
@@ -97,8 +97,9 @@ class PaymentsFunctionalTest extends TestCase
     /**
      * @depends testGetSale
      * @param $sale Sale
+     * @return Sale
      */
-    public function testRefundSale($sale): void
+    public function testRefundSale($sale)
     {
         $refund = new Refund($this->operation['request']['body']);
         $result = $sale->refund($refund, $this->apiContext, $this->mockPayPalRestCall);
@@ -111,8 +112,9 @@ class PaymentsFunctionalTest extends TestCase
     /**
      * @depends testGet
      * @param $payment Payment
+     * @return Payment
      */
-    public function testExecute($payment): void
+    public function testExecute($payment)
     {
         if (Setup::$mode == 'sandbox') {
             $this->markTestSkipped('Not executable on sandbox environment. Needs human interaction');

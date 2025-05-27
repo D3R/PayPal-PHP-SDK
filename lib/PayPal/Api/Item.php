@@ -32,7 +32,7 @@ class Item extends PayPalModel
      * 
      * @return $this
      */
-    public function setSku($sku): static
+    public function setSku($sku)
     {
         $this->sku = $sku;
         return $this;
@@ -55,7 +55,7 @@ class Item extends PayPalModel
      * 
      * @return $this
      */
-    public function setName($name): static
+    public function setName($name)
     {
         $this->name = $name;
         return $this;
@@ -78,7 +78,7 @@ class Item extends PayPalModel
      * 
      * @return $this
      */
-    public function setDescription($description): static
+    public function setDescription($description)
     {
         $this->description = $description;
         return $this;
@@ -101,7 +101,7 @@ class Item extends PayPalModel
      * 
      * @return $this
      */
-    public function setQuantity($quantity): static
+    public function setQuantity($quantity)
     {
         $this->quantity = $quantity;
         return $this;
@@ -124,7 +124,7 @@ class Item extends PayPalModel
      * 
      * @return $this
      */
-    public function setPrice($price): static
+    public function setPrice($price)
     {
         NumericValidator::validate($price, "Price");
         $price = FormatConverter::formatToPrice($price, $this->getCurrency());
@@ -149,7 +149,7 @@ class Item extends PayPalModel
      * 
      * @return $this
      */
-    public function setCurrency($currency): static
+    public function setCurrency($currency)
     {
         $this->currency = $currency;
         return $this;
@@ -172,7 +172,7 @@ class Item extends PayPalModel
      * 
      * @return $this
      */
-    public function setTax($tax): static
+    public function setTax($tax)
     {
         NumericValidator::validate($tax, "Tax");
         $tax = FormatConverter::formatToPrice($tax, $this->getCurrency());
@@ -197,7 +197,7 @@ class Item extends PayPalModel
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setUrl($url): static
+    public function setUrl($url)
     {
         if ($url) {
             UrlValidator::validate($url, "Url");
@@ -225,7 +225,7 @@ class Item extends PayPalModel
      * 
      * @return $this
      */
-    public function setCategory($category): static
+    public function setCategory($category)
     {
         $this->category = $category;
         return $this;
@@ -248,7 +248,7 @@ class Item extends PayPalModel
      * 
      * @return $this
      */
-    public function setWeight($weight): static
+    public function setWeight($weight)
     {
         $this->weight = $weight;
         return $this;
@@ -271,7 +271,7 @@ class Item extends PayPalModel
      * 
      * @return $this
      */
-    public function setLength($length): static
+    public function setLength($length)
     {
         $this->length = $length;
         return $this;
@@ -294,7 +294,7 @@ class Item extends PayPalModel
      * 
      * @return $this
      */
-    public function setHeight($height): static
+    public function setHeight($height)
     {
         $this->height = $height;
         return $this;
@@ -317,7 +317,7 @@ class Item extends PayPalModel
      * 
      * @return $this
      */
-    public function setWidth($width): static
+    public function setWidth($width)
     {
         $this->width = $width;
         return $this;
@@ -340,7 +340,7 @@ class Item extends PayPalModel
      * 
      * @return $this
      */
-    public function setSupplementaryData($supplementary_data): static
+    public function setSupplementaryData($supplementary_data)
     {
         $this->supplementary_data = $supplementary_data;
         return $this;
@@ -362,7 +362,7 @@ class Item extends PayPalModel
      * @param \PayPal\Api\NameValuePair $nameValuePair
      * @return $this
      */
-    public function addSupplementaryData($nameValuePair): static
+    public function addSupplementaryData($nameValuePair)
     {
         if (!$this->getSupplementaryData()) {
             return $this->setSupplementaryData([$nameValuePair]);
@@ -379,7 +379,7 @@ class Item extends PayPalModel
      * @param \PayPal\Api\NameValuePair $nameValuePair
      * @return $this
      */
-    public function removeSupplementaryData($nameValuePair): static
+    public function removeSupplementaryData($nameValuePair)
     {
         return $this->setSupplementaryData(
             array_diff($this->getSupplementaryData(), [$nameValuePair])
@@ -393,7 +393,7 @@ class Item extends PayPalModel
      * 
      * @return $this
      */
-    public function setPostbackData($postback_data): static
+    public function setPostbackData($postback_data)
     {
         $this->postback_data = $postback_data;
         return $this;
@@ -415,7 +415,7 @@ class Item extends PayPalModel
      * @param \PayPal\Api\NameValuePair $nameValuePair
      * @return $this
      */
-    public function addPostbackData($nameValuePair): static
+    public function addPostbackData($nameValuePair)
     {
         if (!$this->getPostbackData()) {
             return $this->setPostbackData([$nameValuePair]);
@@ -432,7 +432,7 @@ class Item extends PayPalModel
      * @param \PayPal\Api\NameValuePair $nameValuePair
      * @return $this
      */
-    public function removePostbackData($nameValuePair): static
+    public function removePostbackData($nameValuePair)
     {
         return $this->setPostbackData(
             array_diff($this->getPostbackData(), [$nameValuePair])

@@ -14,16 +14,18 @@ class LinksTest extends TestCase
 {
     /**
      * Gets Json String of Object Links
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"href":"TestSample","rel":"TestSample","targetSchema":' .HyperSchemaTest::getJson() . ',"method":"TestSample","enctype":"TestSample","schema":' .HyperSchemaTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return Links
      */
-    public static function getObject(): \PayPal\Api\Links
+    public static function getObject()
     {
         return new Links(self::getJson());
     }
@@ -31,8 +33,9 @@ class LinksTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return Links
      */
-    public function testSerializationDeserialization(): \PayPal\Api\Links
+    public function testSerializationDeserialization()
     {
         $obj = new Links(self::getJson());
         $this->assertNotNull($obj);
@@ -50,7 +53,7 @@ class LinksTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Links $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getHref(), "TestSample");
         $this->assertEquals($obj->getRel(), "TestSample");

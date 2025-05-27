@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 class JsonValidatorTest extends TestCase
 {
 
-    public static function positiveProvider(): array
+    public static function positiveProvider()
     {
         return [
             [null],
@@ -17,7 +17,7 @@ class JsonValidatorTest extends TestCase
         ];
     }
 
-    public static function invalidProvider(): array
+    public static function invalidProvider()
     {
         return [
             ['{'],
@@ -32,7 +32,7 @@ class JsonValidatorTest extends TestCase
      *
      * @dataProvider positiveProvider
      */
-    public function testValidate(?string $input): void
+    public function testValidate($input)
     {
         $this->assertTrue(JsonValidator::validate($input));
     }
@@ -42,7 +42,7 @@ class JsonValidatorTest extends TestCase
      * @dataProvider invalidProvider
      * @expectedException \InvalidArgumentException
      */
-    public function testInvalidJson(string|array $input): void
+    public function testInvalidJson($input)
     {
         JsonValidator::validate($input);
     }
@@ -51,7 +51,7 @@ class JsonValidatorTest extends TestCase
      *
      * @dataProvider invalidProvider
      */
-    public function testInvalidJsonSilent(string|array $input): void
+    public function testInvalidJsonSilent($input)
     {
         $this->assertFalse(JsonValidator::validate($input, true));
     }

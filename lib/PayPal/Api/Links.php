@@ -27,7 +27,7 @@ class Links extends PayPalModel
      * 
      * @return $this
      */
-    public function setHref($href): static
+    public function setHref($href)
     {
         $this->href = $href;
         return $this;
@@ -50,7 +50,7 @@ class Links extends PayPalModel
      * 
      * @return $this
      */
-    public function setRel($rel): static
+    public function setRel($rel)
     {
         $this->rel = $rel;
         return $this;
@@ -73,7 +73,7 @@ class Links extends PayPalModel
      * 
      * @return $this
      */
-    public function setTargetSchema($targetSchema): static
+    public function setTargetSchema($targetSchema)
     {
         $this->targetSchema = $targetSchema;
         return $this;
@@ -96,7 +96,7 @@ class Links extends PayPalModel
      * 
      * @return $this
      */
-    public function setMethod($method): static
+    public function setMethod($method)
     {
         $this->method = $method;
         return $this;
@@ -119,7 +119,7 @@ class Links extends PayPalModel
      * 
      * @return $this
      */
-    public function setEnctype($enctype): static
+    public function setEnctype($enctype)
     {
         $this->enctype = $enctype;
         return $this;
@@ -142,7 +142,7 @@ class Links extends PayPalModel
      * 
      * @return $this
      */
-    public function setSchema($schema): static
+    public function setSchema($schema)
     {
         $this->schema = $schema;
         return $this;

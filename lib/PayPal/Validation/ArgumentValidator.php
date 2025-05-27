@@ -16,17 +16,17 @@ class ArgumentValidator
      * @param $argument     mixed The object to be validated
      * @param $argumentName string|null The name of the argument.
      *                      This will be placed in the exception message for easy reference
+     * @return bool
      */
-    public static function validate($argument, $argumentName = null): bool
+    public static function validate($argument, $argumentName = null)
     {
         if ($argument === null) {
             // Error if Object Null
-            throw new \InvalidArgumentException($argumentName . ' cannot be null');
-        } elseif (gettype($argument) === 'string' && trim($argument) === '') {
+            throw new \InvalidArgumentException("$argumentName cannot be null");
+        } elseif (gettype($argument) == 'string' && trim($argument) == '') {
             // Error if String Empty
-            throw new \InvalidArgumentException($argumentName . ' string cannot be empty');
+            throw new \InvalidArgumentException("$argumentName string cannot be empty");
         }
-
         return true;
     }
 }

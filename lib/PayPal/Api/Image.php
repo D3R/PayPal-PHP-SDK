@@ -20,7 +20,7 @@ class Image extends PayPalModel
      * 
      * @return $this
      */
-    public function setImage($imageBase64String): static
+    public function setImage($imageBase64String)
     {
         $this->image = $imageBase64String;
         return $this;
@@ -48,7 +48,6 @@ class Image extends PayPalModel
         if (!$name) {
             $name = uniqid() . '.png';
         }
-
         // Save to File
         file_put_contents($name, base64_decode($this->getImage()));
         return $name;

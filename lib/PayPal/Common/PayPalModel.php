@@ -27,7 +27,7 @@ class PayPalModel implements \Stringable
      * @deprecated Pass ApiContext to create/get methods instead
      * @param \PayPal\Auth\OAuthTokenCredential $credential
      */
-    public static function setCredential($credential): void
+    public static function setCredential($credential)
     {
         self::$credential = $credential;
     }
@@ -88,13 +88,11 @@ class PayPalModel implements \Stringable
             if ($decoded === null) {
                 return $list;
             }
-
             if (is_array($decoded)) {
-                foreach ($decoded as $v) {
+                foreach ($decoded as $k => $v) {
                     $list[] = self::getList($v);
                 }
             }
-
             if (is_a($decoded, (new \stdClass())::class)) {
                 //This means, root element is object
                 $list[] = new static(json_encode($decoded));
@@ -115,7 +113,6 @@ class PayPalModel implements \Stringable
         if ($this->__isset($key)) {
             return $this->_propMap[$key];
         }
-
         return null;
     }
 
@@ -138,8 +135,9 @@ class PayPalModel implements \Stringable
      * Converts the input key into a valid Setter Method Name
      *
      * @param $key
+     * @return mixed
      */
-    private function convertToCamelCase($key): string
+    private function convertToCamelCase($key)
     {
         return str_replace(' ', '', ucwords(str_replace(['_', '-'], ' ', $key)));
     }
@@ -177,7 +175,7 @@ class PayPalModel implements \Stringable
         foreach ($param as $k => $v) {
             if ($v instanceof PayPalModel) {
                 $ret[$k] = $v->toArray();
-            } elseif (is_array($v) && count($v) <= 0) {
+            } elseif (is_array($v) && sizeof($v) <= 0) {
                 $ret[$k] = [];
             } elseif (is_array($v)) {
                 $ret[$k] = $this->_convertToArray($v);
@@ -185,14 +183,12 @@ class PayPalModel implements \Stringable
                 $ret[$k] = $v;
             }
         }
-
         // If the array is empty, which means an empty object,
         // we need to convert array to StdClass object to properly
         // represent JSON String
-        if (count($ret) <= 0) {
+        if (sizeof($ret) <= 0) {
             $ret = new PayPalModel();
         }
-
         return $ret;
     }
 
@@ -202,7 +198,7 @@ class PayPalModel implements \Stringable
      * @param $arr
      * @return $this
      */
-    public function fromArray($arr): static
+    public function fromArray($arr)
     {
         if (!empty($arr)) {
             // Iterate over each element in array
@@ -212,13 +208,12 @@ class PayPalModel implements \Stringable
                     // Determine the class of the object
                     if (($clazz = ReflectionUtil::getPropertyClass(static::class, $k)) != null) {
                         // If the value is an associative array, it means, its an object. Just make recursive call to it.
-                        if ($v === []) {
+                        if (empty($v)) {
                             if (ReflectionUtil::isPropertyClassArray(static::class, $k)) {
                                 // It means, it is an array of objects.
                                 $this->assignValue($k, []);
                                 continue;
                             }
-
                             $o = new $clazz();
                             //$arr = array();
                             $this->assignValue($k, $o);
@@ -240,7 +235,6 @@ class PayPalModel implements \Stringable
                                     $arr[$nk] = $nv;
                                 }
                             }
-
                             $this->assignValue($k, $arr);
                         }
                     } else {
@@ -251,11 +245,10 @@ class PayPalModel implements \Stringable
                 }
             }
         }
-
         return $this;
     }
 
-    private function assignValue($key, $value): void
+    private function assignValue($key, $value)
     {
         $setter = 'set'. $this->convertToCamelCase($key);
         // If we find the setter, use that, otherwise use magic method.
@@ -272,7 +265,7 @@ class PayPalModel implements \Stringable
      * @param $json
      * @return $this
      */
-    public function fromJson($json): static
+    public function fromJson($json)
     {
         return $this->fromArray(json_decode($json, true));
     }
@@ -298,15 +291,16 @@ class PayPalModel implements \Stringable
         // Because of PHP Version 5.3, we cannot use JSON_UNESCAPED_SLASHES option
         // Instead we would use the str_replace command for now.
         // TODO: Replace this code with return json_encode($this->toArray(), $options | 64); once we support PHP >= 5.4
-        if (version_compare(phpversion(), '5.4.0', '>=')) {
+        if (version_compare(phpversion(), '5.4.0', '>=') === true) {
             return json_encode($this->toArray(), $options | 64);
         }
-
         return str_replace('\\/', '/', json_encode($this->toArray(), $options));
     }
 
     /**
      * Magic Method for toString
+     *
+     * @return string
      */
     public function __toString(): string
     {

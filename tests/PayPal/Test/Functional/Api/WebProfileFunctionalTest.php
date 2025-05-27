@@ -24,11 +24,11 @@ class WebProfileFunctionalTest extends TestCase
 
     public $apiContext;
 
-    protected function setUp(): void
+    public function setUp()
     {
         $className = $this->getClassName();
         $testName = $this->getName();
-        $operationString = file_get_contents(__DIR__ . sprintf('/../resources/%s/%s.json', $className, $testName));
+        $operationString = file_get_contents(__DIR__ . "/../resources/$className/$testName.json");
         $this->operation = json_decode($operationString, true);
         $this->response = true;
         if (array_key_exists('body', $this->operation['response'])) {
@@ -40,10 +40,11 @@ class WebProfileFunctionalTest extends TestCase
 
     /**
      * Returns just the classname of the test you are executing. It removes the namespaces.
+     * @return string
      */
-    public function getClassName(): string
+    public function getClassName()
     {
-        return implode('', array_slice(explode('\\', static::class), -1));
+        return join('', array_slice(explode('\\', static::class), -1));
     }
 
     public function testCreate()
@@ -51,7 +52,6 @@ class WebProfileFunctionalTest extends TestCase
         $request = $this->operation['request']['body'];
         $obj = new WebProfile($request);
         $obj->setName(uniqid());
-
         $result = $obj->create($this->apiContext, $this->mockPayPalRestCall);
         $this->assertNotNull($result);
         return $result;
@@ -79,7 +79,7 @@ class WebProfileFunctionalTest extends TestCase
      * @depends testGet
      * @param $webProfile WebProfile
      */
-    public function testGetList($webProfile): void
+    public function testGetList($webProfile)
     {
         $result = WebProfile::get_list($this->apiContext, $this->mockPayPalRestCall);
         $this->assertNotNull($result);
@@ -92,7 +92,6 @@ class WebProfileFunctionalTest extends TestCase
                 break;
             }
         }
-
         $this->assertTrue($found, "The Created Web Profile was not found in the get list");
         $this->assertEquals($webProfile->getId(), $foundObject->getId());
         $this->assertEquals($this->operation['response']['body'][0]['presentation']['logo_image'], $foundObject->getPresentation()->getLogoImage());
@@ -104,7 +103,7 @@ class WebProfileFunctionalTest extends TestCase
      * @depends testGet
      * @param $webProfile WebProfile
      */
-    public function testUpdate($webProfile): void
+    public function testUpdate($webProfile)
     {
         $boolValue = $webProfile->getInputFields()->getNoShipping();
         $newValue = ($boolValue + 1) % 2;
@@ -118,7 +117,7 @@ class WebProfileFunctionalTest extends TestCase
      * @depends testGet
      * @param $webProfile WebProfile
      */
-    public function testPartialUpdate($webProfile): void
+    public function testPartialUpdate($webProfile)
     {
         $patches = [];
         $patches[] = new Patch('{
@@ -139,11 +138,10 @@ class WebProfileFunctionalTest extends TestCase
      * @depends testGet
      * @param $createProfileResponse CreateProfileResponse
      */
-    public function testDelete($createProfileResponse): void
+    public function testDelete($createProfileResponse)
     {
         $webProfile = new WebProfile();
         $webProfile->setId($createProfileResponse->getId());
-
         $result = $webProfile->delete($this->apiContext, $this->mockPayPalRestCall);
         $this->assertTrue($result);
     }

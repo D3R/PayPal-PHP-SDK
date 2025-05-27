@@ -35,16 +35,17 @@ class OauthHandler implements IPayPalHandler
      * @param PayPalHttpConfig $httpConfig
      * @param string                    $request
      * @param mixed                     $options
+     * @return mixed|void
      * @throws PayPalConfigurationException
      * @throws PayPalInvalidCredentialException
      * @throws PayPalMissingCredentialException
      */
-    public function handle($httpConfig, $request, $options): void
+    public function handle($httpConfig, $request, $options)
     {
         $config = $this->apiContext->getConfig();
 
         $httpConfig->setUrl(
-            rtrim(trim($this->_getEndpoint($config)), '/') .
+            rtrim(trim(self::_getEndpoint($config)), '/') .
             ($options['path'] ?? '')
         );
 
@@ -70,7 +71,7 @@ class OauthHandler implements IPayPalHandler
      * @return PayPalHttpConfig
      * @throws \PayPal\Exception\PayPalConfigurationException
      */
-    private function _getEndpoint($config): string
+    private static function _getEndpoint($config)
     {
         if (isset($config['oauth.EndPoint'])) {
             $baseEndpoint = $config['oauth.EndPoint'];
@@ -87,6 +88,8 @@ class OauthHandler implements IPayPalHandler
             $baseEndpoint = PayPalConstants::REST_SANDBOX_ENDPOINT;
         }
 
-        return rtrim(trim($baseEndpoint), '/') . "/v1/oauth2/token";
+        $baseEndpoint = rtrim(trim($baseEndpoint), '/') . "/v1/oauth2/token";
+
+        return $baseEndpoint;
     }
 }

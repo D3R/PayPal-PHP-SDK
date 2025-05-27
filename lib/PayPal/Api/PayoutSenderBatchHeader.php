@@ -25,7 +25,7 @@ class PayoutSenderBatchHeader extends PayPalModel
      * 
      * @return $this
      */
-    public function setSenderBatchId($sender_batch_id): static
+    public function setSenderBatchId($sender_batch_id)
     {
         $this->sender_batch_id = $sender_batch_id;
         return $this;
@@ -48,7 +48,7 @@ class PayoutSenderBatchHeader extends PayPalModel
      * 
      * @return $this
      */
-    public function setEmailSubject($email_subject): static
+    public function setEmailSubject($email_subject)
     {
         $this->email_subject = $email_subject;
         return $this;
@@ -71,7 +71,7 @@ class PayoutSenderBatchHeader extends PayPalModel
      * 
      * @return $this
      */
-    public function setRecipientType($recipient_type): static
+    public function setRecipientType($recipient_type)
     {
         $this->recipient_type = $recipient_type;
         return $this;
@@ -90,7 +90,7 @@ class PayoutSenderBatchHeader extends PayPalModel
     /**
      * @deprecated This property is unused
      */
-    public function setBatchStatus($batch_status): static
+    public function setBatchStatus($batch_status)
     {
         $this->batch_status = $batch_status;
         return $this;

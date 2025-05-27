@@ -24,7 +24,7 @@ class BankAccountsList extends PayPalModel
      * 
      * @return $this
      */
-    public function setBankAccounts($bank_accounts): static
+    public function setBankAccounts($bank_accounts)
     {
         $this->{"bank-accounts"} = $bank_accounts;
         return $this;
@@ -46,7 +46,7 @@ class BankAccountsList extends PayPalModel
      * @param \PayPal\Api\BankAccount $bankAccount
      * @return $this
      */
-    public function addBankAccount($bankAccount): static
+    public function addBankAccount($bankAccount)
     {
         if (!$this->getBankAccounts()) {
             return $this->setBankAccounts([$bankAccount]);
@@ -63,7 +63,7 @@ class BankAccountsList extends PayPalModel
      * @param \PayPal\Api\BankAccount $bankAccount
      * @return $this
      */
-    public function removeBankAccount($bankAccount): static
+    public function removeBankAccount($bankAccount)
     {
         return $this->setBankAccounts(
             array_diff($this->getBankAccounts(), [$bankAccount])
@@ -77,7 +77,7 @@ class BankAccountsList extends PayPalModel
      * 
      * @return $this
      */
-    public function setCount($count): static
+    public function setCount($count)
     {
         $this->count = $count;
         return $this;
@@ -100,7 +100,7 @@ class BankAccountsList extends PayPalModel
      * 
      * @return $this
      */
-    public function setNextId($next_id): static
+    public function setNextId($next_id)
     {
         $this->next_id = $next_id;
         return $this;

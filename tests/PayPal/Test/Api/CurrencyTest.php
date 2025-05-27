@@ -14,16 +14,20 @@ class CurrencyTest extends TestCase
 {
     /**
      * Gets Json String of Object Currency
+     *
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"currency":"TestSample","value":"12.34"}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     *
+     * @return Currency
      */
-    public static function getObject(): \PayPal\Api\Currency
+    public static function getObject()
     {
         return new Currency(self::getJson());
     }
@@ -31,8 +35,10 @@ class CurrencyTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     *
+     * @return Currency
      */
-    public function testSerializationDeserialization(): \PayPal\Api\Currency
+    public function testSerializationDeserialization()
     {
         $obj = new Currency(self::getJson());
         $this->assertNotNull($obj);
@@ -46,7 +52,7 @@ class CurrencyTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Currency $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getCurrency(), "TestSample");
         $this->assertEquals($obj->getValue(), "12.34");

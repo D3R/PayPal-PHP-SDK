@@ -30,7 +30,7 @@ class PaymentInstruction extends PayPalResourceModel
      *
      * @return $this
      */
-    public function setReferenceNumber($reference_number): static
+    public function setReferenceNumber($reference_number)
     {
         $this->reference_number = $reference_number;
         return $this;
@@ -54,7 +54,7 @@ class PaymentInstruction extends PayPalResourceModel
      *
      * @return $this
      */
-    public function setInstructionType($instruction_type): static
+    public function setInstructionType($instruction_type)
     {
         $this->instruction_type = $instruction_type;
         return $this;
@@ -77,7 +77,7 @@ class PaymentInstruction extends PayPalResourceModel
      *
      * @return $this
      */
-    public function setRecipientBankingInstruction($recipient_banking_instruction): static
+    public function setRecipientBankingInstruction($recipient_banking_instruction)
     {
         $this->recipient_banking_instruction = $recipient_banking_instruction;
         return $this;
@@ -100,7 +100,7 @@ class PaymentInstruction extends PayPalResourceModel
      *
      * @return $this
      */
-    public function setAmount($amount): static
+    public function setAmount($amount)
     {
         $this->amount = $amount;
         return $this;
@@ -123,7 +123,7 @@ class PaymentInstruction extends PayPalResourceModel
      *
      * @return $this
      */
-    public function setPaymentDueDate($payment_due_date): static
+    public function setPaymentDueDate($payment_due_date)
     {
         $this->payment_due_date = $payment_due_date;
         return $this;
@@ -146,7 +146,7 @@ class PaymentInstruction extends PayPalResourceModel
      *
      * @return $this
      */
-    public function setNote($note): static
+    public function setNote($note)
     {
         $this->note = $note;
         return $this;
@@ -168,13 +168,14 @@ class PaymentInstruction extends PayPalResourceModel
      * @param string         $paymentId
      * @param ApiContext     $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall   is the Rest Call Service that is used to make rest calls
+     * @return PaymentInstruction
      */
-    public static function get($paymentId, $apiContext = null, $restCall = null): \PayPal\Api\PaymentInstruction
+    public static function get($paymentId, $apiContext = null, $restCall = null)
     {
         ArgumentValidator::validate($paymentId, 'paymentId');
         $payLoad = "";
         $json = self::executeCall(
-            sprintf('/v1/payments/payment/%s/payment-instruction', $paymentId),
+            "/v1/payments/payment/$paymentId/payment-instruction",
             "GET",
             $payLoad,
             null,

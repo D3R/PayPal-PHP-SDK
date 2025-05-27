@@ -23,7 +23,7 @@ class Payee extends PayPalModel
      * 
      * @return $this
      */
-    public function setEmail($email): static
+    public function setEmail($email)
     {
         $this->email = $email;
         return $this;
@@ -46,7 +46,7 @@ class Payee extends PayPalModel
      * 
      * @return $this
      */
-    public function setMerchantId($merchant_id): static
+    public function setMerchantId($merchant_id)
     {
         $this->merchant_id = $merchant_id;
         return $this;
@@ -69,7 +69,7 @@ class Payee extends PayPalModel
      * 
      * @return $this
      */
-    public function setFirstName($first_name): static
+    public function setFirstName($first_name)
     {
         $this->first_name = $first_name;
         return $this;
@@ -92,7 +92,7 @@ class Payee extends PayPalModel
      * 
      * @return $this
      */
-    public function setLastName($last_name): static
+    public function setLastName($last_name)
     {
         $this->last_name = $last_name;
         return $this;
@@ -115,7 +115,7 @@ class Payee extends PayPalModel
      * 
      * @return $this
      */
-    public function setAccountNumber($account_number): static
+    public function setAccountNumber($account_number)
     {
         $this->account_number = $account_number;
         return $this;
@@ -138,7 +138,7 @@ class Payee extends PayPalModel
      * 
      * @return $this
      */
-    public function setPhone($phone): static
+    public function setPhone($phone)
     {
         $this->phone = $phone;
         return $this;

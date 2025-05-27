@@ -21,7 +21,7 @@ class PotentialPayerInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setEmail($email): static
+    public function setEmail($email)
     {
         $this->email = $email;
         return $this;
@@ -44,7 +44,7 @@ class PotentialPayerInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setExternalRememberMeId($external_remember_me_id): static
+    public function setExternalRememberMeId($external_remember_me_id)
     {
         $this->external_remember_me_id = $external_remember_me_id;
         return $this;
@@ -67,7 +67,7 @@ class PotentialPayerInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setAccountNumber($account_number): static
+    public function setAccountNumber($account_number)
     {
         $this->account_number = $account_number;
         return $this;
@@ -90,7 +90,7 @@ class PotentialPayerInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setBillingAddress($billing_address): static
+    public function setBillingAddress($billing_address)
     {
         $this->billing_address = $billing_address;
         return $this;

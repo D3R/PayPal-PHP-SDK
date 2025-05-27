@@ -14,16 +14,18 @@ class DetailedRefundTest extends TestCase
 {
     /**
      * Gets Json String of Object DetailedRefund
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"custom":"TestSample","invoice_number":"TestSample","refund_to_payer":' .CurrencyTest::getJson() . ',"refund_to_external_funding":' .ExternalFundingTest::getJson() . ',"refund_from_transaction_fee":' .CurrencyTest::getJson() . ',"refund_from_received_amount":' .CurrencyTest::getJson() . ',"total_refunded_amount":' .CurrencyTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return DetailedRefund
      */
-    public static function getObject(): \PayPal\Api\DetailedRefund
+    public static function getObject()
     {
         return new DetailedRefund(self::getJson());
     }
@@ -31,8 +33,9 @@ class DetailedRefundTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return DetailedRefund
      */
-    public function testSerializationDeserialization(): \PayPal\Api\DetailedRefund
+    public function testSerializationDeserialization()
     {
         $obj = new DetailedRefund(self::getJson());
         $this->assertNotNull($obj);
@@ -51,7 +54,7 @@ class DetailedRefundTest extends TestCase
      * @depends testSerializationDeserialization
      * @param DetailedRefund $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getCustom(), "TestSample");
         $this->assertEquals($obj->getInvoiceNumber(), "TestSample");

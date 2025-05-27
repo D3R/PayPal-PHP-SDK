@@ -27,7 +27,7 @@ class Tax extends PayPalModel
      * 
      * @return $this
      */
-    public function setId($id): static
+    public function setId($id)
     {
         $this->id = $id;
         return $this;
@@ -50,7 +50,7 @@ class Tax extends PayPalModel
      * 
      * @return $this
      */
-    public function setName($name): static
+    public function setName($name)
     {
         $this->name = $name;
         return $this;
@@ -73,7 +73,7 @@ class Tax extends PayPalModel
      * 
      * @return $this
      */
-    public function setPercent($percent): static
+    public function setPercent($percent)
     {
         NumericValidator::validate($percent, "Percent");
         $percent = FormatConverter::formatToPrice($percent);
@@ -98,7 +98,7 @@ class Tax extends PayPalModel
      * 
      * @return $this
      */
-    public function setAmount($amount): static
+    public function setAmount($amount)
     {
         $this->amount = $amount;
         return $this;

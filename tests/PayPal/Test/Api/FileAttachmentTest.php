@@ -15,16 +15,18 @@ class FileAttachmentTest extends TestCase
 {
     /**
      * Gets Json String of Object FileAttachment
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"name":"TestSample","url":"http://www.google.com"}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return FileAttachment
      */
-    public static function getObject(): \PayPal\Api\FileAttachment
+    public static function getObject()
     {
         return new FileAttachment(self::getJson());
     }
@@ -32,8 +34,9 @@ class FileAttachmentTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return FileAttachment
      */
-    public function testSerializationDeserialization(): \PayPal\Api\FileAttachment
+    public function testSerializationDeserialization()
     {
         $obj = new FileAttachment(self::getJson());
         $this->assertNotNull($obj);
@@ -47,7 +50,7 @@ class FileAttachmentTest extends TestCase
      * @depends testSerializationDeserialization
      * @param FileAttachment $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getName(), "TestSample");
         $this->assertEquals($obj->getUrl(), "http://www.google.com");
@@ -57,7 +60,7 @@ class FileAttachmentTest extends TestCase
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Url is not a fully qualified URL
      */
-    public function testUrlValidationForUrl(): void
+    public function testUrlValidationForUrl()
     {
         $obj = new FileAttachment();
         $obj->setUrl(null);

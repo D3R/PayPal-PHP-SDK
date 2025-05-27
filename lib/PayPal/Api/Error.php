@@ -27,7 +27,7 @@ class Error extends PayPalModel
      *
      * @return $this
      */
-    public function setName($name): static
+    public function setName($name)
     {
         $this->name = $name;
         return $this;
@@ -51,7 +51,7 @@ class Error extends PayPalModel
      *
      * @return $this
      */
-    public function setPurchaseUnitReferenceId($purchase_unit_reference_id): static
+    public function setPurchaseUnitReferenceId($purchase_unit_reference_id)
     {
         $this->purchase_unit_reference_id = $purchase_unit_reference_id;
         return $this;
@@ -76,7 +76,7 @@ class Error extends PayPalModel
      *
      * @return $this
      */
-    public function setCode($code): static
+    public function setCode($code)
     {
         $this->code = $code;
         return $this;
@@ -100,7 +100,7 @@ class Error extends PayPalModel
      *
      * @return $this
      */
-    public function setDebugId($debug_id): static
+    public function setDebugId($debug_id)
     {
         $this->debug_id = $debug_id;
         return $this;
@@ -123,7 +123,7 @@ class Error extends PayPalModel
      *
      * @return $this
      */
-    public function setMessage($message): static
+    public function setMessage($message)
     {
         $this->message = $message;
         return $this;
@@ -146,7 +146,7 @@ class Error extends PayPalModel
      *
      * @return $this
      */
-    public function setInformationLink($information_link): static
+    public function setInformationLink($information_link)
     {
         $this->information_link = $information_link;
         return $this;
@@ -169,7 +169,7 @@ class Error extends PayPalModel
      *
      * @return $this
      */
-    public function setDetails($details): static
+    public function setDetails($details)
     {
         $this->details = $details;
         return $this;
@@ -191,7 +191,7 @@ class Error extends PayPalModel
      * @param \PayPal\Api\ErrorDetails $errorDetails
      * @return $this
      */
-    public function addDetail($errorDetails): static
+    public function addDetail($errorDetails)
     {
         if (!$this->getDetails()) {
             return $this->setDetails([$errorDetails]);
@@ -208,7 +208,7 @@ class Error extends PayPalModel
      * @param \PayPal\Api\ErrorDetails $errorDetails
      * @return $this
      */
-    public function removeDetail($errorDetails): static
+    public function removeDetail($errorDetails)
     {
         return $this->setDetails(
             array_diff($this->getDetails(), [$errorDetails])
@@ -223,7 +223,7 @@ class Error extends PayPalModel
      *
      * @return $this
      */
-    public function setProcessorResponse($processor_response): static
+    public function setProcessorResponse($processor_response)
     {
         $this->processor_response = $processor_response;
         return $this;
@@ -248,7 +248,7 @@ class Error extends PayPalModel
      *
      * @return $this
      */
-    public function setFmfDetails($fmf_details): static
+    public function setFmfDetails($fmf_details)
     {
         $this->fmf_details = $fmf_details;
         return $this;
@@ -272,7 +272,7 @@ class Error extends PayPalModel
      *
      * @return $this
      */
-    public function setLinks($links): static
+    public function setLinks($links)
     {
         $this->links = $links;
         return $this;
@@ -294,7 +294,7 @@ class Error extends PayPalModel
      * @param \PayPal\Api\Links $links
      * @return $this
      */
-    public function addLink($links): static
+    public function addLink($links)
     {
         if (!$this->getLinks()) {
             return $this->setLinks([$links]);
@@ -311,7 +311,7 @@ class Error extends PayPalModel
      * @param \PayPal\Api\Links $links
      * @return $this
      */
-    public function removeLink($links): static
+    public function removeLink($links)
     {
         return $this->setLinks(
             array_diff($this->getLinks(), [$links])

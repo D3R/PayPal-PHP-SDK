@@ -14,16 +14,18 @@ class PlanListTest extends TestCase
 {
     /**
      * Gets Json String of Object PlanList
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"plans":' .PlanTest::getJson() . ',"total_items":"TestSample","total_pages":"TestSample","links":' .LinksTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return PlanList
      */
-    public static function getObject(): \PayPal\Api\PlanList
+    public static function getObject()
     {
         return new PlanList(self::getJson());
     }
@@ -31,8 +33,9 @@ class PlanListTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return PlanList
      */
-    public function testSerializationDeserialization(): \PayPal\Api\PlanList
+    public function testSerializationDeserialization()
     {
         $obj = new PlanList(self::getJson());
         $this->assertNotNull($obj);
@@ -48,7 +51,7 @@ class PlanListTest extends TestCase
      * @depends testSerializationDeserialization
      * @param PlanList $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getPlans(), PlanTest::getObject());
         $this->assertEquals($obj->getTotalItems(), "TestSample");

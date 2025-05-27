@@ -15,16 +15,18 @@ class OrderTest extends TestCase
 {
     /**
      * Gets Json String of Object Order
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"id":"TestSample","reference_id":"TestSample","amount":' .AmountTest::getJson() . ',"payment_mode":"TestSample","state":"TestSample","reason_code":"TestSample","pending_reason":"TestSample","protection_eligibility":"TestSample","protection_eligibility_type":"TestSample","parent_payment":"TestSample","fmf_details":' .FmfDetailsTest::getJson() . ',"create_time":"TestSample","update_time":"TestSample","links":' .LinksTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return Order
      */
-    public static function getObject(): \PayPal\Api\Order
+    public static function getObject()
     {
         return new Order(self::getJson());
     }
@@ -32,8 +34,9 @@ class OrderTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return Order
      */
-    public function testSerializationDeserialization(): \PayPal\Api\Order
+    public function testSerializationDeserialization()
     {
         $obj = new Order(self::getJson());
         $this->assertNotNull($obj);
@@ -59,7 +62,7 @@ class OrderTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Order $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getId(), "TestSample");
         $this->assertEquals($obj->getReferenceId(), "TestSample");
@@ -79,8 +82,9 @@ class OrderTest extends TestCase
 
     /**
      * @dataProvider mockProvider
+     * @param Order $obj
      */
-    public function testGet(\PayPal\Api\Order $obj, ?\PHPUnit_Framework_MockObject_MockObject $mockApiContext): void
+    public function testGet($obj, $mockApiContext)
     {
         $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -95,11 +99,11 @@ class OrderTest extends TestCase
         $result = $obj->get("orderId", $mockApiContext, $mockPPRestCall);
         $this->assertNotNull($result);
     }
-
     /**
      * @dataProvider mockProvider
+     * @param Order $obj
      */
-    public function testCapture(\PayPal\Api\Order $obj, ?\PHPUnit_Framework_MockObject_MockObject $mockApiContext): void
+    public function testCapture($obj, $mockApiContext)
     {
         $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -115,11 +119,11 @@ class OrderTest extends TestCase
         $result = $obj->capture($capture, $mockApiContext, $mockPPRestCall);
         $this->assertNotNull($result);
     }
-
     /**
      * @dataProvider mockProvider
+     * @param Order $obj
      */
-    public function testVoid(\PayPal\Api\Order $obj, ?\PHPUnit_Framework_MockObject_MockObject $mockApiContext): void
+    public function testVoid($obj, $mockApiContext)
     {
         $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -134,11 +138,11 @@ class OrderTest extends TestCase
         $result = $obj->void($mockApiContext, $mockPPRestCall);
         $this->assertNotNull($result);
     }
-
     /**
      * @dataProvider mockProvider
+     * @param Order $obj
      */
-    public function testAuthorize(\PayPal\Api\Order $obj, ?\PHPUnit_Framework_MockObject_MockObject $mockApiContext): void
+    public function testAuthorize($obj, $mockApiContext)
     {
         $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -155,7 +159,7 @@ class OrderTest extends TestCase
         $this->assertNotNull($result);
     }
 
-    public function mockProvider(): array
+    public function mockProvider()
     {
         $obj = self::getObject();
         $mockApiContext = $this->getMockBuilder('ApiContext')

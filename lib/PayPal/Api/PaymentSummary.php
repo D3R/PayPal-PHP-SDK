@@ -23,7 +23,7 @@ class PaymentSummary extends PayPalModel
      * 
      * @return $this
      */
-    public function setPaypal($paypal): static
+    public function setPaypal($paypal)
     {
         $this->paypal = $paypal;
         return $this;
@@ -46,7 +46,7 @@ class PaymentSummary extends PayPalModel
      * 
      * @return $this
      */
-    public function setOther($other): static
+    public function setOther($other)
     {
         $this->other = $other;
         return $this;

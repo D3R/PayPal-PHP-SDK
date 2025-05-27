@@ -23,7 +23,7 @@ class CustomAmount extends PayPalModel
      * 
      * @return $this
      */
-    public function setLabel($label): static
+    public function setLabel($label)
     {
         $this->label = $label;
         return $this;
@@ -46,7 +46,7 @@ class CustomAmount extends PayPalModel
      * 
      * @return $this
      */
-    public function setAmount($amount): static
+    public function setAmount($amount)
     {
         $this->amount = $amount;
         return $this;

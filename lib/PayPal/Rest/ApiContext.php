@@ -48,14 +48,10 @@ class ApiContext
         if ($this->credential == null) {
             return PayPalCredentialManager::getInstance()->getCredentialObject();
         }
-
         return $this->credential;
     }
 
-    /**
-     * @return mixed[]
-     */
-    public function getRequestHeaders(): array
+    public function getRequestHeaders()
     {
         $result = PayPalConfigManager::getInstance()->get('http.headers');
         $headers = [];
@@ -63,17 +59,15 @@ class ApiContext
             $headerName = ltrim($header, 'http.headers');
             $headers[$headerName] = $value;
         }
-
         return $headers;
     }
 
-    public function addRequestHeader($name, $value): void
+    public function addRequestHeader($name, $value)
     {
         // Determine if the name already has a 'http.headers' prefix. If not, add one.
-        if (!str_starts_with($name, 'http.headers')) {
+        if (!(str_starts_with($name, 'http.headers'))) {
             $name = 'http.headers.' . $name;
         }
-
         PayPalConfigManager::getInstance()->addConfigs([$name => $value]);
     }
 
@@ -92,7 +86,7 @@ class ApiContext
      *
      * @param string $requestId the PayPal-Request-Id value to use
      */
-    public function setRequestId($requestId): void
+    public function setRequestId($requestId)
     {
         $this->requestId = $requestId;
     }
@@ -116,7 +110,7 @@ class ApiContext
      *
      * @param array $config SDK configuration parameters
      */
-    public function setConfig(array $config): void
+    public function setConfig(array $config)
     {
         PayPalConfigManager::getInstance()->addConfigs($config);
     }
@@ -147,8 +141,10 @@ class ApiContext
      * can be used to set the PayPal-Request-Id header
      * that is used for idempotency
      * @deprecated
+     *
+     * @return string
      */
-    private function generateRequestId(): string
+    private function generateRequestId()
     {
         static $pid = -1;
         static $addr = -1;
@@ -158,7 +154,11 @@ class ApiContext
         }
 
         if ($addr == -1) {
-            $addr = array_key_exists('SERVER_ADDR', $_SERVER) ? ip2long($_SERVER['SERVER_ADDR']) : php_uname('n');
+            if (array_key_exists('SERVER_ADDR', $_SERVER)) {
+                $addr = ip2long($_SERVER['SERVER_ADDR']);
+            } else {
+                $addr = php_uname('n');
+            }
         }
 
         return $addr . $pid . $_SERVER['REQUEST_TIME'] . mt_rand(0, 0xffff);

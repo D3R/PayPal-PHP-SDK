@@ -27,7 +27,7 @@ class CreditFinancingOffered extends PayPalModel
      * 
      * @return $this
      */
-    public function setTotalCost($total_cost): static
+    public function setTotalCost($total_cost)
     {
         $this->total_cost = $total_cost;
         return $this;
@@ -50,7 +50,7 @@ class CreditFinancingOffered extends PayPalModel
      * 
      * @return $this
      */
-    public function setTerm($term): static
+    public function setTerm($term)
     {
         $this->term = $term;
         return $this;
@@ -73,7 +73,7 @@ class CreditFinancingOffered extends PayPalModel
      * 
      * @return $this
      */
-    public function setMonthlyPayment($monthly_payment): static
+    public function setMonthlyPayment($monthly_payment)
     {
         $this->monthly_payment = $monthly_payment;
         return $this;
@@ -96,7 +96,7 @@ class CreditFinancingOffered extends PayPalModel
      * 
      * @return $this
      */
-    public function setTotalInterest($total_interest): static
+    public function setTotalInterest($total_interest)
     {
         $this->total_interest = $total_interest;
         return $this;
@@ -119,7 +119,7 @@ class CreditFinancingOffered extends PayPalModel
      * 
      * @return $this
      */
-    public function setPayerAcceptance($payer_acceptance): static
+    public function setPayerAcceptance($payer_acceptance)
     {
         $this->payer_acceptance = $payer_acceptance;
         return $this;
@@ -142,7 +142,7 @@ class CreditFinancingOffered extends PayPalModel
      * 
      * @return $this
      */
-    public function setCartAmountImmutable($cart_amount_immutable): static
+    public function setCartAmountImmutable($cart_amount_immutable)
     {
         $this->cart_amount_immutable = $cart_amount_immutable;
         return $this;

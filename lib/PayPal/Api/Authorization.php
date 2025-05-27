@@ -40,7 +40,7 @@ class Authorization extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setId($id): static
+    public function setId($id)
     {
         $this->id = $id;
         return $this;
@@ -63,7 +63,7 @@ class Authorization extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setAmount($amount): static
+    public function setAmount($amount)
     {
         $this->amount = $amount;
         return $this;
@@ -87,7 +87,7 @@ class Authorization extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setPaymentMode($payment_mode): static
+    public function setPaymentMode($payment_mode)
     {
         $this->payment_mode = $payment_mode;
         return $this;
@@ -111,7 +111,7 @@ class Authorization extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setState($state): static
+    public function setState($state)
     {
         $this->state = $state;
         return $this;
@@ -135,7 +135,7 @@ class Authorization extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setReasonCode($reason_code): static
+    public function setReasonCode($reason_code)
     {
         $this->reason_code = $reason_code;
         return $this;
@@ -159,7 +159,7 @@ class Authorization extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setPendingReason($pending_reason): static
+    public function setPendingReason($pending_reason)
     {
         $this->pending_reason = $pending_reason;
         return $this;
@@ -183,7 +183,7 @@ class Authorization extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setProtectionEligibility($protection_eligibility): static
+    public function setProtectionEligibility($protection_eligibility)
     {
         $this->protection_eligibility = $protection_eligibility;
         return $this;
@@ -207,7 +207,7 @@ class Authorization extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setProtectionEligibilityType($protection_eligibility_type): static
+    public function setProtectionEligibilityType($protection_eligibility_type)
     {
         $this->protection_eligibility_type = $protection_eligibility_type;
         return $this;
@@ -230,7 +230,7 @@ class Authorization extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setFmfDetails($fmf_details): static
+    public function setFmfDetails($fmf_details)
     {
         $this->fmf_details = $fmf_details;
         return $this;
@@ -253,7 +253,7 @@ class Authorization extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setParentPayment($parent_payment): static
+    public function setParentPayment($parent_payment)
     {
         $this->parent_payment = $parent_payment;
         return $this;
@@ -276,7 +276,7 @@ class Authorization extends PayPalResourceModel
      *
      * @return $this
      */
-    public function setProcessorResponse($processor_response): static
+    public function setProcessorResponse($processor_response)
     {
         $this->processor_response = $processor_response;
         return $this;
@@ -299,7 +299,7 @@ class Authorization extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setValidUntil($valid_until): static
+    public function setValidUntil($valid_until)
     {
         $this->valid_until = $valid_until;
         return $this;
@@ -322,7 +322,7 @@ class Authorization extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setCreateTime($create_time): static
+    public function setCreateTime($create_time)
     {
         $this->create_time = $create_time;
         return $this;
@@ -345,7 +345,7 @@ class Authorization extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setUpdateTime($update_time): static
+    public function setUpdateTime($update_time)
     {
         $this->update_time = $update_time;
         return $this;
@@ -368,7 +368,7 @@ class Authorization extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setReferenceId($reference_id): static
+    public function setReferenceId($reference_id)
     {
         $this->reference_id = $reference_id;
         return $this;
@@ -391,7 +391,7 @@ class Authorization extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setReceiptId($receipt_id): static
+    public function setReceiptId($receipt_id)
     {
         $this->receipt_id = $receipt_id;
         return $this;
@@ -410,15 +410,17 @@ class Authorization extends PayPalResourceModel
     /**
      * Shows details for an authorization, by ID.
      *
+     * @param string $authorizationId
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return Authorization
      */
-    public static function get(string $authorizationId, $apiContext = null, $restCall = null): \PayPal\Api\Authorization
+    public static function get($authorizationId, $apiContext = null, $restCall = null)
     {
         ArgumentValidator::validate($authorizationId, 'authorizationId');
         $payLoad = "";
         $json = self::executeCall(
-            '/v1/payments/authorization/' . $authorizationId,
+            "/v1/payments/authorization/$authorizationId",
             "GET",
             $payLoad,
             null,
@@ -436,14 +438,15 @@ class Authorization extends PayPalResourceModel
      * @param Capture $capture
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return Capture
      */
-    public function capture($capture, $apiContext = null, $restCall = null): \PayPal\Api\Capture
+    public function capture($capture, $apiContext = null, $restCall = null)
     {
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($capture, 'capture');
         $payLoad = $capture->toJSON();
         $json = self::executeCall(
-            sprintf('/v1/payments/authorization/%s/capture', $this->getId()),
+            "/v1/payments/authorization/{$this->getId()}/capture",
             "POST",
             $payLoad,
             null,
@@ -460,13 +463,14 @@ class Authorization extends PayPalResourceModel
      *
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return Authorization
      */
-    public function void($apiContext = null, $restCall = null): static
+    public function void($apiContext = null, $restCall = null)
     {
         ArgumentValidator::validate($this->getId(), "Id");
         $payLoad = "";
         $json = self::executeCall(
-            sprintf('/v1/payments/authorization/%s/void', $this->getId()),
+            "/v1/payments/authorization/{$this->getId()}/void",
             "POST",
             $payLoad,
             null,
@@ -482,13 +486,14 @@ class Authorization extends PayPalResourceModel
      *
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return Authorization
      */
-    public function reauthorize($apiContext = null, $restCall = null): static
+    public function reauthorize($apiContext = null, $restCall = null)
     {
         ArgumentValidator::validate($this->getId(), "Id");
         $payLoad = $this->toJSON();
         $json = self::executeCall(
-            sprintf('/v1/payments/authorization/%s/reauthorize', $this->getId()),
+            "/v1/payments/authorization/{$this->getId()}/reauthorize",
             "POST",
             $payLoad,
             null,

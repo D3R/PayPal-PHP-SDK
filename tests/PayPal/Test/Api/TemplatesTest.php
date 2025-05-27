@@ -18,16 +18,18 @@ class TemplatesTest extends TestCase
 {
     /**
      * Gets Json String of Object Templates
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"addresses":' .AddressTest::getJson() . ',"emails":"TestSample","phones":' .PhoneTest::getJson() . ',"templates":' .TemplateTest::getJson() . ',"links":' .LinksTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return Templates
      */
-    public static function getObject(): \PayPal\Api\Templates
+    public static function getObject()
     {
         return new Templates(self::getJson());
     }
@@ -35,8 +37,9 @@ class TemplatesTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return Templates
      */
-    public function testSerializationDeserialization(): \PayPal\Api\Templates
+    public function testSerializationDeserialization()
     {
         $obj = new Templates(self::getJson());
         $this->assertNotNull($obj);
@@ -53,7 +56,7 @@ class TemplatesTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Templates $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getAddresses(), AddressTest::getObject());
         $this->assertEquals($obj->getEmails(), "TestSample");
@@ -64,8 +67,9 @@ class TemplatesTest extends TestCase
 
     /**
      * @dataProvider mockProvider
+     * @param Templates $obj
      */
-    public function testGet(\PayPal\Api\Templates $obj, ?\PHPUnit_Framework_MockObject_MockObject $mockApiContext): void
+    public function testGet($obj, $mockApiContext)
     {
         $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -80,11 +84,11 @@ class TemplatesTest extends TestCase
         $result = $obj->get("templateId", $mockApiContext, $mockPPRestCall);
         $this->assertNotNull($result);
     }
-
     /**
      * @dataProvider mockProvider
+     * @param Templates $obj
      */
-    public function testGetAll(\PayPal\Api\Templates $obj, ?\PHPUnit_Framework_MockObject_MockObject $mockApiContext): void
+    public function testGetAll($obj, $mockApiContext)
     {
         $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -101,7 +105,7 @@ class TemplatesTest extends TestCase
         $this->assertNotNull($result);
     }
 
-    public function mockProvider(): array
+    public function mockProvider()
     {
         $obj = self::getObject();
         $mockApiContext = $this->getMockBuilder('ApiContext')

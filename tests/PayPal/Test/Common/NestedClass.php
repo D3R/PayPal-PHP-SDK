@@ -6,7 +6,7 @@ use PayPal\Common\PayPalModel;
 class NestedClass extends PayPalModel
 {
 
-    public function setId($id): void
+    public function setId($id)
     {
         $this->id = $id;
     }
@@ -20,7 +20,7 @@ class NestedClass extends PayPalModel
      *
      * @param \PayPal\Test\Common\ArrayClass $info
      */
-    public function setInfo($info): void
+    public function setInfo($info)
     {
         $this->info = $info;
     }

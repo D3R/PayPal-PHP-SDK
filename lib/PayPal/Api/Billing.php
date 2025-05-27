@@ -24,7 +24,7 @@ class Billing extends PayPalModel
      * 
      * @return $this
      */
-    public function setBillingAgreementId($billing_agreement_id): static
+    public function setBillingAgreementId($billing_agreement_id)
     {
         $this->billing_agreement_id = $billing_agreement_id;
         return $this;

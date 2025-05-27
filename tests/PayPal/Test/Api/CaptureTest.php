@@ -15,16 +15,18 @@ class CaptureTest extends TestCase
 {
     /**
      * Gets Json String of Object Capture
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"id":"TestSample","amount":' .AmountTest::getJson() . ',"is_final_capture":true,"state":"TestSample","reason_code":"TestSample","parent_payment":"TestSample","invoice_number":"TestSample","transaction_fee":' .CurrencyTest::getJson() . ',"create_time":"TestSample","update_time":"TestSample","links":' .LinksTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return Capture
      */
-    public static function getObject(): \PayPal\Api\Capture
+    public static function getObject()
     {
         return new Capture(self::getJson());
     }
@@ -32,8 +34,9 @@ class CaptureTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return Capture
      */
-    public function testSerializationDeserialization(): \PayPal\Api\Capture
+    public function testSerializationDeserialization()
     {
         $obj = new Capture(self::getJson());
         $this->assertNotNull($obj);
@@ -56,7 +59,7 @@ class CaptureTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Capture $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getId(), "TestSample");
         $this->assertEquals($obj->getAmount(), AmountTest::getObject());
@@ -73,8 +76,9 @@ class CaptureTest extends TestCase
 
     /**
      * @dataProvider mockProvider
+     * @param Capture $obj
      */
-    public function testGet(\PayPal\Api\Capture $obj, ?\PHPUnit_Framework_MockObject_MockObject $mockApiContext): void
+    public function testGet($obj, $mockApiContext)
     {
         $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -89,11 +93,11 @@ class CaptureTest extends TestCase
         $result = $obj->get("captureId", $mockApiContext, $mockPPRestCall);
         $this->assertNotNull($result);
     }
-
     /**
      * @dataProvider mockProvider
+     * @param Capture $obj
      */
-    public function testRefund(\PayPal\Api\Capture $obj, ?\PHPUnit_Framework_MockObject_MockObject $mockApiContext): void
+    public function testRefund($obj, $mockApiContext)
     {
         $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
@@ -110,7 +114,7 @@ class CaptureTest extends TestCase
         $this->assertNotNull($result);
     }
 
-    public function mockProvider(): array
+    public function mockProvider()
     {
         $obj = self::getObject();
         $mockApiContext = $this->getMockBuilder('ApiContext')

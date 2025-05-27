@@ -14,16 +14,18 @@ class OverrideChargeModelTest extends TestCase
 {
     /**
      * Gets Json String of Object OverrideChargeModel
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"charge_id":"TestSample","amount":' .CurrencyTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return OverrideChargeModel
      */
-    public static function getObject(): \PayPal\Api\OverrideChargeModel
+    public static function getObject()
     {
         return new OverrideChargeModel(self::getJson());
     }
@@ -31,8 +33,9 @@ class OverrideChargeModelTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return OverrideChargeModel
      */
-    public function testSerializationDeserialization(): \PayPal\Api\OverrideChargeModel
+    public function testSerializationDeserialization()
     {
         $obj = new OverrideChargeModel(self::getJson());
         $this->assertNotNull($obj);
@@ -46,7 +49,7 @@ class OverrideChargeModelTest extends TestCase
      * @depends testSerializationDeserialization
      * @param OverrideChargeModel $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getChargeId(), "TestSample");
         $this->assertEquals($obj->getAmount(), CurrencyTest::getObject());

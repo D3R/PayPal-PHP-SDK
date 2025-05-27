@@ -35,7 +35,7 @@ class Capture extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setId($id): static
+    public function setId($id)
     {
         $this->id = $id;
         return $this;
@@ -58,7 +58,7 @@ class Capture extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setAmount($amount): static
+    public function setAmount($amount)
     {
         $this->amount = $amount;
         return $this;
@@ -81,7 +81,7 @@ class Capture extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setIsFinalCapture($is_final_capture): static
+    public function setIsFinalCapture($is_final_capture)
     {
         $this->is_final_capture = $is_final_capture;
         return $this;
@@ -105,7 +105,7 @@ class Capture extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setState($state): static
+    public function setState($state)
     {
         $this->state = $state;
         return $this;
@@ -129,7 +129,7 @@ class Capture extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setReasonCode($reason_code): static
+    public function setReasonCode($reason_code)
     {
         $this->reason_code = $reason_code;
         return $this;
@@ -152,7 +152,7 @@ class Capture extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setParentPayment($parent_payment): static
+    public function setParentPayment($parent_payment)
     {
         $this->parent_payment = $parent_payment;
         return $this;
@@ -175,7 +175,7 @@ class Capture extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setInvoiceNumber($invoice_number): static
+    public function setInvoiceNumber($invoice_number)
     {
         $this->invoice_number = $invoice_number;
         return $this;
@@ -198,7 +198,7 @@ class Capture extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setTransactionFee($transaction_fee): static
+    public function setTransactionFee($transaction_fee)
     {
         $this->transaction_fee = $transaction_fee;
         return $this;
@@ -221,7 +221,7 @@ class Capture extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setCreateTime($create_time): static
+    public function setCreateTime($create_time)
     {
         $this->create_time = $create_time;
         return $this;
@@ -244,7 +244,7 @@ class Capture extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setUpdateTime($update_time): static
+    public function setUpdateTime($update_time)
     {
         $this->update_time = $update_time;
         return $this;
@@ -263,15 +263,17 @@ class Capture extends PayPalResourceModel
     /**
      * Shows details for a captured payment, by ID.
      *
+     * @param string $captureId
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return Capture
      */
-    public static function get(string $captureId, $apiContext = null, $restCall = null): \PayPal\Api\Capture
+    public static function get($captureId, $apiContext = null, $restCall = null)
     {
         ArgumentValidator::validate($captureId, 'captureId');
         $payLoad = "";
         $json = self::executeCall(
-            '/v1/payments/capture/' . $captureId,
+            "/v1/payments/capture/$captureId",
             "GET",
             $payLoad,
             null,
@@ -290,14 +292,15 @@ class Capture extends PayPalResourceModel
      * @param Refund         $refund
      * @param ApiContext     $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall   is the Rest Call Service that is used to make rest calls
+     * @return Refund
      */
-    public function refund($refund, $apiContext = null, $restCall = null): \PayPal\Api\Refund
+    public function refund($refund, $apiContext = null, $restCall = null)
     {
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($refund, 'refund');
         $payLoad = $refund->toJSON();
         $json = self::executeCall(
-            sprintf('/v1/payments/capture/%s/refund', $this->getId()),
+            "/v1/payments/capture/{$this->getId()}/refund",
             "POST",
             $payLoad,
             null,
@@ -315,14 +318,15 @@ class Capture extends PayPalResourceModel
      * @param RefundRequest $refundRequest
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return DetailedRefund
      */
-    public function refundCapturedPayment($refundRequest, $apiContext = null, $restCall = null): \PayPal\Api\DetailedRefund
+    public function refundCapturedPayment($refundRequest, $apiContext = null, $restCall = null)
     {
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($refundRequest, 'refundRequest');
         $payLoad = $refundRequest->toJSON();
         $json = self::executeCall(
-            sprintf('/v1/payments/capture/%s/refund', $this->getId()),
+            "/v1/payments/capture/{$this->getId()}/refund",
             "POST",
             $payLoad,
             null,

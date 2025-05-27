@@ -35,7 +35,7 @@ class WebhookEvent extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setId($id): static
+    public function setId($id)
     {
         $this->id = $id;
         return $this;
@@ -58,7 +58,7 @@ class WebhookEvent extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setCreateTime($create_time): static
+    public function setCreateTime($create_time)
     {
         $this->create_time = $create_time;
         return $this;
@@ -81,7 +81,7 @@ class WebhookEvent extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setResourceType($resource_type): static
+    public function setResourceType($resource_type)
     {
         $this->resource_type = $resource_type;
         return $this;
@@ -104,7 +104,7 @@ class WebhookEvent extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setEventVersion($event_version): static
+    public function setEventVersion($event_version)
     {
         $this->event_version = $event_version;
         return $this;
@@ -127,7 +127,7 @@ class WebhookEvent extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setEventType($event_type): static
+    public function setEventType($event_type)
     {
         $this->event_type = $event_type;
         return $this;
@@ -150,7 +150,7 @@ class WebhookEvent extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setSummary($summary): static
+    public function setSummary($summary)
     {
         $this->summary = $summary;
         return $this;
@@ -173,7 +173,7 @@ class WebhookEvent extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setResource($resource): static
+    public function setResource($resource)
     {
         $this->resource = $resource;
         return $this;
@@ -202,48 +202,47 @@ class WebhookEvent extends PayPalResourceModel
      * @param string     $body
      * @param ApiContext $apiContext
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return WebhookEvent
      * @throws \InvalidArgumentException if input arguments are incorrect, or Id is not found.
      * @throws PayPalConnectionException if any exception from PayPal APIs other than not found is sent.
      */
-    public static function validateAndGetReceivedEvent($body, $apiContext = null, $restCall = null): \PayPal\Api\WebhookEvent
+    public static function validateAndGetReceivedEvent($body, $apiContext = null, $restCall = null)
     {
-        if (($body == null | empty($body)) !== 0){
+        if ($body == null | empty($body)){
             throw new \InvalidArgumentException("Body cannot be null or empty");
         }
-
         if (!JsonValidator::validate($body, true)) {
             throw new \InvalidArgumentException("Request Body is not a valid JSON.");
         }
-
         $object = new WebhookEvent($body);
         if ($object->getId() == null) {
             throw new \InvalidArgumentException("Id attribute not found in JSON. Possible reason could be invalid JSON Object");
         }
-
         try {
             return self::get($object->getId(), $apiContext, $restCall);
-        } catch(PayPalConnectionException $payPalConnectionException) {
-            if ($payPalConnectionException->getCode() == 404) {
+        } catch(PayPalConnectionException $ex) {
+            if ($ex->getCode() == 404) {
                 // It means that the given webhook event Id is not found for this merchant.
-                throw new \InvalidArgumentException("Webhook Event Id provided in the data is incorrect. This could happen if anyone other than PayPal is faking the incoming webhook data.", $payPalConnectionException->getCode(), $payPalConnectionException);
+                throw new \InvalidArgumentException("Webhook Event Id provided in the data is incorrect. This could happen if anyone other than PayPal is faking the incoming webhook data.");
             }
-
-            throw $payPalConnectionException;
+            throw $ex;
         }
     }
 
     /**
      * Retrieves the Webhooks event resource identified by event_id. Can be used to retrieve the payload for an event.
      *
+     * @param string $eventId
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return WebhookEvent
      */
-    public static function get(string $eventId, $apiContext = null, $restCall = null): \PayPal\Api\WebhookEvent
+    public static function get($eventId, $apiContext = null, $restCall = null)
     {
         ArgumentValidator::validate($eventId, 'eventId');
         $payLoad = "";
         $json = self::executeCall(
-            '/v1/notifications/webhooks-events/' . $eventId,
+            "/v1/notifications/webhooks-events/$eventId",
             "GET",
             $payLoad,
             null,
@@ -260,13 +259,14 @@ class WebhookEvent extends PayPalResourceModel
      *
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return WebhookEvent
      */
-    public function resend($apiContext = null, $restCall = null): static
+    public function resend($apiContext = null, $restCall = null)
     {
         ArgumentValidator::validate($this->getId(), "Id");
         $payLoad = "";
         $json = self::executeCall(
-            sprintf('/v1/notifications/webhooks-events/%s/resend', $this->getId()),
+            "/v1/notifications/webhooks-events/{$this->getId()}/resend",
             "POST",
             $payLoad,
             null,
@@ -283,8 +283,9 @@ class WebhookEvent extends PayPalResourceModel
      * @param array $params
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return WebhookEventList
      */
-    public static function all($params, $apiContext = null, $restCall = null): \PayPal\Api\WebhookEventList
+    public static function all($params, $apiContext = null, $restCall = null)
     {
         ArgumentValidator::validate($params, 'params');
         $payLoad = "";
@@ -296,7 +297,7 @@ class WebhookEvent extends PayPalResourceModel
           'event_type' => 1,
       ];
         $json = self::executeCall(
-            '/v1/notifications/webhooks-events?' . http_build_query(array_intersect_key($params, $allowedParams)),
+            "/v1/notifications/webhooks-events" . "?" . http_build_query(array_intersect_key($params, $allowedParams)),
             "GET",
             $payLoad,
             null,

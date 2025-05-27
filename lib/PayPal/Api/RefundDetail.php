@@ -27,7 +27,7 @@ class RefundDetail extends PayPalModel
      * 
      * @return $this
      */
-    public function setType($type): static
+    public function setType($type)
     {
         $this->type = $type;
         return $this;
@@ -50,7 +50,7 @@ class RefundDetail extends PayPalModel
      * 
      * @return $this
      */
-    public function setTransactionId($transaction_id): static
+    public function setTransactionId($transaction_id)
     {
         $this->transaction_id = $transaction_id;
         return $this;
@@ -73,7 +73,7 @@ class RefundDetail extends PayPalModel
      * 
      * @return $this
      */
-    public function setDate($date): static
+    public function setDate($date)
     {
         $this->date = $date;
         return $this;
@@ -96,7 +96,7 @@ class RefundDetail extends PayPalModel
      * 
      * @return $this
      */
-    public function setNote($note): static
+    public function setNote($note)
     {
         $this->note = $note;
         return $this;
@@ -119,7 +119,7 @@ class RefundDetail extends PayPalModel
      * 
      * @return $this
      */
-    public function setAmount($amount): static
+    public function setAmount($amount)
     {
         $this->amount = $amount;
         return $this;

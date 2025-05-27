@@ -14,16 +14,18 @@ class FundingSourceTest extends TestCase
 {
     /**
      * Gets Json String of Object FundingSource
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"funding_mode":"TestSample","funding_instrument_type":"TestSample","soft_descriptor":"TestSample","amount":' .CurrencyTest::getJson() . ',"negative_balance_amount":' .CurrencyTest::getJson() . ',"legal_text":"TestSample","terms":"TestSample","funding_detail":' .FundingDetailTest::getJson() . ',"additional_text":"TestSample","links":' .LinksTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return FundingSource
      */
-    public static function getObject(): \PayPal\Api\FundingSource
+    public static function getObject()
     {
         return new FundingSource(self::getJson());
     }
@@ -31,8 +33,9 @@ class FundingSourceTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return FundingSource
      */
-    public function testSerializationDeserialization(): \PayPal\Api\FundingSource
+    public function testSerializationDeserialization()
     {
         $obj = new FundingSource(self::getJson());
         $this->assertNotNull($obj);
@@ -53,7 +56,7 @@ class FundingSourceTest extends TestCase
      * @depends testSerializationDeserialization
      * @param FundingSource $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getFundingMode(), "TestSample");
         $this->assertEquals($obj->getFundingInstrumentType(), "TestSample");

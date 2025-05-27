@@ -22,7 +22,7 @@ class PatchRequest extends PayPalModel
      * 
      * @return $this
      */
-    public function setPatches($patches): static
+    public function setPatches($patches)
     {
         $this->patches = $patches;
         return $this;
@@ -44,7 +44,7 @@ class PatchRequest extends PayPalModel
      * @param \PayPal\Api\Patch $patch
      * @return $this
      */
-    public function addPatch($patch): static
+    public function addPatch($patch)
     {
         if (!$this->getPatches()) {
             return $this->setPatches([$patch]);
@@ -61,7 +61,7 @@ class PatchRequest extends PayPalModel
      * @param \PayPal\Api\Patch $patch
      * @return $this
      */
-    public function removePatch($patch): static
+    public function removePatch($patch)
     {
         return $this->setPatches(
             array_diff($this->getPatches(), [$patch])
@@ -75,13 +75,12 @@ class PatchRequest extends PayPalModel
      * @param int $options
      * @return mixed|string
      */
-    public function toJSON($options = 0): string
+    public function toJSON($options = 0)
     {
         $json = [];
         foreach ($this->getPatches() as $patch) {
             $json[] = $patch->toArray();
         }
-
         return str_replace('\\/', '/', json_encode($json, $options));
     }
 }

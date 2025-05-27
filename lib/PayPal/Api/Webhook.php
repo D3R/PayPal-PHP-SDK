@@ -28,7 +28,7 @@ class Webhook extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setId($id): static
+    public function setId($id)
     {
         $this->id = $id;
         return $this;
@@ -51,7 +51,7 @@ class Webhook extends PayPalResourceModel
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setUrl($url): static
+    public function setUrl($url)
     {
         UrlValidator::validate($url, "Url");
         $this->url = $url;
@@ -75,7 +75,7 @@ class Webhook extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setEventTypes($event_types): static
+    public function setEventTypes($event_types)
     {
         $this->event_types = $event_types;
         return $this;
@@ -97,7 +97,7 @@ class Webhook extends PayPalResourceModel
      * @param \PayPal\Api\WebhookEventType $webhookEventType
      * @return $this
      */
-    public function addEventType($webhookEventType): static
+    public function addEventType($webhookEventType)
     {
         if (!$this->getEventTypes()) {
             return $this->setEventTypes([$webhookEventType]);
@@ -114,7 +114,7 @@ class Webhook extends PayPalResourceModel
      * @param \PayPal\Api\WebhookEventType $webhookEventType
      * @return $this
      */
-    public function removeEventType($webhookEventType): static
+    public function removeEventType($webhookEventType)
     {
         return $this->setEventTypes(
             array_diff($this->getEventTypes(), [$webhookEventType])
@@ -126,8 +126,9 @@ class Webhook extends PayPalResourceModel
      *
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return Webhook
      */
-    public function create($apiContext = null, $restCall = null): static
+    public function create($apiContext = null, $restCall = null)
     {
         $payLoad = $this->toJSON();
         $json = self::executeCall(
@@ -145,15 +146,17 @@ class Webhook extends PayPalResourceModel
     /**
      * Shows details for a webhook, by ID.
      *
+     * @param string $webhookId
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return Webhook
      */
-    public static function get(string $webhookId, $apiContext = null, $restCall = null): \PayPal\Api\Webhook
+    public static function get($webhookId, $apiContext = null, $restCall = null)
     {
         ArgumentValidator::validate($webhookId, 'webhookId');
         $payLoad = "";
         $json = self::executeCall(
-            '/v1/notifications/webhooks/' . $webhookId,
+            "/v1/notifications/webhooks/$webhookId",
             "GET",
             $payLoad,
             null,
@@ -172,8 +175,9 @@ class Webhook extends PayPalResourceModel
      *
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return WebhookList
      */
-    public static function getAll($apiContext = null, $restCall = null): \PayPal\Api\WebhookList
+    public static function getAll($apiContext = null, $restCall = null)
     {
         return self::getAllWithParams([], $apiContext, $restCall);
     }
@@ -184,8 +188,9 @@ class Webhook extends PayPalResourceModel
      * @param array $params
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return WebhookList
      */
-    public static function getAllWithParams($params = [], $apiContext = null, $restCall = null): \PayPal\Api\WebhookList
+    public static function getAllWithParams($params = [], $apiContext = null, $restCall = null)
     {
         ArgumentValidator::validate($params, 'params');
         $payLoad = "";
@@ -211,14 +216,15 @@ class Webhook extends PayPalResourceModel
      * @param PatchRequest $patchRequest
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return Webhook
      */
-    public function update($patchRequest, $apiContext = null, $restCall = null): static
+    public function update($patchRequest, $apiContext = null, $restCall = null)
     {
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($patchRequest, 'patchRequest');
         $payLoad = $patchRequest->toJSON();
         $json = self::executeCall(
-            '/v1/notifications/webhooks/' . $this->getId(),
+            "/v1/notifications/webhooks/{$this->getId()}",
             "PATCH",
             $payLoad,
             null,
@@ -234,13 +240,14 @@ class Webhook extends PayPalResourceModel
      *
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return bool
      */
-    public function delete($apiContext = null, $restCall = null): bool
+    public function delete($apiContext = null, $restCall = null)
     {
         ArgumentValidator::validate($this->getId(), "Id");
         $payLoad = "";
         self::executeCall(
-            '/v1/notifications/webhooks/' . $this->getId(),
+            "/v1/notifications/webhooks/{$this->getId()}",
             "DELETE",
             $payLoad,
             null,

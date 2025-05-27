@@ -23,7 +23,7 @@ class PaymentOptions extends PayPalModel
      * 
      * @return $this
      */
-    public function setAllowedPaymentMethod($allowed_payment_method): static
+    public function setAllowedPaymentMethod($allowed_payment_method)
     {
         $this->allowed_payment_method = $allowed_payment_method;
         return $this;
@@ -46,7 +46,7 @@ class PaymentOptions extends PayPalModel
      * 
      * @return $this
      */
-    public function setRecurringFlag($recurring_flag): static
+    public function setRecurringFlag($recurring_flag)
     {
         $this->recurring_flag = $recurring_flag;
         return $this;
@@ -69,7 +69,7 @@ class PaymentOptions extends PayPalModel
      * 
      * @return $this
      */
-    public function setSkipFmf($skip_fmf): static
+    public function setSkipFmf($skip_fmf)
     {
         $this->skip_fmf = $skip_fmf;
         return $this;

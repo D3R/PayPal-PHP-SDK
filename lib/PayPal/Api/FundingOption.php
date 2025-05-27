@@ -27,7 +27,7 @@ class FundingOption extends PayPalModel
      * 
      * @return $this
      */
-    public function setId($id): static
+    public function setId($id)
     {
         $this->id = $id;
         return $this;
@@ -50,7 +50,7 @@ class FundingOption extends PayPalModel
      * 
      * @return $this
      */
-    public function setFundingSources($funding_sources): static
+    public function setFundingSources($funding_sources)
     {
         $this->funding_sources = $funding_sources;
         return $this;
@@ -72,7 +72,7 @@ class FundingOption extends PayPalModel
      * @param \PayPal\Api\FundingSource $fundingSource
      * @return $this
      */
-    public function addFundingSource($fundingSource): static
+    public function addFundingSource($fundingSource)
     {
         if (!$this->getFundingSources()) {
             return $this->setFundingSources([$fundingSource]);
@@ -89,7 +89,7 @@ class FundingOption extends PayPalModel
      * @param \PayPal\Api\FundingSource $fundingSource
      * @return $this
      */
-    public function removeFundingSource($fundingSource): static
+    public function removeFundingSource($fundingSource)
     {
         return $this->setFundingSources(
             array_diff($this->getFundingSources(), [$fundingSource])
@@ -103,7 +103,7 @@ class FundingOption extends PayPalModel
      * 
      * @return $this
      */
-    public function setBackupFundingInstrument($backup_funding_instrument): static
+    public function setBackupFundingInstrument($backup_funding_instrument)
     {
         $this->backup_funding_instrument = $backup_funding_instrument;
         return $this;
@@ -126,7 +126,7 @@ class FundingOption extends PayPalModel
      * 
      * @return $this
      */
-    public function setCurrencyConversion($currency_conversion): static
+    public function setCurrencyConversion($currency_conversion)
     {
         $this->currency_conversion = $currency_conversion;
         return $this;
@@ -149,7 +149,7 @@ class FundingOption extends PayPalModel
      * 
      * @return $this
      */
-    public function setInstallmentInfo($installment_info): static
+    public function setInstallmentInfo($installment_info)
     {
         $this->installment_info = $installment_info;
         return $this;
@@ -172,7 +172,7 @@ class FundingOption extends PayPalModel
      * 
      * @return $this
      */
-    public function setLinks($links): static
+    public function setLinks($links)
     {
         $this->links = $links;
         return $this;
@@ -194,7 +194,7 @@ class FundingOption extends PayPalModel
      * @param \PayPal\Api\Links $links
      * @return $this
      */
-    public function addLink($links): static
+    public function addLink($links)
     {
         if (!$this->getLinks()) {
             return $this->setLinks([$links]);
@@ -211,7 +211,7 @@ class FundingOption extends PayPalModel
      * @param \PayPal\Api\Links $links
      * @return $this
      */
-    public function removeLink($links): static
+    public function removeLink($links)
     {
         return $this->setLinks(
             array_diff($this->getLinks(), [$links])

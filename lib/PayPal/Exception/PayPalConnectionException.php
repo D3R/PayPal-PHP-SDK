@@ -36,7 +36,7 @@ class PayPalConnectionException extends \Exception
      *
      * @param $data
      */
-    public function setData($data): void
+    public function setData($data)
     {
         $this->data = $data;
     }

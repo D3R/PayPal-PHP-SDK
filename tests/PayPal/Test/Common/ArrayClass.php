@@ -6,7 +6,7 @@ use PayPal\Common\PayPalModel;
 class ArrayClass extends PayPalModel
 {
 
-    public function setName($name): void
+    public function setName($name)
     {
         $this->name = $name;
     }
@@ -16,7 +16,7 @@ class ArrayClass extends PayPalModel
         return $this->name;
     }
 
-    public function setDescription($description): void
+    public function setDescription($description)
     {
         $this->description = $description;
     }
@@ -26,12 +26,11 @@ class ArrayClass extends PayPalModel
         return $this->description;
     }
 
-    public function setTags($tags): void
+    public function setTags($tags)
     {
         if (!is_array($tags)) {
             $tags = [$tags];
         }
-
         $this->tags = $tags;
     }
 

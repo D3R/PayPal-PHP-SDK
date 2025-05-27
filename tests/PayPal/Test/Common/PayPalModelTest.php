@@ -9,8 +9,9 @@ class SimpleModelTestClass extends PayPalModel
      *
      * @access public
      * @param string $field1
+     * @return self
      */
-    public function setField1($field1): static
+    public function setField1($field1)
     {
         $this->field1 = $field1;
         return $this;
@@ -30,8 +31,9 @@ class SimpleModelTestClass extends PayPalModel
      *
      * @access public
      * @param string $field2
+     * @return self
      */
-    public function setField2($field2): static
+    public function setField2($field2)
     {
         $this->field2 = $field2;
         return $this;
@@ -57,7 +59,7 @@ class ContainerModelTestClass extends PayPalModel
      * @access public
      * @param string $field1
      */
-    public function setField1($field1): static
+    public function setField1($field1)
     {
         $this->field1 = $field1;
         return $this;
@@ -78,7 +80,7 @@ class ContainerModelTestClass extends PayPalModel
      * @access public
      * @param SimpleModelTestClass $field1
      */
-    public function setNested1($nested1): static
+    public function setNested1($nested1)
     {
         $this->nested1 = $nested1;
         return $this;
@@ -103,7 +105,7 @@ class ListModelTestClass extends PayPalModel
      * @access public
      * @param string $list1
      */
-    public function setList1($list1): void
+    public function setList1($list1)
     {
         $this->list1 = $list1;
     }
@@ -123,7 +125,7 @@ class ListModelTestClass extends PayPalModel
      * @access public
      * @param SimpleModelTestClass $list2 array of SimpleModelTestClass
      */
-    public function setList2($list2): static
+    public function setList2($list2)
     {
         $this->list2 = $list2;
         return $this;
@@ -150,7 +152,7 @@ class PayPalModelTest extends TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp(): void
+    protected function setUp()
     {
     }
 
@@ -158,14 +160,14 @@ class PayPalModelTest extends TestCase
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown(): void
+    protected function tearDown()
     {
     }
 
     /**
      * @test
      */
-    public function testSimpleConversion(): void
+    public function testSimpleConversion()
     {
         $o = new SimpleModelTestClass();
         $o->setField1('value 1');
@@ -181,7 +183,7 @@ class PayPalModelTest extends TestCase
     /**
      * @test
      */
-    public function testEmptyObject(): void
+    public function testEmptyObject()
     {
         $child = new SimpleModelTestClass();
         $child->setField1(null);
@@ -201,7 +203,7 @@ class PayPalModelTest extends TestCase
     /**
      * @test
      */
-    public function testSpecialChars(): void
+    public function testSpecialChars()
     {
         $o = new SimpleModelTestClass();
         $o->setField1('value "1');
@@ -218,7 +220,7 @@ class PayPalModelTest extends TestCase
     /**
      * @test
      */
-    public function testNestedConversion(): void
+    public function testNestedConversion()
     {
         $child = new SimpleModelTestClass();
         $child->setField1('value 1');
@@ -240,7 +242,7 @@ class PayPalModelTest extends TestCase
     /**
      * @test
      */
-    public function testListConversion(): void
+    public function testListConversion()
     {
         $c1 = new SimpleModelTestClass();
         $c1->setField1("a")->setField2('value');
@@ -257,7 +259,7 @@ class PayPalModelTest extends TestCase
         $this->assertEquals($parent, $parentCopy);
     }
 
-    public function EmptyNullProvider(): array
+    public function EmptyNullProvider()
     {
         return [
             [0, true],
@@ -272,15 +274,16 @@ class PayPalModelTest extends TestCase
     /**
      * @dataProvider EmptyNullProvider
      * @param string|null $field2
+     * @param bool $matches
      */
-    public function testEmptyNullConversion(int|string|null $field2, bool $matches): void
+    public function testEmptyNullConversion($field2, $matches)
     {
         $c1 = new SimpleModelTestClass();
         $c1->setField1("a")->setField2($field2);
         $this->assertNotSame(strpos($c1->toJSON(), "field2"), !$matches);
     }
 
-    public function getProvider(): array
+    public function getProvider()
     {
         return [
             ['[[]]', 1, [[]]],
@@ -309,7 +312,7 @@ class PayPalModelTest extends TestCase
         ];
     }
 
-    public function getInvalidProvider(): array
+    public function getInvalidProvider()
     {
         return [
             ['{]'],
@@ -320,9 +323,10 @@ class PayPalModelTest extends TestCase
     /**
      * @dataProvider getProvider
      * @param string|null $input
+     * @param int $count
      * @param mixed $expected
      */
-    public function testGetList(string|\PayPal\Common\PayPalModel|array|null $input, int $count, ?array $expected): void
+    public function testGetList($input, $count, $expected)
     {
         $result = PayPalModel::getList($input);
         $this->assertEquals($expected, $result);
@@ -339,8 +343,8 @@ class PayPalModelTest extends TestCase
      * @expectedExceptionMessage Invalid JSON String
      * @param string|null $input
      */
-    public function testGetListInvalidInput(string $input): void
+    public function testGetListInvalidInput($input)
     {
-        PayPalModel::getList($input);
+        $result = PayPalModel::getList($input);
     }
 }

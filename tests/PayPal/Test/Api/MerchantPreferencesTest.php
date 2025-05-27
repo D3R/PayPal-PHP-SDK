@@ -14,16 +14,18 @@ class MerchantPreferencesTest extends TestCase
 {
     /**
      * Gets Json String of Object MerchantPreferences
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"id":"TestSample","setup_fee":' .CurrencyTest::getJson() . ',"cancel_url":"http://www.google.com","return_url":"http://www.google.com","notify_url":"http://www.google.com","max_fail_attempts":"TestSample","auto_bill_amount":"TestSample","initial_fail_amount_action":"TestSample","accepted_payment_type":"TestSample","char_set":"TestSample"}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return MerchantPreferences
      */
-    public static function getObject(): \PayPal\Api\MerchantPreferences
+    public static function getObject()
     {
         return new MerchantPreferences(self::getJson());
     }
@@ -31,8 +33,9 @@ class MerchantPreferencesTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return MerchantPreferences
      */
-    public function testSerializationDeserialization(): \PayPal\Api\MerchantPreferences
+    public function testSerializationDeserialization()
     {
         $obj = new MerchantPreferences(self::getJson());
         $this->assertNotNull($obj);
@@ -54,7 +57,7 @@ class MerchantPreferencesTest extends TestCase
      * @depends testSerializationDeserialization
      * @param MerchantPreferences $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getId(), "TestSample");
         $this->assertEquals($obj->getSetupFee(), CurrencyTest::getObject());
@@ -72,47 +75,43 @@ class MerchantPreferencesTest extends TestCase
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage CancelUrl is not a fully qualified URL
      */
-    public function testUrlValidationForCancelUrl(): void
+    public function testUrlValidationForCancelUrl()
     {
         $obj = new MerchantPreferences();
         $obj->setCancelUrl(null);
     }
-
     /**
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage ReturnUrl is not a fully qualified URL
      */
-    public function testUrlValidationForReturnUrl(): void
+    public function testUrlValidationForReturnUrl()
     {
         $obj = new MerchantPreferences();
         $obj->setReturnUrl(null);
     }
-
     /**
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage NotifyUrl is not a fully qualified URL
      */
-    public function testUrlValidationForNotifyUrl(): void
+    public function testUrlValidationForNotifyUrl()
     {
         $obj = new MerchantPreferences();
         $obj->setNotifyUrl(null);
     }
 
-    public function testUrlValidationForCancelUrlDeprecated(): void
+    public function testUrlValidationForCancelUrlDeprecated()
     {
         $obj = new MerchantPreferences();
         $obj->setCancelUrl(null);
         $this->assertNull($obj->getCancelUrl());
     }
-
-    public function testUrlValidationForReturnUrlDeprecated(): void
+    public function testUrlValidationForReturnUrlDeprecated()
     {
         $obj = new MerchantPreferences();
         $obj->setReturnUrl(null);
         $this->assertNull($obj->getReturnUrl());
     }
-
-    public function testUrlValidationForNotifyUrlDeprecated(): void
+    public function testUrlValidationForNotifyUrlDeprecated()
     {
         $obj = new MerchantPreferences();
         $obj->setNotifyUrl(null);

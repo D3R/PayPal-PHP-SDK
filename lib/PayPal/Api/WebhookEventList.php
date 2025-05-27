@@ -24,7 +24,7 @@ class WebhookEventList extends PayPalModel
      * 
      * @return $this
      */
-    public function setEvents($events): static
+    public function setEvents($events)
     {
         $this->events = $events;
         return $this;
@@ -46,7 +46,7 @@ class WebhookEventList extends PayPalModel
      * @param \PayPal\Api\WebhookEvent $webhookEvent
      * @return $this
      */
-    public function addEvent($webhookEvent): static
+    public function addEvent($webhookEvent)
     {
         if (!$this->getEvents()) {
             return $this->setEvents([$webhookEvent]);
@@ -63,7 +63,7 @@ class WebhookEventList extends PayPalModel
      * @param \PayPal\Api\WebhookEvent $webhookEvent
      * @return $this
      */
-    public function removeEvent($webhookEvent): static
+    public function removeEvent($webhookEvent)
     {
         return $this->setEvents(
             array_diff($this->getEvents(), [$webhookEvent])
@@ -77,7 +77,7 @@ class WebhookEventList extends PayPalModel
      * 
      * @return $this
      */
-    public function setCount($count): static
+    public function setCount($count)
     {
         $this->count = $count;
         return $this;
@@ -100,7 +100,7 @@ class WebhookEventList extends PayPalModel
      * 
      * @return $this
      */
-    public function setLinks($links): static
+    public function setLinks($links)
     {
         $this->links = $links;
         return $this;
@@ -122,7 +122,7 @@ class WebhookEventList extends PayPalModel
      * @param \PayPal\Api\Links $links
      * @return $this
      */
-    public function addLink($links): static
+    public function addLink($links)
     {
         if (!$this->getLinks()) {
             return $this->setLinks([$links]);
@@ -139,7 +139,7 @@ class WebhookEventList extends PayPalModel
      * @param \PayPal\Api\Links $links
      * @return $this
      */
-    public function removeLink($links): static
+    public function removeLink($links)
     {
         return $this->setLinks(
             array_diff($this->getLinks(), [$links])

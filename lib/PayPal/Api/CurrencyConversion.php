@@ -30,7 +30,7 @@ class CurrencyConversion extends PayPalModel
      * 
      * @return $this
      */
-    public function setConversionDate($conversion_date): static
+    public function setConversionDate($conversion_date)
     {
         $this->conversion_date = $conversion_date;
         return $this;
@@ -53,7 +53,7 @@ class CurrencyConversion extends PayPalModel
      * 
      * @return $this
      */
-    public function setFromCurrency($from_currency): static
+    public function setFromCurrency($from_currency)
     {
         $this->from_currency = $from_currency;
         return $this;
@@ -76,7 +76,7 @@ class CurrencyConversion extends PayPalModel
      * 
      * @return $this
      */
-    public function setFromAmount($from_amount): static
+    public function setFromAmount($from_amount)
     {
         $this->from_amount = $from_amount;
         return $this;
@@ -99,7 +99,7 @@ class CurrencyConversion extends PayPalModel
      * 
      * @return $this
      */
-    public function setToCurrency($to_currency): static
+    public function setToCurrency($to_currency)
     {
         $this->to_currency = $to_currency;
         return $this;
@@ -122,7 +122,7 @@ class CurrencyConversion extends PayPalModel
      * 
      * @return $this
      */
-    public function setToAmount($to_amount): static
+    public function setToAmount($to_amount)
     {
         $this->to_amount = $to_amount;
         return $this;
@@ -146,7 +146,7 @@ class CurrencyConversion extends PayPalModel
      * 
      * @return $this
      */
-    public function setConversionType($conversion_type): static
+    public function setConversionType($conversion_type)
     {
         $this->conversion_type = $conversion_type;
         return $this;
@@ -169,7 +169,7 @@ class CurrencyConversion extends PayPalModel
      * 
      * @return $this
      */
-    public function setConversionTypeChangeable($conversion_type_changeable): static
+    public function setConversionTypeChangeable($conversion_type_changeable)
     {
         $this->conversion_type_changeable = $conversion_type_changeable;
         return $this;
@@ -193,7 +193,7 @@ class CurrencyConversion extends PayPalModel
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setWebUrl($web_url): static
+    public function setWebUrl($web_url)
     {
         UrlValidator::validate($web_url, "WebUrl");
         $this->web_url = $web_url;
@@ -217,7 +217,7 @@ class CurrencyConversion extends PayPalModel
      * 
      * @return $this
      */
-    public function setLinks($links): static
+    public function setLinks($links)
     {
         $this->links = $links;
         return $this;
@@ -239,7 +239,7 @@ class CurrencyConversion extends PayPalModel
      * @param \PayPal\Api\Links $links
      * @return $this
      */
-    public function addLink($links): static
+    public function addLink($links)
     {
         if (!$this->getLinks()) {
             return $this->setLinks([$links]);
@@ -256,7 +256,7 @@ class CurrencyConversion extends PayPalModel
      * @param \PayPal\Api\Links $links
      * @return $this
      */
-    public function removeLink($links): static
+    public function removeLink($links)
     {
         return $this->setLinks(
             array_diff($this->getLinks(), [$links])

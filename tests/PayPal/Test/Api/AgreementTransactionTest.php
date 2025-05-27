@@ -14,16 +14,18 @@ class AgreementTransactionTest extends TestCase
 {
     /**
      * Gets Json String of Object AgreementTransaction
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"transaction_id":"TestSample","status":"TestSample","transaction_type":"TestSample","amount":' .CurrencyTest::getJson() . ',"fee_amount":' .CurrencyTest::getJson() . ',"net_amount":' .CurrencyTest::getJson() . ',"payer_email":"TestSample","payer_name":"TestSample","time_stamp":"TestSample","time_zone":"TestSample"}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return AgreementTransaction
      */
-    public static function getObject(): \PayPal\Api\AgreementTransaction
+    public static function getObject()
     {
         return new AgreementTransaction(self::getJson());
     }
@@ -31,8 +33,9 @@ class AgreementTransactionTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return AgreementTransaction
      */
-    public function testSerializationDeserialization(): \PayPal\Api\AgreementTransaction
+    public function testSerializationDeserialization()
     {
         $obj = new AgreementTransaction(self::getJson());
         $this->assertNotNull($obj);
@@ -54,7 +57,7 @@ class AgreementTransactionTest extends TestCase
      * @depends testSerializationDeserialization
      * @param AgreementTransaction $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getTransactionId(), "TestSample");
         $this->assertEquals($obj->getStatus(), "TestSample");

@@ -38,7 +38,7 @@ class Agreement extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setId($id): static
+    public function setId($id)
     {
         $this->id = $id;
         return $this;
@@ -61,7 +61,7 @@ class Agreement extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setState($state): static
+    public function setState($state)
     {
         $this->state = $state;
         return $this;
@@ -84,7 +84,7 @@ class Agreement extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setName($name): static
+    public function setName($name)
     {
         $this->name = $name;
         return $this;
@@ -107,7 +107,7 @@ class Agreement extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setDescription($description): static
+    public function setDescription($description)
     {
         $this->description = $description;
         return $this;
@@ -130,7 +130,7 @@ class Agreement extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setStartDate($start_date): static
+    public function setStartDate($start_date)
     {
         $this->start_date = $start_date;
         return $this;
@@ -153,7 +153,7 @@ class Agreement extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setPayer($payer): static
+    public function setPayer($payer)
     {
         $this->payer = $payer;
         return $this;
@@ -176,7 +176,7 @@ class Agreement extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setShippingAddress($shipping_address): static
+    public function setShippingAddress($shipping_address)
     {
         $this->shipping_address = $shipping_address;
         return $this;
@@ -199,7 +199,7 @@ class Agreement extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setOverrideMerchantPreferences($override_merchant_preferences): static
+    public function setOverrideMerchantPreferences($override_merchant_preferences)
     {
         $this->override_merchant_preferences = $override_merchant_preferences;
         return $this;
@@ -222,7 +222,7 @@ class Agreement extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setOverrideChargeModels($override_charge_models): static
+    public function setOverrideChargeModels($override_charge_models)
     {
         $this->override_charge_models = $override_charge_models;
         return $this;
@@ -244,7 +244,7 @@ class Agreement extends PayPalResourceModel
      * @param \PayPal\Api\OverrideChargeModel $overrideChargeModel
      * @return $this
      */
-    public function addOverrideChargeModel($overrideChargeModel): static
+    public function addOverrideChargeModel($overrideChargeModel)
     {
         if (!$this->getOverrideChargeModels()) {
             return $this->setOverrideChargeModels([$overrideChargeModel]);
@@ -261,7 +261,7 @@ class Agreement extends PayPalResourceModel
      * @param \PayPal\Api\OverrideChargeModel $overrideChargeModel
      * @return $this
      */
-    public function removeOverrideChargeModel($overrideChargeModel): static
+    public function removeOverrideChargeModel($overrideChargeModel)
     {
         return $this->setOverrideChargeModels(
             array_diff($this->getOverrideChargeModels(), [$overrideChargeModel])
@@ -275,7 +275,7 @@ class Agreement extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setPlan($plan): static
+    public function setPlan($plan)
     {
         $this->plan = $plan;
         return $this;
@@ -298,7 +298,7 @@ class Agreement extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setCreateTime($create_time): static
+    public function setCreateTime($create_time)
     {
         $this->create_time = $create_time;
         return $this;
@@ -321,7 +321,7 @@ class Agreement extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setUpdateTime($update_time): static
+    public function setUpdateTime($update_time)
     {
         $this->update_time = $update_time;
         return $this;
@@ -344,7 +344,7 @@ class Agreement extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setAgreementDetails($agreement_details): static
+    public function setAgreementDetails($agreement_details)
     {
         $this->agreement_details = $agreement_details;
         return $this;
@@ -375,8 +375,9 @@ class Agreement extends PayPalResourceModel
      *
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return Agreement
      */
-    public function create($apiContext = null, $restCall = null): static
+    public function create($apiContext = null, $restCall = null)
     {
         $payLoad = $this->toJSON();
         $json = self::executeCall(
@@ -397,13 +398,14 @@ class Agreement extends PayPalResourceModel
      * @param  $paymentToken
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return Agreement
      */
-    public function execute($paymentToken, $apiContext = null, $restCall = null): static
+    public function execute($paymentToken, $apiContext = null, $restCall = null)
     {
         ArgumentValidator::validate($paymentToken, 'paymentToken');
         $payLoad = "";
         $json = self::executeCall(
-            sprintf('/v1/payments/billing-agreements/%s/agreement-execute', $paymentToken),
+            "/v1/payments/billing-agreements/$paymentToken/agreement-execute",
             "POST",
             $payLoad,
             null,
@@ -417,15 +419,17 @@ class Agreement extends PayPalResourceModel
     /**
      * Retrieve details for a particular billing agreement by passing the ID of the agreement to the request URI.
      *
+     * @param string $agreementId
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return Agreement
      */
-    public static function get(string $agreementId, $apiContext = null, $restCall = null): \PayPal\Api\Agreement
+    public static function get($agreementId, $apiContext = null, $restCall = null)
     {
         ArgumentValidator::validate($agreementId, 'agreementId');
         $payLoad = "";
         $json = self::executeCall(
-            '/v1/payments/billing-agreements/' . $agreementId,
+            "/v1/payments/billing-agreements/$agreementId",
             "GET",
             $payLoad,
             null,
@@ -443,14 +447,15 @@ class Agreement extends PayPalResourceModel
      * @param PatchRequest $patchRequest
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return bool
      */
-    public function update($patchRequest, $apiContext = null, $restCall = null): bool
+    public function update($patchRequest, $apiContext = null, $restCall = null)
     {
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($patchRequest, 'patchRequest');
         $payLoad = $patchRequest->toJSON();
         self::executeCall(
-            '/v1/payments/billing-agreements/' . $this->getId(),
+            "/v1/payments/billing-agreements/{$this->getId()}",
             "PATCH",
             $payLoad,
             null,
@@ -466,14 +471,15 @@ class Agreement extends PayPalResourceModel
      * @param AgreementStateDescriptor $agreementStateDescriptor
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return bool
      */
-    public function suspend($agreementStateDescriptor, $apiContext = null, $restCall = null): bool
+    public function suspend($agreementStateDescriptor, $apiContext = null, $restCall = null)
     {
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($agreementStateDescriptor, 'agreementStateDescriptor');
         $payLoad = $agreementStateDescriptor->toJSON();
         self::executeCall(
-            sprintf('/v1/payments/billing-agreements/%s/suspend', $this->getId()),
+            "/v1/payments/billing-agreements/{$this->getId()}/suspend",
             "POST",
             $payLoad,
             null,
@@ -489,14 +495,15 @@ class Agreement extends PayPalResourceModel
      * @param AgreementStateDescriptor $agreementStateDescriptor
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return bool
      */
-    public function reActivate($agreementStateDescriptor, $apiContext = null, $restCall = null): bool
+    public function reActivate($agreementStateDescriptor, $apiContext = null, $restCall = null)
     {
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($agreementStateDescriptor, 'agreementStateDescriptor');
         $payLoad = $agreementStateDescriptor->toJSON();
         self::executeCall(
-            sprintf('/v1/payments/billing-agreements/%s/re-activate', $this->getId()),
+            "/v1/payments/billing-agreements/{$this->getId()}/re-activate",
             "POST",
             $payLoad,
             null,
@@ -512,14 +519,15 @@ class Agreement extends PayPalResourceModel
      * @param AgreementStateDescriptor $agreementStateDescriptor
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return bool
      */
-    public function cancel($agreementStateDescriptor, $apiContext = null, $restCall = null): bool
+    public function cancel($agreementStateDescriptor, $apiContext = null, $restCall = null)
     {
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($agreementStateDescriptor, 'agreementStateDescriptor');
         $payLoad = $agreementStateDescriptor->toJSON();
         self::executeCall(
-            sprintf('/v1/payments/billing-agreements/%s/cancel', $this->getId()),
+            "/v1/payments/billing-agreements/{$this->getId()}/cancel",
             "POST",
             $payLoad,
             null,
@@ -535,14 +543,15 @@ class Agreement extends PayPalResourceModel
      * @param AgreementStateDescriptor $agreementStateDescriptor
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return bool
      */
-    public function billBalance($agreementStateDescriptor, $apiContext = null, $restCall = null): bool
+    public function billBalance($agreementStateDescriptor, $apiContext = null, $restCall = null)
     {
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($agreementStateDescriptor, 'agreementStateDescriptor');
         $payLoad = $agreementStateDescriptor->toJSON();
         self::executeCall(
-            sprintf('/v1/payments/billing-agreements/%s/bill-balance', $this->getId()),
+            "/v1/payments/billing-agreements/{$this->getId()}/bill-balance",
             "POST",
             $payLoad,
             null,
@@ -558,14 +567,15 @@ class Agreement extends PayPalResourceModel
      * @param Currency $currency
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return bool
      */
-    public function setBalance($currency, $apiContext = null, $restCall = null): bool
+    public function setBalance($currency, $apiContext = null, $restCall = null)
     {
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($currency, 'currency');
         $payLoad = $currency->toJSON();
         self::executeCall(
-            sprintf('/v1/payments/billing-agreements/%s/set-balance', $this->getId()),
+            "/v1/payments/billing-agreements/{$this->getId()}/set-balance",
             "POST",
             $payLoad,
             null,
@@ -582,13 +592,14 @@ class Agreement extends PayPalResourceModel
      * @param string $agreementId
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return AgreementTransactions
      */
-    public static function transactions($agreementId, $apiContext = null, $restCall = null): \PayPal\Api\AgreementTransactions
+    public static function transactions($agreementId, $apiContext = null, $restCall = null)
     {
         ArgumentValidator::validate($agreementId, 'agreementId');
         $payLoad = "";
         $json = self::executeCall(
-            sprintf('/v1/payments/billing-agreements/%s/transactions', $agreementId),
+            "/v1/payments/billing-agreements/$agreementId/transactions",
             "GET",
             $payLoad,
             null,
@@ -607,8 +618,9 @@ class Agreement extends PayPalResourceModel
      * @param array $params Parameters for search string. Options: start_date, and end_date
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return AgreementTransactions
      */
-    public static function searchTransactions($agreementId, $params = [], $apiContext = null, $restCall = null): \PayPal\Api\AgreementTransactions
+    public static function searchTransactions($agreementId, $params = [], $apiContext = null, $restCall = null)
     {
         ArgumentValidator::validate($agreementId, 'agreementId');
         ArgumentValidator::validate($params, 'params');
@@ -620,7 +632,7 @@ class Agreement extends PayPalResourceModel
 
         $payLoad = "";
         $json = self::executeCall(
-            sprintf('/v1/payments/billing-agreements/%s/transactions?', $agreementId) . http_build_query(array_intersect_key($params, $allowedParams)),
+            "/v1/payments/billing-agreements/$agreementId/transactions?" . http_build_query(array_intersect_key($params, $allowedParams)),
             "GET",
             $payLoad,
             null,

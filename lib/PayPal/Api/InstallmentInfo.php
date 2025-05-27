@@ -25,7 +25,7 @@ class InstallmentInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setInstallmentId($installment_id): static
+    public function setInstallmentId($installment_id)
     {
         $this->installment_id = $installment_id;
         return $this;
@@ -49,7 +49,7 @@ class InstallmentInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setNetwork($network): static
+    public function setNetwork($network)
     {
         $this->network = $network;
         return $this;
@@ -72,7 +72,7 @@ class InstallmentInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setIssuer($issuer): static
+    public function setIssuer($issuer)
     {
         $this->issuer = $issuer;
         return $this;
@@ -95,7 +95,7 @@ class InstallmentInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setInstallmentOptions($installment_options): static
+    public function setInstallmentOptions($installment_options)
     {
         $this->installment_options = $installment_options;
         return $this;
@@ -117,7 +117,7 @@ class InstallmentInfo extends PayPalModel
      * @param \PayPal\Api\InstallmentOption $installmentOption
      * @return $this
      */
-    public function addInstallmentOption($installmentOption): static
+    public function addInstallmentOption($installmentOption)
     {
         if (!$this->getInstallmentOptions()) {
             return $this->setInstallmentOptions([$installmentOption]);
@@ -134,7 +134,7 @@ class InstallmentInfo extends PayPalModel
      * @param \PayPal\Api\InstallmentOption $installmentOption
      * @return $this
      */
-    public function removeInstallmentOption($installmentOption): static
+    public function removeInstallmentOption($installmentOption)
     {
         return $this->setInstallmentOptions(
             array_diff($this->getInstallmentOptions(), [$installmentOption])

@@ -8,31 +8,21 @@ use PHPUnit\Framework\TestCase;
 class CreditCardHistoryTest extends TestCase
 {
 
-    private array $cards;
+    private $cards;
 
     public static $id = "id";
-
     public static $validUntil = "2013-02-28T00:00:00Z";
-
     public static $state = "created";
-
     public static $payerId = "payer-id";
-
     public static $cardType = "visa";
-
     public static $cardNumber = "4417119669820331";
-
     public static $expireMonth = 11;
-
     public static $expireYear = "2019";
-
     public static $cvv = "012";
-
     public static $firstName = "V";
-
     public static $lastName = "C";
 
-    public static function createCreditCard(): \PayPal\Api\CreditCard
+    public static function createCreditCard()
     {
         $card = new CreditCard();
         $card->setType(self::$cardType);
@@ -48,7 +38,7 @@ class CreditCardHistoryTest extends TestCase
         return $card;
     }
 
-    protected function setup(): void
+    public function setup()
     {
         $card = self::createCreditCard();
         $card->setBillingAddress(AddressTest::getObject());
@@ -59,7 +49,7 @@ class CreditCardHistoryTest extends TestCase
         $this->cards['partial'] = $card;
     }
 
-    public function testGetterSetters(): void
+    public function testGetterSetters()
     {
         $cardHistory = new CreditCardHistory();
         $cardHistory->setCreditCards([$this->cards['partial'], $this->cards['full']]);
@@ -69,7 +59,7 @@ class CreditCardHistoryTest extends TestCase
     }
 
 
-    public function testSerializationDeserialization(): void
+    public function testSerializationDeserialization()
     {
         $cardHistory = new CreditCardHistory();
         $cardHistory->setCreditCards([$this->cards['partial'], $this->cards['full']]);

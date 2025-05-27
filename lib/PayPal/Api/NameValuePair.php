@@ -23,7 +23,7 @@ class NameValuePair extends PayPalModel
      * 
      * @return $this
      */
-    public function setName($name): static
+    public function setName($name)
     {
         $this->name = $name;
         return $this;
@@ -46,7 +46,7 @@ class NameValuePair extends PayPalModel
      * 
      * @return $this
      */
-    public function setValue($value): static
+    public function setValue($value)
     {
         $this->value = $value;
         return $this;

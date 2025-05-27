@@ -36,7 +36,7 @@ class Refund extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setId($id): static
+    public function setId($id)
     {
         $this->id = $id;
         return $this;
@@ -59,7 +59,7 @@ class Refund extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setAmount($amount): static
+    public function setAmount($amount)
     {
         $this->amount = $amount;
         return $this;
@@ -83,7 +83,7 @@ class Refund extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setState($state): static
+    public function setState($state)
     {
         $this->state = $state;
         return $this;
@@ -106,7 +106,7 @@ class Refund extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setReason($reason): static
+    public function setReason($reason)
     {
         $this->reason = $reason;
         return $this;
@@ -129,7 +129,7 @@ class Refund extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setInvoiceNumber($invoice_number): static
+    public function setInvoiceNumber($invoice_number)
     {
         $this->invoice_number = $invoice_number;
         return $this;
@@ -152,7 +152,7 @@ class Refund extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setSaleId($sale_id): static
+    public function setSaleId($sale_id)
     {
         $this->sale_id = $sale_id;
         return $this;
@@ -175,7 +175,7 @@ class Refund extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setCaptureId($capture_id): static
+    public function setCaptureId($capture_id)
     {
         $this->capture_id = $capture_id;
         return $this;
@@ -198,7 +198,7 @@ class Refund extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setParentPayment($parent_payment): static
+    public function setParentPayment($parent_payment)
     {
         $this->parent_payment = $parent_payment;
         return $this;
@@ -221,7 +221,7 @@ class Refund extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setDescription($description): static
+    public function setDescription($description)
     {
         $this->description = $description;
         return $this;
@@ -244,7 +244,7 @@ class Refund extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setCreateTime($create_time): static
+    public function setCreateTime($create_time)
     {
         $this->create_time = $create_time;
         return $this;
@@ -267,7 +267,7 @@ class Refund extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setUpdateTime($update_time): static
+    public function setUpdateTime($update_time)
     {
         $this->update_time = $update_time;
         return $this;
@@ -291,7 +291,7 @@ class Refund extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setReasonCode($reason_code): static
+    public function setReasonCode($reason_code)
     {
         $this->reason_code = $reason_code;
         return $this;
@@ -310,15 +310,17 @@ class Refund extends PayPalResourceModel
     /**
      * Shows details for a refund, by ID.
      *
+     * @param string $refundId
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
+     * @return Refund
      */
-    public static function get(string $refundId, $apiContext = null, $restCall = null): \PayPal\Api\Refund
+    public static function get($refundId, $apiContext = null, $restCall = null)
     {
         ArgumentValidator::validate($refundId, 'refundId');
         $payLoad = "";
         $json = self::executeCall(
-            '/v1/payments/refund/' . $refundId,
+            "/v1/payments/refund/$refundId",
             "GET",
             $payLoad,
             null,

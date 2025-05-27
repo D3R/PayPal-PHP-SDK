@@ -14,16 +14,18 @@ class ItemTest extends TestCase
 {
     /**
      * Gets Json String of Object Item
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"sku":"TestSample","name":"TestSample","description":"TestSample","quantity":"12.34","price":"12.34","currency":"TestSample","tax":"12.34","url":"http://www.google.com","category":"TestSample","weight":' . MeasurementTest::getJson() . ',"length":' . MeasurementTest::getJson() . ',"height":' . MeasurementTest::getJson() . ',"width":' . MeasurementTest::getJson() . ',"supplementary_data":' . NameValuePairTest::getJson() . ',"postback_data":' . NameValuePairTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return Item
      */
-    public static function getObject(): \PayPal\Api\Item
+    public static function getObject()
     {
         return new Item(self::getJson());
     }
@@ -31,8 +33,9 @@ class ItemTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return Item
      */
-    public function testSerializationDeserialization(): \PayPal\Api\Item
+    public function testSerializationDeserialization()
     {
         $obj = new Item(self::getJson());
         $this->assertNotNull($obj);
@@ -59,7 +62,7 @@ class ItemTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Item $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getSku(), "TestSample");
         $this->assertEquals($obj->getName(), "TestSample");
@@ -82,7 +85,7 @@ class ItemTest extends TestCase
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Url is not a fully qualified URL
      */
-    public function testUrlValidationForUrl(): void
+    public function testUrlValidationForUrl()
     {
         $obj = new Item();
         $obj->setUrl(null);

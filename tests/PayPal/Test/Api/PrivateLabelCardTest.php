@@ -14,16 +14,18 @@ class PrivateLabelCardTest extends TestCase
 {
     /**
      * Gets Json String of Object PrivateLabelCard
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"id":"TestSample","card_number":"TestSample","issuer_id":"TestSample","issuer_name":"TestSample","image_key":"TestSample"}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return PrivateLabelCard
      */
-    public static function getObject(): \PayPal\Api\PrivateLabelCard
+    public static function getObject()
     {
         return new PrivateLabelCard(self::getJson());
     }
@@ -31,8 +33,9 @@ class PrivateLabelCardTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return PrivateLabelCard
      */
-    public function testSerializationDeserialization(): \PayPal\Api\PrivateLabelCard
+    public function testSerializationDeserialization()
     {
         $obj = new PrivateLabelCard(self::getJson());
         $this->assertNotNull($obj);
@@ -49,7 +52,7 @@ class PrivateLabelCardTest extends TestCase
      * @depends testSerializationDeserialization
      * @param PrivateLabelCard $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getId(), "TestSample");
         $this->assertEquals($obj->getCardNumber(), "TestSample");

@@ -14,16 +14,18 @@ class PaymentOptionsTest extends TestCase
 {
     /**
      * Gets Json String of Object PaymentOptions
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"allowed_payment_method":"TestSample","recurring_flag":true,"skip_fmf":true}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return PaymentOptions
      */
-    public static function getObject(): \PayPal\Api\PaymentOptions
+    public static function getObject()
     {
         return new PaymentOptions(self::getJson());
     }
@@ -31,8 +33,9 @@ class PaymentOptionsTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return PaymentOptions
      */
-    public function testSerializationDeserialization(): \PayPal\Api\PaymentOptions
+    public function testSerializationDeserialization()
     {
         $obj = new PaymentOptions(self::getJson());
         $this->assertNotNull($obj);
@@ -47,7 +50,7 @@ class PaymentOptionsTest extends TestCase
      * @depends testSerializationDeserialization
      * @param PaymentOptions $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getAllowedPaymentMethod(), "TestSample");
         $this->assertEquals($obj->getRecurringFlag(), true);

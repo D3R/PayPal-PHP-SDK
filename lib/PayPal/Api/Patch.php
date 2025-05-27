@@ -26,7 +26,7 @@ class Patch extends PayPalModel
      * 
      * @return $this
      */
-    public function setOp($op): static
+    public function setOp($op)
     {
         $this->op = $op;
         return $this;
@@ -49,7 +49,7 @@ class Patch extends PayPalModel
      * 
      * @return $this
      */
-    public function setPath($path): static
+    public function setPath($path)
     {
         $this->path = $path;
         return $this;
@@ -72,7 +72,7 @@ class Patch extends PayPalModel
      * 
      * @return $this
      */
-    public function setValue($value): static
+    public function setValue($value)
     {
         $this->value = $value;
         return $this;
@@ -95,7 +95,7 @@ class Patch extends PayPalModel
      * 
      * @return $this
      */
-    public function setFrom($from): static
+    public function setFrom($from)
     {
         $this->from = $from;
         return $this;

@@ -14,16 +14,18 @@ class InstallmentOptionTest extends TestCase
 {
     /**
      * Gets Json String of Object InstallmentOption
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"term":123,"monthly_payment":' . CurrencyTest::getJson() . ',"discount_amount":' . CurrencyTest::getJson() . ',"discount_percentage":"TestSample"}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return InstallmentOption
      */
-    public static function getObject(): \PayPal\Api\InstallmentOption
+    public static function getObject()
     {
         return new InstallmentOption(self::getJson());
     }
@@ -31,8 +33,9 @@ class InstallmentOptionTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return InstallmentOption
      */
-    public function testSerializationDeserialization(): \PayPal\Api\InstallmentOption
+    public function testSerializationDeserialization()
     {
         $obj = new InstallmentOption(self::getJson());
         $this->assertNotNull($obj);
@@ -48,7 +51,7 @@ class InstallmentOptionTest extends TestCase
      * @depends testSerializationDeserialization
      * @param InstallmentOption $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getTerm(), 123);
         $this->assertEquals($obj->getMonthlyPayment(), CurrencyTest::getObject());

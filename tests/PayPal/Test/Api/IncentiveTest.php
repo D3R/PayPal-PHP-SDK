@@ -14,16 +14,18 @@ class IncentiveTest extends TestCase
 {
     /**
      * Gets Json String of Object Incentive
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"id":"TestSample","code":"TestSample","name":"TestSample","description":"TestSample","minimum_purchase_amount":' . CurrencyTest::getJson() . ',"logo_image_url":"http://www.google.com","expiry_date":"TestSample","type":"TestSample","terms":"TestSample"}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return Incentive
      */
-    public static function getObject(): \PayPal\Api\Incentive
+    public static function getObject()
     {
         return new Incentive(self::getJson());
     }
@@ -31,8 +33,9 @@ class IncentiveTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return Incentive
      */
-    public function testSerializationDeserialization(): \PayPal\Api\Incentive
+    public function testSerializationDeserialization()
     {
         $obj = new Incentive(self::getJson());
         $this->assertNotNull($obj);
@@ -53,7 +56,7 @@ class IncentiveTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Incentive $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getId(), "TestSample");
         $this->assertEquals($obj->getCode(), "TestSample");
@@ -70,7 +73,7 @@ class IncentiveTest extends TestCase
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage LogoImageUrl is not a fully qualified URL
      */
-    public function testUrlValidationForLogoImageUrl(): void
+    public function testUrlValidationForLogoImageUrl()
     {
         $obj = new Incentive();
         $obj->setLogoImageUrl(null);

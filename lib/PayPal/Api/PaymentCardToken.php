@@ -27,7 +27,7 @@ class PaymentCardToken extends PayPalModel
      * 
      * @return $this
      */
-    public function setPaymentCardId($payment_card_id): static
+    public function setPaymentCardId($payment_card_id)
     {
         $this->payment_card_id = $payment_card_id;
         return $this;
@@ -50,7 +50,7 @@ class PaymentCardToken extends PayPalModel
      * 
      * @return $this
      */
-    public function setExternalCustomerId($external_customer_id): static
+    public function setExternalCustomerId($external_customer_id)
     {
         $this->external_customer_id = $external_customer_id;
         return $this;
@@ -73,7 +73,7 @@ class PaymentCardToken extends PayPalModel
      * 
      * @return $this
      */
-    public function setLast4($last4): static
+    public function setLast4($last4)
     {
         $this->last4 = $last4;
         return $this;
@@ -97,7 +97,7 @@ class PaymentCardToken extends PayPalModel
      * 
      * @return $this
      */
-    public function setType($type): static
+    public function setType($type)
     {
         $this->type = $type;
         return $this;
@@ -120,7 +120,7 @@ class PaymentCardToken extends PayPalModel
      * 
      * @return $this
      */
-    public function setExpireMonth($expire_month): static
+    public function setExpireMonth($expire_month)
     {
         $this->expire_month = $expire_month;
         return $this;
@@ -143,7 +143,7 @@ class PaymentCardToken extends PayPalModel
      * 
      * @return $this
      */
-    public function setExpireYear($expire_year): static
+    public function setExpireYear($expire_year)
     {
         $this->expire_year = $expire_year;
         return $this;

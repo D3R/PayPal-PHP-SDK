@@ -16,13 +16,17 @@ class PayPalCredentialManager
 {
     /**
      * Singleton Object
+     *
+     * @var PayPalCredentialManager
      */
-    private static ?\PayPal\Core\PayPalCredentialManager $instance = null;
+    private static $instance;
 
     /**
      * Hashmap to contain credentials for accounts.
+     *
+     * @var array
      */
-    private array $credentialHashmap = [];
+    private $credentialHashmap = [];
 
     /**
      * Contains the API username of the default account to use
@@ -42,9 +46,9 @@ class PayPalCredentialManager
     {
         try {
             $this->initCredential($config);
-        } catch (\Exception $exception) {
+        } catch (\Exception $e) {
             $this->credentialHashmap = [];
-            throw $exception;
+            throw $e;
         }
     }
 
@@ -52,13 +56,13 @@ class PayPalCredentialManager
      * Create singleton instance for this class.
      *
      * @param array|null $config
+     * @return PayPalCredentialManager
      */
-    public static function getInstance($config = null): \PayPal\Core\PayPalCredentialManager
+    public static function getInstance($config = null)
     {
-        if (!self::$instance instanceof \PayPal\Core\PayPalCredentialManager) {
+        if (!self::$instance) {
             self::$instance = new self($config == null ? PayPalConfigManager::getInstance()->getConfigHashmap() : $config);
         }
-
         return self::$instance;
     }
 
@@ -67,7 +71,7 @@ class PayPalCredentialManager
      *
      * @param array $config
      */
-    private function initCredential($config): void
+    private function initCredential($config)
     {
         $suffix = 1;
         $prefix = "acct";
@@ -78,7 +82,6 @@ class PayPalCredentialManager
                 $arr[$k] = $v;
             }
         }
-
         $credArr = $arr;
 
         $arr = [];
@@ -88,7 +91,6 @@ class PayPalCredentialManager
                 $arr[] = substr($key, 0, $pos);
             }
         }
-
         $arrayPartKeys = array_unique($arr);
 
         $key = $prefix . $suffix;
@@ -101,11 +103,13 @@ class PayPalCredentialManager
                     $credArr[$key . ".ClientSecret"]
                 );
             }
-
             if ($userName && $this->defaultAccountName == null) {
-                $this->defaultAccountName = array_key_exists($key . '.UserName', $credArr) ? $credArr[$key . '.UserName'] : $key;
+                if (array_key_exists($key . '.UserName', $credArr)) {
+                    $this->defaultAccountName = $credArr[$key . '.UserName'];
+                } else {
+                    $this->defaultAccountName = $key;
+                }
             }
-
             $suffix++;
             $key = $prefix . $suffix;
         }
@@ -114,24 +118,26 @@ class PayPalCredentialManager
     /**
      * Sets credential object for users
      *
+     * @param \PayPal\Auth\OAuthTokenCredential $credential
      * @param string|null   $userId  User Id associated with the account
      * @param bool $default If set, it would make it as a default credential for all requests
+     *
      * @return $this
      */
-    public function setCredentialObject(OAuthTokenCredential $credential, $userId = null, $default = true): static
+    public function setCredentialObject(OAuthTokenCredential $credential, $userId = null, $default = true)
     {
         $key = $userId == null ? 'default' : $userId;
         $this->credentialHashmap[$key] = $credential;
         if ($default) {
             $this->defaultAccountName = $key;
         }
-
         return $this;
     }
 
     /**
      * Obtain Credential Object based on UserId provided.
      *
+     * @param null $userId
      * @return OAuthTokenCredential
      * @throws PayPalInvalidCredentialException
      */
@@ -147,7 +153,6 @@ class PayPalCredentialManager
             throw new PayPalInvalidCredentialException("Credential not found for " .  ($userId ?: " default user") .
             ". Please make sure your configuration/APIContext has credential information");
         }
-
         return $credObj;
     }
 

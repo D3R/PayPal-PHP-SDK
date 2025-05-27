@@ -22,7 +22,7 @@ class WebhookList extends PayPalModel
      * 
      * @return $this
      */
-    public function setWebhooks($webhooks): static
+    public function setWebhooks($webhooks)
     {
         $this->webhooks = $webhooks;
         return $this;
@@ -44,7 +44,7 @@ class WebhookList extends PayPalModel
      * @param \PayPal\Api\Webhook $webhook
      * @return $this
      */
-    public function addWebhook($webhook): static
+    public function addWebhook($webhook)
     {
         if (!$this->getWebhooks()) {
             return $this->setWebhooks([$webhook]);
@@ -61,7 +61,7 @@ class WebhookList extends PayPalModel
      * @param \PayPal\Api\Webhook $webhook
      * @return $this
      */
-    public function removeWebhook($webhook): static
+    public function removeWebhook($webhook)
     {
         return $this->setWebhooks(
             array_diff($this->getWebhooks(), [$webhook])

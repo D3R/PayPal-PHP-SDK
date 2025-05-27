@@ -14,16 +14,18 @@ class InvoiceAddressTest extends TestCase
 {
     /**
      * Gets Json String of Object Address
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"line1":"TestSample","line2":"TestSample","city":"TestSample","country_code":"TestSample","postal_code":"TestSample","state":"TestSample","phone":'. PhoneTest::getJson() . "}";
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return InvoiceAddress
      */
-    public static function getObject(): \PayPal\Api\InvoiceAddress
+    public static function getObject()
     {
         return new InvoiceAddress(self::getJson());
     }
@@ -31,8 +33,9 @@ class InvoiceAddressTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return InvoiceAddress
      */
-    public function testSerializationDeserialization(): \PayPal\Api\InvoiceAddress
+    public function testSerializationDeserialization()
     {
         $obj = new InvoiceAddress(self::getJson());
         $this->assertNotNull($obj);
@@ -51,7 +54,7 @@ class InvoiceAddressTest extends TestCase
      * @depends testSerializationDeserialization
      * @param InvoiceAddress $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getLine1(), "TestSample");
         $this->assertEquals($obj->getLine2(), "TestSample");

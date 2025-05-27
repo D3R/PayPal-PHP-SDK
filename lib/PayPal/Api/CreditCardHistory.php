@@ -24,7 +24,7 @@ class CreditCardHistory extends PayPalModel
      * @param \PayPal\Api\CreditCard[] $credit_cards
      * @return $this
      */
-    public function setCreditCards($credit_cards): static
+    public function setCreditCards($credit_cards)
     {
         $this->{"credit-cards"} = $credit_cards;
         return $this;
@@ -48,7 +48,7 @@ class CreditCardHistory extends PayPalModel
      * 
      * @return $this
      */
-    public function setCount($count): static
+    public function setCount($count)
     {
         $this->count = $count;
         return $this;
@@ -72,7 +72,7 @@ class CreditCardHistory extends PayPalModel
      * 
      * @return $this
      */
-    public function setNextId($next_id): static
+    public function setNextId($next_id)
     {
         $this->next_id = $next_id;
         return $this;

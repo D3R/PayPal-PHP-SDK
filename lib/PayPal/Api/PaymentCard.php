@@ -39,7 +39,7 @@ class PaymentCard extends PayPalModel
      * 
      * @return $this
      */
-    public function setId($id): static
+    public function setId($id)
     {
         $this->id = $id;
         return $this;
@@ -62,7 +62,7 @@ class PaymentCard extends PayPalModel
      * 
      * @return $this
      */
-    public function setNumber($number): static
+    public function setNumber($number)
     {
         $this->number = $number;
         return $this;
@@ -86,7 +86,7 @@ class PaymentCard extends PayPalModel
      * 
      * @return $this
      */
-    public function setType($type): static
+    public function setType($type)
     {
         $this->type = $type;
         return $this;
@@ -109,7 +109,7 @@ class PaymentCard extends PayPalModel
      * 
      * @return $this
      */
-    public function setExpireMonth($expire_month): static
+    public function setExpireMonth($expire_month)
     {
         $this->expire_month = $expire_month;
         return $this;
@@ -132,7 +132,7 @@ class PaymentCard extends PayPalModel
      * 
      * @return $this
      */
-    public function setExpireYear($expire_year): static
+    public function setExpireYear($expire_year)
     {
         $this->expire_year = $expire_year;
         return $this;
@@ -155,7 +155,7 @@ class PaymentCard extends PayPalModel
      * 
      * @return $this
      */
-    public function setStartMonth($start_month): static
+    public function setStartMonth($start_month)
     {
         $this->start_month = $start_month;
         return $this;
@@ -178,7 +178,7 @@ class PaymentCard extends PayPalModel
      * 
      * @return $this
      */
-    public function setStartYear($start_year): static
+    public function setStartYear($start_year)
     {
         $this->start_year = $start_year;
         return $this;
@@ -201,7 +201,7 @@ class PaymentCard extends PayPalModel
      * 
      * @return $this
      */
-    public function setCvv2($cvv2): static
+    public function setCvv2($cvv2)
     {
         $this->cvv2 = $cvv2;
         return $this;
@@ -224,7 +224,7 @@ class PaymentCard extends PayPalModel
      * 
      * @return $this
      */
-    public function setFirstName($first_name): static
+    public function setFirstName($first_name)
     {
         $this->first_name = $first_name;
         return $this;
@@ -247,7 +247,7 @@ class PaymentCard extends PayPalModel
      * 
      * @return $this
      */
-    public function setLastName($last_name): static
+    public function setLastName($last_name)
     {
         $this->last_name = $last_name;
         return $this;
@@ -270,7 +270,7 @@ class PaymentCard extends PayPalModel
      * 
      * @return $this
      */
-    public function setBillingCountry($billing_country): static
+    public function setBillingCountry($billing_country)
     {
         $this->billing_country = $billing_country;
         return $this;
@@ -293,7 +293,7 @@ class PaymentCard extends PayPalModel
      * 
      * @return $this
      */
-    public function setBillingAddress($billing_address): static
+    public function setBillingAddress($billing_address)
     {
         $this->billing_address = $billing_address;
         return $this;
@@ -316,7 +316,7 @@ class PaymentCard extends PayPalModel
      * 
      * @return $this
      */
-    public function setExternalCustomerId($external_customer_id): static
+    public function setExternalCustomerId($external_customer_id)
     {
         $this->external_customer_id = $external_customer_id;
         return $this;
@@ -340,7 +340,7 @@ class PaymentCard extends PayPalModel
      * 
      * @return $this
      */
-    public function setStatus($status): static
+    public function setStatus($status)
     {
         $this->status = $status;
         return $this;
@@ -364,7 +364,7 @@ class PaymentCard extends PayPalModel
      * 
      * @return $this
      */
-    public function setCardProductClass($card_product_class): static
+    public function setCardProductClass($card_product_class)
     {
         $this->card_product_class = $card_product_class;
         return $this;
@@ -387,7 +387,7 @@ class PaymentCard extends PayPalModel
      * 
      * @return $this
      */
-    public function setValidUntil($valid_until): static
+    public function setValidUntil($valid_until)
     {
         $this->valid_until = $valid_until;
         return $this;
@@ -410,7 +410,7 @@ class PaymentCard extends PayPalModel
      * 
      * @return $this
      */
-    public function setIssueNumber($issue_number): static
+    public function setIssueNumber($issue_number)
     {
         $this->issue_number = $issue_number;
         return $this;
@@ -433,7 +433,7 @@ class PaymentCard extends PayPalModel
      * 
      * @return $this
      */
-    public function setLinks($links): static
+    public function setLinks($links)
     {
         $this->links = $links;
         return $this;
@@ -455,7 +455,7 @@ class PaymentCard extends PayPalModel
      * @param \PayPal\Api\Links $links
      * @return $this
      */
-    public function addLink($links): static
+    public function addLink($links)
     {
         if (!$this->getLinks()) {
             return $this->setLinks([$links]);
@@ -472,7 +472,7 @@ class PaymentCard extends PayPalModel
      * @param \PayPal\Api\Links $links
      * @return $this
      */
-    public function removeLink($links): static
+    public function removeLink($links)
     {
         return $this->setLinks(
             array_diff($this->getLinks(), [$links])

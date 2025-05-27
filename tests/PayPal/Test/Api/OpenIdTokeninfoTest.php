@@ -18,7 +18,7 @@ class OpenIdTokeninfoTest extends TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp(): void
+    protected function setUp()
     {
         $this->token = new OpenIdTokeninfo();
         $this->token->setAccessToken("Access token")
@@ -33,14 +33,14 @@ class OpenIdTokeninfoTest extends TestCase
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown(): void
+    protected function tearDown()
     {
     }
 
     /**
      * @test
      */
-    public function testSerializationDeserialization(): void
+    public function testSerializationDeserialization()
     {
         $tokenCopy = new OpenIdTokeninfo();
         $tokenCopy->fromJson($this->token->toJson());
@@ -52,7 +52,7 @@ class OpenIdTokeninfoTest extends TestCase
      * @t1est
      * TODO: Fix Test. This test is disabled
      */
-    public function t1estOperations(): void
+    public function t1estOperations()
     {
         $clientId = 'AQkquBDf1zctJOWGKWUEtKXm6qVhueUEMvXO_-MCI4DQQ4-LWvkDLIN2fGsd';
         $clientSecret = 'ELtVxAjhT7cJimnz5-Nsx9k2reTKSVfErNQF-CmrwJgxRtylkGTKlU4RvrX';

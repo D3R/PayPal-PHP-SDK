@@ -17,8 +17,9 @@ class PayPalUserAgent
      *
      * @param string $sdkName
      * @param string $sdkVersion
+     * @return string
      */
-    public static function getValue($sdkName, $sdkVersion): string
+    public static function getValue($sdkName, $sdkVersion)
     {
         $featureList = [
             'platform-ver=' . PHP_VERSION,
@@ -30,19 +31,19 @@ class PayPalUserAgent
             $opensslVersion = explode(' ', OPENSSL_VERSION_TEXT);
             $featureList[] = 'crypto-lib-ver=' . $opensslVersion[1];
         }
-
         if (function_exists('curl_version')) {
             $curlVersion = curl_version();
             $featureList[] = 'curl=' . $curlVersion['version'];
         }
-
         return sprintf("PayPalSDK/%s %s (%s)", $sdkName, $sdkVersion, implode('; ', $featureList));
     }
 
     /**
      * Gets PHP Bit version
+     *
+     * @return int|string
      */
-    private static function _getPHPBit(): string
+    private static function _getPHPBit()
     {
         return match (PHP_INT_SIZE) {
             4 => '32',

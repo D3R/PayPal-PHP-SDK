@@ -24,7 +24,7 @@ class Phone extends PayPalModel
      * 
      * @return $this
      */
-    public function setCountryCode($country_code): static
+    public function setCountryCode($country_code)
     {
         $this->country_code = $country_code;
         return $this;
@@ -47,7 +47,7 @@ class Phone extends PayPalModel
      * 
      * @return $this
      */
-    public function setNationalNumber($national_number): static
+    public function setNationalNumber($national_number)
     {
         $this->national_number = $national_number;
         return $this;
@@ -70,7 +70,7 @@ class Phone extends PayPalModel
      * 
      * @return $this
      */
-    public function setExtension($extension): static
+    public function setExtension($extension)
     {
         $this->extension = $extension;
         return $this;

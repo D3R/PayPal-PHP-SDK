@@ -35,7 +35,7 @@ class CartBase extends PayPalModel
      * 
      * @return $this
      */
-    public function setReferenceId($reference_id): static
+    public function setReferenceId($reference_id)
     {
         $this->reference_id = $reference_id;
         return $this;
@@ -58,7 +58,7 @@ class CartBase extends PayPalModel
      * 
      * @return $this
      */
-    public function setAmount($amount): static
+    public function setAmount($amount)
     {
         $this->amount = $amount;
         return $this;
@@ -81,7 +81,7 @@ class CartBase extends PayPalModel
      * 
      * @return $this
      */
-    public function setPayee($payee): static
+    public function setPayee($payee)
     {
         $this->payee = $payee;
         return $this;
@@ -104,7 +104,7 @@ class CartBase extends PayPalModel
      * 
      * @return $this
      */
-    public function setDescription($description): static
+    public function setDescription($description)
     {
         $this->description = $description;
         return $this;
@@ -127,7 +127,7 @@ class CartBase extends PayPalModel
      * 
      * @return $this
      */
-    public function setNoteToPayee($note_to_payee): static
+    public function setNoteToPayee($note_to_payee)
     {
         $this->note_to_payee = $note_to_payee;
         return $this;
@@ -150,7 +150,7 @@ class CartBase extends PayPalModel
      * 
      * @return $this
      */
-    public function setCustom($custom): static
+    public function setCustom($custom)
     {
         $this->custom = $custom;
         return $this;
@@ -173,7 +173,7 @@ class CartBase extends PayPalModel
      * 
      * @return $this
      */
-    public function setInvoiceNumber($invoice_number): static
+    public function setInvoiceNumber($invoice_number)
     {
         $this->invoice_number = $invoice_number;
         return $this;
@@ -196,7 +196,7 @@ class CartBase extends PayPalModel
      * 
      * @return $this
      */
-    public function setPurchaseOrder($purchase_order): static
+    public function setPurchaseOrder($purchase_order)
     {
         $this->purchase_order = $purchase_order;
         return $this;
@@ -219,7 +219,7 @@ class CartBase extends PayPalModel
      * 
      * @return $this
      */
-    public function setSoftDescriptor($soft_descriptor): static
+    public function setSoftDescriptor($soft_descriptor)
     {
         $this->soft_descriptor = $soft_descriptor;
         return $this;
@@ -242,7 +242,7 @@ class CartBase extends PayPalModel
      * 
      * @return $this
      */
-    public function setSoftDescriptorCity($soft_descriptor_city): static
+    public function setSoftDescriptorCity($soft_descriptor_city)
     {
         $this->soft_descriptor_city = $soft_descriptor_city;
         return $this;
@@ -265,7 +265,7 @@ class CartBase extends PayPalModel
      * 
      * @return $this
      */
-    public function setPaymentOptions($payment_options): static
+    public function setPaymentOptions($payment_options)
     {
         $this->payment_options = $payment_options;
         return $this;
@@ -288,7 +288,7 @@ class CartBase extends PayPalModel
      * 
      * @return $this
      */
-    public function setItemList($item_list): static
+    public function setItemList($item_list)
     {
         $this->item_list = $item_list;
         return $this;
@@ -311,7 +311,7 @@ class CartBase extends PayPalModel
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setNotifyUrl($notify_url): static
+    public function setNotifyUrl($notify_url)
     {
         UrlValidator::validate($notify_url, "NotifyUrl");
         $this->notify_url = $notify_url;
@@ -335,7 +335,7 @@ class CartBase extends PayPalModel
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setOrderUrl($order_url): static
+    public function setOrderUrl($order_url)
     {
         UrlValidator::validate($order_url, "OrderUrl");
         $this->order_url = $order_url;
@@ -359,7 +359,7 @@ class CartBase extends PayPalModel
      *
      * @return $this
      */
-    public function setExternalFunding($external_funding): static
+    public function setExternalFunding($external_funding)
     {
         $this->external_funding = $external_funding;
         return $this;
@@ -381,7 +381,7 @@ class CartBase extends PayPalModel
      * @param \PayPal\Api\ExternalFunding $externalFunding
      * @return $this
      */
-    public function addExternalFunding($externalFunding): static
+    public function addExternalFunding($externalFunding)
     {
         if (!$this->getExternalFunding()) {
             return $this->setExternalFunding([$externalFunding]);
@@ -398,7 +398,7 @@ class CartBase extends PayPalModel
      * @param \PayPal\Api\ExternalFunding $externalFunding
      * @return $this
      */
-    public function removeExternalFunding($externalFunding): static
+    public function removeExternalFunding($externalFunding)
     {
         return $this->setExternalFunding(
             array_diff($this->getExternalFunding(), [$externalFunding])

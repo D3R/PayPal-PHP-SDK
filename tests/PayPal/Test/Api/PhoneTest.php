@@ -14,16 +14,18 @@ class PhoneTest extends TestCase
 {
     /**
      * Gets Json String of Object Phone
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"country_code":"TestSample","national_number":"TestSample","extension":"TestSample"}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return Phone
      */
-    public static function getObject(): \PayPal\Api\Phone
+    public static function getObject()
     {
         return new Phone(self::getJson());
     }
@@ -31,8 +33,9 @@ class PhoneTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return Phone
      */
-    public function testSerializationDeserialization(): \PayPal\Api\Phone
+    public function testSerializationDeserialization()
     {
         $obj = new Phone(self::getJson());
         $this->assertNotNull($obj);
@@ -47,7 +50,7 @@ class PhoneTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Phone $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getCountryCode(), "TestSample");
         $this->assertEquals($obj->getNationalNumber(), "TestSample");

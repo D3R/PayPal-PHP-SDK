@@ -24,7 +24,7 @@ class PaymentHistory extends PayPalModel
      * 
      * @return $this
      */
-    public function setPayments($payments): static
+    public function setPayments($payments)
     {
         $this->payments = $payments;
         return $this;
@@ -46,7 +46,7 @@ class PaymentHistory extends PayPalModel
      * @param \PayPal\Api\Payment $payment
      * @return $this
      */
-    public function addPayment($payment): static
+    public function addPayment($payment)
     {
         if (!$this->getPayments()) {
             return $this->setPayments([$payment]);
@@ -63,7 +63,7 @@ class PaymentHistory extends PayPalModel
      * @param \PayPal\Api\Payment $payment
      * @return $this
      */
-    public function removePayment($payment): static
+    public function removePayment($payment)
     {
         return $this->setPayments(
             array_diff($this->getPayments(), [$payment])
@@ -77,7 +77,7 @@ class PaymentHistory extends PayPalModel
      * 
      * @return $this
      */
-    public function setCount($count): static
+    public function setCount($count)
     {
         $this->count = $count;
         return $this;
@@ -100,7 +100,7 @@ class PaymentHistory extends PayPalModel
      * 
      * @return $this
      */
-    public function setNextId($next_id): static
+    public function setNextId($next_id)
     {
         $this->next_id = $next_id;
         return $this;

@@ -14,16 +14,20 @@ class CreditCardTokenTest extends TestCase
 {
     /**
      * Gets Json String of Object CreditCardToken
+     *
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"credit_card_id":"TestSample","payer_id":"TestSample","last4":"TestSample","type":"TestSample","expire_month":123,"expire_year":123}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     *
+     * @return CreditCardToken
      */
-    public static function getObject(): \PayPal\Api\CreditCardToken
+    public static function getObject()
     {
         return new CreditCardToken(self::getJson());
     }
@@ -31,8 +35,10 @@ class CreditCardTokenTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     *
+     * @return CreditCardToken
      */
-    public function testSerializationDeserialization(): \PayPal\Api\CreditCardToken
+    public function testSerializationDeserialization()
     {
         $obj = new CreditCardToken(self::getJson());
         $this->assertNotNull($obj);
@@ -50,7 +56,7 @@ class CreditCardTokenTest extends TestCase
      * @depends testSerializationDeserialization
      * @param CreditCardToken $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getCreditCardId(), "TestSample");
         $this->assertEquals($obj->getPayerId(), "TestSample");

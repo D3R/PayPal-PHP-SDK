@@ -40,7 +40,6 @@ abstract class AuthorizationCache
                 }
             }
         }
-
         return $tokens;
     }
 
@@ -54,7 +53,7 @@ abstract class AuthorizationCache
      * @param      $tokenExpiresIn
      * @throws \Exception
      */
-    public static function push($clientId, $accessToken, $tokenCreateTime, $tokenExpiresIn, $config = null): void
+    public static function push($clientId, $accessToken, $tokenCreateTime, $tokenExpiresIn, $config = null)
     {
         // Return if not enabled
         if (!self::isEnabled($config)) {
@@ -62,8 +61,10 @@ abstract class AuthorizationCache
         }
 
         $cachePath = self::cachePath($config);
-        if (!is_dir(dirname($cachePath)) && mkdir(dirname($cachePath), 0755, true) == false) {
-            throw new \Exception('Failed to create directory at ' . $cachePath);
+        if (!is_dir(dirname($cachePath))) {
+            if (mkdir(dirname($cachePath), 0755, true) == false) {
+                throw new \Exception("Failed to create directory at $cachePath");
+            }
         }
 
         // Reads all the existing persisted data
@@ -77,7 +78,6 @@ abstract class AuthorizationCache
                 'tokenExpiresIn' => $tokenExpiresIn
             ];
         }
-
         if (!file_put_contents($cachePath, json_encode($tokens))) {
             throw new \Exception("Failed to write cache");
         };
@@ -92,7 +92,7 @@ abstract class AuthorizationCache
     public static function isEnabled($config)
     {
         $value = self::getConfigValue('cache.enabled', $config);
-        return $value === null || $value === '' || $value === '0' ? false : ((trim($value) == true || trim($value) === 'true'));
+        return empty($value) ? false : ((trim($value) == true || trim($value) == 'true'));
     }
     
     /**
@@ -104,7 +104,7 @@ abstract class AuthorizationCache
     public static function cachePath($config)
     {
         $cachePath = self::getConfigValue('cache.FileName', $config);
-        return $cachePath === null || $cachePath === '' || $cachePath === '0' ? __DIR__ . self::$CACHE_PATH : $cachePath;
+        return empty($cachePath) ? __DIR__ . self::$CACHE_PATH : $cachePath;
     }
 
     /**
@@ -113,8 +113,9 @@ abstract class AuthorizationCache
      *
      * @param $key
      * @param $config
+     * @return null|string
      */
-    private static function getConfigValue(string $key, $config): ?string
+    private static function getConfigValue($key, $config)
     {
         $config = ($config && is_array($config)) ? $config : PayPalConfigManager::getInstance()->getConfigHashmap();
         return (array_key_exists($key, $config)) ? trim($config[$key]) : null;

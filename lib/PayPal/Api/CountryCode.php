@@ -22,7 +22,7 @@ class CountryCode extends PayPalModel
      *
      * @return $this
      */
-    public function setCountryCode($country_code): static
+    public function setCountryCode($country_code)
     {
         $this->country_code = $country_code;
         return $this;

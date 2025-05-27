@@ -23,7 +23,7 @@ class PayPalResourceModel extends PayPalModel implements IResource
      *
      * @return $this
      */
-    public function setLinks($links): static
+    public function setLinks($links)
     {
         $this->links = $links;
         return $this;
@@ -48,7 +48,6 @@ class PayPalResourceModel extends PayPalModel implements IResource
                 }
             }
         }
-
         return null;
     }
 
@@ -58,7 +57,7 @@ class PayPalResourceModel extends PayPalModel implements IResource
      * @param \PayPal\Api\Links $links
      * @return $this
      */
-    public function addLink($links): static
+    public function addLink($links)
     {
         if (!$this->getLinks()) {
             return $this->setLinks([$links]);
@@ -75,7 +74,7 @@ class PayPalResourceModel extends PayPalModel implements IResource
      * @param \PayPal\Api\Links $links
      * @return $this
      */
-    public function removeLink($links): static
+    public function removeLink($links)
     {
         return $this->setLinks(
             array_diff($this->getLinks(), [$links])
@@ -102,7 +101,7 @@ class PayPalResourceModel extends PayPalModel implements IResource
         $restCall = $restCall ?: new PayPalRestCall($apiContext);
 
         //Make the execution call
-        $json = $restCall->execute($url, $method, $handlers, $payLoad, $headers);
+        $json = $restCall->execute($handlers, $url, $method, $payLoad, $headers);
         return $json;
     }
 
@@ -111,8 +110,9 @@ class PayPalResourceModel extends PayPalModel implements IResource
      *
      * @param string|null $refreshToken
      * @param ApiContext $apiContext
+     * @return void
      */
-    public function updateAccessToken($refreshToken, $apiContext): void
+    public function updateAccessToken($refreshToken, $apiContext)
     {
         $apiContext = $apiContext ?: new ApiContext(self::$credential);
         $apiContext->getCredential()->updateAccessToken($apiContext->getConfig(), $refreshToken);

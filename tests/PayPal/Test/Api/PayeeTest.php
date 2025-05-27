@@ -14,16 +14,18 @@ class PayeeTest extends TestCase
 {
     /**
      * Gets Json String of Object Payee
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"email":"TestSample","merchant_id":"TestSample","first_name":"TestSample","last_name":"TestSample","account_number":"TestSample","phone":' .PhoneTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return Payee
      */
-    public static function getObject(): \PayPal\Api\Payee
+    public static function getObject()
     {
         return new Payee(self::getJson());
     }
@@ -31,8 +33,9 @@ class PayeeTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return Payee
      */
-    public function testSerializationDeserialization(): \PayPal\Api\Payee
+    public function testSerializationDeserialization()
     {
         $obj = new Payee(self::getJson());
         $this->assertNotNull($obj);
@@ -50,7 +53,7 @@ class PayeeTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Payee $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getEmail(), "TestSample");
         $this->assertEquals($obj->getMerchantId(), "TestSample");

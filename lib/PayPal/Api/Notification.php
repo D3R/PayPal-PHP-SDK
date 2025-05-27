@@ -25,7 +25,7 @@ class Notification extends PayPalModel
      * 
      * @return $this
      */
-    public function setSubject($subject): static
+    public function setSubject($subject)
     {
         $this->subject = $subject;
         return $this;
@@ -48,7 +48,7 @@ class Notification extends PayPalModel
      * 
      * @return $this
      */
-    public function setNote($note): static
+    public function setNote($note)
     {
         $this->note = $note;
         return $this;
@@ -71,7 +71,7 @@ class Notification extends PayPalModel
      * 
      * @return $this
      */
-    public function setSendToMerchant($send_to_merchant): static
+    public function setSendToMerchant($send_to_merchant)
     {
         $this->send_to_merchant = $send_to_merchant;
         return $this;
@@ -94,7 +94,7 @@ class Notification extends PayPalModel
      * 
      * @return $this
      */
-    public function setCcEmails($cc_emails): static
+    public function setCcEmails($cc_emails)
     {
         $this->cc_emails = $cc_emails;
         return $this;
@@ -116,7 +116,7 @@ class Notification extends PayPalModel
      * @param string $string
      * @return $this
      */
-    public function addCcEmail($string): static
+    public function addCcEmail($string)
     {
         if (!$this->getCcEmails()) {
             return $this->setCcEmails([$string]);
@@ -133,7 +133,7 @@ class Notification extends PayPalModel
      * @param string $string
      * @return $this
      */
-    public function removeCcEmail($string): static
+    public function removeCcEmail($string)
     {
         return $this->setCcEmails(
             array_diff($this->getCcEmails(), [$string])

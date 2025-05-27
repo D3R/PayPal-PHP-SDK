@@ -16,7 +16,7 @@ class OAuthTokenCredentialTest extends TestCase
     /**
      * @group integration
      */
-    public function testGetAccessToken(): void
+    public function testGetAccessToken()
     {
         $cred = new OAuthTokenCredential(Constants::CLIENT_ID, Constants::CLIENT_SECRET);
         $this->assertEquals(Constants::CLIENT_ID, $cred->getClientId());
@@ -34,14 +34,14 @@ class OAuthTokenCredentialTest extends TestCase
     /**
      * @group integration
      */
-    public function testInvalidCredentials(): void
+    public function testInvalidCredentials()
     {
         $this->setExpectedException(\PayPal\Exception\PayPalConnectionException::class);
         $cred = new OAuthTokenCredential('dummy', 'secret');
         $this->assertNull($cred->getAccessToken(PayPalConfigManager::getInstance()->getConfigHashmap()));
     }
 
-    public function testGetAccessTokenUnit(): void
+    public function testGetAccessTokenUnit()
     {
         $config = [
             'mode' => 'sandbox',
@@ -51,7 +51,7 @@ class OAuthTokenCredentialTest extends TestCase
         $cred = new OAuthTokenCredential('clientId', 'clientSecret');
 
         //{"clientId":{"clientId":"clientId","accessToken":"accessToken","tokenCreateTime":1421204091,"tokenExpiresIn":288000000}}
-        AuthorizationCache::push($config, 'clientId', $cred->encrypt('accessToken'), 1421204091, 288000000);
+        AuthorizationCache::push('clientId', $cred->encrypt('accessToken'), 1421204091, 288000000, $config);
 
         $apiContext = new ApiContext($cred);
         $apiContext->setConfig($config);
@@ -61,7 +61,7 @@ class OAuthTokenCredentialTest extends TestCase
         $this->assertNotNull($result);
     }
 
-    public function testGetAccessTokenUnitMock(): void
+    public function testGetAccessTokenUnitMock()
     {
         $config = [
             'mode' => 'sandbox'
@@ -82,7 +82,7 @@ class OAuthTokenCredentialTest extends TestCase
         $this->assertEquals('refresh_token_value', $response);
     }
 
-    public function testUpdateAccessTokenUnitMock(): void
+    public function testUpdateAccessTokenUnitMock()
     {
         $config = [
             'mode' => 'sandbox'
@@ -115,7 +115,7 @@ class OAuthTokenCredentialTest extends TestCase
      * @expectedException \PayPal\Exception\PayPalConnectionException
      * @expectedExceptionMessage Could not generate new Access token. Invalid response from server:
      */
-    public function testUpdateAccessTokenNullReturnUnitMock(): void
+    public function testUpdateAccessTokenNullReturnUnitMock()
     {
         $config = [
             'mode' => 'sandbox'

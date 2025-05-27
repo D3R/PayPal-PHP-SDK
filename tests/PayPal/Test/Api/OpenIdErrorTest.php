@@ -12,13 +12,14 @@ use PHPUnit\Framework\TestCase;
 class OpenIdErrorTest extends TestCase
 {
 
-    private \PayPal\Api\OpenIdError $error;
+    /** @var  OpenIdError */
+    private $error;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp(): void
+    protected function setUp()
     {
         $this->error = new OpenIdError();
         $this->error->setErrorDescription('error description')
@@ -30,14 +31,14 @@ class OpenIdErrorTest extends TestCase
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown(): void
+    protected function tearDown()
     {
     }
 
     /**
      * @test
      */
-    public function testSerializationDeserialization(): void
+    public function testSerializationDeserialization()
     {
         $errorCopy = new OpenIdError();
         $errorCopy->fromJson($this->error->toJson());

@@ -14,16 +14,18 @@ class BankAccountsListTest extends TestCase
 {
     /**
      * Gets Json String of Object BankAccountsList
+     * @return string
      */
-    public static function getJson(): string
+    public static function getJson()
     {
         return '{"bank-accounts":' .BankAccountTest::getJson() . ',"count":123,"next_id":"TestSample"}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
+     * @return BankAccountsList
      */
-    public static function getObject(): \PayPal\Api\BankAccountsList
+    public static function getObject()
     {
         return new BankAccountsList(self::getJson());
     }
@@ -31,8 +33,9 @@ class BankAccountsListTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
+     * @return BankAccountsList
      */
-    public function testSerializationDeserialization(): \PayPal\Api\BankAccountsList
+    public function testSerializationDeserialization()
     {
         $obj = new BankAccountsList(self::getJson());
         $this->assertNotNull($obj);
@@ -47,7 +50,7 @@ class BankAccountsListTest extends TestCase
      * @depends testSerializationDeserialization
      * @param BankAccountsList $obj
      */
-    public function testGetters($obj): void
+    public function testGetters($obj)
     {
         $this->assertEquals($obj->getBankAccounts(), BankAccountTest::getObject());
         $this->assertEquals($obj->getCount(), 123);
