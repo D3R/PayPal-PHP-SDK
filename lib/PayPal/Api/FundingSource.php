@@ -31,7 +31,7 @@ class FundingSource extends FundingInstrument
      * 
      * @return $this
      */
-    public function setFundingMode($funding_mode)
+    public function setFundingMode($funding_mode): static
     {
         $this->funding_mode = $funding_mode;
         return $this;
@@ -55,7 +55,7 @@ class FundingSource extends FundingInstrument
      * 
      * @return $this
      */
-    public function setFundingInstrumentType($funding_instrument_type)
+    public function setFundingInstrumentType($funding_instrument_type): static
     {
         $this->funding_instrument_type = $funding_instrument_type;
         return $this;
@@ -78,7 +78,7 @@ class FundingSource extends FundingInstrument
      * 
      * @return $this
      */
-    public function setSoftDescriptor($soft_descriptor)
+    public function setSoftDescriptor($soft_descriptor): static
     {
         $this->soft_descriptor = $soft_descriptor;
         return $this;
@@ -101,7 +101,7 @@ class FundingSource extends FundingInstrument
      * 
      * @return $this
      */
-    public function setAmount($amount)
+    public function setAmount($amount): static
     {
         $this->amount = $amount;
         return $this;
@@ -124,7 +124,7 @@ class FundingSource extends FundingInstrument
      * 
      * @return $this
      */
-    public function setNegativeBalanceAmount($negative_balance_amount)
+    public function setNegativeBalanceAmount($negative_balance_amount): static
     {
         $this->negative_balance_amount = $negative_balance_amount;
         return $this;
@@ -147,7 +147,7 @@ class FundingSource extends FundingInstrument
      * 
      * @return $this
      */
-    public function setLegalText($legal_text)
+    public function setLegalText($legal_text): static
     {
         $this->legal_text = $legal_text;
         return $this;
@@ -170,7 +170,7 @@ class FundingSource extends FundingInstrument
      * 
      * @return $this
      */
-    public function setFundingDetail($funding_detail)
+    public function setFundingDetail($funding_detail): static
     {
         $this->funding_detail = $funding_detail;
         return $this;
@@ -193,7 +193,7 @@ class FundingSource extends FundingInstrument
      * 
      * @return $this
      */
-    public function setAdditionalText($additional_text)
+    public function setAdditionalText($additional_text): static
     {
         $this->additional_text = $additional_text;
         return $this;
@@ -218,7 +218,7 @@ class FundingSource extends FundingInstrument
      *
      * @return $this
      */
-    public function setExtends($extends)
+    public function setExtends($extends): static
     {
         $this->extends = $extends;
         return $this;
@@ -243,7 +243,7 @@ class FundingSource extends FundingInstrument
      * 
      * @return $this
      */
-    public function setLinks($links)
+    public function setLinks($links): static
     {
         $this->links = $links;
         return $this;
@@ -265,13 +265,13 @@ class FundingSource extends FundingInstrument
      * @param \PayPal\Api\Links $links
      * @return $this
      */
-    public function addLink($links)
+    public function addLink($links): static
     {
         if (!$this->getLinks()) {
-            return $this->setLinks(array($links));
+            return $this->setLinks([$links]);
         } else {
             return $this->setLinks(
-                array_merge($this->getLinks(), array($links))
+                array_merge($this->getLinks(), [$links])
             );
         }
     }
@@ -282,10 +282,10 @@ class FundingSource extends FundingInstrument
      * @param \PayPal\Api\Links $links
      * @return $this
      */
-    public function removeLink($links)
+    public function removeLink($links): static
     {
         return $this->setLinks(
-            array_diff($this->getLinks(), array($links))
+            array_diff($this->getLinks(), [$links])
         );
     }
 

@@ -14,9 +14,9 @@ $captureId = "<your authorization id here>";
 // with a valid ApiContext (See bootstrap.php for more on `ApiContext`)
 try {
     $capture = Capture::get($captureId, $apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Get Captured Payment", "Capture", $captureId, null, $ex);
+    ResultPrinter::printError("Get Captured Payment", "Capture", $captureId, null, $exception);
     exit(1);
 }
 

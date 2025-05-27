@@ -35,7 +35,7 @@ class CreditCard extends PayPalResourceModel
      *
      * @return $this
      */
-    public function setId($id)
+    public function setId($id): static
     {
         $this->id = $id;
         return $this;
@@ -59,7 +59,7 @@ class CreditCard extends PayPalResourceModel
      *
      * @return $this
      */
-    public function setNumber($number)
+    public function setNumber($number): static
     {
         $this->number = $number;
         return $this;
@@ -82,7 +82,7 @@ class CreditCard extends PayPalResourceModel
      *
      * @return $this
      */
-    public function setType($type)
+    public function setType($type): static
     {
         $this->type = $type;
         return $this;
@@ -105,7 +105,7 @@ class CreditCard extends PayPalResourceModel
      *
      * @return $this
      */
-    public function setExpireMonth($expire_month)
+    public function setExpireMonth($expire_month): static
     {
         $this->expire_month = $expire_month;
         return $this;
@@ -128,7 +128,7 @@ class CreditCard extends PayPalResourceModel
      *
      * @return $this
      */
-    public function setExpireYear($expire_year)
+    public function setExpireYear($expire_year): static
     {
         $this->expire_year = $expire_year;
         return $this;
@@ -151,7 +151,7 @@ class CreditCard extends PayPalResourceModel
      *
      * @return $this
      */
-    public function setCvv2($cvv2)
+    public function setCvv2($cvv2): static
     {
         $this->cvv2 = $cvv2;
         return $this;
@@ -174,7 +174,7 @@ class CreditCard extends PayPalResourceModel
      *
      * @return $this
      */
-    public function setFirstName($first_name)
+    public function setFirstName($first_name): static
     {
         $this->first_name = $first_name;
         return $this;
@@ -197,7 +197,7 @@ class CreditCard extends PayPalResourceModel
      *
      * @return $this
      */
-    public function setLastName($last_name)
+    public function setLastName($last_name): static
     {
         $this->last_name = $last_name;
         return $this;
@@ -220,7 +220,7 @@ class CreditCard extends PayPalResourceModel
      *
      * @return $this
      */
-    public function setBillingAddress($billing_address)
+    public function setBillingAddress($billing_address): static
     {
         $this->billing_address = $billing_address;
         return $this;
@@ -243,7 +243,7 @@ class CreditCard extends PayPalResourceModel
      *
      * @return $this
      */
-    public function setExternalCustomerId($external_customer_id)
+    public function setExternalCustomerId($external_customer_id): static
     {
         $this->external_customer_id = $external_customer_id;
         return $this;
@@ -266,7 +266,7 @@ class CreditCard extends PayPalResourceModel
      *
      * @return $this
      */
-    public function setMerchantId($merchant_id)
+    public function setMerchantId($merchant_id): static
     {
         $this->merchant_id = $merchant_id;
         return $this;
@@ -290,7 +290,7 @@ class CreditCard extends PayPalResourceModel
      *
      * @return $this
      */
-    public function setPayerId($payer_id)
+    public function setPayerId($payer_id): static
     {
         $this->payer_id = $payer_id;
         return $this;
@@ -314,7 +314,7 @@ class CreditCard extends PayPalResourceModel
      *
      * @return $this
      */
-    public function setExternalCardId($external_card_id)
+    public function setExternalCardId($external_card_id): static
     {
         $this->external_card_id = $external_card_id;
         return $this;
@@ -338,7 +338,7 @@ class CreditCard extends PayPalResourceModel
      *
      * @return $this
      */
-    public function setState($state)
+    public function setState($state): static
     {
         $this->state = $state;
         return $this;
@@ -361,7 +361,7 @@ class CreditCard extends PayPalResourceModel
      *
      * @return $this
      */
-    public function setCreateTime($create_time)
+    public function setCreateTime($create_time): static
     {
         $this->create_time = $create_time;
         return $this;
@@ -384,7 +384,7 @@ class CreditCard extends PayPalResourceModel
      *
      * @return $this
      */
-    public function setUpdateTime($update_time)
+    public function setUpdateTime($update_time): static
     {
         $this->update_time = $update_time;
         return $this;
@@ -407,7 +407,7 @@ class CreditCard extends PayPalResourceModel
      *
      * @return $this
      */
-    public function setValidUntil($valid_until)
+    public function setValidUntil($valid_until): static
     {
         $this->valid_until = $valid_until;
         return $this;
@@ -428,9 +428,8 @@ class CreditCard extends PayPalResourceModel
      *
      * @param ApiContext     $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall   is the Rest Call Service that is used to make rest calls
-     * @return CreditCard
      */
-    public function create($apiContext = null, $restCall = null)
+    public function create($apiContext = null, $restCall = null): static
     {
         $payLoad = $this->toJSON();
         $json = self::executeCall(
@@ -448,17 +447,15 @@ class CreditCard extends PayPalResourceModel
     /**
      * Obtain the Credit Card resource for the given identifier.
      *
-     * @param string         $creditCardId
      * @param ApiContext     $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall   is the Rest Call Service that is used to make rest calls
-     * @return CreditCard
      */
-    public static function get($creditCardId, $apiContext = null, $restCall = null)
+    public static function get(string $creditCardId, $apiContext = null, $restCall = null): \PayPal\Api\CreditCard
     {
         ArgumentValidator::validate($creditCardId, 'creditCardId');
         $payLoad = "";
         $json = self::executeCall(
-            "/v1/vault/credit-cards/$creditCardId",
+            '/v1/vault/credit-cards/' . $creditCardId,
             "GET",
             $payLoad,
             null,
@@ -475,14 +472,13 @@ class CreditCard extends PayPalResourceModel
      *
      * @param ApiContext     $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall   is the Rest Call Service that is used to make rest calls
-     * @return bool
      */
-    public function delete($apiContext = null, $restCall = null)
+    public function delete($apiContext = null, $restCall = null): bool
     {
         ArgumentValidator::validate($this->getId(), "Id");
         $payLoad = "";
         self::executeCall(
-            "/v1/vault/credit-cards/{$this->getId()}",
+            '/v1/vault/credit-cards/' . $this->getId(),
             "DELETE",
             $payLoad,
             null,
@@ -498,15 +494,14 @@ class CreditCard extends PayPalResourceModel
      * @param PatchRequest   $patchRequest
      * @param ApiContext     $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall   is the Rest Call Service that is used to make rest calls
-     * @return CreditCard
      */
-    public function update($patchRequest, $apiContext = null, $restCall = null)
+    public function update($patchRequest, $apiContext = null, $restCall = null): static
     {
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($patchRequest, 'patch');
         $payload = $patchRequest->toJSON();
         $json = self::executeCall(
-            "/v1/vault/credit-cards/{$this->getId()}",
+            '/v1/vault/credit-cards/' . $this->getId(),
             "PATCH",
             $payload,
             null,
@@ -523,16 +518,16 @@ class CreditCard extends PayPalResourceModel
      * @param array          $params
      * @param ApiContext     $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall   is the Rest Call Service that is used to make rest calls
-     * @return CreditCardList
      */
-    public static function all($params, $apiContext = null, $restCall = null)
+    public static function all($params, $apiContext = null, $restCall = null): \PayPal\Api\CreditCardList
     {
         if (is_null($params)) {
-            $params = array();
+            $params = [];
         }
+
         ArgumentValidator::validate($params, 'params');
         $payLoad = "";
-        $allowedParams = array(
+        $allowedParams = [
             'page_size' => 1,
             'page' => 1,
             'start_time' => 1,
@@ -543,9 +538,9 @@ class CreditCard extends PayPalResourceModel
             'external_card_id' => 1,
             'external_customer_id' => 1,
             'total_required' => 1
-        );
+        ];
         $json = self::executeCall(
-            "/v1/vault/credit-cards" . "?" . http_build_query(array_intersect_key($params, $allowedParams)),
+            '/v1/vault/credit-cards?' . http_build_query(array_intersect_key($params, $allowedParams)),
             "GET",
             $payLoad,
             null,

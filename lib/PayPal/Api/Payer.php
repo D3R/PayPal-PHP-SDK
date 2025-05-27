@@ -29,7 +29,7 @@ class Payer extends PayPalModel
      * 
      * @return $this
      */
-    public function setPaymentMethod($payment_method)
+    public function setPaymentMethod($payment_method): static
     {
         $this->payment_method = $payment_method;
         return $this;
@@ -53,7 +53,7 @@ class Payer extends PayPalModel
      * 
      * @return $this
      */
-    public function setStatus($status)
+    public function setStatus($status): static
     {
         $this->status = $status;
         return $this;
@@ -77,7 +77,7 @@ class Payer extends PayPalModel
      * 
      * @return $this
      */
-    public function setAccountType($account_type)
+    public function setAccountType($account_type): static
     {
         $this->account_type = $account_type;
         return $this;
@@ -100,7 +100,7 @@ class Payer extends PayPalModel
      * 
      * @return $this
      */
-    public function setAccountAge($account_age)
+    public function setAccountAge($account_age): static
     {
         $this->account_age = $account_age;
         return $this;
@@ -123,7 +123,7 @@ class Payer extends PayPalModel
      * 
      * @return $this
      */
-    public function setFundingInstruments($funding_instruments)
+    public function setFundingInstruments($funding_instruments): static
     {
         $this->funding_instruments = $funding_instruments;
         return $this;
@@ -145,13 +145,13 @@ class Payer extends PayPalModel
      * @param \PayPal\Api\FundingInstrument $fundingInstrument
      * @return $this
      */
-    public function addFundingInstrument($fundingInstrument)
+    public function addFundingInstrument($fundingInstrument): static
     {
         if (!$this->getFundingInstruments()) {
-            return $this->setFundingInstruments(array($fundingInstrument));
+            return $this->setFundingInstruments([$fundingInstrument]);
         } else {
             return $this->setFundingInstruments(
-                array_merge($this->getFundingInstruments(), array($fundingInstrument))
+                array_merge($this->getFundingInstruments(), [$fundingInstrument])
             );
         }
     }
@@ -162,10 +162,10 @@ class Payer extends PayPalModel
      * @param \PayPal\Api\FundingInstrument $fundingInstrument
      * @return $this
      */
-    public function removeFundingInstrument($fundingInstrument)
+    public function removeFundingInstrument($fundingInstrument): static
     {
         return $this->setFundingInstruments(
-            array_diff($this->getFundingInstruments(), array($fundingInstrument))
+            array_diff($this->getFundingInstruments(), [$fundingInstrument])
         );
     }
 
@@ -176,7 +176,7 @@ class Payer extends PayPalModel
      * 
      * @return $this
      */
-    public function setFundingOptionId($funding_option_id)
+    public function setFundingOptionId($funding_option_id): static
     {
         $this->funding_option_id = $funding_option_id;
         return $this;
@@ -199,7 +199,7 @@ class Payer extends PayPalModel
      * 
      * @return $this
      */
-    public function setFundingOption($funding_option)
+    public function setFundingOption($funding_option): static
     {
         $this->funding_option = $funding_option;
         return $this;
@@ -223,7 +223,7 @@ class Payer extends PayPalModel
      * 
      * @return $this
      */
-    public function setExternalSelectedFundingInstrumentType($external_selected_funding_instrument_type)
+    public function setExternalSelectedFundingInstrumentType($external_selected_funding_instrument_type): static
     {
         $this->external_selected_funding_instrument_type = $external_selected_funding_instrument_type;
         return $this;
@@ -246,7 +246,7 @@ class Payer extends PayPalModel
      * 
      * @return $this
      */
-    public function setRelatedFundingOption($related_funding_option)
+    public function setRelatedFundingOption($related_funding_option): static
     {
         $this->related_funding_option = $related_funding_option;
         return $this;
@@ -269,7 +269,7 @@ class Payer extends PayPalModel
      * 
      * @return $this
      */
-    public function setPayerInfo($payer_info)
+    public function setPayerInfo($payer_info): static
     {
         $this->payer_info = $payer_info;
         return $this;

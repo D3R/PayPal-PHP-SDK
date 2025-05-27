@@ -30,7 +30,7 @@ class Participant extends PayPalModel
      * 
      * @return $this
      */
-    public function setEmail($email)
+    public function setEmail($email): static
     {
         $this->email = $email;
         return $this;
@@ -53,7 +53,7 @@ class Participant extends PayPalModel
      * 
      * @return $this
      */
-    public function setFirstName($first_name)
+    public function setFirstName($first_name): static
     {
         $this->first_name = $first_name;
         return $this;
@@ -76,7 +76,7 @@ class Participant extends PayPalModel
      * 
      * @return $this
      */
-    public function setLastName($last_name)
+    public function setLastName($last_name): static
     {
         $this->last_name = $last_name;
         return $this;
@@ -99,7 +99,7 @@ class Participant extends PayPalModel
      * 
      * @return $this
      */
-    public function setBusinessName($business_name)
+    public function setBusinessName($business_name): static
     {
         $this->business_name = $business_name;
         return $this;
@@ -122,7 +122,7 @@ class Participant extends PayPalModel
      * 
      * @return $this
      */
-    public function setPhone($phone)
+    public function setPhone($phone): static
     {
         $this->phone = $phone;
         return $this;
@@ -145,7 +145,7 @@ class Participant extends PayPalModel
      * 
      * @return $this
      */
-    public function setFax($fax)
+    public function setFax($fax): static
     {
         $this->fax = $fax;
         return $this;
@@ -168,7 +168,7 @@ class Participant extends PayPalModel
      * 
      * @return $this
      */
-    public function setWebsite($website)
+    public function setWebsite($website): static
     {
         $this->website = $website;
         return $this;
@@ -191,7 +191,7 @@ class Participant extends PayPalModel
      * 
      * @return $this
      */
-    public function setAdditionalInfo($additional_info)
+    public function setAdditionalInfo($additional_info): static
     {
         $this->additional_info = $additional_info;
         return $this;
@@ -214,7 +214,7 @@ class Participant extends PayPalModel
      * 
      * @return $this
      */
-    public function setAddress($address)
+    public function setAddress($address): static
     {
         $this->address = $address;
         return $this;

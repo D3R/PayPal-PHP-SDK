@@ -32,7 +32,7 @@ class Item extends PayPalModel
      * 
      * @return $this
      */
-    public function setSku($sku)
+    public function setSku($sku): static
     {
         $this->sku = $sku;
         return $this;
@@ -55,7 +55,7 @@ class Item extends PayPalModel
      * 
      * @return $this
      */
-    public function setName($name)
+    public function setName($name): static
     {
         $this->name = $name;
         return $this;
@@ -78,7 +78,7 @@ class Item extends PayPalModel
      * 
      * @return $this
      */
-    public function setDescription($description)
+    public function setDescription($description): static
     {
         $this->description = $description;
         return $this;
@@ -101,7 +101,7 @@ class Item extends PayPalModel
      * 
      * @return $this
      */
-    public function setQuantity($quantity)
+    public function setQuantity($quantity): static
     {
         $this->quantity = $quantity;
         return $this;
@@ -124,7 +124,7 @@ class Item extends PayPalModel
      * 
      * @return $this
      */
-    public function setPrice($price)
+    public function setPrice($price): static
     {
         NumericValidator::validate($price, "Price");
         $price = FormatConverter::formatToPrice($price, $this->getCurrency());
@@ -149,7 +149,7 @@ class Item extends PayPalModel
      * 
      * @return $this
      */
-    public function setCurrency($currency)
+    public function setCurrency($currency): static
     {
         $this->currency = $currency;
         return $this;
@@ -172,7 +172,7 @@ class Item extends PayPalModel
      * 
      * @return $this
      */
-    public function setTax($tax)
+    public function setTax($tax): static
     {
         NumericValidator::validate($tax, "Tax");
         $tax = FormatConverter::formatToPrice($tax, $this->getCurrency());
@@ -197,7 +197,7 @@ class Item extends PayPalModel
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setUrl($url)
+    public function setUrl($url): static
     {
         if ($url) {
             UrlValidator::validate($url, "Url");
@@ -225,7 +225,7 @@ class Item extends PayPalModel
      * 
      * @return $this
      */
-    public function setCategory($category)
+    public function setCategory($category): static
     {
         $this->category = $category;
         return $this;
@@ -248,7 +248,7 @@ class Item extends PayPalModel
      * 
      * @return $this
      */
-    public function setWeight($weight)
+    public function setWeight($weight): static
     {
         $this->weight = $weight;
         return $this;
@@ -271,7 +271,7 @@ class Item extends PayPalModel
      * 
      * @return $this
      */
-    public function setLength($length)
+    public function setLength($length): static
     {
         $this->length = $length;
         return $this;
@@ -294,7 +294,7 @@ class Item extends PayPalModel
      * 
      * @return $this
      */
-    public function setHeight($height)
+    public function setHeight($height): static
     {
         $this->height = $height;
         return $this;
@@ -317,7 +317,7 @@ class Item extends PayPalModel
      * 
      * @return $this
      */
-    public function setWidth($width)
+    public function setWidth($width): static
     {
         $this->width = $width;
         return $this;
@@ -340,7 +340,7 @@ class Item extends PayPalModel
      * 
      * @return $this
      */
-    public function setSupplementaryData($supplementary_data)
+    public function setSupplementaryData($supplementary_data): static
     {
         $this->supplementary_data = $supplementary_data;
         return $this;
@@ -362,13 +362,13 @@ class Item extends PayPalModel
      * @param \PayPal\Api\NameValuePair $nameValuePair
      * @return $this
      */
-    public function addSupplementaryData($nameValuePair)
+    public function addSupplementaryData($nameValuePair): static
     {
         if (!$this->getSupplementaryData()) {
-            return $this->setSupplementaryData(array($nameValuePair));
+            return $this->setSupplementaryData([$nameValuePair]);
         } else {
             return $this->setSupplementaryData(
-                array_merge($this->getSupplementaryData(), array($nameValuePair))
+                array_merge($this->getSupplementaryData(), [$nameValuePair])
             );
         }
     }
@@ -379,10 +379,10 @@ class Item extends PayPalModel
      * @param \PayPal\Api\NameValuePair $nameValuePair
      * @return $this
      */
-    public function removeSupplementaryData($nameValuePair)
+    public function removeSupplementaryData($nameValuePair): static
     {
         return $this->setSupplementaryData(
-            array_diff($this->getSupplementaryData(), array($nameValuePair))
+            array_diff($this->getSupplementaryData(), [$nameValuePair])
         );
     }
 
@@ -393,7 +393,7 @@ class Item extends PayPalModel
      * 
      * @return $this
      */
-    public function setPostbackData($postback_data)
+    public function setPostbackData($postback_data): static
     {
         $this->postback_data = $postback_data;
         return $this;
@@ -415,13 +415,13 @@ class Item extends PayPalModel
      * @param \PayPal\Api\NameValuePair $nameValuePair
      * @return $this
      */
-    public function addPostbackData($nameValuePair)
+    public function addPostbackData($nameValuePair): static
     {
         if (!$this->getPostbackData()) {
-            return $this->setPostbackData(array($nameValuePair));
+            return $this->setPostbackData([$nameValuePair]);
         } else {
             return $this->setPostbackData(
-                array_merge($this->getPostbackData(), array($nameValuePair))
+                array_merge($this->getPostbackData(), [$nameValuePair])
             );
         }
     }
@@ -432,10 +432,10 @@ class Item extends PayPalModel
      * @param \PayPal\Api\NameValuePair $nameValuePair
      * @return $this
      */
-    public function removePostbackData($nameValuePair)
+    public function removePostbackData($nameValuePair): static
     {
         return $this->setPostbackData(
-            array_diff($this->getPostbackData(), array($nameValuePair))
+            array_diff($this->getPostbackData(), [$nameValuePair])
         );
     }
 

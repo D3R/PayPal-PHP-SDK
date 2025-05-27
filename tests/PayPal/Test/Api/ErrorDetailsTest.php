@@ -14,20 +14,16 @@ class ErrorDetailsTest extends TestCase
 {
     /**
      * Gets Json String of Object ErrorDetails
-     *
-     * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"field":"TestSample","issue":"TestSample","purchase_unit_reference_id":"TestSample","code":"TestSample"}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
-     *
-     * @return ErrorDetails
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\ErrorDetails
     {
         return new ErrorDetails(self::getJson());
     }
@@ -35,10 +31,8 @@ class ErrorDetailsTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     *
-     * @return ErrorDetails
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\ErrorDetails
     {
         $obj = new ErrorDetails(self::getJson());
         $this->assertNotNull($obj);
@@ -54,7 +48,7 @@ class ErrorDetailsTest extends TestCase
      * @depends testSerializationDeserialization
      * @param ErrorDetails $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getField(), "TestSample");
         $this->assertEquals($obj->getIssue(), "TestSample");

@@ -14,18 +14,16 @@ class TaxTest extends TestCase
 {
     /**
      * Gets Json String of Object Tax
-     * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"id":"TestSample","name":"TestSample","percent":"12.34","amount":' .CurrencyTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
-     * @return Tax
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\Tax
     {
         return new Tax(self::getJson());
     }
@@ -33,9 +31,8 @@ class TaxTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     * @return Tax
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\Tax
     {
         $obj = new Tax(self::getJson());
         $this->assertNotNull($obj);
@@ -51,7 +48,7 @@ class TaxTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Tax $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getId(), "TestSample");
         $this->assertEquals($obj->getName(), "TestSample");

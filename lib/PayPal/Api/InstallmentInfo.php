@@ -25,7 +25,7 @@ class InstallmentInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setInstallmentId($installment_id)
+    public function setInstallmentId($installment_id): static
     {
         $this->installment_id = $installment_id;
         return $this;
@@ -49,7 +49,7 @@ class InstallmentInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setNetwork($network)
+    public function setNetwork($network): static
     {
         $this->network = $network;
         return $this;
@@ -72,7 +72,7 @@ class InstallmentInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setIssuer($issuer)
+    public function setIssuer($issuer): static
     {
         $this->issuer = $issuer;
         return $this;
@@ -95,7 +95,7 @@ class InstallmentInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setInstallmentOptions($installment_options)
+    public function setInstallmentOptions($installment_options): static
     {
         $this->installment_options = $installment_options;
         return $this;
@@ -117,13 +117,13 @@ class InstallmentInfo extends PayPalModel
      * @param \PayPal\Api\InstallmentOption $installmentOption
      * @return $this
      */
-    public function addInstallmentOption($installmentOption)
+    public function addInstallmentOption($installmentOption): static
     {
         if (!$this->getInstallmentOptions()) {
-            return $this->setInstallmentOptions(array($installmentOption));
+            return $this->setInstallmentOptions([$installmentOption]);
         } else {
             return $this->setInstallmentOptions(
-                array_merge($this->getInstallmentOptions(), array($installmentOption))
+                array_merge($this->getInstallmentOptions(), [$installmentOption])
             );
         }
     }
@@ -134,10 +134,10 @@ class InstallmentInfo extends PayPalModel
      * @param \PayPal\Api\InstallmentOption $installmentOption
      * @return $this
      */
-    public function removeInstallmentOption($installmentOption)
+    public function removeInstallmentOption($installmentOption): static
     {
         return $this->setInstallmentOptions(
-            array_diff($this->getInstallmentOptions(), array($installmentOption))
+            array_diff($this->getInstallmentOptions(), [$installmentOption])
         );
     }
 

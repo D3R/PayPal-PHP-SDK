@@ -26,7 +26,7 @@ class CarrierAccount extends PayPalModel
      * 
      * @return $this
      */
-    public function setId($id)
+    public function setId($id): static
     {
         $this->id = $id;
         return $this;
@@ -49,7 +49,7 @@ class CarrierAccount extends PayPalModel
      * 
      * @return $this
      */
-    public function setPhoneNumber($phone_number)
+    public function setPhoneNumber($phone_number): static
     {
         $this->phone_number = $phone_number;
         return $this;
@@ -72,7 +72,7 @@ class CarrierAccount extends PayPalModel
      * 
      * @return $this
      */
-    public function setExternalCustomerId($external_customer_id)
+    public function setExternalCustomerId($external_customer_id): static
     {
         $this->external_customer_id = $external_customer_id;
         return $this;
@@ -96,7 +96,7 @@ class CarrierAccount extends PayPalModel
      * 
      * @return $this
      */
-    public function setPhoneSource($phone_source)
+    public function setPhoneSource($phone_source): static
     {
         $this->phone_source = $phone_source;
         return $this;
@@ -119,7 +119,7 @@ class CarrierAccount extends PayPalModel
      * 
      * @return $this
      */
-    public function setCountryCode($country_code)
+    public function setCountryCode($country_code): static
     {
         $this->country_code = $country_code;
         return $this;

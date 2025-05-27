@@ -15,18 +15,14 @@ class PayPalConfigManager
 
     /**
      * Configuration Options
-     *
-     * @var array
      */
-    private $configs = array(
-    );
+    private float|int|array $configs = [
+    ];
 
     /**
      * Singleton Object
-     *
-     * @var $this
      */
-    private static $instance;
+    private static ?\PayPal\Core\PayPalConfigManager $instance = null;
 
     /**
      * Private Constructor
@@ -37,8 +33,9 @@ class PayPalConfigManager
             $configFile = constant('PP_CONFIG_PATH') . '/sdk_config.ini';
         } else {
             $configFile = implode(DIRECTORY_SEPARATOR,
-                array(dirname(__FILE__), "..", "config", "sdk_config.ini"));
+                [__DIR__, "..", "config", "sdk_config.ini"]);
         }
+
         if (file_exists($configFile)) {
             $this->addConfigFromIni($configFile);
         }
@@ -46,14 +43,13 @@ class PayPalConfigManager
 
     /**
      * Returns the singleton object
-     *
-     * @return $this
      */
-    public static function getInstance()
+    public static function getInstance(): \PayPal\Core\PayPalConfigManager
     {
         if (!isset(self::$instance)) {
             self::$instance = new self();
         }
+
         return self::$instance;
     }
 
@@ -63,11 +59,12 @@ class PayPalConfigManager
      * @param string $fileName
      * @return $this
      */
-    public function addConfigFromIni($fileName)
+    public function addConfigFromIni($fileName): static
     {
         if ($configs = parse_ini_file($fileName)) {
             $this->addConfigs($configs);
         }
+
         return $this;
     }
 
@@ -79,7 +76,7 @@ class PayPalConfigManager
      * @param array $configs
      * @return $this
      */
-    public function addConfigs($configs = array())
+    public function addConfigs($configs = []): static
     {
         $this->configs = $configs + $this->configs;
         return $this;
@@ -98,7 +95,7 @@ class PayPalConfigManager
         if (array_key_exists($searchKey, $this->configs)) {
             return $this->configs[$searchKey];
         } else {
-            $arr = array();
+            $arr = [];
             if ($searchKey !== '') {
                 foreach ($this->configs as $k => $v) {
                     if (strstr($k, $searchKey)) {
@@ -119,32 +116,31 @@ class PayPalConfigManager
      * all configured accounts
      *
      * @param string|null $userId
-     * @return array|string
      */
-    public function getIniPrefix($userId = null)
+    public function getIniPrefix($userId = null): array|string
     {
         if ($userId == null) {
-            $arr = array();
+            $arr = [];
             foreach ($this->configs as $key => $value) {
                 $pos = strpos($key, '.');
                 if (strstr($key, "acct")) {
                     $arr[] = substr($key, 0, $pos);
                 }
             }
+
             return array_unique($arr);
         } else {
-            $iniPrefix = array_search($userId, $this->configs);
+            $iniPrefix = array_search($userId, $this->configs, true);
             $pos = strpos($iniPrefix, '.');
-            $acct = substr($iniPrefix, 0, $pos);
 
-            return $acct;
+            return substr($iniPrefix, 0, $pos);
         }
     }
 
     /**
      * returns the config file hashmap
      */
-    public function getConfigHashmap()
+    public function getConfigHashmap(): array|float|int
     {
         return $this->configs;
     }

@@ -23,7 +23,7 @@ class VerifyWebhookSignatureResponse extends PayPalModel
      * 
      * @return $this
      */
-    public function setVerificationStatus($verification_status)
+    public function setVerificationStatus($verification_status): static
     {
         $this->verification_status = $verification_status;
         return $this;

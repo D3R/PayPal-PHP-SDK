@@ -25,7 +25,7 @@ class Cost extends PayPalModel
      * 
      * @return $this
      */
-    public function setPercent($percent)
+    public function setPercent($percent): static
     {
         NumericValidator::validate($percent, "Percent");
         $percent = FormatConverter::formatToNumber($percent);
@@ -50,7 +50,7 @@ class Cost extends PayPalModel
      * 
      * @return $this
      */
-    public function setAmount($amount)
+    public function setAmount($amount): static
     {
         $this->amount = $amount;
         return $this;

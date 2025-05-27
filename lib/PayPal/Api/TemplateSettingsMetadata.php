@@ -22,7 +22,7 @@ class TemplateSettingsMetadata extends PayPalModel
      * 
      * @return $this
      */
-    public function setHidden($hidden)
+    public function setHidden($hidden): static
     {
         $this->hidden = $hidden;
         return $this;

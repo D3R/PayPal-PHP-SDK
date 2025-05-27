@@ -11,14 +11,13 @@ use PHPUnit\Framework\TestCase;
 class OpenIdAddressTest extends TestCase
 {
 
-    /** @var  OpenIdAddress */
-    private $addr;
+    private \PayPal\Api\OpenIdAddress $addr;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->addr = self::getTestData();
     }
@@ -27,12 +26,12 @@ class OpenIdAddressTest extends TestCase
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
 
     }
 
-    public static function getTestData()
+    public static function getTestData(): \PayPal\Api\OpenIdAddress
     {
         $addr = new OpenIdAddress();
         $addr->setCountry("US")->setLocality("San Jose")
@@ -44,7 +43,7 @@ class OpenIdAddressTest extends TestCase
     /**
      * @test
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): void
     {
         $addrCopy = new OpenIdAddress();
         $addrCopy->fromJson($this->addr->toJson());

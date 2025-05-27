@@ -35,7 +35,7 @@ class Plan extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setId($id)
+    public function setId($id): static
     {
         $this->id = $id;
         return $this;
@@ -58,7 +58,7 @@ class Plan extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setName($name)
+    public function setName($name): static
     {
         $this->name = $name;
         return $this;
@@ -81,7 +81,7 @@ class Plan extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setDescription($description)
+    public function setDescription($description): static
     {
         $this->description = $description;
         return $this;
@@ -104,7 +104,7 @@ class Plan extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setType($type)
+    public function setType($type): static
     {
         $this->type = $type;
         return $this;
@@ -127,7 +127,7 @@ class Plan extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setState($state)
+    public function setState($state): static
     {
         $this->state = $state;
         return $this;
@@ -150,7 +150,7 @@ class Plan extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setCreateTime($create_time)
+    public function setCreateTime($create_time): static
     {
         $this->create_time = $create_time;
         return $this;
@@ -173,7 +173,7 @@ class Plan extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setUpdateTime($update_time)
+    public function setUpdateTime($update_time): static
     {
         $this->update_time = $update_time;
         return $this;
@@ -196,7 +196,7 @@ class Plan extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setPaymentDefinitions($payment_definitions)
+    public function setPaymentDefinitions($payment_definitions): static
     {
         $this->payment_definitions = $payment_definitions;
         return $this;
@@ -218,13 +218,13 @@ class Plan extends PayPalResourceModel
      * @param \PayPal\Api\PaymentDefinition $paymentDefinition
      * @return $this
      */
-    public function addPaymentDefinition($paymentDefinition)
+    public function addPaymentDefinition($paymentDefinition): static
     {
         if (!$this->getPaymentDefinitions()) {
-            return $this->setPaymentDefinitions(array($paymentDefinition));
+            return $this->setPaymentDefinitions([$paymentDefinition]);
         } else {
             return $this->setPaymentDefinitions(
-                array_merge($this->getPaymentDefinitions(), array($paymentDefinition))
+                array_merge($this->getPaymentDefinitions(), [$paymentDefinition])
             );
         }
     }
@@ -235,10 +235,10 @@ class Plan extends PayPalResourceModel
      * @param \PayPal\Api\PaymentDefinition $paymentDefinition
      * @return $this
      */
-    public function removePaymentDefinition($paymentDefinition)
+    public function removePaymentDefinition($paymentDefinition): static
     {
         return $this->setPaymentDefinitions(
-            array_diff($this->getPaymentDefinitions(), array($paymentDefinition))
+            array_diff($this->getPaymentDefinitions(), [$paymentDefinition])
         );
     }
 
@@ -249,7 +249,7 @@ class Plan extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setTerms($terms)
+    public function setTerms($terms): static
     {
         $this->terms = $terms;
         return $this;
@@ -271,13 +271,13 @@ class Plan extends PayPalResourceModel
      * @param \PayPal\Api\Terms $terms
      * @return $this
      */
-    public function addTerm($terms)
+    public function addTerm($terms): static
     {
         if (!$this->getTerms()) {
-            return $this->setTerms(array($terms));
+            return $this->setTerms([$terms]);
         } else {
             return $this->setTerms(
-                array_merge($this->getTerms(), array($terms))
+                array_merge($this->getTerms(), [$terms])
             );
         }
     }
@@ -288,10 +288,10 @@ class Plan extends PayPalResourceModel
      * @param \PayPal\Api\Terms $terms
      * @return $this
      */
-    public function removeTerm($terms)
+    public function removeTerm($terms): static
     {
         return $this->setTerms(
-            array_diff($this->getTerms(), array($terms))
+            array_diff($this->getTerms(), [$terms])
         );
     }
 
@@ -302,7 +302,7 @@ class Plan extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setMerchantPreferences($merchant_preferences)
+    public function setMerchantPreferences($merchant_preferences): static
     {
         $this->merchant_preferences = $merchant_preferences;
         return $this;
@@ -321,17 +321,15 @@ class Plan extends PayPalResourceModel
     /**
      * Retrieve the details for a particular billing plan by passing the billing plan ID to the request URI.
      *
-     * @param string $planId
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return Plan
      */
-    public static function get($planId, $apiContext = null, $restCall = null)
+    public static function get(string $planId, $apiContext = null, $restCall = null): \PayPal\Api\Plan
     {
         ArgumentValidator::validate($planId, 'planId');
         $payLoad = "";
         $json = self::executeCall(
-            "/v1/payments/billing-plans/$planId",
+            '/v1/payments/billing-plans/' . $planId,
             "GET",
             $payLoad,
             null,
@@ -348,9 +346,8 @@ class Plan extends PayPalResourceModel
      *
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return Plan
      */
-    public function create($apiContext = null, $restCall = null)
+    public function create($apiContext = null, $restCall = null): static
     {
         $payLoad = $this->toJSON();
         $json = self::executeCall(
@@ -371,15 +368,14 @@ class Plan extends PayPalResourceModel
      * @param PatchRequest $patchRequest
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return bool
      */
-    public function update($patchRequest, $apiContext = null, $restCall = null)
+    public function update($patchRequest, $apiContext = null, $restCall = null): bool
     {
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($patchRequest, 'patchRequest');
         $payLoad = $patchRequest->toJSON();
         self::executeCall(
-            "/v1/payments/billing-plans/{$this->getId()}",
+            '/v1/payments/billing-plans/' . $this->getId(),
             "PATCH",
             $payLoad,
             null,
@@ -394,9 +390,8 @@ class Plan extends PayPalResourceModel
      *
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return bool
      */
-    public function delete($apiContext = null, $restCall = null)
+    public function delete($apiContext = null, $restCall = null): bool
     {
         ArgumentValidator::validate($this->getId(), "Id");
         $patchRequest = new PatchRequest();
@@ -417,20 +412,19 @@ class Plan extends PayPalResourceModel
      * @param array $params
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return PlanList
      */
-    public static function all($params, $apiContext = null, $restCall = null)
+    public static function all($params, $apiContext = null, $restCall = null): \PayPal\Api\PlanList
     {
         ArgumentValidator::validate($params, 'params');
         $payLoad = "";
-        $allowedParams = array(
+        $allowedParams = [
             'page_size' => 1,
             'status' => 1,
             'page' => 1,
             'total_required' => 1
-        );
+        ];
         $json = self::executeCall(
-            "/v1/payments/billing-plans/" . "?" . http_build_query(array_intersect_key($params, $allowedParams)),
+            '/v1/payments/billing-plans/?' . http_build_query(array_intersect_key($params, $allowedParams)),
             "GET",
             $payLoad,
             null,

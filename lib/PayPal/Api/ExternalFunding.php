@@ -27,7 +27,7 @@ class ExternalFunding extends PayPalModel
      * 
      * @return $this
      */
-    public function setReferenceId($reference_id)
+    public function setReferenceId($reference_id): static
     {
         $this->reference_id = $reference_id;
         return $this;
@@ -50,7 +50,7 @@ class ExternalFunding extends PayPalModel
      * 
      * @return $this
      */
-    public function setCode($code)
+    public function setCode($code): static
     {
         $this->code = $code;
         return $this;
@@ -73,7 +73,7 @@ class ExternalFunding extends PayPalModel
      * 
      * @return $this
      */
-    public function setFundingAccountId($funding_account_id)
+    public function setFundingAccountId($funding_account_id): static
     {
         $this->funding_account_id = $funding_account_id;
         return $this;
@@ -96,7 +96,7 @@ class ExternalFunding extends PayPalModel
      * 
      * @return $this
      */
-    public function setDisplayText($display_text)
+    public function setDisplayText($display_text): static
     {
         $this->display_text = $display_text;
         return $this;
@@ -119,7 +119,7 @@ class ExternalFunding extends PayPalModel
      * 
      * @return $this
      */
-    public function setAmount($amount)
+    public function setAmount($amount): static
     {
         $this->amount = $amount;
         return $this;
@@ -143,7 +143,7 @@ class ExternalFunding extends PayPalModel
      *
      * @return $this
      */
-    public function setFundingInstruction($funding_instruction)
+    public function setFundingInstruction($funding_instruction): static
     {
         $this->funding_instruction = $funding_instruction;
         return $this;

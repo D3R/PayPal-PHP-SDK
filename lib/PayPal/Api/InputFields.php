@@ -24,7 +24,7 @@ class InputFields extends PayPalModel
      * 
      * @return $this
      */
-    public function setAllowNote($allow_note)
+    public function setAllowNote($allow_note): static
     {
         $this->allow_note = $allow_note;
         return $this;
@@ -47,7 +47,7 @@ class InputFields extends PayPalModel
      * 
      * @return $this
      */
-    public function setNoShipping($no_shipping)
+    public function setNoShipping($no_shipping): static
     {
         $this->no_shipping = $no_shipping;
         return $this;
@@ -70,7 +70,7 @@ class InputFields extends PayPalModel
      * 
      * @return $this
      */
-    public function setAddressOverride($address_override)
+    public function setAddressOverride($address_override): static
     {
         $this->address_override = $address_override;
         return $this;

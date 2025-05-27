@@ -24,7 +24,7 @@ class FileAttachment extends PayPalModel
      * 
      * @return $this
      */
-    public function setName($name)
+    public function setName($name): static
     {
         $this->name = $name;
         return $this;
@@ -47,7 +47,7 @@ class FileAttachment extends PayPalModel
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setUrl($url)
+    public function setUrl($url): static
     {
         UrlValidator::validate($url, "Url");
         $this->url = $url;

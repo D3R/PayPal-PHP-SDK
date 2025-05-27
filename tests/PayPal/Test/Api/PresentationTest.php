@@ -14,18 +14,16 @@ class PresentationTest extends TestCase
 {
     /**
      * Gets Json String of Object Presentation
-     * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"brand_name":"TestSample","logo_image":"TestSample","locale_code":"TestSample","return_url_label":"TestSample","note_to_seller_label":"TestSample"}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
-     * @return Presentation
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\Presentation
     {
         return new Presentation(self::getJson());
     }
@@ -33,9 +31,8 @@ class PresentationTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     * @return Presentation
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\Presentation
     {
         $obj = new Presentation(self::getJson());
         $this->assertNotNull($obj);
@@ -52,7 +49,7 @@ class PresentationTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Presentation $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getBrandName(), "TestSample");
         $this->assertEquals($obj->getLogoImage(), "TestSample");

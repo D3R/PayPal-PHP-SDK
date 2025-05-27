@@ -7,7 +7,7 @@
 // We will be re-using the sample code to get a web profile. GetWebProfile.php will
 // create a new web profileId for sample, and return the web profile object.
 /** @var \PayPal\Api\WebProfile $webProfile */
-$webProfile = require 'GetWebProfile.php';
+$webProfile = require __DIR__ . '/GetWebProfile.php';
 
 
 // Updated the logo image of presentation object in a given web profile.
@@ -20,9 +20,9 @@ try {
         // object
         $updatedWebProfile = \PayPal\Api\WebProfile::get($webProfile->getId(), $apiContext);
     }
-} catch (\Exception $ex) {
+} catch (\Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Updated Web Profile", "Web Profile", $webProfile->getId(), $webProfile, $ex);
+    ResultPrinter::printError("Updated Web Profile", "Web Profile", $webProfile->getId(), $webProfile, $exception);
     exit(1);
 }
 

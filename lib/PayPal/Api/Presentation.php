@@ -26,7 +26,7 @@ class Presentation extends PayPalModel
      * 
      * @return $this
      */
-    public function setBrandName($brand_name)
+    public function setBrandName($brand_name): static
     {
         $this->brand_name = $brand_name;
         return $this;
@@ -49,7 +49,7 @@ class Presentation extends PayPalModel
      * 
      * @return $this
      */
-    public function setLogoImage($logo_image)
+    public function setLogoImage($logo_image): static
     {
         $this->logo_image = $logo_image;
         return $this;
@@ -72,7 +72,7 @@ class Presentation extends PayPalModel
      * 
      * @return $this
      */
-    public function setLocaleCode($locale_code)
+    public function setLocaleCode($locale_code): static
     {
         $this->locale_code = $locale_code;
         return $this;
@@ -95,7 +95,7 @@ class Presentation extends PayPalModel
      * 
      * @return $this
      */
-    public function setReturnUrlLabel($return_url_label)
+    public function setReturnUrlLabel($return_url_label): static
     {
         $this->return_url_label = $return_url_label;
         return $this;
@@ -118,7 +118,7 @@ class Presentation extends PayPalModel
      * 
      * @return $this
      */
-    public function setNoteToSellerLabel($note_to_seller_label)
+    public function setNoteToSellerLabel($note_to_seller_label): static
     {
         $this->note_to_seller_label = $note_to_seller_label;
         return $this;

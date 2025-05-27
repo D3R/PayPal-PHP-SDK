@@ -14,18 +14,16 @@ class ExternalFundingTest extends TestCase
 {
     /**
      * Gets Json String of Object ExternalFunding
-     * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"reference_id":"TestSample","code":"TestSample","funding_account_id":"TestSample","display_text":"TestSample","amount":' .AmountTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
-     * @return ExternalFunding
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\ExternalFunding
     {
         return new ExternalFunding(self::getJson());
     }
@@ -33,9 +31,8 @@ class ExternalFundingTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     * @return ExternalFunding
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\ExternalFunding
     {
         $obj = new ExternalFunding(self::getJson());
         $this->assertNotNull($obj);
@@ -52,7 +49,7 @@ class ExternalFundingTest extends TestCase
      * @depends testSerializationDeserialization
      * @param ExternalFunding $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getReferenceId(), "TestSample");
         $this->assertEquals($obj->getCode(), "TestSample");

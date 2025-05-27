@@ -26,7 +26,7 @@ class FmfDetails extends PayPalModel
      * 
      * @return $this
      */
-    public function setFilterType($filter_type)
+    public function setFilterType($filter_type): static
     {
         $this->filter_type = $filter_type;
         return $this;
@@ -50,7 +50,7 @@ class FmfDetails extends PayPalModel
      * 
      * @return $this
      */
-    public function setFilterId($filter_id)
+    public function setFilterId($filter_id): static
     {
         $this->filter_id = $filter_id;
         return $this;
@@ -73,7 +73,7 @@ class FmfDetails extends PayPalModel
      * 
      * @return $this
      */
-    public function setName($name)
+    public function setName($name): static
     {
         $this->name = $name;
         return $this;
@@ -96,7 +96,7 @@ class FmfDetails extends PayPalModel
      * 
      * @return $this
      */
-    public function setDescription($description)
+    public function setDescription($description): static
     {
         $this->description = $description;
         return $this;

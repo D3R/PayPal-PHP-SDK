@@ -32,7 +32,7 @@ class Metadata extends PayPalModel
      * 
      * @return $this
      */
-    public function setCreatedDate($created_date)
+    public function setCreatedDate($created_date): static
     {
         $this->created_date = $created_date;
         return $this;
@@ -55,7 +55,7 @@ class Metadata extends PayPalModel
      * 
      * @return $this
      */
-    public function setCreatedBy($created_by)
+    public function setCreatedBy($created_by): static
     {
         $this->created_by = $created_by;
         return $this;
@@ -78,7 +78,7 @@ class Metadata extends PayPalModel
      * 
      * @return $this
      */
-    public function setCancelledDate($cancelled_date)
+    public function setCancelledDate($cancelled_date): static
     {
         $this->cancelled_date = $cancelled_date;
         return $this;
@@ -101,7 +101,7 @@ class Metadata extends PayPalModel
      * 
      * @return $this
      */
-    public function setCancelledBy($cancelled_by)
+    public function setCancelledBy($cancelled_by): static
     {
         $this->cancelled_by = $cancelled_by;
         return $this;
@@ -124,7 +124,7 @@ class Metadata extends PayPalModel
      * 
      * @return $this
      */
-    public function setLastUpdatedDate($last_updated_date)
+    public function setLastUpdatedDate($last_updated_date): static
     {
         $this->last_updated_date = $last_updated_date;
         return $this;
@@ -147,7 +147,7 @@ class Metadata extends PayPalModel
      * 
      * @return $this
      */
-    public function setLastUpdatedBy($last_updated_by)
+    public function setLastUpdatedBy($last_updated_by): static
     {
         $this->last_updated_by = $last_updated_by;
         return $this;
@@ -170,7 +170,7 @@ class Metadata extends PayPalModel
      * 
      * @return $this
      */
-    public function setFirstSentDate($first_sent_date)
+    public function setFirstSentDate($first_sent_date): static
     {
         $this->first_sent_date = $first_sent_date;
         return $this;
@@ -193,7 +193,7 @@ class Metadata extends PayPalModel
      * 
      * @return $this
      */
-    public function setLastSentDate($last_sent_date)
+    public function setLastSentDate($last_sent_date): static
     {
         $this->last_sent_date = $last_sent_date;
         return $this;
@@ -216,7 +216,7 @@ class Metadata extends PayPalModel
      * 
      * @return $this
      */
-    public function setLastSentBy($last_sent_by)
+    public function setLastSentBy($last_sent_by): static
     {
         $this->last_sent_by = $last_sent_by;
         return $this;
@@ -239,7 +239,7 @@ class Metadata extends PayPalModel
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setPayerViewUrl($payer_view_url)
+    public function setPayerViewUrl($payer_view_url): static
     {
         UrlValidator::validate($payer_view_url, "PayerViewUrl");
         $this->payer_view_url = $payer_view_url;

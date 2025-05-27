@@ -23,7 +23,7 @@ class InvoiceSearchResponse extends PayPalModel
      * 
      * @return $this
      */
-    public function setTotalCount($total_count)
+    public function setTotalCount($total_count): static
     {
         $this->total_count = $total_count;
         return $this;
@@ -46,7 +46,7 @@ class InvoiceSearchResponse extends PayPalModel
      * 
      * @return $this
      */
-    public function setInvoices($invoices)
+    public function setInvoices($invoices): static
     {
         $this->invoices = $invoices;
         return $this;
@@ -68,13 +68,13 @@ class InvoiceSearchResponse extends PayPalModel
      * @param \PayPal\Api\Invoice $invoice
      * @return $this
      */
-    public function addInvoice($invoice)
+    public function addInvoice($invoice): static
     {
         if (!$this->getInvoices()) {
-            return $this->setInvoices(array($invoice));
+            return $this->setInvoices([$invoice]);
         } else {
             return $this->setInvoices(
-                array_merge($this->getInvoices(), array($invoice))
+                array_merge($this->getInvoices(), [$invoice])
             );
         }
     }
@@ -85,10 +85,10 @@ class InvoiceSearchResponse extends PayPalModel
      * @param \PayPal\Api\Invoice $invoice
      * @return $this
      */
-    public function removeInvoice($invoice)
+    public function removeInvoice($invoice): static
     {
         return $this->setInvoices(
-            array_diff($this->getInvoices(), array($invoice))
+            array_diff($this->getInvoices(), [$invoice])
         );
     }
 

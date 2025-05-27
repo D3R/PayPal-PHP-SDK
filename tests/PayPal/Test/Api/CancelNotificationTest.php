@@ -14,18 +14,16 @@ class CancelNotificationTest extends TestCase
 {
     /**
      * Gets Json String of Object CancelNotification
-     * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"subject":"TestSample","note":"TestSample","send_to_merchant":true,"send_to_payer":true}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
-     * @return CancelNotification
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\CancelNotification
     {
         return new CancelNotification(self::getJson());
     }
@@ -33,9 +31,8 @@ class CancelNotificationTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     * @return CancelNotification
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\CancelNotification
     {
         $obj = new CancelNotification(self::getJson());
         $this->assertNotNull($obj);
@@ -51,7 +48,7 @@ class CancelNotificationTest extends TestCase
      * @depends testSerializationDeserialization
      * @param CancelNotification $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getSubject(), "TestSample");
         $this->assertEquals($obj->getNote(), "TestSample");

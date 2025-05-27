@@ -24,7 +24,7 @@ class RedirectUrls extends PayPalModel
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setReturnUrl($return_url)
+    public function setReturnUrl($return_url): static
     {
         UrlValidator::validate($return_url, "ReturnUrl");
         $this->return_url = $return_url;
@@ -48,7 +48,7 @@ class RedirectUrls extends PayPalModel
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setCancelUrl($cancel_url)
+    public function setCancelUrl($cancel_url): static
     {
         UrlValidator::validate($cancel_url, "CancelUrl");
         $this->cancel_url = $cancel_url;

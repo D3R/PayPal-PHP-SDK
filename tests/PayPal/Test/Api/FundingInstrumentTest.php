@@ -14,18 +14,16 @@ class FundingInstrumentTest extends TestCase
 {
     /**
      * Gets Json String of Object FundingInstrument
-     * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"credit_card":' . CreditCardTest::getJson() . ',"credit_card_token":' . CreditCardTokenTest::getJson() . ',"payment_card":' . PaymentCardTest::getJson() . ',"bank_account":' . ExtendedBankAccountTest::getJson() . ',"bank_account_token":' . BankTokenTest::getJson() . ',"credit":' . CreditTest::getJson() . ',"incentive":' . IncentiveTest::getJson() . ',"external_funding":' . ExternalFundingTest::getJson() . ',"carrier_account_token":' . CarrierAccountTokenTest::getJson() . ',"carrier_account":' . CarrierAccountTest::getJson() . ',"private_label_card":' . PrivateLabelCardTest::getJson() . ',"billing":' . BillingTest::getJson() . ',"alternate_payment":' . AlternatePaymentTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
-     * @return FundingInstrument
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\FundingInstrument
     {
         return new FundingInstrument(self::getJson());
     }
@@ -33,9 +31,8 @@ class FundingInstrumentTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     * @return FundingInstrument
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\FundingInstrument
     {
         $obj = new FundingInstrument(self::getJson());
         $this->assertNotNull($obj);
@@ -59,7 +56,7 @@ class FundingInstrumentTest extends TestCase
      * @depends testSerializationDeserialization
      * @param FundingInstrument $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getCreditCard(), CreditCardTest::getObject());
         $this->assertEquals($obj->getCreditCardToken(), CreditCardTokenTest::getObject());

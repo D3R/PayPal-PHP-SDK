@@ -15,18 +15,16 @@ class WebhookEventListTest extends TestCase
 {
     /**
      * Gets Json String of Object WebhookEventList
-     * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"events":' .WebhookEventTest::getJson() . ',"count":123,"links":' .LinksTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
-     * @return WebhookEventList
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\WebhookEventList
     {
         return new WebhookEventList(self::getJson());
     }
@@ -34,9 +32,8 @@ class WebhookEventListTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     * @return WebhookEventList
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\WebhookEventList
     {
         $obj = new WebhookEventList(self::getJson());
         $this->assertNotNull($obj);
@@ -51,7 +48,7 @@ class WebhookEventListTest extends TestCase
      * @depends testSerializationDeserialization
      * @param WebhookEventList $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getEvents(), WebhookEventTest::getObject());
         $this->assertEquals($obj->getCount(), 123);

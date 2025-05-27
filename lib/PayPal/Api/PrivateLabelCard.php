@@ -26,7 +26,7 @@ class PrivateLabelCard extends PayPalModel
      * 
      * @return $this
      */
-    public function setId($id)
+    public function setId($id): static
     {
         $this->id = $id;
         return $this;
@@ -49,7 +49,7 @@ class PrivateLabelCard extends PayPalModel
      * 
      * @return $this
      */
-    public function setCardNumber($card_number)
+    public function setCardNumber($card_number): static
     {
         $this->card_number = $card_number;
         return $this;
@@ -72,7 +72,7 @@ class PrivateLabelCard extends PayPalModel
      * 
      * @return $this
      */
-    public function setIssuerId($issuer_id)
+    public function setIssuerId($issuer_id): static
     {
         $this->issuer_id = $issuer_id;
         return $this;
@@ -95,7 +95,7 @@ class PrivateLabelCard extends PayPalModel
      * 
      * @return $this
      */
-    public function setIssuerName($issuer_name)
+    public function setIssuerName($issuer_name): static
     {
         $this->issuer_name = $issuer_name;
         return $this;
@@ -118,7 +118,7 @@ class PrivateLabelCard extends PayPalModel
      * 
      * @return $this
      */
-    public function setImageKey($image_key)
+    public function setImageKey($image_key): static
     {
         $this->image_key = $image_key;
         return $this;

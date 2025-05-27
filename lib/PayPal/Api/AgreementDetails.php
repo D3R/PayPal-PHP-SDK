@@ -29,7 +29,7 @@ class AgreementDetails extends PayPalModel
      * 
      * @return $this
      */
-    public function setOutstandingBalance($outstanding_balance)
+    public function setOutstandingBalance($outstanding_balance): static
     {
         $this->outstanding_balance = $outstanding_balance;
         return $this;
@@ -52,7 +52,7 @@ class AgreementDetails extends PayPalModel
      * 
      * @return $this
      */
-    public function setCyclesRemaining($cycles_remaining)
+    public function setCyclesRemaining($cycles_remaining): static
     {
         $this->cycles_remaining = $cycles_remaining;
         return $this;
@@ -75,7 +75,7 @@ class AgreementDetails extends PayPalModel
      * 
      * @return $this
      */
-    public function setCyclesCompleted($cycles_completed)
+    public function setCyclesCompleted($cycles_completed): static
     {
         $this->cycles_completed = $cycles_completed;
         return $this;
@@ -98,7 +98,7 @@ class AgreementDetails extends PayPalModel
      * 
      * @return $this
      */
-    public function setNextBillingDate($next_billing_date)
+    public function setNextBillingDate($next_billing_date): static
     {
         $this->next_billing_date = $next_billing_date;
         return $this;
@@ -121,7 +121,7 @@ class AgreementDetails extends PayPalModel
      * 
      * @return $this
      */
-    public function setLastPaymentDate($last_payment_date)
+    public function setLastPaymentDate($last_payment_date): static
     {
         $this->last_payment_date = $last_payment_date;
         return $this;
@@ -144,7 +144,7 @@ class AgreementDetails extends PayPalModel
      * 
      * @return $this
      */
-    public function setLastPaymentAmount($last_payment_amount)
+    public function setLastPaymentAmount($last_payment_amount): static
     {
         $this->last_payment_amount = $last_payment_amount;
         return $this;
@@ -167,7 +167,7 @@ class AgreementDetails extends PayPalModel
      * 
      * @return $this
      */
-    public function setFinalPaymentDate($final_payment_date)
+    public function setFinalPaymentDate($final_payment_date): static
     {
         $this->final_payment_date = $final_payment_date;
         return $this;
@@ -190,7 +190,7 @@ class AgreementDetails extends PayPalModel
      * 
      * @return $this
      */
-    public function setFailedPaymentCount($failed_payment_count)
+    public function setFailedPaymentCount($failed_payment_count): static
     {
         $this->failed_payment_count = $failed_payment_count;
         return $this;

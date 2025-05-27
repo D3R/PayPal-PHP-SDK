@@ -7,7 +7,7 @@
 // API used: POST /v1/payments/payouts-item/<Payout-Item-Id>/cancel
 
 /** @var \PayPal\Api\PayoutBatch $payoutBatch */
-$payoutBatch = require 'CreateSinglePayout.php';
+$payoutBatch = require __DIR__ . '/CreateSinglePayout.php';
 // ## Payout Item ID
 // You can replace this with your Payout Batch Id on already created Payout.
 $payoutItems = $payoutBatch->getItems();
@@ -28,9 +28,9 @@ try {
         // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
         ResultPrinter::printError("Cancel Unclaimed Payout Item", "PayoutItem", null, $payoutItemId, new Exception("Payout Item Status is not UNCLAIMED"));
     }
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Cancel Unclaimed Payout Item", "PayoutItem", null, $payoutItemId, $ex);
+    ResultPrinter::printError("Cancel Unclaimed Payout Item", "PayoutItem", null, $payoutItemId, $exception);
     exit(1);
 }
 

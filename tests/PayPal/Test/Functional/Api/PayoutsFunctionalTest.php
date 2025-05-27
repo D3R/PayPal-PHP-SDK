@@ -26,11 +26,11 @@ class PayoutsFunctionalTest extends TestCase
 
     public static $batchId;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $className = $this->getClassName();
         $testName = $this->getName();
-        $operationString = file_get_contents(__DIR__ . "/../resources/$className/$testName.json");
+        $operationString = file_get_contents(__DIR__ . sprintf('/../resources/%s/%s.json', $className, $testName));
         $this->operation = json_decode($operationString, true);
         $this->response = true;
         if (array_key_exists('body', $this->operation['response'])) {
@@ -42,11 +42,10 @@ class PayoutsFunctionalTest extends TestCase
 
     /**
      * Returns just the classname of the test you are executing. It removes the namespaces.
-     * @return string
      */
-    public function getClassName()
+    public function getClassName(): string
     {
-        return join('', array_slice(explode('\\', get_class($this)), -1));
+        return implode('', array_slice(explode('\\', static::class), -1));
     }
 
     public function testCreate()
@@ -56,14 +55,15 @@ class PayoutsFunctionalTest extends TestCase
         if (Setup::$mode != 'mock') {
             $obj->getSenderBatchHeader()->setSenderBatchId(uniqid());
         }
+
         PayoutsFunctionalTest::$batchId = $obj->getSenderBatchHeader()->getSenderBatchId();
-        $params = array('sync_mode' => 'true');
+        $params = ['sync_mode' => 'true'];
         $result = $obj->create($params, $this->apiContext, $this->mockPayPalRestCall);
         $this->assertNotNull($result);
         $this->assertEquals(PayoutsFunctionalTest::$batchId, $result->getBatchHeader()->getSenderBatchHeader()->getSenderBatchId());
         $this->assertEquals('SUCCESS', $result->getBatchHeader()->getBatchStatus());
         $items = $result->getItems();
-        $this->assertGreaterThan(0, sizeof($items));
+        $this->assertGreaterThan(0, count($items));
         $item = $items[0];
         $this->assertEquals('UNCLAIMED', $item->getTransactionStatus());
         return $result;
@@ -86,9 +86,8 @@ class PayoutsFunctionalTest extends TestCase
     /**
      * @depends testCreate
      * @param $payoutBatch PayoutBatch
-     * @return PayoutBatch
      */
-    public function testGetItem($payoutBatch)
+    public function testGetItem($payoutBatch): void
     {
         $items = $payoutBatch->getItems();
         $item = $items[0];
@@ -103,9 +102,8 @@ class PayoutsFunctionalTest extends TestCase
     /**
      * @depends testCreate
      * @param $payoutBatch PayoutBatch
-     * @return PayoutBatch
      */
-    public function testCancel($payoutBatch)
+    public function testCancel($payoutBatch): void
     {
         $items = $payoutBatch->getItems();
         $item = $items[0];
@@ -113,6 +111,7 @@ class PayoutsFunctionalTest extends TestCase
             $this->markTestSkipped('Transaction status needs to be Unclaimed for this test ');
             return;
         }
+
         $result = PayoutItem::cancel($item->getPayoutItemId(), $this->apiContext, $this->mockPayPalRestCall);
         $this->assertNotNull($result);
         $this->assertEquals($item->getPayoutItemId(), $result->getPayoutItemId());

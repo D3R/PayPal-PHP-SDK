@@ -24,7 +24,7 @@ class BankToken extends PayPalModel
      * 
      * @return $this
      */
-    public function setBankId($bank_id)
+    public function setBankId($bank_id): static
     {
         $this->bank_id = $bank_id;
         return $this;
@@ -47,7 +47,7 @@ class BankToken extends PayPalModel
      * 
      * @return $this
      */
-    public function setExternalCustomerId($external_customer_id)
+    public function setExternalCustomerId($external_customer_id): static
     {
         $this->external_customer_id = $external_customer_id;
         return $this;
@@ -70,7 +70,7 @@ class BankToken extends PayPalModel
      * 
      * @return $this
      */
-    public function setMandateReferenceNumber($mandate_reference_number)
+    public function setMandateReferenceNumber($mandate_reference_number): static
     {
         $this->mandate_reference_number = $mandate_reference_number;
         return $this;

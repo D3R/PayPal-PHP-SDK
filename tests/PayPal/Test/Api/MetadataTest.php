@@ -14,18 +14,16 @@ class MetadataTest extends TestCase
 {
     /**
      * Gets Json String of Object Metadata
-     * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"created_date":"TestSample","created_by":"TestSample","cancelled_date":"TestSample","cancelled_by":"TestSample","last_updated_date":"TestSample","last_updated_by":"TestSample","first_sent_date":"TestSample","last_sent_date":"TestSample","last_sent_by":"TestSample","payer_view_url":"http://www.google.com"}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
-     * @return Metadata
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\Metadata
     {
         return new Metadata(self::getJson());
     }
@@ -33,9 +31,8 @@ class MetadataTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     * @return Metadata
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\Metadata
     {
         $obj = new Metadata(self::getJson());
         $this->assertNotNull($obj);
@@ -57,7 +54,7 @@ class MetadataTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Metadata $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getCreatedDate(), "TestSample");
         $this->assertEquals($obj->getCreatedBy(), "TestSample");
@@ -75,13 +72,13 @@ class MetadataTest extends TestCase
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage PayerViewUrl is not a fully qualified URL
      */
-    public function testUrlValidationForPayerViewUrl()
+    public function testUrlValidationForPayerViewUrl(): void
     {
         $obj = new Metadata();
         $obj->setPayerViewUrl(null);
     }
 
-    public function testUrlValidationForPayerViewUrlDeprecated()
+    public function testUrlValidationForPayerViewUrlDeprecated(): void
     {
         $obj = new Metadata();
         $obj->setPayer_view_url(null);

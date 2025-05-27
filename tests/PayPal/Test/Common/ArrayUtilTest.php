@@ -7,15 +7,15 @@ use PHPUnit\Framework\TestCase;
 class ArrayUtilTest extends TestCase
 {
 
-    public function testIsAssocArray()
+    public function testIsAssocArray(): void
     {
-        $arr = array(1, 2, 3);
+        $arr = [1, 2, 3];
         $this->assertEquals(false, ArrayUtil::isAssocArray($arr));
 
-        $arr = array(
+        $arr = [
             'name' => 'John Doe',
             'City' => 'San Jose'
-        );
+        ];
         $this->assertEquals(true, ArrayUtil::isAssocArray($arr));
 
         $arr[] = 'CA';

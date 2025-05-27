@@ -14,18 +14,16 @@ class SaleTest extends TestCase
 {
     /**
      * Gets Json String of Object Sale
-     * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"id":"TestSample","purchase_unit_reference_id":"TestSample","amount":' . AmountTest::getJson() . ',"payment_mode":"TestSample","state":"TestSample","reason_code":"TestSample","protection_eligibility":"TestSample","protection_eligibility_type":"TestSample","clearing_time":"TestSample","payment_hold_status":"TestSample","payment_hold_reasons":"TestSample","transaction_fee":' . CurrencyTest::getJson() . ',"receivable_amount":' . CurrencyTest::getJson() . ',"exchange_rate":"TestSample","fmf_details":' . FmfDetailsTest::getJson() . ',"receipt_id":"TestSample","parent_payment":"TestSample","processor_response":' . ProcessorResponseTest::getJson() . ',"billing_agreement_id":"TestSample","create_time":"TestSample","update_time":"TestSample","links":' . LinksTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
-     * @return Sale
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\Sale
     {
         return new Sale(self::getJson());
     }
@@ -33,9 +31,8 @@ class SaleTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     * @return Sale
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\Sale
     {
         $obj = new Sale(self::getJson());
         $this->assertNotNull($obj);
@@ -69,7 +66,7 @@ class SaleTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Sale $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getId(), "TestSample");
         $this->assertEquals($obj->getPurchaseUnitReferenceId(), "TestSample");
@@ -97,11 +94,10 @@ class SaleTest extends TestCase
 
     /**
      * @dataProvider mockProvider
-     * @param Sale $obj
      */
-    public function testGet($obj, $mockApiContext)
+    public function testGet(\PayPal\Api\Sale $obj, ?\PHPUnit_Framework_MockObject_MockObject $mockApiContext): void
     {
-        $mockPPRestCall = $this->getMockBuilder('\PayPal\Transport\PayPalRestCall')
+        $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -114,13 +110,13 @@ class SaleTest extends TestCase
         $result = $obj->get("saleId", $mockApiContext, $mockPPRestCall);
         $this->assertNotNull($result);
     }
+
     /**
      * @dataProvider mockProvider
-     * @param Sale $obj
      */
-    public function testRefund($obj, $mockApiContext)
+    public function testRefund(\PayPal\Api\Sale $obj, ?\PHPUnit_Framework_MockObject_MockObject $mockApiContext): void
     {
-        $mockPPRestCall = $this->getMockBuilder('\PayPal\Transport\PayPalRestCall')
+        $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -135,15 +131,15 @@ class SaleTest extends TestCase
         $this->assertNotNull($result);
     }
 
-    public function mockProvider()
+    public function mockProvider(): array
     {
         $obj = self::getObject();
         $mockApiContext = $this->getMockBuilder('ApiContext')
             ->disableOriginalConstructor()
             ->getMock();
-        return array(
-            array($obj, $mockApiContext),
-            array($obj, null)
-        );
+        return [
+            [$obj, $mockApiContext],
+            [$obj, null]
+        ];
     }
 }

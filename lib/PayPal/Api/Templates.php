@@ -30,7 +30,7 @@ class Templates extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setAddresses($addresses)
+    public function setAddresses($addresses): static
     {
         $this->addresses = $addresses;
         return $this;
@@ -52,13 +52,13 @@ class Templates extends PayPalResourceModel
      * @param \PayPal\Api\Address $address
      * @return $this
      */
-    public function addAddress($address)
+    public function addAddress($address): static
     {
         if (!$this->getAddresses()) {
-            return $this->setAddresses(array($address));
+            return $this->setAddresses([$address]);
         } else {
             return $this->setAddresses(
-                array_merge($this->getAddresses(), array($address))
+                array_merge($this->getAddresses(), [$address])
             );
         }
     }
@@ -69,10 +69,10 @@ class Templates extends PayPalResourceModel
      * @param \PayPal\Api\Address $address
      * @return $this
      */
-    public function removeAddress($address)
+    public function removeAddress($address): static
     {
         return $this->setAddresses(
-            array_diff($this->getAddresses(), array($address))
+            array_diff($this->getAddresses(), [$address])
         );
     }
 
@@ -83,7 +83,7 @@ class Templates extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setEmails($emails)
+    public function setEmails($emails): static
     {
         $this->emails = $emails;
         return $this;
@@ -105,13 +105,13 @@ class Templates extends PayPalResourceModel
      * @param string $string
      * @return $this
      */
-    public function addEmail($string)
+    public function addEmail($string): static
     {
         if (!$this->getEmails()) {
-            return $this->setEmails(array($string));
+            return $this->setEmails([$string]);
         } else {
             return $this->setEmails(
-                array_merge($this->getEmails(), array($string))
+                array_merge($this->getEmails(), [$string])
             );
         }
     }
@@ -122,10 +122,10 @@ class Templates extends PayPalResourceModel
      * @param string $string
      * @return $this
      */
-    public function removeEmail($string)
+    public function removeEmail($string): static
     {
         return $this->setEmails(
-            array_diff($this->getEmails(), array($string))
+            array_diff($this->getEmails(), [$string])
         );
     }
 
@@ -136,7 +136,7 @@ class Templates extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setPhones($phones)
+    public function setPhones($phones): static
     {
         $this->phones = $phones;
         return $this;
@@ -158,13 +158,13 @@ class Templates extends PayPalResourceModel
      * @param \PayPal\Api\Phone $phone
      * @return $this
      */
-    public function addPhone($phone)
+    public function addPhone($phone): static
     {
         if (!$this->getPhones()) {
-            return $this->setPhones(array($phone));
+            return $this->setPhones([$phone]);
         } else {
             return $this->setPhones(
-                array_merge($this->getPhones(), array($phone))
+                array_merge($this->getPhones(), [$phone])
             );
         }
     }
@@ -175,10 +175,10 @@ class Templates extends PayPalResourceModel
      * @param \PayPal\Api\Phone $phone
      * @return $this
      */
-    public function removePhone($phone)
+    public function removePhone($phone): static
     {
         return $this->setPhones(
-            array_diff($this->getPhones(), array($phone))
+            array_diff($this->getPhones(), [$phone])
         );
     }
 
@@ -189,7 +189,7 @@ class Templates extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setTemplates($templates)
+    public function setTemplates($templates): static
     {
         $this->templates = $templates;
         return $this;
@@ -211,13 +211,13 @@ class Templates extends PayPalResourceModel
      * @param \PayPal\Api\Template $template
      * @return $this
      */
-    public function addTemplate($template)
+    public function addTemplate($template): static
     {
         if (!$this->getTemplates()) {
-            return $this->setTemplates(array($template));
+            return $this->setTemplates([$template]);
         } else {
             return $this->setTemplates(
-                array_merge($this->getTemplates(), array($template))
+                array_merge($this->getTemplates(), [$template])
             );
         }
     }
@@ -228,10 +228,10 @@ class Templates extends PayPalResourceModel
      * @param \PayPal\Api\Template $template
      * @return $this
      */
-    public function removeTemplate($template)
+    public function removeTemplate($template): static
     {
         return $this->setTemplates(
-            array_diff($this->getTemplates(), array($template))
+            array_diff($this->getTemplates(), [$template])
         );
     }
 
@@ -240,17 +240,15 @@ class Templates extends PayPalResourceModel
      *
      * @deprecated Please use `Template::get()` instead.
      * @see Template::get
-     * @param string $templateId
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return Template
      */
-    public static function get($templateId, $apiContext = null, $restCall = null)
+    public static function get(string $templateId, $apiContext = null, $restCall = null): \PayPal\Api\Template
     {
         ArgumentValidator::validate($templateId, 'templateId');
         $payLoad = "";
         $json = self::executeCall(
-            "/v1/invoicing/templates/$templateId",
+            '/v1/invoicing/templates/' . $templateId,
             "GET",
             $payLoad,
             null,
@@ -268,17 +266,16 @@ class Templates extends PayPalResourceModel
      * @param array $params
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return Templates
      */
-    public static function getAll($params = array(), $apiContext = null, $restCall = null)
+    public static function getAll($params = [], $apiContext = null, $restCall = null): \PayPal\Api\Templates
     {
         ArgumentValidator::validate($params, 'params');
         $payLoad = "";
-        $allowedParams = array(
+        $allowedParams = [
           'fields' => 1,
-      );
+      ];
         $json = self::executeCall(
-            "/v1/invoicing/templates/" . "?" . http_build_query(array_intersect_key($params, $allowedParams)),
+            '/v1/invoicing/templates/?' . http_build_query(array_intersect_key($params, $allowedParams)),
             "GET",
             $payLoad,
             null,

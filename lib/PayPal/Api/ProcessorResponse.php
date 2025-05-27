@@ -27,7 +27,7 @@ class ProcessorResponse extends PayPalModel
      *
      * @return $this
      */
-    public function setResponseCode($response_code)
+    public function setResponseCode($response_code): static
     {
         $this->response_code = $response_code;
         return $this;
@@ -50,7 +50,7 @@ class ProcessorResponse extends PayPalModel
      *
      * @return $this
      */
-    public function setAvsCode($avs_code)
+    public function setAvsCode($avs_code): static
     {
         $this->avs_code = $avs_code;
         return $this;
@@ -73,7 +73,7 @@ class ProcessorResponse extends PayPalModel
      *
      * @return $this
      */
-    public function setCvvCode($cvv_code)
+    public function setCvvCode($cvv_code): static
     {
         $this->cvv_code = $cvv_code;
         return $this;
@@ -97,7 +97,7 @@ class ProcessorResponse extends PayPalModel
      *
      * @return $this
      */
-    public function setAdviceCode($advice_code)
+    public function setAdviceCode($advice_code): static
     {
         $this->advice_code = $advice_code;
         return $this;
@@ -120,7 +120,7 @@ class ProcessorResponse extends PayPalModel
      *
      * @return $this
      */
-    public function setEciSubmitted($eci_submitted)
+    public function setEciSubmitted($eci_submitted): static
     {
         $this->eci_submitted = $eci_submitted;
         return $this;
@@ -143,7 +143,7 @@ class ProcessorResponse extends PayPalModel
      *
      * @return $this
      */
-    public function setVpas($vpas)
+    public function setVpas($vpas): static
     {
         $this->vpas = $vpas;
         return $this;

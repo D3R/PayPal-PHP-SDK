@@ -5,7 +5,7 @@
 // a third party invoice.
 
 /** @var Invoice $invoice */
-$invoice = require 'CreateThirdPartyInvoice.php';
+$invoice = require __DIR__ . '/CreateThirdPartyInvoice.php';
 use PayPal\Api\Invoice;
 
 $invoiceId = $invoice->getId();
@@ -29,9 +29,9 @@ try {
 
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
     ResultPrinter::printResult("Get Third Party Invoice", "Invoice", $retrievedInvoice->getId(), $invoiceId, $retrievedInvoice);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Get Third Party Invoice", "Invoice", $invoiceId, $invoiceId, $ex);
+    ResultPrinter::printError("Get Third Party Invoice", "Invoice", $invoiceId, $invoiceId, $exception);
     exit(1);
 }
 

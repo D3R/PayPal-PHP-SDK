@@ -23,7 +23,7 @@ class PaymentExecution extends PayPalModel
      * 
      * @return $this
      */
-    public function setPayerId($payer_id)
+    public function setPayerId($payer_id): static
     {
         $this->payer_id = $payer_id;
         return $this;
@@ -46,7 +46,7 @@ class PaymentExecution extends PayPalModel
      * 
      * @return $this
      */
-    public function setCarrierAccountId($carrier_account_id)
+    public function setCarrierAccountId($carrier_account_id): static
     {
         $this->carrier_account_id = $carrier_account_id;
         return $this;
@@ -69,7 +69,7 @@ class PaymentExecution extends PayPalModel
      * 
      * @return $this
      */
-    public function setTransactions($transactions)
+    public function setTransactions($transactions): static
     {
         $this->transactions = $transactions;
         return $this;
@@ -91,13 +91,13 @@ class PaymentExecution extends PayPalModel
      * @param \PayPal\Api\Transaction $transaction
      * @return $this
      */
-    public function addTransaction($transaction)
+    public function addTransaction($transaction): static
     {
         if (!$this->getTransactions()) {
-            return $this->setTransactions(array($transaction));
+            return $this->setTransactions([$transaction]);
         } else {
             return $this->setTransactions(
-                array_merge($this->getTransactions(), array($transaction))
+                array_merge($this->getTransactions(), [$transaction])
             );
         }
     }
@@ -108,10 +108,10 @@ class PaymentExecution extends PayPalModel
      * @param \PayPal\Api\Transaction $transaction
      * @return $this
      */
-    public function removeTransaction($transaction)
+    public function removeTransaction($transaction): static
     {
         return $this->setTransactions(
-            array_diff($this->getTransactions(), array($transaction))
+            array_diff($this->getTransactions(), [$transaction])
         );
     }
 

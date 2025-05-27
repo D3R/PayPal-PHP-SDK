@@ -25,7 +25,7 @@ class ItemList extends PayPalModel
      * 
      * @return $this
      */
-    public function setItems($items)
+    public function setItems($items): static
     {
         $this->items = array_values($items);
         return $this;
@@ -47,13 +47,13 @@ class ItemList extends PayPalModel
      * @param \PayPal\Api\Item $item
      * @return $this
      */
-    public function addItem($item)
+    public function addItem($item): static
     {
         if (!$this->getItems()) {
-            return $this->setItems(array($item));
+            return $this->setItems([$item]);
         } else {
             return $this->setItems(
-                array_merge($this->getItems(), array($item))
+                array_merge($this->getItems(), [$item])
             );
         }
     }
@@ -64,10 +64,10 @@ class ItemList extends PayPalModel
      * @param \PayPal\Api\Item $item
      * @return $this
      */
-    public function removeItem($item)
+    public function removeItem($item): static
     {
         return $this->setItems(
-            array_diff($this->getItems(), array($item))
+            array_diff($this->getItems(), [$item])
         );
     }
 
@@ -78,7 +78,7 @@ class ItemList extends PayPalModel
      * 
      * @return $this
      */
-    public function setShippingAddress($shipping_address)
+    public function setShippingAddress($shipping_address): static
     {
         $this->shipping_address = $shipping_address;
         return $this;
@@ -101,7 +101,7 @@ class ItemList extends PayPalModel
      * 
      * @return $this
      */
-    public function setShippingMethod($shipping_method)
+    public function setShippingMethod($shipping_method): static
     {
         $this->shipping_method = $shipping_method;
         return $this;
@@ -124,7 +124,7 @@ class ItemList extends PayPalModel
      * 
      * @return $this
      */
-    public function setShippingPhoneNumber($shipping_phone_number)
+    public function setShippingPhoneNumber($shipping_phone_number): static
     {
         $this->shipping_phone_number = $shipping_phone_number;
         return $this;

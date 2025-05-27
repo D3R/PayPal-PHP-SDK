@@ -32,7 +32,7 @@ class MerchantPreferences extends PayPalModel
      * 
      * @return $this
      */
-    public function setId($id)
+    public function setId($id): static
     {
         $this->id = $id;
         return $this;
@@ -55,7 +55,7 @@ class MerchantPreferences extends PayPalModel
      * 
      * @return $this
      */
-    public function setSetupFee($setup_fee)
+    public function setSetupFee($setup_fee): static
     {
         $this->setup_fee = $setup_fee;
         return $this;
@@ -78,7 +78,7 @@ class MerchantPreferences extends PayPalModel
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setCancelUrl($cancel_url)
+    public function setCancelUrl($cancel_url): static
     {
         UrlValidator::validate($cancel_url, "CancelUrl");
         $this->cancel_url = $cancel_url;
@@ -102,7 +102,7 @@ class MerchantPreferences extends PayPalModel
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setReturnUrl($return_url)
+    public function setReturnUrl($return_url): static
     {
         UrlValidator::validate($return_url, "ReturnUrl");
         $this->return_url = $return_url;
@@ -126,7 +126,7 @@ class MerchantPreferences extends PayPalModel
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setNotifyUrl($notify_url)
+    public function setNotifyUrl($notify_url): static
     {
         UrlValidator::validate($notify_url, "NotifyUrl");
         $this->notify_url = $notify_url;
@@ -150,7 +150,7 @@ class MerchantPreferences extends PayPalModel
      * 
      * @return $this
      */
-    public function setMaxFailAttempts($max_fail_attempts)
+    public function setMaxFailAttempts($max_fail_attempts): static
     {
         $this->max_fail_attempts = $max_fail_attempts;
         return $this;
@@ -173,7 +173,7 @@ class MerchantPreferences extends PayPalModel
      * 
      * @return $this
      */
-    public function setAutoBillAmount($auto_bill_amount)
+    public function setAutoBillAmount($auto_bill_amount): static
     {
         $this->auto_bill_amount = $auto_bill_amount;
         return $this;
@@ -196,7 +196,7 @@ class MerchantPreferences extends PayPalModel
      * 
      * @return $this
      */
-    public function setInitialFailAmountAction($initial_fail_amount_action)
+    public function setInitialFailAmountAction($initial_fail_amount_action): static
     {
         $this->initial_fail_amount_action = $initial_fail_amount_action;
         return $this;
@@ -219,7 +219,7 @@ class MerchantPreferences extends PayPalModel
      * 
      * @return $this
      */
-    public function setAcceptedPaymentType($accepted_payment_type)
+    public function setAcceptedPaymentType($accepted_payment_type): static
     {
         $this->accepted_payment_type = $accepted_payment_type;
         return $this;
@@ -242,7 +242,7 @@ class MerchantPreferences extends PayPalModel
      * 
      * @return $this
      */
-    public function setCharSet($char_set)
+    public function setCharSet($char_set): static
     {
         $this->char_set = $char_set;
         return $this;

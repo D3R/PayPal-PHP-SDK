@@ -23,7 +23,7 @@ class CarrierAccountToken extends PayPalModel
      * 
      * @return $this
      */
-    public function setCarrierAccountId($carrier_account_id)
+    public function setCarrierAccountId($carrier_account_id): static
     {
         $this->carrier_account_id = $carrier_account_id;
         return $this;
@@ -46,7 +46,7 @@ class CarrierAccountToken extends PayPalModel
      * 
      * @return $this
      */
-    public function setExternalCustomerId($external_customer_id)
+    public function setExternalCustomerId($external_customer_id): static
     {
         $this->external_customer_id = $external_customer_id;
         return $this;

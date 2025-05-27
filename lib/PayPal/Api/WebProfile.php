@@ -30,7 +30,7 @@ class WebProfile extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setId($id)
+    public function setId($id): static
     {
         $this->id = $id;
         return $this;
@@ -53,7 +53,7 @@ class WebProfile extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setName($name)
+    public function setName($name): static
     {
         $this->name = $name;
         return $this;
@@ -76,7 +76,7 @@ class WebProfile extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setTemporary($temporary)
+    public function setTemporary($temporary): static
     {
         $this->temporary = $temporary;
         return $this;
@@ -99,7 +99,7 @@ class WebProfile extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setFlowConfig($flow_config)
+    public function setFlowConfig($flow_config): static
     {
         $this->flow_config = $flow_config;
         return $this;
@@ -122,7 +122,7 @@ class WebProfile extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setInputFields($input_fields)
+    public function setInputFields($input_fields): static
     {
         $this->input_fields = $input_fields;
         return $this;
@@ -145,7 +145,7 @@ class WebProfile extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setPresentation($presentation)
+    public function setPresentation($presentation): static
     {
         $this->presentation = $presentation;
         return $this;
@@ -166,9 +166,8 @@ class WebProfile extends PayPalResourceModel
      *
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return CreateProfileResponse
      */
-    public function create($apiContext = null, $restCall = null)
+    public function create($apiContext = null, $restCall = null): \PayPal\Api\CreateProfileResponse
     {
         $payLoad = $this->toJSON();
         $json = self::executeCall(
@@ -189,14 +188,13 @@ class WebProfile extends PayPalResourceModel
      *
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return bool
      */
-    public function update($apiContext = null, $restCall = null)
+    public function update($apiContext = null, $restCall = null): bool
     {
         ArgumentValidator::validate($this->getId(), "Id");
         $payLoad = $this->toJSON();
         self::executeCall(
-            "/v1/payment-experience/web-profiles/{$this->getId()}",
+            '/v1/payment-experience/web-profiles/' . $this->getId(),
             "PUT",
             $payLoad,
             null,
@@ -212,19 +210,19 @@ class WebProfile extends PayPalResourceModel
      * @param Patch[] $patch
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return bool
      */
-    public function partial_update($patch, $apiContext = null, $restCall = null)
+    public function partial_update($patch, $apiContext = null, $restCall = null): bool
     {
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($patch, 'patch');
-        $payload = array();
+        $payload = [];
         foreach ($patch as $patchObject) {
             $payload[] = $patchObject->toArray();
         }
+
         $payLoad = json_encode($payload);
         self::executeCall(
-            "/v1/payment-experience/web-profiles/{$this->getId()}",
+            '/v1/payment-experience/web-profiles/' . $this->getId(),
             "PATCH",
             $payLoad,
             null,
@@ -237,17 +235,15 @@ class WebProfile extends PayPalResourceModel
     /**
      * Shows details for a web experience profile, by ID.
      *
-     * @param string $profileId
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return WebProfile
      */
-    public static function get($profileId, $apiContext = null, $restCall = null)
+    public static function get(string $profileId, $apiContext = null, $restCall = null): \PayPal\Api\WebProfile
     {
         ArgumentValidator::validate($profileId, 'profileId');
         $payLoad = "";
         $json = self::executeCall(
-            "/v1/payment-experience/web-profiles/$profileId",
+            '/v1/payment-experience/web-profiles/' . $profileId,
             "GET",
             $payLoad,
             null,
@@ -285,14 +281,13 @@ class WebProfile extends PayPalResourceModel
      *
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return bool
      */
-    public function delete($apiContext = null, $restCall = null)
+    public function delete($apiContext = null, $restCall = null): bool
     {
         ArgumentValidator::validate($this->getId(), "Id");
         $payLoad = "";
         self::executeCall(
-            "/v1/payment-experience/web-profiles/{$this->getId()}",
+            '/v1/payment-experience/web-profiles/' . $this->getId(),
             "DELETE",
             $payLoad,
             null,

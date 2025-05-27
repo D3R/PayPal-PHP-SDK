@@ -37,7 +37,7 @@ class PayerInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setEmail($email)
+    public function setEmail($email): static
     {
         $this->email = $email;
         return $this;
@@ -60,7 +60,7 @@ class PayerInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setExternalRememberMeId($external_remember_me_id)
+    public function setExternalRememberMeId($external_remember_me_id): static
     {
         $this->external_remember_me_id = $external_remember_me_id;
         return $this;
@@ -84,7 +84,7 @@ class PayerInfo extends PayPalModel
      *
      * @return $this
      */
-    public function setAccountNumber($account_number)
+    public function setAccountNumber($account_number): static
     {
         $this->account_number = $account_number;
         return $this;
@@ -110,7 +110,7 @@ class PayerInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setBuyerAccountNumber($buyer_account_number)
+    public function setBuyerAccountNumber($buyer_account_number): static
     {
         $this->buyer_account_number = $buyer_account_number;
         return $this;
@@ -133,7 +133,7 @@ class PayerInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setSalutation($salutation)
+    public function setSalutation($salutation): static
     {
         $this->salutation = $salutation;
         return $this;
@@ -156,7 +156,7 @@ class PayerInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setFirstName($first_name)
+    public function setFirstName($first_name): static
     {
         $this->first_name = $first_name;
         return $this;
@@ -179,7 +179,7 @@ class PayerInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setMiddleName($middle_name)
+    public function setMiddleName($middle_name): static
     {
         $this->middle_name = $middle_name;
         return $this;
@@ -202,7 +202,7 @@ class PayerInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setLastName($last_name)
+    public function setLastName($last_name): static
     {
         $this->last_name = $last_name;
         return $this;
@@ -225,7 +225,7 @@ class PayerInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setSuffix($suffix)
+    public function setSuffix($suffix): static
     {
         $this->suffix = $suffix;
         return $this;
@@ -248,7 +248,7 @@ class PayerInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setPayerId($payer_id)
+    public function setPayerId($payer_id): static
     {
         $this->payer_id = $payer_id;
         return $this;
@@ -271,7 +271,7 @@ class PayerInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setPhone($phone)
+    public function setPhone($phone): static
     {
         $this->phone = $phone;
         return $this;
@@ -295,7 +295,7 @@ class PayerInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setPhoneType($phone_type)
+    public function setPhoneType($phone_type): static
     {
         $this->phone_type = $phone_type;
         return $this;
@@ -318,7 +318,7 @@ class PayerInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setBirthDate($birth_date)
+    public function setBirthDate($birth_date): static
     {
         $this->birth_date = $birth_date;
         return $this;
@@ -341,7 +341,7 @@ class PayerInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setTaxId($tax_id)
+    public function setTaxId($tax_id): static
     {
         $this->tax_id = $tax_id;
         return $this;
@@ -365,7 +365,7 @@ class PayerInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setTaxIdType($tax_id_type)
+    public function setTaxIdType($tax_id_type): static
     {
         $this->tax_id_type = $tax_id_type;
         return $this;
@@ -388,7 +388,7 @@ class PayerInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setCountryCode($country_code)
+    public function setCountryCode($country_code): static
     {
         $this->country_code = $country_code;
         return $this;
@@ -411,7 +411,7 @@ class PayerInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setBillingAddress($billing_address)
+    public function setBillingAddress($billing_address): static
     {
         $this->billing_address = $billing_address;
         return $this;
@@ -434,7 +434,7 @@ class PayerInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setShippingAddress($shipping_address)
+    public function setShippingAddress($shipping_address): static
     {
         $this->shipping_address = $shipping_address;
         return $this;

@@ -21,7 +21,7 @@ class CreateProfileResponse extends WebProfile
      * 
      * @return $this
      */
-    public function setId($id)
+    public function setId($id): static
     {
         $this->id = $id;
         return $this;

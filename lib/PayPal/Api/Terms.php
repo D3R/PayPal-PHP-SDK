@@ -27,7 +27,7 @@ class Terms extends PayPalModel
      * 
      * @return $this
      */
-    public function setId($id)
+    public function setId($id): static
     {
         $this->id = $id;
         return $this;
@@ -50,7 +50,7 @@ class Terms extends PayPalModel
      * 
      * @return $this
      */
-    public function setType($type)
+    public function setType($type): static
     {
         $this->type = $type;
         return $this;
@@ -73,7 +73,7 @@ class Terms extends PayPalModel
      * 
      * @return $this
      */
-    public function setMaxBillingAmount($max_billing_amount)
+    public function setMaxBillingAmount($max_billing_amount): static
     {
         $this->max_billing_amount = $max_billing_amount;
         return $this;
@@ -96,7 +96,7 @@ class Terms extends PayPalModel
      * 
      * @return $this
      */
-    public function setOccurrences($occurrences)
+    public function setOccurrences($occurrences): static
     {
         $this->occurrences = $occurrences;
         return $this;
@@ -119,7 +119,7 @@ class Terms extends PayPalModel
      * 
      * @return $this
      */
-    public function setAmountRange($amount_range)
+    public function setAmountRange($amount_range): static
     {
         $this->amount_range = $amount_range;
         return $this;
@@ -142,7 +142,7 @@ class Terms extends PayPalModel
      * 
      * @return $this
      */
-    public function setBuyerEditable($buyer_editable)
+    public function setBuyerEditable($buyer_editable): static
     {
         $this->buyer_editable = $buyer_editable;
         return $this;

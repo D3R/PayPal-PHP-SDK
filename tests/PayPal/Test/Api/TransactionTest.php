@@ -14,19 +14,16 @@ class TransactionTest extends TestCase
 {
     /**
      * Gets Json String of Object Transaction
-     *
-     * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
-     * @return Transaction
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\Transaction
     {
         return new Transaction(self::getJson());
     }
@@ -34,9 +31,8 @@ class TransactionTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     * @return Transaction
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\Transaction
     {
         $obj = new Transaction(self::getJson());
         $this->assertNotNull($obj);
@@ -48,7 +44,7 @@ class TransactionTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Transaction $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
     }
 }

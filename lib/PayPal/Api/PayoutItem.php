@@ -29,7 +29,7 @@ class PayoutItem extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setRecipientType($recipient_type)
+    public function setRecipientType($recipient_type): static
     {
         $this->recipient_type = $recipient_type;
         return $this;
@@ -52,7 +52,7 @@ class PayoutItem extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setAmount($amount)
+    public function setAmount($amount): static
     {
         $this->amount = $amount;
         return $this;
@@ -75,7 +75,7 @@ class PayoutItem extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setNote($note)
+    public function setNote($note): static
     {
         $this->note = $note;
         return $this;
@@ -98,7 +98,7 @@ class PayoutItem extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setReceiver($receiver)
+    public function setReceiver($receiver): static
     {
         $this->receiver = $receiver;
         return $this;
@@ -121,7 +121,7 @@ class PayoutItem extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setSenderItemId($sender_item_id)
+    public function setSenderItemId($sender_item_id): static
     {
         $this->sender_item_id = $sender_item_id;
         return $this;
@@ -140,17 +140,15 @@ class PayoutItem extends PayPalResourceModel
     /**
      * Obtain the status of a payout item by passing the item ID to the request URI.
      *
-     * @param string $payoutItemId
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return PayoutItemDetails
      */
-    public static function get($payoutItemId, $apiContext = null, $restCall = null)
+    public static function get(string $payoutItemId, $apiContext = null, $restCall = null): \PayPal\Api\PayoutItemDetails
     {
         ArgumentValidator::validate($payoutItemId, 'payoutItemId');
         $payLoad = "";
         $json = self::executeCall(
-            "/v1/payments/payouts-item/$payoutItemId",
+            '/v1/payments/payouts-item/' . $payoutItemId,
             "GET",
             $payLoad,
             null,
@@ -168,14 +166,13 @@ class PayoutItem extends PayPalResourceModel
      * @param string $payoutItemId
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return PayoutItemDetails
      */
-    public static function cancel($payoutItemId, $apiContext = null, $restCall = null)
+    public static function cancel($payoutItemId, $apiContext = null, $restCall = null): \PayPal\Api\PayoutItemDetails
     {
         ArgumentValidator::validate($payoutItemId, 'payoutItemId');
         $payLoad = "";
         $json = self::executeCall(
-            "/v1/payments/payouts-item/$payoutItemId/cancel",
+            sprintf('/v1/payments/payouts-item/%s/cancel', $payoutItemId),
             "POST",
             $payLoad,
             null,

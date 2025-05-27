@@ -12,16 +12,16 @@ class ArrayUtil
 {
     /**
      *
-     * @param array $arr
      * @return true if $arr is an associative array
      */
-    public static function isAssocArray(array $arr)
+    public static function isAssocArray(array $arr): bool
     {
-        foreach ($arr as $k => $v) {
+        foreach (array_keys($arr) as $k) {
             if (is_int($k)) {
                 return false;
             }
         }
+
         return true;
     }
 }

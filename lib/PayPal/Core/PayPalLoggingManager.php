@@ -15,7 +15,7 @@ class PayPalLoggingManager
     /**
      * @var array of logging manager instances with class name as key
      */
-    private static $instances = array();
+    private static array $instances = [];
 
     /**
      * The logger to be used for all messages
@@ -25,23 +25,17 @@ class PayPalLoggingManager
     private $logger;
 
     /**
-     * Logger Name
-     *
-     * @var string
-     */
-    private $loggerName;
-
-    /**
      * Returns the singleton object
      *
      * @param string $loggerName
      * @return $this
      */
-    public static function getInstance($loggerName = __CLASS__)
+    public static function getInstance($loggerName = self::class)
     {
         if (array_key_exists($loggerName, PayPalLoggingManager::$instances)) {
             return PayPalLoggingManager::$instances[$loggerName];
         }
+
         $instance = new self($loggerName);
         PayPalLoggingManager::$instances[$loggerName] = $instance;
         return $instance;
@@ -56,11 +50,10 @@ class PayPalLoggingManager
     {
         $config = PayPalConfigManager::getInstance()->getConfigHashmap();
         // Checks if custom factory defined, and is it an implementation of @PayPalLogFactory
-        $factory = array_key_exists('log.AdapterFactory', $config) && in_array('PayPal\Log\PayPalLogFactory', class_implements($config['log.AdapterFactory'])) ? $config['log.AdapterFactory'] : '\PayPal\Log\PayPalDefaultLogFactory';
+        $factory = array_key_exists('log.AdapterFactory', $config) && in_array(\PayPal\Log\PayPalLogFactory::class, class_implements($config['log.AdapterFactory'])) ? $config['log.AdapterFactory'] : \PayPal\Log\PayPalDefaultLogFactory::class;
         /** @var PayPalLogFactory $factoryInstance */
         $factoryInstance = new $factory();
         $this->logger = $factoryInstance->getLogger($loggerName);
-        $this->loggerName = $loggerName;
     }
 
     /**
@@ -68,7 +61,7 @@ class PayPalLoggingManager
      *
      * @param string $message
      */
-    public function error($message)
+    public function error(string|\Stringable $message): void
     {
         $this->logger->error($message);
     }
@@ -78,7 +71,7 @@ class PayPalLoggingManager
      *
      * @param string $message
      */
-    public function warning($message)
+    public function warning(string|\Stringable $message): void
     {
         $this->logger->warning($message);
     }
@@ -88,7 +81,7 @@ class PayPalLoggingManager
      *
      * @param string $message
      */
-    public function info($message)
+    public function info(string|\Stringable $message): void
     {
         $this->logger->info($message);
     }
@@ -98,7 +91,7 @@ class PayPalLoggingManager
      *
      * @param string $message
      */
-    public function fine($message)
+    public function fine(string|\Stringable $message): void
     {
         $this->info($message);
     }
@@ -108,7 +101,7 @@ class PayPalLoggingManager
      *
      * @param string $message
      */
-    public function debug($message)
+    public function debug(string|\Stringable $message): void
     {
         $config = PayPalConfigManager::getInstance()->getConfigHashmap();
         // Disable debug in live mode.

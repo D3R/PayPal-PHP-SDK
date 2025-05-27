@@ -26,7 +26,7 @@ class AlternatePayment extends PayPalModel
      * 
      * @return $this
      */
-    public function setAlternatePaymentAccountId($alternate_payment_account_id)
+    public function setAlternatePaymentAccountId($alternate_payment_account_id): static
     {
         $this->alternate_payment_account_id = $alternate_payment_account_id;
         return $this;
@@ -49,7 +49,7 @@ class AlternatePayment extends PayPalModel
      * 
      * @return $this
      */
-    public function setExternalCustomerId($external_customer_id)
+    public function setExternalCustomerId($external_customer_id): static
     {
         $this->external_customer_id = $external_customer_id;
         return $this;
@@ -72,7 +72,7 @@ class AlternatePayment extends PayPalModel
      * 
      * @return $this
      */
-    public function setAlternatePaymentProviderId($alternate_payment_provider_id)
+    public function setAlternatePaymentProviderId($alternate_payment_provider_id): static
     {
         $this->alternate_payment_provider_id = $alternate_payment_provider_id;
         return $this;

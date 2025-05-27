@@ -23,7 +23,7 @@ class Transactions extends PayPalModel
      * 
      * @return $this
      */
-    public function setAmount($amount)
+    public function setAmount($amount): static
     {
         $this->amount = $amount;
         return $this;

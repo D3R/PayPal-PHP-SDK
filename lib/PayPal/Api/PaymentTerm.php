@@ -24,7 +24,7 @@ class PaymentTerm extends PayPalModel
      * 
      * @return $this
      */
-    public function setTermType($term_type)
+    public function setTermType($term_type): static
     {
         $this->term_type = $term_type;
         return $this;
@@ -47,7 +47,7 @@ class PaymentTerm extends PayPalModel
      * 
      * @return $this
      */
-    public function setDueDate($due_date)
+    public function setDueDate($due_date): static
     {
         $this->due_date = $due_date;
         return $this;

@@ -12,7 +12,7 @@ class PayPalLogger extends AbstractLogger
     /**
      * @var array Indexed list of all log levels.
      */
-    private $loggingLevels = array(
+    private array $loggingLevels = [
         LogLevel::EMERGENCY,
         LogLevel::ALERT,
         LogLevel::CRITICAL,
@@ -21,7 +21,7 @@ class PayPalLogger extends AbstractLogger
         LogLevel::NOTICE,
         LogLevel::INFO,
         LogLevel::DEBUG
-    );
+    ];
 
     /**
      * Configured Logging Level
@@ -39,34 +39,30 @@ class PayPalLogger extends AbstractLogger
 
     /**
      * Log Enabled
-     *
-     * @var bool
      */
-    private $isLoggingEnabled;
+    private ?bool $isLoggingEnabled = null;
 
     /**
-     * Logger Name. Generally corresponds to class name
-     *
-     * @var string
+     * @param string $className
      */
-    private $loggerName;
-
-    public function __construct($className)
+    public function __construct(/**
+     * Logger Name. Generally corresponds to class name
+     */
+    private $loggerName)
     {
-        $this->loggerName = $className;
         $this->initialize();
     }
 
-    public function initialize()
+    public function initialize(): void
     {
         $config = PayPalConfigManager::getInstance()->getConfigHashmap();
         if (!empty($config)) {
             $this->isLoggingEnabled = (array_key_exists('log.LogEnabled', $config) && $config['log.LogEnabled'] == '1');
             if ($this->isLoggingEnabled) {
-                $this->loggerFile = ($config['log.FileName']) ? $config['log.FileName'] : ini_get('error_log');
+                $this->loggerFile = $config['log.FileName'] ?: ini_get('error_log');
                 $loggingLevel = strtoupper($config['log.LogLevel']);
-                $this->loggingLevel = (isset($loggingLevel) && defined("\\Psr\\Log\\LogLevel::$loggingLevel")) ?
-                    constant("\\Psr\\Log\\LogLevel::$loggingLevel") :
+                $this->loggingLevel = (isset($loggingLevel) && defined(\Psr\Log\LogLevel::class . '::' . $loggingLevel)) ?
+                    constant(\Psr\Log\LogLevel::class . '::' . $loggingLevel) :
                     LogLevel::INFO;
             }
         }
@@ -74,11 +70,9 @@ class PayPalLogger extends AbstractLogger
 
     public function log($level, string|\Stringable $message, array $context = []): void
     {
-        if ($this->isLoggingEnabled) {
-            // Checks if the message is at level below configured logging level
-            if (array_search($level, $this->loggingLevels) <= array_search($this->loggingLevel, $this->loggingLevels)) {
-                error_log("[" . date('d-m-Y H:i:s') . "] " . $this->loggerName . " : " . strtoupper($level) . ": $message\n", 3, $this->loggerFile);
-            }
+        // Checks if the message is at level below configured logging level
+        if ($this->isLoggingEnabled && array_search($level, $this->loggingLevels, true) <= array_search($this->loggingLevel, $this->loggingLevels, true)) {
+            error_log("[" . date('d-m-Y H:i:s') . "] " . $this->loggerName . " : " . strtoupper($level) . sprintf(': %s%s', $message, PHP_EOL), 3, $this->loggerFile);
         }
     }
 }

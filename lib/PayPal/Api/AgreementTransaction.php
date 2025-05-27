@@ -31,7 +31,7 @@ class AgreementTransaction extends PayPalModel
      * 
      * @return $this
      */
-    public function setTransactionId($transaction_id)
+    public function setTransactionId($transaction_id): static
     {
         $this->transaction_id = $transaction_id;
         return $this;
@@ -54,7 +54,7 @@ class AgreementTransaction extends PayPalModel
      * 
      * @return $this
      */
-    public function setStatus($status)
+    public function setStatus($status): static
     {
         $this->status = $status;
         return $this;
@@ -77,7 +77,7 @@ class AgreementTransaction extends PayPalModel
      * 
      * @return $this
      */
-    public function setTransactionType($transaction_type)
+    public function setTransactionType($transaction_type): static
     {
         $this->transaction_type = $transaction_type;
         return $this;
@@ -100,7 +100,7 @@ class AgreementTransaction extends PayPalModel
      * 
      * @return $this
      */
-    public function setAmount($amount)
+    public function setAmount($amount): static
     {
         $this->amount = $amount;
         return $this;
@@ -123,7 +123,7 @@ class AgreementTransaction extends PayPalModel
      * 
      * @return $this
      */
-    public function setFeeAmount($fee_amount)
+    public function setFeeAmount($fee_amount): static
     {
         $this->fee_amount = $fee_amount;
         return $this;
@@ -146,7 +146,7 @@ class AgreementTransaction extends PayPalModel
      * 
      * @return $this
      */
-    public function setNetAmount($net_amount)
+    public function setNetAmount($net_amount): static
     {
         $this->net_amount = $net_amount;
         return $this;
@@ -169,7 +169,7 @@ class AgreementTransaction extends PayPalModel
      * 
      * @return $this
      */
-    public function setPayerEmail($payer_email)
+    public function setPayerEmail($payer_email): static
     {
         $this->payer_email = $payer_email;
         return $this;
@@ -192,7 +192,7 @@ class AgreementTransaction extends PayPalModel
      * 
      * @return $this
      */
-    public function setPayerName($payer_name)
+    public function setPayerName($payer_name): static
     {
         $this->payer_name = $payer_name;
         return $this;
@@ -215,7 +215,7 @@ class AgreementTransaction extends PayPalModel
      * 
      * @return $this
      */
-    public function setTimeStamp($time_stamp)
+    public function setTimeStamp($time_stamp): static
     {
         $this->time_stamp = $time_stamp;
         return $this;
@@ -238,7 +238,7 @@ class AgreementTransaction extends PayPalModel
      * 
      * @return $this
      */
-    public function setTimeZone($time_zone)
+    public function setTimeZone($time_zone): static
     {
         $this->time_zone = $time_zone;
         return $this;

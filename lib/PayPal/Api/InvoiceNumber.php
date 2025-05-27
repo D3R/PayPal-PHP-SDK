@@ -22,7 +22,7 @@ class InvoiceNumber extends PayPalModel
      *
      * @return $this
      */
-    public function setNumber($number) {
+    public function setNumber($number): static {
         $this->number = $number;
         return $this;
     }

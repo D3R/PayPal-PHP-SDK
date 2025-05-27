@@ -14,18 +14,16 @@ class BankTokenTest extends TestCase
 {
     /**
      * Gets Json String of Object BankToken
-     * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"bank_id":"TestSample","external_customer_id":"TestSample","mandate_reference_number":"TestSample"}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
-     * @return BankToken
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\BankToken
     {
         return new BankToken(self::getJson());
     }
@@ -33,9 +31,8 @@ class BankTokenTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     * @return BankToken
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\BankToken
     {
         $obj = new BankToken(self::getJson());
         $this->assertNotNull($obj);
@@ -50,7 +47,7 @@ class BankTokenTest extends TestCase
      * @depends testSerializationDeserialization
      * @param BankToken $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getBankId(), "TestSample");
         $this->assertEquals($obj->getExternalCustomerId(), "TestSample");

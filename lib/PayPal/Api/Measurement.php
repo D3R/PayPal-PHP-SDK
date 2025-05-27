@@ -23,7 +23,7 @@ class Measurement extends PayPalModel
      * 
      * @return $this
      */
-    public function setValue($value)
+    public function setValue($value): static
     {
         $this->value = $value;
         return $this;
@@ -46,7 +46,7 @@ class Measurement extends PayPalModel
      * 
      * @return $this
      */
-    public function setUnit($unit)
+    public function setUnit($unit): static
     {
         $this->unit = $unit;
         return $this;

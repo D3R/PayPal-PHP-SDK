@@ -13,17 +13,17 @@
 /** @var \PayPal\Api\Webhook $webhook */
 $webhook = require __DIR__ . '/../bootstrap.php';
 
-$params = array(
+$params = [
    // 'start_time'=>'2014-12-06T11:00:00Z',
    // 'end_time'=>'2014-12-12T11:00:00Z'
-);
+];
 
 // ### Search Webhook events
 try {
     $output = \PayPal\Api\WebhookEvent::all($params, $apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Search Webhook events", "WebhookEventList", null, null, $ex);
+    ResultPrinter::printError("Search Webhook events", "WebhookEventList", null, null, $exception);
     exit(1);
 }
 

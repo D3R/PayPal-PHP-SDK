@@ -14,20 +14,16 @@ class CreditTest extends TestCase
 {
     /**
      * Gets Json String of Object Credit
-     *
-     * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"id":"TestSample","type":"TestSample"}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
-     *
-     * @return Credit
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\Credit
     {
         return new Credit(self::getJson());
     }
@@ -35,10 +31,8 @@ class CreditTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     *
-     * @return Credit
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\Credit
     {
         $obj = new Credit(self::getJson());
         $this->assertNotNull($obj);
@@ -52,7 +46,7 @@ class CreditTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Credit $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getId(), "TestSample");
         $this->assertEquals($obj->getType(), "TestSample");

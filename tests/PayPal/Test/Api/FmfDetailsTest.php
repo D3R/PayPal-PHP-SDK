@@ -14,18 +14,16 @@ class FmfDetailsTest extends TestCase
 {
     /**
      * Gets Json String of Object FmfDetails
-     * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"filter_type":"TestSample","filter_id":"TestSample","name":"TestSample","description":"TestSample"}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
-     * @return FmfDetails
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\FmfDetails
     {
         return new FmfDetails(self::getJson());
     }
@@ -33,9 +31,8 @@ class FmfDetailsTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     * @return FmfDetails
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\FmfDetails
     {
         $obj = new FmfDetails(self::getJson());
         $this->assertNotNull($obj);
@@ -51,7 +48,7 @@ class FmfDetailsTest extends TestCase
      * @depends testSerializationDeserialization
      * @param FmfDetails $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getFilterType(), "TestSample");
         $this->assertEquals($obj->getFilterId(), "TestSample");

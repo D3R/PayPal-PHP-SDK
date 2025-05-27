@@ -17,7 +17,7 @@ class OpenIdUserinfoTest extends TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
     }
 
@@ -25,7 +25,7 @@ class OpenIdUserinfoTest extends TestCase
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
     }
 
@@ -33,7 +33,7 @@ class OpenIdUserinfoTest extends TestCase
     /**
      * @test
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): void
     {
         $user = new OpenIdUserinfo();
         $user->setAccountType("PERSONAL")->setAgeRange("20-30")->setBirthday("1970-01-01")
@@ -56,9 +56,9 @@ class OpenIdUserinfoTest extends TestCase
     /**
      * @test
      */
-    public function testInvalidParamUserInfoCall()
+    public function testInvalidParamUserInfoCall(): void
     {
-        $this->setExpectedException('PayPal\Exception\PayPalConnectionException');
-        OpenIdUserinfo::getUserinfo(array('access_token' => 'accessToken'));
+        $this->setExpectedException(\PayPal\Exception\PayPalConnectionException::class);
+        OpenIdUserinfo::getUserinfo(['access_token' => 'accessToken']);
     }
 }

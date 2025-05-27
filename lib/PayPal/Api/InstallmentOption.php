@@ -25,7 +25,7 @@ class InstallmentOption extends PayPalModel
      * 
      * @return $this
      */
-    public function setTerm($term)
+    public function setTerm($term): static
     {
         $this->term = $term;
         return $this;
@@ -48,7 +48,7 @@ class InstallmentOption extends PayPalModel
      * 
      * @return $this
      */
-    public function setMonthlyPayment($monthly_payment)
+    public function setMonthlyPayment($monthly_payment): static
     {
         $this->monthly_payment = $monthly_payment;
         return $this;
@@ -71,7 +71,7 @@ class InstallmentOption extends PayPalModel
      * 
      * @return $this
      */
-    public function setDiscountAmount($discount_amount)
+    public function setDiscountAmount($discount_amount): static
     {
         $this->discount_amount = $discount_amount;
         return $this;
@@ -94,7 +94,7 @@ class InstallmentOption extends PayPalModel
      * 
      * @return $this
      */
-    public function setDiscountPercentage($discount_percentage)
+    public function setDiscountPercentage($discount_percentage): static
     {
         $this->discount_percentage = $discount_percentage;
         return $this;

@@ -16,33 +16,26 @@ class ApiContext
 {
 
     /**
-     * Unique request id to be used for this call
-     * The user can either generate one as per application
-     * needs or let the SDK generate one
-     *
-     * @var null|string $requestId
-     */
-    private $requestId;
-
-    /**
-     * This is a placeholder for holding credential for the request
-     * If the value is not set, it would get the value from @\PayPal\Core\PayPalCredentialManager
-     *
-     * @var \PayPal\Auth\OAuthTokenCredential
-     */
-    private $credential;
-
-
-    /**
      * Construct
      *
      * @param \PayPal\Auth\OAuthTokenCredential $credential
      * @param string|null                       $requestId
      */
-    public function __construct($credential = null, $requestId = null)
+    public function __construct(
+        /**
+         * This is a placeholder for holding credential for the request
+        If the value is not set, it would get the value from @\PayPal\Core\PayPalCredentialManager
+         * @\PayPal\Core\PayPalCredentialManager
+        */
+        private $credential = null,
+        /**
+         * Unique request id to be used for this call
+         * The user can either generate one as per application
+         * needs or let the SDK generate one
+         */
+        private $requestId = null
+    )
     {
-        $this->requestId = $requestId;
-        $this->credential = $credential;
     }
 
     /**
@@ -55,27 +48,33 @@ class ApiContext
         if ($this->credential == null) {
             return PayPalCredentialManager::getInstance()->getCredentialObject();
         }
+
         return $this->credential;
     }
 
-    public function getRequestHeaders()
+    /**
+     * @return mixed[]
+     */
+    public function getRequestHeaders(): array
     {
         $result = PayPalConfigManager::getInstance()->get('http.headers');
-        $headers = array();
+        $headers = [];
         foreach ($result as $header => $value) {
             $headerName = ltrim($header, 'http.headers');
             $headers[$headerName] = $value;
         }
+
         return $headers;
     }
 
-    public function addRequestHeader($name, $value)
+    public function addRequestHeader($name, $value): void
     {
         // Determine if the name already has a 'http.headers' prefix. If not, add one.
-        if (!(substr($name, 0, strlen('http.headers')) === 'http.headers')) {
+        if (!str_starts_with($name, 'http.headers')) {
             $name = 'http.headers.' . $name;
         }
-        PayPalConfigManager::getInstance()->addConfigs(array($name => $value));
+
+        PayPalConfigManager::getInstance()->addConfigs([$name => $value]);
     }
 
     /**
@@ -93,7 +92,7 @@ class ApiContext
      *
      * @param string $requestId the PayPal-Request-Id value to use
      */
-    public function setRequestId($requestId)
+    public function setRequestId($requestId): void
     {
         $this->requestId = $requestId;
     }
@@ -117,7 +116,7 @@ class ApiContext
      *
      * @param array $config SDK configuration parameters
      */
-    public function setConfig(array $config)
+    public function setConfig(array $config): void
     {
         PayPalConfigManager::getInstance()->addConfigs($config);
     }
@@ -148,10 +147,8 @@ class ApiContext
      * can be used to set the PayPal-Request-Id header
      * that is used for idempotency
      * @deprecated
-     *
-     * @return string
      */
-    private function generateRequestId()
+    private function generateRequestId(): string
     {
         static $pid = -1;
         static $addr = -1;
@@ -161,11 +158,7 @@ class ApiContext
         }
 
         if ($addr == -1) {
-            if (array_key_exists('SERVER_ADDR', $_SERVER)) {
-                $addr = ip2long($_SERVER['SERVER_ADDR']);
-            } else {
-                $addr = php_uname('n');
-            }
+            $addr = array_key_exists('SERVER_ADDR', $_SERVER) ? ip2long($_SERVER['SERVER_ADDR']) : php_uname('n');
         }
 
         return $addr . $pid . $_SERVER['REQUEST_TIME'] . mt_rand(0, 0xffff);

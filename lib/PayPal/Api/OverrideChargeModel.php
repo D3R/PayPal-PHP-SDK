@@ -23,7 +23,7 @@ class OverrideChargeModel extends PayPalModel
      * 
      * @return $this
      */
-    public function setChargeId($charge_id)
+    public function setChargeId($charge_id): static
     {
         $this->charge_id = $charge_id;
         return $this;
@@ -46,7 +46,7 @@ class OverrideChargeModel extends PayPalModel
      * 
      * @return $this
      */
-    public function setAmount($amount)
+    public function setAmount($amount): static
     {
         $this->amount = $amount;
         return $this;

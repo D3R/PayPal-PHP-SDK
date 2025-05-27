@@ -29,7 +29,7 @@ class PaymentDetail extends PayPalModel
      * 
      * @return $this
      */
-    public function setType($type)
+    public function setType($type): static
     {
         $this->type = $type;
         return $this;
@@ -52,7 +52,7 @@ class PaymentDetail extends PayPalModel
      * 
      * @return $this
      */
-    public function setTransactionId($transaction_id)
+    public function setTransactionId($transaction_id): static
     {
         $this->transaction_id = $transaction_id;
         return $this;
@@ -76,7 +76,7 @@ class PaymentDetail extends PayPalModel
      * 
      * @return $this
      */
-    public function setTransactionType($transaction_type)
+    public function setTransactionType($transaction_type): static
     {
         $this->transaction_type = $transaction_type;
         return $this;
@@ -99,7 +99,7 @@ class PaymentDetail extends PayPalModel
      * 
      * @return $this
      */
-    public function setDate($date)
+    public function setDate($date): static
     {
         $this->date = $date;
         return $this;
@@ -123,7 +123,7 @@ class PaymentDetail extends PayPalModel
      * 
      * @return $this
      */
-    public function setMethod($method)
+    public function setMethod($method): static
     {
         $this->method = $method;
         return $this;
@@ -146,7 +146,7 @@ class PaymentDetail extends PayPalModel
      * 
      * @return $this
      */
-    public function setNote($note)
+    public function setNote($note): static
     {
         $this->note = $note;
         return $this;
@@ -169,7 +169,7 @@ class PaymentDetail extends PayPalModel
      * 
      * @return $this
      */
-    public function setAmount($amount)
+    public function setAmount($amount): static
     {
         $this->amount = $amount;
         return $this;

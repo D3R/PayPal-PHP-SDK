@@ -31,7 +31,7 @@ class Incentive extends PayPalModel
      * 
      * @return $this
      */
-    public function setId($id)
+    public function setId($id): static
     {
         $this->id = $id;
         return $this;
@@ -54,7 +54,7 @@ class Incentive extends PayPalModel
      * 
      * @return $this
      */
-    public function setCode($code)
+    public function setCode($code): static
     {
         $this->code = $code;
         return $this;
@@ -77,7 +77,7 @@ class Incentive extends PayPalModel
      * 
      * @return $this
      */
-    public function setName($name)
+    public function setName($name): static
     {
         $this->name = $name;
         return $this;
@@ -100,7 +100,7 @@ class Incentive extends PayPalModel
      * 
      * @return $this
      */
-    public function setDescription($description)
+    public function setDescription($description): static
     {
         $this->description = $description;
         return $this;
@@ -123,7 +123,7 @@ class Incentive extends PayPalModel
      * 
      * @return $this
      */
-    public function setMinimumPurchaseAmount($minimum_purchase_amount)
+    public function setMinimumPurchaseAmount($minimum_purchase_amount): static
     {
         $this->minimum_purchase_amount = $minimum_purchase_amount;
         return $this;
@@ -146,7 +146,7 @@ class Incentive extends PayPalModel
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setLogoImageUrl($logo_image_url)
+    public function setLogoImageUrl($logo_image_url): static
     {
         UrlValidator::validate($logo_image_url, "LogoImageUrl");
         $this->logo_image_url = $logo_image_url;
@@ -170,7 +170,7 @@ class Incentive extends PayPalModel
      * 
      * @return $this
      */
-    public function setExpiryDate($expiry_date)
+    public function setExpiryDate($expiry_date): static
     {
         $this->expiry_date = $expiry_date;
         return $this;
@@ -194,7 +194,7 @@ class Incentive extends PayPalModel
      * 
      * @return $this
      */
-    public function setType($type)
+    public function setType($type): static
     {
         $this->type = $type;
         return $this;
@@ -217,7 +217,7 @@ class Incentive extends PayPalModel
      * 
      * @return $this
      */
-    public function setTerms($terms)
+    public function setTerms($terms): static
     {
         $this->terms = $terms;
         return $this;

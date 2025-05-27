@@ -26,7 +26,7 @@ class FlowConfig extends PayPalModel
      * 
      * @return $this
      */
-    public function setLandingPageType($landing_page_type)
+    public function setLandingPageType($landing_page_type): static
     {
         $this->landing_page_type = $landing_page_type;
         return $this;
@@ -49,7 +49,7 @@ class FlowConfig extends PayPalModel
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setBankTxnPendingUrl($bank_txn_pending_url)
+    public function setBankTxnPendingUrl($bank_txn_pending_url): static
     {
         UrlValidator::validate($bank_txn_pending_url, "BankTxnPendingUrl");
         $this->bank_txn_pending_url = $bank_txn_pending_url;
@@ -73,7 +73,7 @@ class FlowConfig extends PayPalModel
      * 
      * @return $this
      */
-    public function setUserAction($user_action)
+    public function setUserAction($user_action): static
     {
         $this->user_action = $user_action;
         return $this;
@@ -96,7 +96,7 @@ class FlowConfig extends PayPalModel
      * 
      * @return $this
      */
-    public function setReturnUriHttpMethod($return_uri_http_method)
+    public function setReturnUriHttpMethod($return_uri_http_method): static
     {
         $this->return_uri_http_method = $return_uri_http_method;
         return $this;

@@ -20,32 +20,28 @@ use PayPal\Exception\PayPalMissingCredentialException;
 class RestHandler implements IPayPalHandler
 {
     /**
-     * Private Variable
-     *
-     * @var \Paypal\Rest\ApiContext $apiContext
-     */
-    private $apiContext;
-
-    /**
      * Construct
      *
      * @param \Paypal\Rest\ApiContext $apiContext
      */
-    public function __construct($apiContext)
+    public function __construct(
+        /**
+         * Private Variable
+         */
+        private $apiContext
+    )
     {
-        $this->apiContext = $apiContext;
     }
 
     /**
      * @param PayPalHttpConfig $httpConfig
      * @param string                    $request
      * @param mixed                     $options
-     * @return mixed|void
      * @throws PayPalConfigurationException
      * @throws PayPalInvalidCredentialException
      * @throws PayPalMissingCredentialException
      */
-    public function handle($httpConfig, $request, $options)
+    public function handle($httpConfig, $request, $options): void
     {
         $credential = $this->apiContext->getCredential();
         $config = $this->apiContext->getConfig();
@@ -68,7 +64,7 @@ class RestHandler implements IPayPalHandler
 
         $httpConfig->setUrl(
             rtrim(trim($this->_getEndpoint($config)), '/') .
-            (isset($options['path']) ? $options['path'] : '')
+            ($options['path'] ?? '')
         );
 
         // Overwrite Expect Header to disable 100 Continue Issue
@@ -78,13 +74,14 @@ class RestHandler implements IPayPalHandler
             $httpConfig->addHeader("User-Agent", PayPalUserAgent::getValue(PayPalConstants::SDK_NAME, PayPalConstants::SDK_VERSION));
         }
 
-        if (!is_null($credential) && $credential instanceof OAuthTokenCredential && is_null($httpConfig->getHeader('Authorization'))) {
+        if (is_null($httpConfig->getHeader('Authorization'))) {
             $httpConfig->addHeader('Authorization', "Bearer " . $credential->getAccessToken($config), false);
         }
 
         if (($httpConfig->getMethod() == 'POST' || $httpConfig->getMethod() == 'PUT') && !is_null($this->apiContext->getRequestId())) {
             $httpConfig->addHeader('PayPal-Request-Id', $this->apiContext->getRequestId());
         }
+
         // Add any additional Headers that they may have provided
         $headers = $this->apiContext->getRequestHeaders();
         foreach ($headers as $key => $value) {
@@ -105,17 +102,11 @@ class RestHandler implements IPayPalHandler
         if (isset($config['service.EndPoint'])) {
             return $config['service.EndPoint'];
         } elseif (isset($config['mode'])) {
-            switch (strtoupper($config['mode'])) {
-                case 'SANDBOX':
-                    return PayPalConstants::REST_SANDBOX_ENDPOINT;
-                    break;
-                case 'LIVE':
-                    return PayPalConstants::REST_LIVE_ENDPOINT;
-                    break;
-                default:
-                    throw new PayPalConfigurationException('The mode config parameter must be set to either sandbox/live');
-                    break;
-            }
+            return match (strtoupper($config['mode'])) {
+                'SANDBOX' => PayPalConstants::REST_SANDBOX_ENDPOINT,
+                'LIVE' => PayPalConstants::REST_LIVE_ENDPOINT,
+                default => throw new PayPalConfigurationException('The mode config parameter must be set to either sandbox/live'),
+            };
         } else {
             // Defaulting to Sandbox
             return PayPalConstants::REST_SANDBOX_ENDPOINT;

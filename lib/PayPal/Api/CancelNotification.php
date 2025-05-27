@@ -26,7 +26,7 @@ class CancelNotification extends PayPalModel
      * 
      * @return $this
      */
-    public function setSubject($subject)
+    public function setSubject($subject): static
     {
         $this->subject = $subject;
         return $this;
@@ -49,7 +49,7 @@ class CancelNotification extends PayPalModel
      * 
      * @return $this
      */
-    public function setNote($note)
+    public function setNote($note): static
     {
         $this->note = $note;
         return $this;
@@ -72,7 +72,7 @@ class CancelNotification extends PayPalModel
      * 
      * @return $this
      */
-    public function setSendToMerchant($send_to_merchant)
+    public function setSendToMerchant($send_to_merchant): static
     {
         $this->send_to_merchant = $send_to_merchant;
         return $this;
@@ -95,7 +95,7 @@ class CancelNotification extends PayPalModel
      * 
      * @return $this
      */
-    public function setSendToPayer($send_to_payer)
+    public function setSendToPayer($send_to_payer): static
     {
         $this->send_to_payer = $send_to_payer;
         return $this;
@@ -118,7 +118,7 @@ class CancelNotification extends PayPalModel
      * 
      * @return $this
      */
-    public function setCcEmails($cc_emails)
+    public function setCcEmails($cc_emails): static
     {
         $this->cc_emails = $cc_emails;
         return $this;
@@ -140,13 +140,13 @@ class CancelNotification extends PayPalModel
      * @param string $string
      * @return $this
      */
-    public function addCcEmail($string)
+    public function addCcEmail($string): static
     {
         if (!$this->getCcEmails()) {
-            return $this->setCcEmails(array($string));
+            return $this->setCcEmails([$string]);
         } else {
             return $this->setCcEmails(
-                array_merge($this->getCcEmails(), array($string))
+                array_merge($this->getCcEmails(), [$string])
             );
         }
     }
@@ -157,10 +157,10 @@ class CancelNotification extends PayPalModel
      * @param string $string
      * @return $this
      */
-    public function removeCcEmail($string)
+    public function removeCcEmail($string): static
     {
         return $this->setCcEmails(
-            array_diff($this->getCcEmails(), array($string))
+            array_diff($this->getCcEmails(), [$string])
         );
     }
 

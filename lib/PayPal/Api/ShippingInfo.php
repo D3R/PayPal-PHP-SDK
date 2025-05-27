@@ -26,7 +26,7 @@ class ShippingInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setFirstName($first_name)
+    public function setFirstName($first_name): static
     {
         $this->first_name = $first_name;
         return $this;
@@ -49,7 +49,7 @@ class ShippingInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setLastName($last_name)
+    public function setLastName($last_name): static
     {
         $this->last_name = $last_name;
         return $this;
@@ -72,7 +72,7 @@ class ShippingInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setBusinessName($business_name)
+    public function setBusinessName($business_name): static
     {
         $this->business_name = $business_name;
         return $this;
@@ -94,7 +94,7 @@ class ShippingInfo extends PayPalModel
      * @param \PayPal\Api\Phone $phone
      * @return $this
      */
-    public function setPhone($phone)
+    public function setPhone($phone): static
     {
         $this->phone = $phone;
         return $this;
@@ -116,7 +116,7 @@ class ShippingInfo extends PayPalModel
      * @param string $email
      * @return $this
      */
-    public function setEmail($email)
+    public function setEmail($email): static
     {
         $this->email = $email;
         return $this;
@@ -139,7 +139,7 @@ class ShippingInfo extends PayPalModel
      * 
      * @return $this
      */
-    public function setAddress($address)
+    public function setAddress($address): static
     {
         $this->address = $address;
         return $this;

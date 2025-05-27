@@ -25,7 +25,7 @@ class FundingDetail extends PayPalModel
      * 
      * @return $this
      */
-    public function setClearingTime($clearing_time)
+    public function setClearingTime($clearing_time): static
     {
         $this->clearing_time = $clearing_time;
         return $this;
@@ -48,7 +48,7 @@ class FundingDetail extends PayPalModel
      * 
      * @return $this
      */
-    public function setPaymentHoldDate($payment_hold_date)
+    public function setPaymentHoldDate($payment_hold_date): static
     {
         $this->payment_hold_date = $payment_hold_date;
         return $this;
@@ -71,7 +71,7 @@ class FundingDetail extends PayPalModel
      * 
      * @return $this
      */
-    public function setPaymentDebitDate($payment_debit_date)
+    public function setPaymentDebitDate($payment_debit_date): static
     {
         $this->payment_debit_date = $payment_debit_date;
         return $this;
@@ -95,7 +95,7 @@ class FundingDetail extends PayPalModel
      * 
      * @return $this
      */
-    public function setProcessingType($processing_type)
+    public function setProcessingType($processing_type): static
     {
         $this->processing_type = $processing_type;
         return $this;

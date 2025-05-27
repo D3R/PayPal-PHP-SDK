@@ -7,7 +7,7 @@
 // We will be re-using the sample code to get a web profile. GetWebProfile.php will
 // create a new web profileId for sample, and return the web profile object.
 /** @var \PayPal\Api\WebProfile $webProfile */
-$webProfile = require 'GetWebProfile.php';
+$webProfile = require __DIR__ . '/GetWebProfile.php';
 
 // ### Create Patch Operation
 // APIs allows us to pass an array of patches
@@ -29,16 +29,16 @@ $patchOperation2->setOp("remove")
 
 
 //Generate an array of patch operations
-$patches = array($patchOperation1, $patchOperation2);
+$patches = [$patchOperation1, $patchOperation2];
 
 try {
     // Execute the partial update, to carry out these two operations on a given web profile object
     if ($webProfile->partial_update($patches, $apiContext)) {
         $webProfile = \PayPal\Api\WebProfile::get($webProfile->getId(), $apiContext);
     }
-} catch (\Exception $ex) {
+} catch (\Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Partially Updated Web Profile", "Web Profile", $webProfile->getId(), $patches, $ex);
+    ResultPrinter::printError("Partially Updated Web Profile", "Web Profile", $webProfile->getId(), $patches, $exception);
     exit(1);
 }
 

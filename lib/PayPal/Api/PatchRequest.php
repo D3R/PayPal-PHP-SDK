@@ -22,7 +22,7 @@ class PatchRequest extends PayPalModel
      * 
      * @return $this
      */
-    public function setPatches($patches)
+    public function setPatches($patches): static
     {
         $this->patches = $patches;
         return $this;
@@ -44,13 +44,13 @@ class PatchRequest extends PayPalModel
      * @param \PayPal\Api\Patch $patch
      * @return $this
      */
-    public function addPatch($patch)
+    public function addPatch($patch): static
     {
         if (!$this->getPatches()) {
-            return $this->setPatches(array($patch));
+            return $this->setPatches([$patch]);
         } else {
             return $this->setPatches(
-                array_merge($this->getPatches(), array($patch))
+                array_merge($this->getPatches(), [$patch])
             );
         }
     }
@@ -61,10 +61,10 @@ class PatchRequest extends PayPalModel
      * @param \PayPal\Api\Patch $patch
      * @return $this
      */
-    public function removePatch($patch)
+    public function removePatch($patch): static
     {
         return $this->setPatches(
-            array_diff($this->getPatches(), array($patch))
+            array_diff($this->getPatches(), [$patch])
         );
     }
 
@@ -75,12 +75,13 @@ class PatchRequest extends PayPalModel
      * @param int $options
      * @return mixed|string
      */
-    public function toJSON($options = 0)
+    public function toJSON($options = 0): string
     {
-        $json = array();
+        $json = [];
         foreach ($this->getPatches() as $patch) {
             $json[] = $patch->toArray();
         }
+
         return str_replace('\\/', '/', json_encode($json, $options));
     }
 }

@@ -14,20 +14,16 @@ class CarrierAccountTokenTest extends TestCase
 {
     /**
      * Gets Json String of Object CarrierAccountToken
-     *
-     * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"carrier_account_id":"TestSample","external_customer_id":"TestSample"}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
-     *
-     * @return CarrierAccountToken
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\CarrierAccountToken
     {
         return new CarrierAccountToken(self::getJson());
     }
@@ -35,10 +31,8 @@ class CarrierAccountTokenTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     *
-     * @return CarrierAccountToken
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\CarrierAccountToken
     {
         $obj = new CarrierAccountToken(self::getJson());
         $this->assertNotNull($obj);
@@ -52,7 +46,7 @@ class CarrierAccountTokenTest extends TestCase
      * @depends testSerializationDeserialization
      * @param CarrierAccountToken $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getCarrierAccountId(), "TestSample");
         $this->assertEquals($obj->getExternalCustomerId(), "TestSample");

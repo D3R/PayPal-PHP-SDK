@@ -14,18 +14,16 @@ class PayoutBatchHeaderTest extends TestCase
 {
     /**
      * Gets Json String of Object PayoutBatchHeader
-     * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"payout_batch_id":"TestSample","batch_status":"TestSample","time_created":"TestSample","time_completed":"TestSample","sender_batch_header":' .PayoutSenderBatchHeaderTest::getJson() . ',"amount":' .CurrencyTest::getJson() . ',"fees":' .CurrencyTest::getJson() . ',"errors":' .ErrorTest::getJson() . ',"links":' .LinksTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
-     * @return PayoutBatchHeader
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\PayoutBatchHeader
     {
         return new PayoutBatchHeader(self::getJson());
     }
@@ -33,9 +31,8 @@ class PayoutBatchHeaderTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     * @return PayoutBatchHeader
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\PayoutBatchHeader
     {
         $obj = new PayoutBatchHeader(self::getJson());
         $this->assertNotNull($obj);
@@ -56,7 +53,7 @@ class PayoutBatchHeaderTest extends TestCase
      * @depends testSerializationDeserialization
      * @param PayoutBatchHeader $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getPayoutBatchId(), "TestSample");
         $this->assertEquals($obj->getBatchStatus(), "TestSample");

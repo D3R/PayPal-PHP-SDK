@@ -23,13 +23,10 @@ class PayPalInvalidCredentialException extends \Exception
 
     /**
      * prints error message
-     *
-     * @return string
      */
-    public function errorMessage()
+    public function errorMessage(): string
     {
-        $errorMsg = 'Error on line ' . $this->getLine() . ' in ' . $this->getFile()
+        return 'Error on line ' . $this->getLine() . ' in ' . $this->getFile()
             . ': <b>' . $this->getMessage() . '</b>';
-        return $errorMsg;
     }
 }

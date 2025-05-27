@@ -8,7 +8,7 @@
 
 // Retrieving the Agreement object from Suspend Agreement Sample to demonstrate the List
 /** @var Agreement $suspendedAgreement */
-$suspendedAgreement = require 'SuspendBillingAgreement.php';
+$suspendedAgreement = require __DIR__ . '/SuspendBillingAgreement.php';
 
 use PayPal\Api\Agreement;
 use PayPal\Api\AgreementStateDescriptor;
@@ -22,9 +22,9 @@ try {
 
     // Lets get the updated Agreement Object
     $agreement = Agreement::get($suspendedAgreement->getId(), $apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printResult("Reactivate the Agreement", "Agreement", $agreement->getId(), $suspendedAgreement, $ex);
+    ResultPrinter::printResult("Reactivate the Agreement", "Agreement", $agreement->getId(), $suspendedAgreement, $exception);
     exit(1);
 }
 

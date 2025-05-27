@@ -14,18 +14,16 @@ class RefundRequestTest extends TestCase
 {
     /**
      * Gets Json String of Object RefundRequest
-     * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"amount":' .AmountTest::getJson() . ',"description":"TestSample","refund_type":"TestSample","refund_source":"TestSample","reason":"TestSample","invoice_number":"TestSample","refund_advice":true,"is_non_platform_transaction":"TestSample"}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
-     * @return RefundRequest
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\RefundRequest
     {
         return new RefundRequest(self::getJson());
     }
@@ -33,9 +31,8 @@ class RefundRequestTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     * @return RefundRequest
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\RefundRequest
     {
         $obj = new RefundRequest(self::getJson());
         $this->assertNotNull($obj);
@@ -53,7 +50,7 @@ class RefundRequestTest extends TestCase
      * @depends testSerializationDeserialization
      * @param RefundRequest $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getAmount(), AmountTest::getObject());
         $this->assertEquals($obj->getDescription(), "TestSample");

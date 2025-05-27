@@ -14,20 +14,16 @@ class DetailsTest extends TestCase
 {
     /**
      * Gets Json String of Object Details
-     *
-     * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"subtotal":"12.34","shipping":"12.34","tax":"12.34","handling_fee":"12.34","shipping_discount":"12.34","insurance":"12.34","gift_wrap":"12.34","fee":"12.34"}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
-     *
-     * @return Details
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\Details
     {
         return new Details(self::getJson());
     }
@@ -35,10 +31,8 @@ class DetailsTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     *
-     * @return Details
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\Details
     {
         $obj = new Details(self::getJson());
         $this->assertNotNull($obj);
@@ -58,7 +52,7 @@ class DetailsTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Details $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getSubtotal(), "12.34");
         $this->assertEquals($obj->getShipping(), "12.34");

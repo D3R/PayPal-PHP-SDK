@@ -14,54 +14,40 @@ class PayPalHttpConnection
 {
 
     /**
-     * @var PayPalHttpConfig
-     */
-    private $httpConfig;
-
-    /**
      * LoggingManager
      *
      * @var PayPalLoggingManager
      */
     private $logger;
 
-    /**
-     * @var array
-     */
-    private $responseHeaders = array();
+    private array $responseHeaders = [];
 
-    /**
-     * @var bool
-     */
-    private $skippedHttpStatusLine = false;
+    private bool $skippedHttpStatusLine = false;
 
     /**
      * Default Constructor
      *
-     * @param PayPalHttpConfig $httpConfig
-     * @param array            $config
      * @throws PayPalConfigurationException
      */
-    public function __construct(PayPalHttpConfig $httpConfig, array $config)
+    public function __construct(private PayPalHttpConfig $httpConfig, array $config)
     {
         if (!function_exists("curl_init")) {
             throw new PayPalConfigurationException("Curl module is not available on this system");
         }
-        $this->httpConfig = $httpConfig;
-        $this->logger = PayPalLoggingManager::getInstance(__CLASS__);
+
+        $this->logger = PayPalLoggingManager::getInstance(self::class);
     }
 
     /**
      * Gets all Http Headers
-     *
-     * @return array
      */
-    private function getHttpHeaders()
+    private function getHttpHeaders(): array
     {
-        $ret = array();
+        $ret = [];
         foreach ($this->httpConfig->getHeaders() as $k => $v) {
-            $ret[] = "$k: $v";
+            $ret[] = sprintf('%s: %s', $k, $v);
         }
+
         return $ret;
     }
 
@@ -70,9 +56,8 @@ class PayPalHttpConnection
      *
      * @param resource $ch
      * @param string $data
-     * @return int
      */
-    protected function parseResponseHeaders($ch, $data) {
+    protected function parseResponseHeaders($ch, $data): int {
         if (!$this->skippedHttpStatusLine) {
             $this->skippedHttpStatusLine = true;
             return strlen($data);
@@ -84,11 +69,11 @@ class PayPalHttpConnection
         }
 
         // Added condition to ignore extra header which dont have colon ( : )
-        if (strpos($trimmedData, ":") == false) {
+        if (!str_contains($trimmedData, ":")) {
             return strlen($data);
         }
         
-        list($key, $value) = explode(":", $trimmedData, 2);
+        [$key, $value] = explode(":", $trimmedData, 2);
 
         $key = trim($key);
         $value = trim($value);
@@ -110,13 +95,13 @@ class PayPalHttpConnection
      * Implodes a key/value array for printing.
      *
      * @param array $arr
-     * @return string
      */
-    protected function implodeArray($arr) {
+    protected function implodeArray($arr): string {
         $retStr = '';
         foreach($arr as $key => $value) {
             $retStr .= $key . ': ' . $value . ', ';
         }
+
         rtrim($retStr, ', ');
         return $retStr;
     }
@@ -125,10 +110,9 @@ class PayPalHttpConnection
      * Executes an HTTP request
      *
      * @param string $data query string OR POST content as a string
-     * @return mixed
      * @throws PayPalConnectionException
      */
-    public function execute($data)
+    public function execute(?string $data): string|bool
     {
         //Initialize the logger
         $this->logger->info($this->httpConfig->getMethod() . ' ' . $this->httpConfig->getUrl());
@@ -139,6 +123,7 @@ class PayPalHttpConnection
         if (empty($options[CURLOPT_HTTPHEADER])) {
             unset($options[CURLOPT_HTTPHEADER]);
         }
+
         curl_setopt_array($ch, $options);
         curl_setopt($ch, CURLOPT_URL, $this->httpConfig->getUrl());
         curl_setopt($ch, CURLOPT_HEADER, false);
@@ -163,9 +148,9 @@ class PayPalHttpConnection
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $this->httpConfig->getMethod());
         }
 
-        $this->responseHeaders = array();
+        $this->responseHeaders = [];
         $this->skippedHttpStatusLine = false;
-        curl_setopt($ch, CURLOPT_HEADERFUNCTION, array($this, 'parseResponseHeaders'));
+        curl_setopt($ch, CURLOPT_HEADERFUNCTION, [$this, 'parseResponseHeaders']);
 
         //Execute Curl Request
         $result = curl_exec($ch);
@@ -175,14 +160,14 @@ class PayPalHttpConnection
         //Retry if Certificate Exception
         if (curl_errno($ch) == 60) {
             $this->logger->info("Invalid or no certificate authority found - Retrying using bundled CA certs file");
-            curl_setopt($ch, CURLOPT_CAINFO, dirname(__FILE__) . '/cacert.pem');
+            curl_setopt($ch, CURLOPT_CAINFO, __DIR__ . '/cacert.pem');
             $result = curl_exec($ch);
             //Retrieve Response Status
             $httpStatus = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         }
 
         //Throw Exception if Retries and Certificates doenst work
-        if (curl_errno($ch)) {
+        if (curl_errno($ch) !== 0) {
             $ex = new PayPalConnectionException(
                 $this->httpConfig->getUrl(),
                 curl_error($ch),
@@ -195,7 +180,7 @@ class PayPalHttpConnection
         // Get Request and Response Headers
         $requestHeaders = curl_getinfo($ch, CURLINFO_HEADER_OUT);
         $this->logger->debug("Request Headers \t: " . str_replace("\r\n", ", ", $requestHeaders));
-        $this->logger->debug(($data && $data != '' ? "Request Data\t\t: " . $data : "No Request Payload") . "\n" . str_repeat('-', 128) . "\n");
+        $this->logger->debug(($data && $data !== '' ? "Request Data\t\t: " . $data : "No Request Payload") . "\n" . str_repeat('-', 128) . "\n");
         $this->logger->info("Response Status \t: " . $httpStatus);
         $this->logger->debug("Response Headers\t: " . $this->implodeArray($this->responseHeaders));
 
@@ -206,11 +191,11 @@ class PayPalHttpConnection
         if ($httpStatus < 200 || $httpStatus >= 300) {
             $ex = new PayPalConnectionException(
                 $this->httpConfig->getUrl(),
-                "Got Http response code $httpStatus when accessing {$this->httpConfig->getUrl()}.",
+                sprintf('Got Http response code %s when accessing %s.', $httpStatus, $this->httpConfig->getUrl()),
                 $httpStatus
             );
             $ex->setData($result);
-            $this->logger->error("Got Http response code $httpStatus when accessing {$this->httpConfig->getUrl()}. " . $result);
+            $this->logger->error(sprintf('Got Http response code %s when accessing %s. ', $httpStatus, $this->httpConfig->getUrl()) . $result);
             $this->logger->debug("\n\n" . str_repeat('=', 128) . "\n");
             throw $ex;
         }

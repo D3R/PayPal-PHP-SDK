@@ -25,7 +25,7 @@ class Currency extends PayPalModel
      * 
      * @return $this
      */
-    public function setCurrency($currency)
+    public function setCurrency($currency): static
     {
         $this->currency = $currency;
         return $this;
@@ -48,7 +48,7 @@ class Currency extends PayPalModel
      * 
      * @return $this
      */
-    public function setValue($value)
+    public function setValue($value): static
     {
         NumericValidator::validate($value, "Value");
         $value = FormatConverter::formatToPrice($value, $this->getCurrency());

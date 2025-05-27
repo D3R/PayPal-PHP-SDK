@@ -14,18 +14,16 @@ class ShippingAddressTest extends TestCase
 {
     /**
      * Gets Json String of Object ShippingAddress
-     * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"id":"TestSample","recipient_name":"TestSample","default_address":true}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
-     * @return ShippingAddress
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\ShippingAddress
     {
         return new ShippingAddress(self::getJson());
     }
@@ -33,9 +31,8 @@ class ShippingAddressTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     * @return ShippingAddress
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\ShippingAddress
     {
         $obj = new ShippingAddress(self::getJson());
         $this->assertNotNull($obj);
@@ -50,7 +47,7 @@ class ShippingAddressTest extends TestCase
      * @depends testSerializationDeserialization
      * @param ShippingAddress $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getId(), "TestSample");
         $this->assertEquals($obj->getRecipientName(), "TestSample");

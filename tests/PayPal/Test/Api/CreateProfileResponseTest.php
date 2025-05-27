@@ -23,9 +23,8 @@ class CreateProfileResponseTest extends TestCase
 
     /**
      * Gets Object Instance with Json data filled in
-     * @return CreateProfileResponse
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\CreateProfileResponse
     {
         return new CreateProfileResponse(self::getJson());
     }
@@ -33,9 +32,8 @@ class CreateProfileResponseTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     * @return CreateProfileResponse
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\CreateProfileResponse
     {
         $obj = new CreateProfileResponse(self::getJson());
         $this->assertNotNull($obj);
@@ -48,7 +46,7 @@ class CreateProfileResponseTest extends TestCase
      * @depends testSerializationDeserialization
      * @param CreateProfileResponse $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getId(), "TestSample");
     }

@@ -10,15 +10,15 @@
 // In samples we are using CreateWebhook.php sample to get the created instance of webhook.
 // However, in real case scenario, we could use just the ID from database or retrieved from the form.
 /** @var \PayPal\Api\Webhook $webhook */
-$webhook = require 'CreateWebhook.php';
+$webhook = require __DIR__ . '/CreateWebhook.php';
 $webhookId = $webhook->getId();
 
 // ### Get Webhook
 try {
     $output = \PayPal\Api\Webhook::get($webhookId, $apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Get a Webhook", "Webhook", null, $webhookId, $ex);
+    ResultPrinter::printError("Get a Webhook", "Webhook", null, $webhookId, $exception);
     exit(1);
 }
 

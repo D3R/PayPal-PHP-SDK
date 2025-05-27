@@ -14,18 +14,16 @@ class RefundTest extends TestCase
 {
     /**
      * Gets Json String of Object Refund
-     * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"id":"TestSample","amount":' .AmountTest::getJson() . ',"state":"TestSample","reason":"TestSample","invoice_number":"TestSample","sale_id":"TestSample","capture_id":"TestSample","parent_payment":"TestSample","description":"TestSample","create_time":"TestSample","update_time":"TestSample","reason_code":"TestSample","links":' .LinksTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
-     * @return Refund
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\Refund
     {
         return new Refund(self::getJson());
     }
@@ -33,9 +31,8 @@ class RefundTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     * @return Refund
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\Refund
     {
         $obj = new Refund(self::getJson());
         $this->assertNotNull($obj);
@@ -60,7 +57,7 @@ class RefundTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Refund $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getId(), "TestSample");
         $this->assertEquals($obj->getAmount(), AmountTest::getObject());
@@ -79,11 +76,10 @@ class RefundTest extends TestCase
 
     /**
      * @dataProvider mockProvider
-     * @param Refund $obj
      */
-    public function testGet($obj, $mockApiContext)
+    public function testGet(\PayPal\Api\Refund $obj, ?\PHPUnit_Framework_MockObject_MockObject $mockApiContext): void
     {
-        $mockPPRestCall = $this->getMockBuilder('\PayPal\Transport\PayPalRestCall')
+        $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -97,15 +93,15 @@ class RefundTest extends TestCase
         $this->assertNotNull($result);
     }
 
-    public function mockProvider()
+    public function mockProvider(): array
     {
         $obj = self::getObject();
         $mockApiContext = $this->getMockBuilder('ApiContext')
                     ->disableOriginalConstructor()
                     ->getMock();
-        return array(
-            array($obj, $mockApiContext),
-            array($obj, null)
-        );
+        return [
+            [$obj, $mockApiContext],
+            [$obj, null]
+        ];
     }
 }

@@ -9,9 +9,8 @@ class FormatConverter
      *
      * @param $value
      * @param $formatter
-     * @return string
      */
-    public static function format($value, $formatter)
+    public static function format($value, $formatter): string
     {
         return sprintf($formatter, $value);
     }
@@ -23,13 +22,13 @@ class FormatConverter
      *
      * @param     $value
      * @param int $decimals
-     * @return null|string
      */
-    public static function formatToNumber($value, $decimals = 2)
+    public static function formatToNumber($value, $decimals = 2): ?string
     {
         if (trim($value) != null) {
             return number_format($value, $decimals, '.', '');
         }
+
         return null;
     }
 
@@ -40,23 +39,23 @@ class FormatConverter
      * any specific currency level rules as required here.
      *
      * @param      $value
-     * @param null $currency
-     * @return null|string
      */
-    public static function formatToPrice($value, $currency = null)
+    public static function formatToPrice($value, $currency = null): ?string
     {
         $decimals = 2;
-        $currencyDecimals = array('JPY' => 0, 'TWD' => 0, 'HUF' => 0);
+        $currencyDecimals = ['JPY' => 0, 'TWD' => 0, 'HUF' => 0];
         if ($currency && array_key_exists($currency, $currencyDecimals)) {
-            if (strpos($value, ".") !== false && (floor($value) != $value)) {
+            if (str_contains($value, ".") && (floor($value) != $value)) {
                 //throw exception if it has decimal values for JPY, TWD and HUF which does not ends with .00
-                throw new \InvalidArgumentException("value cannot have decimals for $currency currency");
+                throw new \InvalidArgumentException(sprintf('value cannot have decimals for %s currency', $currency));
             }
+
             $decimals = $currencyDecimals[$currency];
-        } elseif (strpos($value, ".") === false) {
+        } elseif (!str_contains($value, ".")) {
             // Check if value has decimal values. If not no need to assign 2 decimals with .00 at the end
             $decimals = 0;
         }
+
         return self::formatToNumber($value, $decimals);
     }
 }

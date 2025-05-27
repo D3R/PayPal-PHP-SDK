@@ -37,7 +37,7 @@ class Payment extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setId($id)
+    public function setId($id): static
     {
         $this->id = $id;
         return $this;
@@ -61,7 +61,7 @@ class Payment extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setIntent($intent)
+    public function setIntent($intent): static
     {
         $this->intent = $intent;
         return $this;
@@ -84,7 +84,7 @@ class Payment extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setPayer($payer)
+    public function setPayer($payer): static
     {
         $this->payer = $payer;
         return $this;
@@ -107,7 +107,7 @@ class Payment extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setPotentialPayerInfo($potential_payer_info)
+    public function setPotentialPayerInfo($potential_payer_info): static
     {
         $this->potential_payer_info = $potential_payer_info;
         return $this;
@@ -129,7 +129,7 @@ class Payment extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setPayee($payee)
+    public function setPayee($payee): static
     {
         $this->payee = $payee;
         return $this;
@@ -151,7 +151,7 @@ class Payment extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setCart($cart)
+    public function setCart($cart): static
     {
         $this->cart = $cart;
         return $this;
@@ -174,7 +174,7 @@ class Payment extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setTransactions($transactions)
+    public function setTransactions($transactions): static
     {
         $this->transactions = $transactions;
         return $this;
@@ -196,13 +196,13 @@ class Payment extends PayPalResourceModel
      * @param \PayPal\Api\Transaction $transaction
      * @return $this
      */
-    public function addTransaction($transaction)
+    public function addTransaction($transaction): static
     {
         if (!$this->getTransactions()) {
-            return $this->setTransactions(array($transaction));
+            return $this->setTransactions([$transaction]);
         } else {
             return $this->setTransactions(
-                array_merge($this->getTransactions(), array($transaction))
+                array_merge($this->getTransactions(), [$transaction])
             );
         }
     }
@@ -213,10 +213,10 @@ class Payment extends PayPalResourceModel
      * @param \PayPal\Api\Transaction $transaction
      * @return $this
      */
-    public function removeTransaction($transaction)
+    public function removeTransaction($transaction): static
     {
         return $this->setTransactions(
-            array_diff($this->getTransactions(), array($transaction))
+            array_diff($this->getTransactions(), [$transaction])
         );
     }
 
@@ -227,7 +227,7 @@ class Payment extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setFailedTransactions($failed_transactions)
+    public function setFailedTransactions($failed_transactions): static
     {
         $this->failed_transactions = $failed_transactions;
         return $this;
@@ -249,13 +249,13 @@ class Payment extends PayPalResourceModel
      * @param \PayPal\Api\Error $error
      * @return $this
      */
-    public function addFailedTransaction($error)
+    public function addFailedTransaction($error): static
     {
         if (!$this->getFailedTransactions()) {
-            return $this->setFailedTransactions(array($error));
+            return $this->setFailedTransactions([$error]);
         } else {
             return $this->setFailedTransactions(
-                array_merge($this->getFailedTransactions(), array($error))
+                array_merge($this->getFailedTransactions(), [$error])
             );
         }
     }
@@ -266,10 +266,10 @@ class Payment extends PayPalResourceModel
      * @param \PayPal\Api\Error $error
      * @return $this
      */
-    public function removeFailedTransaction($error)
+    public function removeFailedTransaction($error): static
     {
         return $this->setFailedTransactions(
-            array_diff($this->getFailedTransactions(), array($error))
+            array_diff($this->getFailedTransactions(), [$error])
         );
     }
 
@@ -280,7 +280,7 @@ class Payment extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setBillingAgreementTokens($billing_agreement_tokens)
+    public function setBillingAgreementTokens($billing_agreement_tokens): static
     {
         $this->billing_agreement_tokens = $billing_agreement_tokens;
         return $this;
@@ -302,13 +302,13 @@ class Payment extends PayPalResourceModel
      * @param string $billingAgreementToken
      * @return $this
      */
-    public function addBillingAgreementToken($billingAgreementToken)
+    public function addBillingAgreementToken($billingAgreementToken): static
     {
         if (!$this->getBillingAgreementTokens()) {
-            return $this->setBillingAgreementTokens(array($billingAgreementToken));
+            return $this->setBillingAgreementTokens([$billingAgreementToken]);
         } else {
             return $this->setBillingAgreementTokens(
-                array_merge($this->getBillingAgreementTokens(), array($billingAgreementToken))
+                array_merge($this->getBillingAgreementTokens(), [$billingAgreementToken])
             );
         }
     }
@@ -319,10 +319,10 @@ class Payment extends PayPalResourceModel
      * @param string $billingAgreementToken
      * @return $this
      */
-    public function removeBillingAgreementToken($billingAgreementToken)
+    public function removeBillingAgreementToken($billingAgreementToken): static
     {
         return $this->setBillingAgreementTokens(
-            array_diff($this->getBillingAgreementTokens(), array($billingAgreementToken))
+            array_diff($this->getBillingAgreementTokens(), [$billingAgreementToken])
         );
     }
 
@@ -333,7 +333,7 @@ class Payment extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setCreditFinancingOffered($credit_financing_offered)
+    public function setCreditFinancingOffered($credit_financing_offered): static
     {
         $this->credit_financing_offered = $credit_financing_offered;
         return $this;
@@ -356,7 +356,7 @@ class Payment extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setPaymentInstruction($payment_instruction)
+    public function setPaymentInstruction($payment_instruction): static
     {
         $this->payment_instruction = $payment_instruction;
         return $this;
@@ -380,7 +380,7 @@ class Payment extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setState($state)
+    public function setState($state): static
     {
         $this->state = $state;
         return $this;
@@ -403,7 +403,7 @@ class Payment extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setExperienceProfileId($experience_profile_id)
+    public function setExperienceProfileId($experience_profile_id): static
     {
         $this->experience_profile_id = $experience_profile_id;
         return $this;
@@ -426,7 +426,7 @@ class Payment extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setNoteToPayer($note_to_payer)
+    public function setNoteToPayer($note_to_payer): static
     {
         $this->note_to_payer = $note_to_payer;
         return $this;
@@ -449,7 +449,7 @@ class Payment extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setRedirectUrls($redirect_urls)
+    public function setRedirectUrls($redirect_urls): static
     {
         $this->redirect_urls = $redirect_urls;
         return $this;
@@ -473,7 +473,7 @@ class Payment extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setFailureReason($failure_reason)
+    public function setFailureReason($failure_reason): static
     {
         $this->failure_reason = $failure_reason;
         return $this;
@@ -496,7 +496,7 @@ class Payment extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setCreateTime($create_time)
+    public function setCreateTime($create_time): static
     {
         $this->create_time = $create_time;
         return $this;
@@ -519,7 +519,7 @@ class Payment extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setUpdateTime($update_time)
+    public function setUpdateTime($update_time): static
     {
         $this->update_time = $update_time;
         return $this;
@@ -550,11 +550,11 @@ class Payment extends PayPalResourceModel
      *
      * @return null|string
      */
-	public function getToken()
+	public function getToken(): string|array|null
 	{
 		$parameter_name = "token";
 		parse_str(parse_url($this->getApprovalLink(), PHP_URL_QUERY), $query);
-		return !isset($query[$parameter_name]) ? null : $query[$parameter_name];
+		return $query[$parameter_name] ?? null;
 	}
 	
     /**
@@ -562,9 +562,8 @@ class Payment extends PayPalResourceModel
      *
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return Payment
      */
-    public function create($apiContext = null, $restCall = null)
+    public function create($apiContext = null, $restCall = null): static
     {
         $payLoad = $this->toJSON();
         $json = self::executeCall(
@@ -582,17 +581,15 @@ class Payment extends PayPalResourceModel
     /**
      * Shows details for a payment, by ID.
      *
-     * @param string $paymentId
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return Payment
      */
-    public static function get($paymentId, $apiContext = null, $restCall = null)
+    public static function get(string $paymentId, $apiContext = null, $restCall = null): \PayPal\Api\Payment
     {
         ArgumentValidator::validate($paymentId, 'paymentId');
         $payLoad = "";
         $json = self::executeCall(
-            "/v1/payments/payment/$paymentId",
+            '/v1/payments/payment/' . $paymentId,
             "GET",
             $payLoad,
             null,
@@ -610,15 +607,14 @@ class Payment extends PayPalResourceModel
      * @param PatchRequest $patchRequest
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return boolean
      */
-    public function update($patchRequest, $apiContext = null, $restCall = null)
+    public function update($patchRequest, $apiContext = null, $restCall = null): bool
     {
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($patchRequest, 'patchRequest');
         $payLoad = $patchRequest->toJSON();
         self::executeCall(
-            "/v1/payments/payment/{$this->getId()}",
+            '/v1/payments/payment/' . $this->getId(),
             "PATCH",
             $payLoad,
             null,
@@ -634,15 +630,14 @@ class Payment extends PayPalResourceModel
      * @param PaymentExecution $paymentExecution
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return Payment
      */
-    public function execute($paymentExecution, $apiContext = null, $restCall = null)
+    public function execute($paymentExecution, $apiContext = null, $restCall = null): static
     {
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($paymentExecution, 'paymentExecution');
         $payLoad = $paymentExecution->toJSON();
         $json = self::executeCall(
-            "/v1/payments/payment/{$this->getId()}/execute",
+            sprintf('/v1/payments/payment/%s/execute', $this->getId()),
             "POST",
             $payLoad,
             null,
@@ -659,13 +654,12 @@ class Payment extends PayPalResourceModel
      * @param array $params
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return PaymentHistory
      */
-    public static function all($params, $apiContext = null, $restCall = null)
+    public static function all($params, $apiContext = null, $restCall = null): \PayPal\Api\PaymentHistory
     {
         ArgumentValidator::validate($params, 'params');
         $payLoad = "";
-        $allowedParams = array(
+        $allowedParams = [
                     'count' => 1,
                     'start_id' => 1,
                     'start_index' => 1,
@@ -674,7 +668,7 @@ class Payment extends PayPalResourceModel
                     'payee_id' => 1,
                     'sort_by' => 1,
                     'sort_order' => 1,
-        );
+        ];
         $json = self::executeCall(
             "/v1/payments/payment?" . http_build_query(array_intersect_key($params, $allowedParams)),
             "GET",

@@ -15,18 +15,16 @@ class ItemListTest extends TestCase
 {
     /**
      * Gets Json String of Object ItemList
-     * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"items":[' . ItemTest::getJson() . '],"shipping_address":' . ShippingAddressTest::getJson() . ',"shipping_method":"TestSample","shipping_phone_number":"TestSample"}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
-     * @return ItemList
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\ItemList
     {
         return new ItemList(self::getJson());
     }
@@ -34,9 +32,8 @@ class ItemListTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     * @return ItemList
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\ItemList
     {
         $obj = new ItemList(self::getJson());
         $this->assertNotNull($obj);
@@ -52,9 +49,9 @@ class ItemListTest extends TestCase
      * @depends testSerializationDeserialization
      * @param ItemList $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
-        $this->assertEquals($obj->getItems(), array(ItemTest::getObject()));
+        $this->assertEquals($obj->getItems(), [ItemTest::getObject()]);
         $this->assertEquals($obj->getShippingAddress(), ShippingAddressTest::getObject());
         $this->assertEquals($obj->getShippingMethod(), "TestSample");
         $this->assertEquals($obj->getShippingPhoneNumber(), "TestSample");
@@ -64,17 +61,19 @@ class ItemListTest extends TestCase
      * @depends testSerializationDeserialization
      * @param ItemList $obj
      */
-    public function testAddRemove($obj)
+    public function testAddRemove($obj): void
     {
 		$item2 = new Item(ItemTest::getJSON());
 		$item2->setSku('TestSample2');
+
         $item3 = new Item(ItemTest::getJSON());
 		$item3->setSku('TestSample3');
+
 		$obj->addItem($item2);
 		$obj->addItem($item3);
 		$this->assertCount(3, $obj->getItems());
 		$obj->removeItem($item2);
-		
+
 		$this->assertCount(2, $obj->getItems());
 		$this->assertContains('"items":[', $obj->toJSON());
     }

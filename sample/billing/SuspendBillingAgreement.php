@@ -25,9 +25,9 @@ try {
 
     // Lets get the updated Agreement Object
     $agreement = Agreement::get($createdAgreement->getId(), $apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Suspended the Agreement", "Agreement", null, $agreementStateDescriptor, $ex);
+    ResultPrinter::printError("Suspended the Agreement", "Agreement", null, $agreementStateDescriptor, $exception);
     exit(1);
 }
 

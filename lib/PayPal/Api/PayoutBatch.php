@@ -24,7 +24,7 @@ class PayoutBatch extends PayPalModel
      * 
      * @return $this
      */
-    public function setBatchHeader($batch_header)
+    public function setBatchHeader($batch_header): static
     {
         $this->batch_header = $batch_header;
         return $this;
@@ -47,7 +47,7 @@ class PayoutBatch extends PayPalModel
      * 
      * @return $this
      */
-    public function setItems($items)
+    public function setItems($items): static
     {
         $this->items = $items;
         return $this;
@@ -69,13 +69,13 @@ class PayoutBatch extends PayPalModel
      * @param \PayPal\Api\PayoutItemDetails $payoutItemDetails
      * @return $this
      */
-    public function addItem($payoutItemDetails)
+    public function addItem($payoutItemDetails): static
     {
         if (!$this->getItems()) {
-            return $this->setItems(array($payoutItemDetails));
+            return $this->setItems([$payoutItemDetails]);
         } else {
             return $this->setItems(
-                array_merge($this->getItems(), array($payoutItemDetails))
+                array_merge($this->getItems(), [$payoutItemDetails])
             );
         }
     }
@@ -86,10 +86,10 @@ class PayoutBatch extends PayPalModel
      * @param \PayPal\Api\PayoutItemDetails $payoutItemDetails
      * @return $this
      */
-    public function removeItem($payoutItemDetails)
+    public function removeItem($payoutItemDetails): static
     {
         return $this->setItems(
-            array_diff($this->getItems(), array($payoutItemDetails))
+            array_diff($this->getItems(), [$payoutItemDetails])
         );
     }
 
@@ -101,7 +101,7 @@ class PayoutBatch extends PayPalModel
      *
      * @return $this
      */
-    public function setLinks($links)
+    public function setLinks($links): static
     {
         $this->links = $links;
         return $this;

@@ -27,31 +27,31 @@ class BillingAgreementsFunctionalTest extends TestCase
 
     public $mockPayPalRestCall;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $className = $this->getClassName();
         $testName = $this->getName();
         $this->setupTest($className, $testName);
     }
 
-    public function setupTest($className, $testName)
+    public function setupTest($className, $testName): void
     {
-        $operationString = file_get_contents(__DIR__ . "/../resources/$className/$testName.json");
+        $operationString = file_get_contents(__DIR__ . sprintf('/../resources/%s/%s.json', $className, $testName));
         $this->operation = json_decode($operationString, true);
         $this->response = true;
         if (array_key_exists('body', $this->operation['response'])) {
             $this->response = json_encode($this->operation['response']['body']);
         }
+
         Setup::SetUpForFunctionalTests($this);
     }
 
     /**
      * Returns just the classname of the test you are executing. It removes the namespaces.
-     * @return string
      */
-    public function getClassName()
+    public function getClassName(): string
     {
-        return join('', array_slice(explode('\\', get_class($this)), -1));
+        return implode('', array_slice(explode('\\', static::class), -1));
     }
 
     /**
@@ -79,14 +79,14 @@ class BillingAgreementsFunctionalTest extends TestCase
         if (Setup::$mode == 'sandbox') {
             $this->markTestSkipped('Not executable on sandbox environment. Needs human interaction');
         }
+
         $links = $agreement->getLinks();
         $url = parse_url($links[0]->getHref(), 6);
         parse_str($url, $result);
         $paymentToken = $result['token'];
         $this->assertNotNull($paymentToken);
         $this->assertNotEmpty($paymentToken);
-        $result = $agreement->execute($paymentToken, $this->apiContext, $this->mockPayPalRestCall);
-        return $result;
+        return $agreement->execute($paymentToken, $this->apiContext, $this->mockPayPalRestCall);
     }
 
     /**
@@ -121,7 +121,7 @@ class BillingAgreementsFunctionalTest extends TestCase
      * @depends testGet
      * @param $agreement Agreement
      */
-    public function testUpdate($agreement)
+    public function testUpdate($agreement): void
     {
         /** @var Patch[] $request */
         $request = $this->operation['request']['body'][0];
@@ -129,10 +129,12 @@ class BillingAgreementsFunctionalTest extends TestCase
         $patch->setOp($request['op']);
         $patch->setPath($request['path']);
         $patch->setValue($request['value']);
-        $patches = array();
+
+        $patches = [];
         $patches[] = $patch;
         $patchRequest = new PatchRequest();
         $patchRequest->setPatches($patches);
+
         $result = $agreement->update($patchRequest, $this->apiContext, $this->mockPayPalRestCall);
         $this->assertTrue($result);
     }
@@ -168,15 +170,14 @@ class BillingAgreementsFunctionalTest extends TestCase
     /**
      * @depends testGet
      * @param $agreement Agreement
-     * @return Agreement
      */
-    public function testGetTransactions($agreement)
+    public function testGetTransactions($agreement): void
     {
-        $params = array('start_date' => date('Y-m-d', strtotime('-15 years')), 'end_date' => date('Y-m-d', strtotime('+5 days')));
+        $params = ['start_date' => date('Y-m-d', strtotime('-15 years')), 'end_date' => date('Y-m-d', strtotime('+5 days'))];
         $result = Agreement::searchTransactions($agreement->getId(), $params, $this->apiContext, $this->mockPayPalRestCall);
         $this->assertNotNull($result);
         $this->assertInternalType('array', $result->getAgreementTransactionList());
-        $this->assertGreaterThan(0, sizeof($result->getAgreementTransactionList()));
+        $this->assertGreaterThan(0, count($result->getAgreementTransactionList()));
         $list = $result->getAgreementTransactionList();
         $first = $list[0];
         $this->assertEquals($first->getTransactionId(), $agreement->getId());

@@ -23,7 +23,7 @@ class TemplateSettings extends PayPalModel
      * 
      * @return $this
      */
-    public function setFieldName($field_name)
+    public function setFieldName($field_name): static
     {
         $this->field_name = $field_name;
         return $this;
@@ -46,7 +46,7 @@ class TemplateSettings extends PayPalModel
      * 
      * @return $this
      */
-    public function setDisplayPreference($display_preference)
+    public function setDisplayPreference($display_preference): static
     {
         $this->display_preference = $display_preference;
         return $this;

@@ -9,10 +9,10 @@ use PayPal\Validation\JsonValidator;
  * Stores all member data in a Hashmap that enables easy
  * JSON encoding/decoding
  */
-class PayPalModel
+class PayPalModel implements \Stringable
 {
 
-    private $_propMap = array();
+    private $_propMap = [];
 
     /**
      * OAuth Credentials to use for this call
@@ -27,7 +27,7 @@ class PayPalModel
      * @deprecated Pass ApiContext to create/get methods instead
      * @param \PayPal\Auth\OAuthTokenCredential $credential
      */
-    public static function setCredential($credential)
+    public static function setCredential($credential): void
     {
         self::$credential = $credential;
     }
@@ -71,12 +71,12 @@ class PayPalModel
             return null;
         }
 
-        if (is_a($data, get_class(new \stdClass()))) {
+        if (is_a($data, (new \stdClass())::class)) {
             //This means, root element is object
             return new static(json_encode($data));
         }
 
-        $list = array();
+        $list = [];
 
         if (is_array($data)) {
             $data = json_encode($data);
@@ -88,12 +88,14 @@ class PayPalModel
             if ($decoded === null) {
                 return $list;
             }
+
             if (is_array($decoded)) {
-                foreach ($decoded as $k => $v) {
+                foreach ($decoded as $v) {
                     $list[] = self::getList($v);
                 }
             }
-            if (is_a($decoded, get_class(new \stdClass()))) {
+
+            if (is_a($decoded, (new \stdClass())::class)) {
                 //This means, root element is object
                 $list[] = new static(json_encode($decoded));
             }
@@ -113,6 +115,7 @@ class PayPalModel
         if ($this->__isset($key)) {
             return $this->_propMap[$key];
         }
+
         return null;
     }
 
@@ -135,11 +138,10 @@ class PayPalModel
      * Converts the input key into a valid Setter Method Name
      *
      * @param $key
-     * @return mixed
      */
-    private function convertToCamelCase($key)
+    private function convertToCamelCase($key): string
     {
-        return str_replace(' ', '', ucwords(str_replace(array('_', '-'), ' ', $key)));
+        return str_replace(' ', '', ucwords(str_replace(['_', '-'], ' ', $key)));
     }
 
     /**
@@ -171,24 +173,26 @@ class PayPalModel
      */
     private function _convertToArray($param)
     {
-        $ret = array();
+        $ret = [];
         foreach ($param as $k => $v) {
             if ($v instanceof PayPalModel) {
                 $ret[$k] = $v->toArray();
-            } elseif (is_array($v) && sizeof($v) <= 0) {
-                $ret[$k] = array();
+            } elseif (is_array($v) && count($v) <= 0) {
+                $ret[$k] = [];
             } elseif (is_array($v)) {
                 $ret[$k] = $this->_convertToArray($v);
             } else {
                 $ret[$k] = $v;
             }
         }
+
         // If the array is empty, which means an empty object,
         // we need to convert array to StdClass object to properly
         // represent JSON String
-        if (sizeof($ret) <= 0) {
+        if (count($ret) <= 0) {
             $ret = new PayPalModel();
         }
+
         return $ret;
     }
 
@@ -198,7 +202,7 @@ class PayPalModel
      * @param $arr
      * @return $this
      */
-    public function fromArray($arr)
+    public function fromArray($arr): static
     {
         if (!empty($arr)) {
             // Iterate over each element in array
@@ -206,14 +210,15 @@ class PayPalModel
                 // If the value is an array, it means, it is an object after conversion
                 if (is_array($v)) {
                     // Determine the class of the object
-                    if (($clazz = ReflectionUtil::getPropertyClass(get_class($this), $k)) != null) {
+                    if (($clazz = ReflectionUtil::getPropertyClass(static::class, $k)) != null) {
                         // If the value is an associative array, it means, its an object. Just make recursive call to it.
-                        if (empty($v)) {
-                            if (ReflectionUtil::isPropertyClassArray(get_class($this), $k)) {
+                        if ($v === []) {
+                            if (ReflectionUtil::isPropertyClassArray(static::class, $k)) {
                                 // It means, it is an array of objects.
-                                $this->assignValue($k, array());
+                                $this->assignValue($k, []);
                                 continue;
                             }
+
                             $o = new $clazz();
                             //$arr = array();
                             $this->assignValue($k, $o);
@@ -224,7 +229,7 @@ class PayPalModel
                             $this->assignValue($k, $o);
                         } else {
                             // Else, value is an array of object/data
-                            $arr = array();
+                            $arr = [];
                             // Iterate through each element in that array.
                             foreach ($v as $nk => $nv) {
                                 if (is_array($nv)) {
@@ -235,6 +240,7 @@ class PayPalModel
                                     $arr[$nk] = $nv;
                                 }
                             }
+
                             $this->assignValue($k, $arr);
                         }
                     } else {
@@ -245,10 +251,11 @@ class PayPalModel
                 }
             }
         }
+
         return $this;
     }
 
-    private function assignValue($key, $value)
+    private function assignValue($key, $value): void
     {
         $setter = 'set'. $this->convertToCamelCase($key);
         // If we find the setter, use that, otherwise use magic method.
@@ -265,7 +272,7 @@ class PayPalModel
      * @param $json
      * @return $this
      */
-    public function fromJson($json)
+    public function fromJson($json): static
     {
         return $this->fromArray(json_decode($json, true));
     }
@@ -291,18 +298,17 @@ class PayPalModel
         // Because of PHP Version 5.3, we cannot use JSON_UNESCAPED_SLASHES option
         // Instead we would use the str_replace command for now.
         // TODO: Replace this code with return json_encode($this->toArray(), $options | 64); once we support PHP >= 5.4
-        if (version_compare(phpversion(), '5.4.0', '>=') === true) {
+        if (version_compare(phpversion(), '5.4.0', '>=')) {
             return json_encode($this->toArray(), $options | 64);
         }
+
         return str_replace('\\/', '/', json_encode($this->toArray(), $options));
     }
 
     /**
      * Magic Method for toString
-     *
-     * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->toJSON(128);
     }

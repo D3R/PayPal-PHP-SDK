@@ -14,18 +14,16 @@ class PayerTest extends TestCase
 {
     /**
      * Gets Json String of Object Payer
-     * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"payment_method":"TestSample","status":"TestSample","account_type":"TestSample","account_age":"TestSample","funding_instruments":' .FundingInstrumentTest::getJson() . ',"funding_option_id":"TestSample","funding_option":' .FundingOptionTest::getJson() . ',"external_selected_funding_instrument_type":"TestSample","related_funding_option":' .FundingOptionTest::getJson() . ',"payer_info":' .PayerInfoTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
-     * @return Payer
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\Payer
     {
         return new Payer(self::getJson());
     }
@@ -33,9 +31,8 @@ class PayerTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     * @return Payer
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\Payer
     {
         $obj = new Payer(self::getJson());
         $this->assertNotNull($obj);
@@ -57,7 +54,7 @@ class PayerTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Payer $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getPaymentMethod(), "TestSample");
         $this->assertEquals($obj->getStatus(), "TestSample");

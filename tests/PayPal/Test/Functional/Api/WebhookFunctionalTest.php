@@ -29,51 +29,53 @@ class WebhookFunctionalTest extends TestCase
 
     public $apiContext;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $className = $this->getClassName();
         $testName = $this->getName();
-        $operationString = file_get_contents(__DIR__ . "/../resources/$className/$testName.json");
+        $operationString = file_get_contents(__DIR__ . sprintf('/../resources/%s/%s.json', $className, $testName));
         $this->operation = json_decode($operationString, true);
         $this->response = true;
         if (array_key_exists('body', $this->operation['response'])) {
             $this->response = json_encode($this->operation['response']['body']);
         }
+
         Setup::SetUpForFunctionalTests($this);
     }
 
     /**
      * Returns just the classname of the test you are executing. It removes the namespaces.
-     * @return string
      */
-    public function getClassName()
+    public function getClassName(): string
     {
-        return join('', array_slice(explode('\\', get_class($this)), -1));
+        return implode('', array_slice(explode('\\', static::class), -1));
     }
 
-    public function testCreate()
+    public function testCreate(): ?\PayPal\Api\Webhook
     {
         $request = $this->operation['request']['body'];
         $obj = new Webhook($request);
         // Adding a random url request to make it unique
         $obj->setUrl($obj->getUrl() . '?rand=' . uniqid());
+
         $result = null;
         try {
             $result = $obj->create($this->apiContext, $this->mockPayPalRestCall);
-        } catch (PayPalConnectionException $ex) {
-            $data = $ex->getData();
-            if (strpos($data, 'WEBHOOK_NUMBER_LIMIT_EXCEEDED') !== false) {
+        } catch (PayPalConnectionException $payPalConnectionException) {
+            $data = $payPalConnectionException->getData();
+            if (str_contains($data, 'WEBHOOK_NUMBER_LIMIT_EXCEEDED')) {
                 $this->deleteAll();
                 $result = $obj->create($this->apiContext, $this->mockPayPalRestCall);
             } else {
-                $this->fail($ex->getMessage());
+                $this->fail($payPalConnectionException->getMessage());
             }
         }
+
         $this->assertNotNull($result);
         return $result;
     }
 
-    public function deleteAll()
+    public function deleteAll(): void
     {
         $result = Webhook::getAll($this->apiContext, $this->mockPayPalRestCall);
         foreach ($result->getWebhooks() as $webhookObject) {
@@ -125,6 +127,7 @@ class WebhookFunctionalTest extends TestCase
                 break;
             }
         }
+
         $this->assertTrue($found, "The Created Webhook was not found in the get list");
         $this->assertEquals($webhook->getId(), $foundObject->getId());
         return $result;
@@ -134,9 +137,9 @@ class WebhookFunctionalTest extends TestCase
      * @depends testGet
      * @param $webhook Webhook
      */
-    public function testUpdate($webhook)
+    public function testUpdate($webhook): void
     {
-        $patches = array();
+        $patches = [];
         foreach ($this->operation['request']['body'] as $request) {
             /** @var Patch[] $request */
             $patch = new Patch();
@@ -147,21 +150,23 @@ class WebhookFunctionalTest extends TestCase
                 $new_url = $request['value'] . '?rand=' .uniqid();
                 $patch->setValue($new_url);
             }
+
             $patches[] = $patch;
         }
 
         $patchRequest = new PatchRequest();
         $patchRequest->setPatches($patches);
+
         $result = $webhook->update($patchRequest, $this->apiContext, $this->mockPayPalRestCall);
         $this->assertNotNull($result);
         $found = false;
-        $foundObject = null;
         foreach ($result->getEventTypes() as $eventType) {
             if ($eventType->getName() == "PAYMENT.SALE.REFUNDED") {
                 $found = true;
                 break;
             }
         }
+
         $this->assertTrue($found);
     }
 
@@ -169,7 +174,7 @@ class WebhookFunctionalTest extends TestCase
      * @depends testGet
      * @param $webhook Webhook
      */
-    public function testDelete($webhook)
+    public function testDelete($webhook): void
     {
         $result = $webhook->delete($this->apiContext, $this->mockPayPalRestCall);
         $this->assertTrue($result);
@@ -177,7 +182,7 @@ class WebhookFunctionalTest extends TestCase
 
     public function testEventSearch()
     {
-        $result = WebhookEvent::all(array(), $this->apiContext, $this->mockPayPalRestCall);
+        $result = WebhookEvent::all([], $this->apiContext, $this->mockPayPalRestCall);
         $this->assertNotNull($result);
         return $result;
     }

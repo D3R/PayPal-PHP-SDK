@@ -23,9 +23,8 @@ class OpenIdAddress extends PayPalModel
      * Full street address component, which may include house number, street name.
      *
      * @param string $street_address
-     * @return self
      */
-    public function setStreetAddress($street_address)
+    public function setStreetAddress($street_address): static
     {
         $this->street_address = $street_address;
         return $this;
@@ -45,9 +44,8 @@ class OpenIdAddress extends PayPalModel
      * City or locality component.
      *
      * @param string $locality
-     * @return self
      */
-    public function setLocality($locality)
+    public function setLocality($locality): static
     {
         $this->locality = $locality;
         return $this;
@@ -67,9 +65,8 @@ class OpenIdAddress extends PayPalModel
      * State, province, prefecture or region component.
      *
      * @param string $region
-     * @return self
      */
-    public function setRegion($region)
+    public function setRegion($region): static
     {
         $this->region = $region;
         return $this;
@@ -89,9 +86,8 @@ class OpenIdAddress extends PayPalModel
      * Zip code or postal code component.
      *
      * @param string $postal_code
-     * @return self
      */
-    public function setPostalCode($postal_code)
+    public function setPostalCode($postal_code): static
     {
         $this->postal_code = $postal_code;
         return $this;
@@ -111,9 +107,8 @@ class OpenIdAddress extends PayPalModel
      * Country name component.
      *
      * @param string $country
-     * @return self
      */
-    public function setCountry($country)
+    public function setCountry($country): static
     {
         $this->country = $country;
         return $this;

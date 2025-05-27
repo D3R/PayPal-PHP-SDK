@@ -20,7 +20,7 @@ class Transaction extends TransactionBase
      *
      * @return $this
      */
-    public function setTransactions($transactions)
+    public function setTransactions($transactions): static
     {
         $this->transactions = $transactions;
         return $this;
@@ -43,7 +43,7 @@ class Transaction extends TransactionBase
      * @deprecated Use #setReferenceId instead
      * @return $this
      */
-    public function setPurchaseUnitReferenceId($purchase_unit_reference_id)
+    public function setPurchaseUnitReferenceId($purchase_unit_reference_id): static
     {
         $this->purchase_unit_reference_id = $purchase_unit_reference_id;
         return $this;

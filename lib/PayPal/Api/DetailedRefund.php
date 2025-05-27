@@ -26,7 +26,7 @@ class DetailedRefund extends Refund
      * 
      * @return $this
      */
-    public function setCustom($custom)
+    public function setCustom($custom): static
     {
         $this->custom = $custom;
         return $this;
@@ -49,7 +49,7 @@ class DetailedRefund extends Refund
      * 
      * @return $this
      */
-    public function setRefundToPayer($refund_to_payer)
+    public function setRefundToPayer($refund_to_payer): static
     {
         $this->refund_to_payer = $refund_to_payer;
         return $this;
@@ -72,7 +72,7 @@ class DetailedRefund extends Refund
      * 
      * @return $this
      */
-    public function setRefundToExternalFunding($refund_to_external_funding)
+    public function setRefundToExternalFunding($refund_to_external_funding): static
     {
         $this->refund_to_external_funding = $refund_to_external_funding;
         return $this;
@@ -95,7 +95,7 @@ class DetailedRefund extends Refund
      * 
      * @return $this
      */
-    public function setRefundFromTransactionFee($refund_from_transaction_fee)
+    public function setRefundFromTransactionFee($refund_from_transaction_fee): static
     {
         $this->refund_from_transaction_fee = $refund_from_transaction_fee;
         return $this;
@@ -118,7 +118,7 @@ class DetailedRefund extends Refund
      * 
      * @return $this
      */
-    public function setRefundFromReceivedAmount($refund_from_received_amount)
+    public function setRefundFromReceivedAmount($refund_from_received_amount): static
     {
         $this->refund_from_received_amount = $refund_from_received_amount;
         return $this;
@@ -141,7 +141,7 @@ class DetailedRefund extends Refund
      * 
      * @return $this
      */
-    public function setTotalRefundedAmount($total_refunded_amount)
+    public function setTotalRefundedAmount($total_refunded_amount): static
     {
         $this->total_refunded_amount = $total_refunded_amount;
         return $this;

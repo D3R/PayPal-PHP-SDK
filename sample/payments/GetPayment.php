@@ -22,9 +22,9 @@ use PayPal\Api\Payment;
 // (See bootstrap.php for more on `ApiContext`)
 try {
     $payment = Payment::get($createdPayment->getId(), $apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Get Payment", "Payment", null, null, $ex);
+    ResultPrinter::printError("Get Payment", "Payment", null, null, $exception);
     exit(1);
 }
 

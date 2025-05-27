@@ -27,7 +27,7 @@ class RecipientBankingInstruction extends PayPalModel
      * 
      * @return $this
      */
-    public function setBankName($bank_name)
+    public function setBankName($bank_name): static
     {
         $this->bank_name = $bank_name;
         return $this;
@@ -50,7 +50,7 @@ class RecipientBankingInstruction extends PayPalModel
      * 
      * @return $this
      */
-    public function setAccountHolderName($account_holder_name)
+    public function setAccountHolderName($account_holder_name): static
     {
         $this->account_holder_name = $account_holder_name;
         return $this;
@@ -73,7 +73,7 @@ class RecipientBankingInstruction extends PayPalModel
      * 
      * @return $this
      */
-    public function setAccountNumber($account_number)
+    public function setAccountNumber($account_number): static
     {
         $this->account_number = $account_number;
         return $this;
@@ -96,7 +96,7 @@ class RecipientBankingInstruction extends PayPalModel
      * 
      * @return $this
      */
-    public function setRoutingNumber($routing_number)
+    public function setRoutingNumber($routing_number): static
     {
         $this->routing_number = $routing_number;
         return $this;
@@ -119,7 +119,7 @@ class RecipientBankingInstruction extends PayPalModel
      * 
      * @return $this
      */
-    public function setInternationalBankAccountNumber($international_bank_account_number)
+    public function setInternationalBankAccountNumber($international_bank_account_number): static
     {
         $this->international_bank_account_number = $international_bank_account_number;
         return $this;
@@ -142,7 +142,7 @@ class RecipientBankingInstruction extends PayPalModel
      * 
      * @return $this
      */
-    public function setBankIdentifierCode($bank_identifier_code)
+    public function setBankIdentifierCode($bank_identifier_code): static
     {
         $this->bank_identifier_code = $bank_identifier_code;
         return $this;

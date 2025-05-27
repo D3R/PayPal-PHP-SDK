@@ -23,7 +23,7 @@ class ErrorDetails extends PayPalModel
      * 
      * @return $this
      */
-    public function setField($field)
+    public function setField($field): static
     {
         $this->field = $field;
         return $this;
@@ -46,7 +46,7 @@ class ErrorDetails extends PayPalModel
      * 
      * @return $this
      */
-    public function setIssue($issue)
+    public function setIssue($issue): static
     {
         $this->issue = $issue;
         return $this;
@@ -69,7 +69,7 @@ class ErrorDetails extends PayPalModel
      * 
      * @return $this
      */
-    public function setPurchaseUnitReferenceId($purchase_unit_reference_id)
+    public function setPurchaseUnitReferenceId($purchase_unit_reference_id): static
     {
         $this->purchase_unit_reference_id = $purchase_unit_reference_id;
         return $this;
@@ -92,7 +92,7 @@ class ErrorDetails extends PayPalModel
      * 
      * @return $this
      */
-    public function setCode($code)
+    public function setCode($code): static
     {
         $this->code = $code;
         return $this;

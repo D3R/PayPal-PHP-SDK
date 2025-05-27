@@ -14,18 +14,16 @@ class MeasurementTest extends TestCase
 {
     /**
      * Gets Json String of Object Measurement
-     * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"value":"TestSample","unit":"TestSample"}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
-     * @return Measurement
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\Measurement
     {
         return new Measurement(self::getJson());
     }
@@ -33,9 +31,8 @@ class MeasurementTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     * @return Measurement
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\Measurement
     {
         $obj = new Measurement(self::getJson());
         $this->assertNotNull($obj);
@@ -49,7 +46,7 @@ class MeasurementTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Measurement $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getValue(), "TestSample");
         $this->assertEquals($obj->getUnit(), "TestSample");

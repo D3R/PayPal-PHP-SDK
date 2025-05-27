@@ -25,7 +25,7 @@ class PlanList extends PayPalModel
      * 
      * @return $this
      */
-    public function setPlans($plans)
+    public function setPlans($plans): static
     {
         $this->plans = $plans;
         return $this;
@@ -47,13 +47,13 @@ class PlanList extends PayPalModel
      * @param \PayPal\Api\Plan $plan
      * @return $this
      */
-    public function addPlan($plan)
+    public function addPlan($plan): static
     {
         if (!$this->getPlans()) {
-            return $this->setPlans(array($plan));
+            return $this->setPlans([$plan]);
         } else {
             return $this->setPlans(
-                array_merge($this->getPlans(), array($plan))
+                array_merge($this->getPlans(), [$plan])
             );
         }
     }
@@ -64,10 +64,10 @@ class PlanList extends PayPalModel
      * @param \PayPal\Api\Plan $plan
      * @return $this
      */
-    public function removePlan($plan)
+    public function removePlan($plan): static
     {
         return $this->setPlans(
-            array_diff($this->getPlans(), array($plan))
+            array_diff($this->getPlans(), [$plan])
         );
     }
 
@@ -78,7 +78,7 @@ class PlanList extends PayPalModel
      * 
      * @return $this
      */
-    public function setTotalItems($total_items)
+    public function setTotalItems($total_items): static
     {
         $this->total_items = $total_items;
         return $this;
@@ -101,7 +101,7 @@ class PlanList extends PayPalModel
      * 
      * @return $this
      */
-    public function setTotalPages($total_pages)
+    public function setTotalPages($total_pages): static
     {
         $this->total_pages = $total_pages;
         return $this;
@@ -124,7 +124,7 @@ class PlanList extends PayPalModel
      * 
      * @return $this
      */
-    public function setLinks($links)
+    public function setLinks($links): static
     {
         $this->links = $links;
         return $this;
@@ -146,13 +146,13 @@ class PlanList extends PayPalModel
      * @param \PayPal\Api\Links $links
      * @return $this
      */
-    public function addLink($links)
+    public function addLink($links): static
     {
         if (!$this->getLinks()) {
-            return $this->setLinks(array($links));
+            return $this->setLinks([$links]);
         } else {
             return $this->setLinks(
-                array_merge($this->getLinks(), array($links))
+                array_merge($this->getLinks(), [$links])
             );
         }
     }
@@ -163,10 +163,10 @@ class PlanList extends PayPalModel
      * @param \PayPal\Api\Links $links
      * @return $this
      */
-    public function removeLink($links)
+    public function removeLink($links): static
     {
         return $this->setLinks(
-            array_diff($this->getLinks(), array($links))
+            array_diff($this->getLinks(), [$links])
         );
     }
 

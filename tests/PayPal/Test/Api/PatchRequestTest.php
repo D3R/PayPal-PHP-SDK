@@ -15,18 +15,16 @@ class PatchRequestTest extends TestCase
 {
     /**
      * Gets Json String of Object PatchRequest
-     * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"patches":' .PatchTest::getJson() . '}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
-     * @return PatchRequest
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\PatchRequest
     {
         return new PatchRequest(self::getJson());
     }
@@ -34,9 +32,8 @@ class PatchRequestTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     * @return PatchRequest
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\PatchRequest
     {
         $obj = new PatchRequest(self::getJson());
         $this->assertNotNull($obj);
@@ -48,7 +45,7 @@ class PatchRequestTest extends TestCase
      * @depends testSerializationDeserialization
      * @param PatchRequest $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getPatches(), PatchTest::getObject());
     }

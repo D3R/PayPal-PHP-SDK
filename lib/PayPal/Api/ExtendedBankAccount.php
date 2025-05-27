@@ -19,7 +19,7 @@ class ExtendedBankAccount extends BankAccount
      * 
      * @return $this
      */
-    public function setMandateReferenceNumber($mandate_reference_number)
+    public function setMandateReferenceNumber($mandate_reference_number): static
     {
         $this->mandate_reference_number = $mandate_reference_number;
         return $this;

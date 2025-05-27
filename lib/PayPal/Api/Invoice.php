@@ -56,7 +56,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setId($id)
+    public function setId($id): static
     {
         $this->id = $id;
         return $this;
@@ -79,7 +79,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setNumber($number)
+    public function setNumber($number): static
     {
         $this->number = $number;
         return $this;
@@ -102,7 +102,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setTemplateId($template_id)
+    public function setTemplateId($template_id): static
     {
         $this->template_id = $template_id;
         return $this;
@@ -125,7 +125,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setUri($uri)
+    public function setUri($uri): static
     {
         $this->uri = $uri;
         return $this;
@@ -149,7 +149,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setStatus($status)
+    public function setStatus($status): static
     {
         $this->status = $status;
         return $this;
@@ -172,7 +172,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setMerchantInfo($merchant_info)
+    public function setMerchantInfo($merchant_info): static
     {
         $this->merchant_info = $merchant_info;
         return $this;
@@ -195,7 +195,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setBillingInfo($billing_info)
+    public function setBillingInfo($billing_info): static
     {
         $this->billing_info = $billing_info;
         return $this;
@@ -217,13 +217,13 @@ class Invoice extends PayPalResourceModel
      * @param \PayPal\Api\BillingInfo $billingInfo
      * @return $this
      */
-    public function addBillingInfo($billingInfo)
+    public function addBillingInfo($billingInfo): static
     {
         if (!$this->getBillingInfo()) {
-            return $this->setBillingInfo(array($billingInfo));
+            return $this->setBillingInfo([$billingInfo]);
         } else {
             return $this->setBillingInfo(
-                array_merge($this->getBillingInfo(), array($billingInfo))
+                array_merge($this->getBillingInfo(), [$billingInfo])
             );
         }
     }
@@ -234,10 +234,10 @@ class Invoice extends PayPalResourceModel
      * @param \PayPal\Api\BillingInfo $billingInfo
      * @return $this
      */
-    public function removeBillingInfo($billingInfo)
+    public function removeBillingInfo($billingInfo): static
     {
         return $this->setBillingInfo(
-            array_diff($this->getBillingInfo(), array($billingInfo))
+            array_diff($this->getBillingInfo(), [$billingInfo])
         );
     }
 
@@ -248,7 +248,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setCcInfo($cc_info)
+    public function setCcInfo($cc_info): static
     {
         $this->cc_info = $cc_info;
         return $this;
@@ -270,13 +270,13 @@ class Invoice extends PayPalResourceModel
      * @param \PayPal\Api\Participant $participant
      * @return $this
      */
-    public function addCcInfo($participant)
+    public function addCcInfo($participant): static
     {
         if (!$this->getCcInfo()) {
-            return $this->setCcInfo(array($participant));
+            return $this->setCcInfo([$participant]);
         } else {
             return $this->setCcInfo(
-                array_merge($this->getCcInfo(), array($participant))
+                array_merge($this->getCcInfo(), [$participant])
             );
         }
     }
@@ -287,10 +287,10 @@ class Invoice extends PayPalResourceModel
      * @param \PayPal\Api\Participant $participant
      * @return $this
      */
-    public function removeCcInfo($participant)
+    public function removeCcInfo($participant): static
     {
         return $this->setCcInfo(
-            array_diff($this->getCcInfo(), array($participant))
+            array_diff($this->getCcInfo(), [$participant])
         );
     }
 
@@ -301,7 +301,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setShippingInfo($shipping_info)
+    public function setShippingInfo($shipping_info): static
     {
         $this->shipping_info = $shipping_info;
         return $this;
@@ -324,7 +324,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setItems($items)
+    public function setItems($items): static
     {
         $this->items = $items;
         return $this;
@@ -346,13 +346,13 @@ class Invoice extends PayPalResourceModel
      * @param \PayPal\Api\InvoiceItem $invoiceItem
      * @return $this
      */
-    public function addItem($invoiceItem)
+    public function addItem($invoiceItem): static
     {
         if (!$this->getItems()) {
-            return $this->setItems(array($invoiceItem));
+            return $this->setItems([$invoiceItem]);
         } else {
             return $this->setItems(
-                array_merge($this->getItems(), array($invoiceItem))
+                array_merge($this->getItems(), [$invoiceItem])
             );
         }
     }
@@ -363,10 +363,10 @@ class Invoice extends PayPalResourceModel
      * @param \PayPal\Api\InvoiceItem $invoiceItem
      * @return $this
      */
-    public function removeItem($invoiceItem)
+    public function removeItem($invoiceItem): static
     {
         return $this->setItems(
-            array_diff($this->getItems(), array($invoiceItem))
+            array_diff($this->getItems(), [$invoiceItem])
         );
     }
 
@@ -377,7 +377,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setInvoiceDate($invoice_date)
+    public function setInvoiceDate($invoice_date): static
     {
         $this->invoice_date = $invoice_date;
         return $this;
@@ -400,7 +400,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setPaymentTerm($payment_term)
+    public function setPaymentTerm($payment_term): static
     {
         $this->payment_term = $payment_term;
         return $this;
@@ -423,7 +423,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setReference($reference)
+    public function setReference($reference): static
     {
         $this->reference = $reference;
         return $this;
@@ -446,7 +446,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setDiscount($discount)
+    public function setDiscount($discount): static
     {
         $this->discount = $discount;
         return $this;
@@ -469,7 +469,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setShippingCost($shipping_cost)
+    public function setShippingCost($shipping_cost): static
     {
         $this->shipping_cost = $shipping_cost;
         return $this;
@@ -492,7 +492,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setCustom($custom)
+    public function setCustom($custom): static
     {
         $this->custom = $custom;
         return $this;
@@ -515,7 +515,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setAllowPartialPayment($allow_partial_payment)
+    public function setAllowPartialPayment($allow_partial_payment): static
     {
         $this->allow_partial_payment = $allow_partial_payment;
         return $this;
@@ -538,7 +538,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setMinimumAmountDue($minimum_amount_due)
+    public function setMinimumAmountDue($minimum_amount_due): static
     {
         $this->minimum_amount_due = $minimum_amount_due;
         return $this;
@@ -561,7 +561,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setTaxCalculatedAfterDiscount($tax_calculated_after_discount)
+    public function setTaxCalculatedAfterDiscount($tax_calculated_after_discount): static
     {
         $this->tax_calculated_after_discount = $tax_calculated_after_discount;
         return $this;
@@ -584,7 +584,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setTaxInclusive($tax_inclusive)
+    public function setTaxInclusive($tax_inclusive): static
     {
         $this->tax_inclusive = $tax_inclusive;
         return $this;
@@ -607,7 +607,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setTerms($terms)
+    public function setTerms($terms): static
     {
         $this->terms = $terms;
         return $this;
@@ -630,7 +630,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setNote($note)
+    public function setNote($note): static
     {
         $this->note = $note;
         return $this;
@@ -653,7 +653,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setMerchantMemo($merchant_memo)
+    public function setMerchantMemo($merchant_memo): static
     {
         $this->merchant_memo = $merchant_memo;
         return $this;
@@ -676,7 +676,7 @@ class Invoice extends PayPalResourceModel
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function setLogoUrl($logo_url)
+    public function setLogoUrl($logo_url): static
     {
         UrlValidator::validate($logo_url, "LogoUrl");
         $this->logo_url = $logo_url;
@@ -700,7 +700,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setTotalAmount($total_amount)
+    public function setTotalAmount($total_amount): static
     {
         $this->total_amount = $total_amount;
         return $this;
@@ -723,7 +723,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setPayments($payments)
+    public function setPayments($payments): static
     {
         $this->payments = $payments;
         return $this;
@@ -745,13 +745,13 @@ class Invoice extends PayPalResourceModel
      * @param \PayPal\Api\PaymentDetail $paymentDetail
      * @return $this
      */
-    public function addPayment($paymentDetail)
+    public function addPayment($paymentDetail): static
     {
         if (!$this->getPayments()) {
-            return $this->setPayments(array($paymentDetail));
+            return $this->setPayments([$paymentDetail]);
         } else {
             return $this->setPayments(
-                array_merge($this->getPayments(), array($paymentDetail))
+                array_merge($this->getPayments(), [$paymentDetail])
             );
         }
     }
@@ -762,10 +762,10 @@ class Invoice extends PayPalResourceModel
      * @param \PayPal\Api\PaymentDetail $paymentDetail
      * @return $this
      */
-    public function removePayment($paymentDetail)
+    public function removePayment($paymentDetail): static
     {
         return $this->setPayments(
-            array_diff($this->getPayments(), array($paymentDetail))
+            array_diff($this->getPayments(), [$paymentDetail])
         );
     }
 
@@ -776,7 +776,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setRefunds($refunds)
+    public function setRefunds($refunds): static
     {
         $this->refunds = $refunds;
         return $this;
@@ -798,13 +798,13 @@ class Invoice extends PayPalResourceModel
      * @param \PayPal\Api\RefundDetail $refundDetail
      * @return $this
      */
-    public function addRefund($refundDetail)
+    public function addRefund($refundDetail): static
     {
         if (!$this->getRefunds()) {
-            return $this->setRefunds(array($refundDetail));
+            return $this->setRefunds([$refundDetail]);
         } else {
             return $this->setRefunds(
-                array_merge($this->getRefunds(), array($refundDetail))
+                array_merge($this->getRefunds(), [$refundDetail])
             );
         }
     }
@@ -815,10 +815,10 @@ class Invoice extends PayPalResourceModel
      * @param \PayPal\Api\RefundDetail $refundDetail
      * @return $this
      */
-    public function removeRefund($refundDetail)
+    public function removeRefund($refundDetail): static
     {
         return $this->setRefunds(
-            array_diff($this->getRefunds(), array($refundDetail))
+            array_diff($this->getRefunds(), [$refundDetail])
         );
     }
 
@@ -829,7 +829,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setMetadata($metadata)
+    public function setMetadata($metadata): static
     {
         $this->metadata = $metadata;
         return $this;
@@ -852,7 +852,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setAdditionalData($additional_data)
+    public function setAdditionalData($additional_data): static
     {
         $this->additional_data = $additional_data;
         return $this;
@@ -875,7 +875,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setPaidAmount($paid_amount)
+    public function setPaidAmount($paid_amount): static
     {
         $this->paid_amount = $paid_amount;
         return $this;
@@ -898,7 +898,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setRefundedAmount($refunded_amount)
+    public function setRefundedAmount($refunded_amount): static
     {
         $this->refunded_amount = $refunded_amount;
         return $this;
@@ -921,7 +921,7 @@ class Invoice extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setAttachments($attachments)
+    public function setAttachments($attachments): static
     {
         $this->attachments = $attachments;
         return $this;
@@ -943,13 +943,13 @@ class Invoice extends PayPalResourceModel
      * @param \PayPal\Api\FileAttachment $fileAttachment
      * @return $this
      */
-    public function addAttachment($fileAttachment)
+    public function addAttachment($fileAttachment): static
     {
         if (!$this->getAttachments()) {
-            return $this->setAttachments(array($fileAttachment));
+            return $this->setAttachments([$fileAttachment]);
         } else {
             return $this->setAttachments(
-                array_merge($this->getAttachments(), array($fileAttachment))
+                array_merge($this->getAttachments(), [$fileAttachment])
             );
         }
     }
@@ -960,10 +960,10 @@ class Invoice extends PayPalResourceModel
      * @param \PayPal\Api\FileAttachment $fileAttachment
      * @return $this
      */
-    public function removeAttachment($fileAttachment)
+    public function removeAttachment($fileAttachment): static
     {
         return $this->setAttachments(
-            array_diff($this->getAttachments(), array($fileAttachment))
+            array_diff($this->getAttachments(), [$fileAttachment])
         );
     }
 
@@ -972,9 +972,8 @@ class Invoice extends PayPalResourceModel
      *
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return Invoice
      */
-    public function create($apiContext = null, $restCall = null)
+    public function create($apiContext = null, $restCall = null): static
     {
         $payLoad = $this->toJSON();
         $json = self::executeCall(
@@ -995,9 +994,8 @@ class Invoice extends PayPalResourceModel
      * @param Search $search
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return InvoiceSearchResponse
      */
-    public static function search($search, $apiContext = null, $restCall = null)
+    public static function search($search, $apiContext = null, $restCall = null): \PayPal\Api\InvoiceSearchResponse
     {
         ArgumentValidator::validate($search, 'search');
         $payLoad = $search->toJSON();
@@ -1019,14 +1017,13 @@ class Invoice extends PayPalResourceModel
      *
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return bool
      */
-    public function send($apiContext = null, $restCall = null)
+    public function send($apiContext = null, $restCall = null): bool
     {
         ArgumentValidator::validate($this->getId(), "Id");
         $payLoad = "";
         self::executeCall(
-            "/v1/invoicing/invoices/{$this->getId()}/send",
+            sprintf('/v1/invoicing/invoices/%s/send', $this->getId()),
             "POST",
             $payLoad,
             null,
@@ -1042,15 +1039,14 @@ class Invoice extends PayPalResourceModel
      * @param Notification $notification
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return bool
      */
-    public function remind($notification, $apiContext = null, $restCall = null)
+    public function remind($notification, $apiContext = null, $restCall = null): bool
     {
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($notification, 'notification');
         $payLoad = $notification->toJSON();
         self::executeCall(
-            "/v1/invoicing/invoices/{$this->getId()}/remind",
+            sprintf('/v1/invoicing/invoices/%s/remind', $this->getId()),
             "POST",
             $payLoad,
             null,
@@ -1066,15 +1062,14 @@ class Invoice extends PayPalResourceModel
      * @param CancelNotification $cancelNotification
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return bool
      */
-    public function cancel($cancelNotification, $apiContext = null, $restCall = null)
+    public function cancel($cancelNotification, $apiContext = null, $restCall = null): bool
     {
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($cancelNotification, 'cancelNotification');
         $payLoad = $cancelNotification->toJSON();
         self::executeCall(
-            "/v1/invoicing/invoices/{$this->getId()}/cancel",
+            sprintf('/v1/invoicing/invoices/%s/cancel', $this->getId()),
             "POST",
             $payLoad,
             null,
@@ -1090,15 +1085,14 @@ class Invoice extends PayPalResourceModel
      * @param PaymentDetail $paymentDetail
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return bool
      */
-    public function recordPayment($paymentDetail, $apiContext = null, $restCall = null)
+    public function recordPayment($paymentDetail, $apiContext = null, $restCall = null): bool
     {
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($paymentDetail, 'paymentDetail');
         $payLoad = $paymentDetail->toJSON();
         self::executeCall(
-            "/v1/invoicing/invoices/{$this->getId()}/record-payment",
+            sprintf('/v1/invoicing/invoices/%s/record-payment', $this->getId()),
             "POST",
             $payLoad,
             null,
@@ -1114,15 +1108,14 @@ class Invoice extends PayPalResourceModel
      * @param RefundDetail $refundDetail
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return bool
      */
-    public function recordRefund($refundDetail, $apiContext = null, $restCall = null)
+    public function recordRefund($refundDetail, $apiContext = null, $restCall = null): bool
     {
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($refundDetail, 'refundDetail');
         $payLoad = $refundDetail->toJSON();
         self::executeCall(
-            "/v1/invoicing/invoices/{$this->getId()}/record-refund",
+            sprintf('/v1/invoicing/invoices/%s/record-refund', $this->getId()),
             "POST",
             $payLoad,
             null,
@@ -1135,17 +1128,15 @@ class Invoice extends PayPalResourceModel
     /**
      * Gets the details for a specified invoice, by ID.
      *
-     * @param string $invoiceId
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return Invoice
      */
-    public static function get($invoiceId, $apiContext = null, $restCall = null)
+    public static function get(string $invoiceId, $apiContext = null, $restCall = null): \PayPal\Api\Invoice
     {
         ArgumentValidator::validate($invoiceId, 'invoiceId');
         $payLoad = "";
         $json = self::executeCall(
-            "/v1/invoicing/invoices/$invoiceId",
+            '/v1/invoicing/invoices/' . $invoiceId,
             "GET",
             $payLoad,
             null,
@@ -1163,17 +1154,16 @@ class Invoice extends PayPalResourceModel
      * @param array $params
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return InvoiceSearchResponse
      */
-    public static function getAll($params = array(), $apiContext = null, $restCall = null)
+    public static function getAll($params = [], $apiContext = null, $restCall = null): \PayPal\Api\InvoiceSearchResponse
     {
         ArgumentValidator::validate($params, 'params');
 
-        $allowedParams = array(
+        $allowedParams = [
             'page' => 1,
             'page_size' => 1,
             'total_count_required' => 1
-        );
+        ];
 
         $payLoad = "";
         $json = self::executeCall(
@@ -1194,14 +1184,13 @@ class Invoice extends PayPalResourceModel
      *
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return Invoice
      */
-    public function update($apiContext = null, $restCall = null)
+    public function update($apiContext = null, $restCall = null): static
     {
         ArgumentValidator::validate($this->getId(), "Id");
         $payLoad = $this->toJSON();
         $json = self::executeCall(
-            "/v1/invoicing/invoices/{$this->getId()}",
+            '/v1/invoicing/invoices/' . $this->getId(),
             "PUT",
             $payLoad,
             null,
@@ -1217,14 +1206,13 @@ class Invoice extends PayPalResourceModel
      *
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return bool
      */
-    public function delete($apiContext = null, $restCall = null)
+    public function delete($apiContext = null, $restCall = null): bool
     {
         ArgumentValidator::validate($this->getId(), "Id");
         $payLoad = "";
         self::executeCall(
-            "/v1/invoicing/invoices/{$this->getId()}",
+            '/v1/invoicing/invoices/' . $this->getId(),
             "DELETE",
             $payLoad,
             null,
@@ -1239,15 +1227,14 @@ class Invoice extends PayPalResourceModel
      *
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return bool
      */
-    public function deleteExternalPayment($transactionId, $apiContext = null, $restCall = null)
+    public function deleteExternalPayment($transactionId, $apiContext = null, $restCall = null): bool
     {
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($transactionId, "TransactionId");
         $payLoad = "";
         self::executeCall(
-            "/v1/invoicing/invoices/{$this->getId()}/payment-records/{$transactionId}",
+            sprintf('/v1/invoicing/invoices/%s/payment-records/%s', $this->getId(), $transactionId),
             "DELETE",
             $payLoad,
             null,
@@ -1262,15 +1249,14 @@ class Invoice extends PayPalResourceModel
      *
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return bool
      */
-    public function deleteExternalRefund($transactionId, $apiContext = null, $restCall = null)
+    public function deleteExternalRefund($transactionId, $apiContext = null, $restCall = null): bool
     {
         ArgumentValidator::validate($this->getId(), "Id");
         ArgumentValidator::validate($transactionId, "TransactionId");
         $payLoad = "";
         self::executeCall(
-            "/v1/invoicing/invoices/{$this->getId()}/refund-records/{$transactionId}",
+            sprintf('/v1/invoicing/invoices/%s/refund-records/%s', $this->getId(), $transactionId),
             "DELETE",
             $payLoad,
             null,
@@ -1287,22 +1273,21 @@ class Invoice extends PayPalResourceModel
      * @param string $invoiceId
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return Image
      */
-    public static function qrCode($invoiceId, $params = array(), $apiContext = null, $restCall = null)
+    public static function qrCode($invoiceId, $params = [], $apiContext = null, $restCall = null): \PayPal\Api\Image
     {
         ArgumentValidator::validate($invoiceId, 'invoiceId');
         ArgumentValidator::validate($params, 'params');
 
-        $allowedParams = array(
+        $allowedParams = [
             'width' => 1,
             'height' => 1,
             'action' => 1
-        );
+        ];
 
         $payLoad = "";
         $json = self::executeCall(
-            "/v1/invoicing/invoices/$invoiceId/qr-code?" . http_build_query(array_intersect_key($params, $allowedParams)),
+            sprintf('/v1/invoicing/invoices/%s/qr-code?', $invoiceId) . http_build_query(array_intersect_key($params, $allowedParams)),
             "GET",
             $payLoad,
             null,
@@ -1319,9 +1304,8 @@ class Invoice extends PayPalResourceModel
      *
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return InvoiceNumber
      */
-    public static function generateNumber($apiContext = null, $restCall = null)
+    public static function generateNumber($apiContext = null, $restCall = null): \PayPal\Api\InvoiceNumber
     {
         $payLoad = "";
         $json = self::executeCall(

@@ -29,7 +29,7 @@ class BaseAddress extends PayPalModel
      * 
      * @return $this
      */
-    public function setLine1($line1)
+    public function setLine1($line1): static
     {
         $this->line1 = $line1;
         return $this;
@@ -52,7 +52,7 @@ class BaseAddress extends PayPalModel
      * 
      * @return $this
      */
-    public function setLine2($line2)
+    public function setLine2($line2): static
     {
         $this->line2 = $line2;
         return $this;
@@ -75,7 +75,7 @@ class BaseAddress extends PayPalModel
      * 
      * @return $this
      */
-    public function setCity($city)
+    public function setCity($city): static
     {
         $this->city = $city;
         return $this;
@@ -98,7 +98,7 @@ class BaseAddress extends PayPalModel
      * 
      * @return $this
      */
-    public function setCountryCode($country_code)
+    public function setCountryCode($country_code): static
     {
         $this->country_code = $country_code;
         return $this;
@@ -121,7 +121,7 @@ class BaseAddress extends PayPalModel
      * 
      * @return $this
      */
-    public function setPostalCode($postal_code)
+    public function setPostalCode($postal_code): static
     {
         $this->postal_code = $postal_code;
         return $this;
@@ -144,7 +144,7 @@ class BaseAddress extends PayPalModel
      * 
      * @return $this
      */
-    public function setState($state)
+    public function setState($state): static
     {
         $this->state = $state;
         return $this;
@@ -168,7 +168,7 @@ class BaseAddress extends PayPalModel
      *
      * @return $this
      */
-    public function setNormalizationStatus($normalization_status)
+    public function setNormalizationStatus($normalization_status): static
     {
         $this->normalization_status = $normalization_status;
         return $this;
@@ -192,7 +192,7 @@ class BaseAddress extends PayPalModel
      *
      * @return $this
      */
-    public function setStatus($status)
+    public function setStatus($status): static
     {
         $this->status = $status;
         return $this;

@@ -26,7 +26,7 @@ class RelatedResources extends PayPalModel
      * 
      * @return $this
      */
-    public function setSale($sale)
+    public function setSale($sale): static
     {
         $this->sale = $sale;
         return $this;
@@ -49,7 +49,7 @@ class RelatedResources extends PayPalModel
      * 
      * @return $this
      */
-    public function setAuthorization($authorization)
+    public function setAuthorization($authorization): static
     {
         $this->authorization = $authorization;
         return $this;
@@ -72,7 +72,7 @@ class RelatedResources extends PayPalModel
      * 
      * @return $this
      */
-    public function setOrder($order)
+    public function setOrder($order): static
     {
         $this->order = $order;
         return $this;
@@ -95,7 +95,7 @@ class RelatedResources extends PayPalModel
      * 
      * @return $this
      */
-    public function setCapture($capture)
+    public function setCapture($capture): static
     {
         $this->capture = $capture;
         return $this;
@@ -118,7 +118,7 @@ class RelatedResources extends PayPalModel
      * 
      * @return $this
      */
-    public function setRefund($refund)
+    public function setRefund($refund): static
     {
         $this->refund = $refund;
         return $this;

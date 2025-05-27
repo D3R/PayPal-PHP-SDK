@@ -20,7 +20,7 @@ class InvoiceAddress extends BaseAddress
      * 
      * @return $this
      */
-    public function setPhone($phone)
+    public function setPhone($phone): static
     {
         $this->phone = $phone;
         return $this;

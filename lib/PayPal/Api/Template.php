@@ -31,7 +31,7 @@ class Template extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setTemplateId($template_id)
+    public function setTemplateId($template_id): static
     {
         $this->template_id = $template_id;
         return $this;
@@ -54,7 +54,7 @@ class Template extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setName($name)
+    public function setName($name): static
     {
         $this->name = $name;
         return $this;
@@ -77,7 +77,7 @@ class Template extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setDefault($default)
+    public function setDefault($default): static
     {
         $this->default = $default;
         return $this;
@@ -100,7 +100,7 @@ class Template extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setTemplateData($template_data)
+    public function setTemplateData($template_data): static
     {
         $this->template_data = $template_data;
         return $this;
@@ -123,7 +123,7 @@ class Template extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setSettings($settings)
+    public function setSettings($settings): static
     {
         $this->settings = $settings;
         return $this;
@@ -145,13 +145,13 @@ class Template extends PayPalResourceModel
      * @param \PayPal\Api\TemplateSettings $templateSettings
      * @return $this
      */
-    public function addSetting($templateSettings)
+    public function addSetting($templateSettings): static
     {
         if (!$this->getSettings()) {
-            return $this->setSettings(array($templateSettings));
+            return $this->setSettings([$templateSettings]);
         } else {
             return $this->setSettings(
-                array_merge($this->getSettings(), array($templateSettings))
+                array_merge($this->getSettings(), [$templateSettings])
             );
         }
     }
@@ -162,10 +162,10 @@ class Template extends PayPalResourceModel
      * @param \PayPal\Api\TemplateSettings $templateSettings
      * @return $this
      */
-    public function removeSetting($templateSettings)
+    public function removeSetting($templateSettings): static
     {
         return $this->setSettings(
-            array_diff($this->getSettings(), array($templateSettings))
+            array_diff($this->getSettings(), [$templateSettings])
         );
     }
 
@@ -176,7 +176,7 @@ class Template extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setUnitOfMeasure($unit_of_measure)
+    public function setUnitOfMeasure($unit_of_measure): static
     {
         $this->unit_of_measure = $unit_of_measure;
         return $this;
@@ -199,7 +199,7 @@ class Template extends PayPalResourceModel
      * 
      * @return $this
      */
-    public function setCustom($custom)
+    public function setCustom($custom): static
     {
         $this->custom = $custom;
         return $this;
@@ -218,17 +218,15 @@ class Template extends PayPalResourceModel
     /**
      * Retrieve the details for a particular template by passing the template ID to the request URI.
      *
-     * @param string $templateId
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return Template
      */
-    public static function get($templateId, $apiContext = null, $restCall = null)
+    public static function get(string $templateId, $apiContext = null, $restCall = null): \PayPal\Api\Template
     {
         ArgumentValidator::validate($templateId, 'templateId');
         $payLoad = "";
         $json = self::executeCall(
-            "/v1/invoicing/templates/$templateId",
+            '/v1/invoicing/templates/' . $templateId,
             "GET",
             $payLoad,
             null,
@@ -245,14 +243,13 @@ class Template extends PayPalResourceModel
      *
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return bool
      */
-    public function delete($apiContext = null, $restCall = null)
+    public function delete($apiContext = null, $restCall = null): bool
     {
         ArgumentValidator::validate($this->getTemplateId(), "Id");
         $payLoad = "";
         self::executeCall(
-            "/v1/invoicing/templates/{$this->getTemplateId()}",
+            '/v1/invoicing/templates/' . $this->getTemplateId(),
             "DELETE",
             $payLoad,
             null,
@@ -267,9 +264,8 @@ class Template extends PayPalResourceModel
      *
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return Template
      */
-    public function create($apiContext = null, $restCall = null)
+    public function create($apiContext = null, $restCall = null): static
     {
         $json = self::executeCall(
             "/v1/invoicing/templates",
@@ -288,14 +284,13 @@ class Template extends PayPalResourceModel
      *
      * @param ApiContext $apiContext is the APIContext for this call. It can be used to pass dynamic configuration and credentials.
      * @param PayPalRestCall $restCall is the Rest Call Service that is used to make rest calls
-     * @return Template
      */
-    public function update($apiContext = null, $restCall = null)
+    public function update($apiContext = null, $restCall = null): static
     {
         ArgumentValidator::validate($this->getTemplateId(), "Id");
         $payLoad = $this->toJSON();
         $json = self::executeCall(
-            "/v1/invoicing/templates/{$this->getTemplateId()}",
+            '/v1/invoicing/templates/' . $this->getTemplateId(),
             "PUT",
             $payLoad,
             null,

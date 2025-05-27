@@ -14,18 +14,16 @@ class CreditFinancingOfferedTest extends TestCase
 {
     /**
      * Gets Json String of Object CreditFinancingOffered
-     * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"total_cost":' .CurrencyTest::getJson() . ',"term":"12.34","monthly_payment":' .CurrencyTest::getJson() . ',"total_interest":' .CurrencyTest::getJson() . ',"payer_acceptance":true,"cart_amount_immutable":true}';
     }
 
     /**
      * Gets Object Instance with Json data filled in
-     * @return CreditFinancingOffered
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\CreditFinancingOffered
     {
         return new CreditFinancingOffered(self::getJson());
     }
@@ -33,9 +31,8 @@ class CreditFinancingOfferedTest extends TestCase
 
     /**
      * Tests for Serialization and Deserialization Issues
-     * @return CreditFinancingOffered
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\CreditFinancingOffered
     {
         $obj = new CreditFinancingOffered(self::getJson());
         $this->assertNotNull($obj);
@@ -53,7 +50,7 @@ class CreditFinancingOfferedTest extends TestCase
      * @depends testSerializationDeserialization
      * @param CreditFinancingOffered $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getTotalCost(), CurrencyTest::getObject());
         $this->assertEquals($obj->getTerm(), "12.34");

@@ -31,7 +31,7 @@ class PayoutItemDetails extends PayPalModel
      * 
      * @return $this
      */
-    public function setPayoutItemId($payout_item_id)
+    public function setPayoutItemId($payout_item_id): static
     {
         $this->payout_item_id = $payout_item_id;
         return $this;
@@ -54,7 +54,7 @@ class PayoutItemDetails extends PayPalModel
      * 
      * @return $this
      */
-    public function setTransactionId($transaction_id)
+    public function setTransactionId($transaction_id): static
     {
         $this->transaction_id = $transaction_id;
         return $this;
@@ -77,7 +77,7 @@ class PayoutItemDetails extends PayPalModel
      * 
      * @return $this
      */
-    public function setTransactionStatus($transaction_status)
+    public function setTransactionStatus($transaction_status): static
     {
         $this->transaction_status = $transaction_status;
         return $this;
@@ -100,7 +100,7 @@ class PayoutItemDetails extends PayPalModel
      * 
      * @return $this
      */
-    public function setPayoutItemFee($payout_item_fee)
+    public function setPayoutItemFee($payout_item_fee): static
     {
         $this->payout_item_fee = $payout_item_fee;
         return $this;
@@ -123,7 +123,7 @@ class PayoutItemDetails extends PayPalModel
      * 
      * @return $this
      */
-    public function setPayoutBatchId($payout_batch_id)
+    public function setPayoutBatchId($payout_batch_id): static
     {
         $this->payout_batch_id = $payout_batch_id;
         return $this;
@@ -146,7 +146,7 @@ class PayoutItemDetails extends PayPalModel
      * 
      * @return $this
      */
-    public function setSenderBatchId($sender_batch_id)
+    public function setSenderBatchId($sender_batch_id): static
     {
         $this->sender_batch_id = $sender_batch_id;
         return $this;
@@ -169,7 +169,7 @@ class PayoutItemDetails extends PayPalModel
      * 
      * @return $this
      */
-    public function setPayoutItem($payout_item)
+    public function setPayoutItem($payout_item): static
     {
         $this->payout_item = $payout_item;
         return $this;
@@ -192,7 +192,7 @@ class PayoutItemDetails extends PayPalModel
      * 
      * @return $this
      */
-    public function setTimeProcessed($time_processed)
+    public function setTimeProcessed($time_processed): static
     {
         $this->time_processed = $time_processed;
         return $this;
@@ -215,7 +215,7 @@ class PayoutItemDetails extends PayPalModel
      * 
      * @return $this
      */
-    public function setErrors($errors)
+    public function setErrors($errors): static
     {
         $this->errors = $errors;
         return $this;
@@ -238,7 +238,7 @@ class PayoutItemDetails extends PayPalModel
      * 
      * @return $this
      */
-    public function setLinks($links)
+    public function setLinks($links): static
     {
         $this->links = $links;
         return $this;
@@ -260,13 +260,13 @@ class PayoutItemDetails extends PayPalModel
      * @param \PayPal\Api\Links $links
      * @return $this
      */
-    public function addLink($links)
+    public function addLink($links): static
     {
         if (!$this->getLinks()) {
-            return $this->setLinks(array($links));
+            return $this->setLinks([$links]);
         } else {
             return $this->setLinks(
-                array_merge($this->getLinks(), array($links))
+                array_merge($this->getLinks(), [$links])
             );
         }
     }
@@ -277,10 +277,10 @@ class PayoutItemDetails extends PayPalModel
      * @param \PayPal\Api\Links $links
      * @return $this
      */
-    public function removeLink($links)
+    public function removeLink($links): static
     {
         return $this->setLinks(
-            array_diff($this->getLinks(), array($links))
+            array_diff($this->getLinks(), [$links])
         );
     }
 

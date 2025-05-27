@@ -21,7 +21,7 @@ class Address extends BaseAddress
      * 
      * @return $this
      */
-    public function setPhone($phone)
+    public function setPhone($phone): static
     {
         $this->phone = $phone;
         return $this;
@@ -44,7 +44,7 @@ class Address extends BaseAddress
      *
      * @return $this
      */
-    public function setType($type)
+    public function setType($type): static
     {
         $this->type = $type;
         return $this;

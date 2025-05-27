@@ -11,25 +11,21 @@ namespace PayPal\Security;
  */
 class Cipher
 {
-    private $secretKey;
-
     /**
      * Fixed IV Size
      */
     const IV_SIZE = 16;
 
-    public function __construct($secretKey)
+    public function __construct(private $secretKey)
     {
-        $this->secretKey = $secretKey;
     }
 
     /**
      * Encrypts the input text using the cipher key
      *
      * @param $input
-     * @return string
      */
-    public function encrypt($input)
+    public function encrypt($input): string
     {
         // Create a random IV. Not using mcrypt to generate one, as to not have a dependency on it.
         $iv = substr(uniqid("", true), 0, Cipher::IV_SIZE);
@@ -45,7 +41,7 @@ class Cipher
      * @param $input
      * @return string
      */
-    public function decrypt($input)
+    public function decrypt($input): string|false
     {
         // Decode the IV + data
         $input = base64_decode($input);
