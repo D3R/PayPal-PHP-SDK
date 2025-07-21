@@ -29,7 +29,7 @@ class WebhookFunctionalTest extends TestCase
 
     public $apiContext;
 
-    public function setUp()
+    public function setUp(): void
     {
         $className = $this->getClassName();
         $testName = $this->getName();
@@ -46,9 +46,9 @@ class WebhookFunctionalTest extends TestCase
      * Returns just the classname of the test you are executing. It removes the namespaces.
      * @return string
      */
-    public function getClassName()
+    public function getClassName(): string
     {
-        return join('', array_slice(explode('\\', get_class($this)), -1));
+        return join('', array_slice(explode('\\', static::class), -1));
     }
 
     public function testCreate()
@@ -62,7 +62,7 @@ class WebhookFunctionalTest extends TestCase
             $result = $obj->create($this->apiContext, $this->mockPayPalRestCall);
         } catch (PayPalConnectionException $ex) {
             $data = $ex->getData();
-            if (strpos($data, 'WEBHOOK_NUMBER_LIMIT_EXCEEDED') !== false) {
+            if (str_contains($data, 'WEBHOOK_NUMBER_LIMIT_EXCEEDED')) {
                 $this->deleteAll();
                 $result = $obj->create($this->apiContext, $this->mockPayPalRestCall);
             } else {
@@ -73,7 +73,7 @@ class WebhookFunctionalTest extends TestCase
         return $result;
     }
 
-    public function deleteAll()
+    public function deleteAll(): void
     {
         $result = Webhook::getAll($this->apiContext, $this->mockPayPalRestCall);
         foreach ($result->getWebhooks() as $webhookObject) {
@@ -134,9 +134,9 @@ class WebhookFunctionalTest extends TestCase
      * @depends testGet
      * @param $webhook Webhook
      */
-    public function testUpdate($webhook)
+    public function testUpdate($webhook): void
     {
-        $patches = array();
+        $patches = [];
         foreach ($this->operation['request']['body'] as $request) {
             /** @var Patch[] $request */
             $patch = new Patch();
@@ -169,7 +169,7 @@ class WebhookFunctionalTest extends TestCase
      * @depends testGet
      * @param $webhook Webhook
      */
-    public function testDelete($webhook)
+    public function testDelete($webhook): void
     {
         $result = $webhook->delete($this->apiContext, $this->mockPayPalRestCall);
         $this->assertTrue($result);
@@ -177,7 +177,7 @@ class WebhookFunctionalTest extends TestCase
 
     public function testEventSearch()
     {
-        $result = WebhookEvent::all(array(), $this->apiContext, $this->mockPayPalRestCall);
+        $result = WebhookEvent::all([], $this->apiContext, $this->mockPayPalRestCall);
         $this->assertNotNull($result);
         return $result;
     }

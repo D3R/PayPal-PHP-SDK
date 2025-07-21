@@ -16,7 +16,7 @@ class CostTest extends TestCase
      * Gets Json String of Object Cost
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"percent":"12.34","amount":' .CurrencyTest::getJson() . '}';
     }
@@ -25,7 +25,7 @@ class CostTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return Cost
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\Cost
     {
         return new Cost(self::getJson());
     }
@@ -35,7 +35,7 @@ class CostTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return Cost
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\Cost
     {
         $obj = new Cost(self::getJson());
         $this->assertNotNull($obj);
@@ -49,7 +49,7 @@ class CostTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Cost $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getPercent(), "12.34");
         $this->assertEquals($obj->getAmount(), CurrencyTest::getObject());

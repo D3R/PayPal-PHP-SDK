@@ -16,7 +16,7 @@ class RecipientBankingInstructionTest extends TestCase
      * Gets Json String of Object RecipientBankingInstruction
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"bank_name":"TestSample","account_holder_name":"TestSample","account_number":"TestSample","routing_number":"TestSample","international_bank_account_number":"TestSample","bank_identifier_code":"TestSample"}';
     }
@@ -25,7 +25,7 @@ class RecipientBankingInstructionTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return RecipientBankingInstruction
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\RecipientBankingInstruction
     {
         return new RecipientBankingInstruction(self::getJson());
     }
@@ -35,7 +35,7 @@ class RecipientBankingInstructionTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return RecipientBankingInstruction
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\RecipientBankingInstruction
     {
         $obj = new RecipientBankingInstruction(self::getJson());
         $this->assertNotNull($obj);
@@ -53,7 +53,7 @@ class RecipientBankingInstructionTest extends TestCase
      * @depends testSerializationDeserialization
      * @param RecipientBankingInstruction $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getBankName(), "TestSample");
         $this->assertEquals($obj->getAccountHolderName(), "TestSample");

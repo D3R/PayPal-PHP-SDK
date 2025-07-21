@@ -91,17 +91,17 @@ $senderItem2 = new \PayPal\Api\PayoutItem(
 // #### Sender Item 3
 // One more way of assigning values in constructor when creating instance of PayPalModel object. Injecting array.
 $senderItem3 = new \PayPal\Api\PayoutItem(
-    array(
+    [
         "recipient_type" => "EMAIL",
         "receiver" => "shirt-supplier-three@mail.com",
         "note" => "Thank you.",
         "sender_item_id" => uniqid(),
-        "amount" => array(
+        "amount" => [
             "value" => "0.90",
             "currency" => "USD"
-        )
+        ]
 
-    )
+    ]
 );
 
 $payouts->setSenderBatchHeader($senderBatchHeader)
@@ -114,9 +114,9 @@ $request = clone $payouts;
 // ### Create Payout
 try {
     $output = $payouts->create(null, $apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Created Batch Payout", "Payout", null, $request, $ex);
+    ResultPrinter::printError("Created Batch Payout", "Payout", null, $request, $exception);
     exit(1);
 }
 

@@ -12,7 +12,7 @@ class PayPalLogger extends AbstractLogger
     /**
      * @var array Indexed list of all log levels.
      */
-    private $loggingLevels = array(
+    private $loggingLevels = [
         LogLevel::EMERGENCY,
         LogLevel::ALERT,
         LogLevel::CRITICAL,
@@ -21,7 +21,7 @@ class PayPalLogger extends AbstractLogger
         LogLevel::NOTICE,
         LogLevel::INFO,
         LogLevel::DEBUG
-    );
+    ];
 
     /**
      * Configured Logging Level
@@ -45,15 +45,13 @@ class PayPalLogger extends AbstractLogger
     private $isLoggingEnabled;
 
     /**
-     * Logger Name. Generally corresponds to class name
-     *
-     * @var string
+     * @param string $className
      */
-    private $loggerName;
-
-    public function __construct($className)
+    public function __construct(/**
+     * Logger Name. Generally corresponds to class name
+     */
+    private $loggerName)
     {
-        $this->loggerName = $className;
         $this->initialize();
     }
 
@@ -63,7 +61,7 @@ class PayPalLogger extends AbstractLogger
         if (!empty($config)) {
             $this->isLoggingEnabled = (array_key_exists('log.LogEnabled', $config) && $config['log.LogEnabled'] == '1');
             if ($this->isLoggingEnabled) {
-                $this->loggerFile = ($config['log.FileName']) ? $config['log.FileName'] : ini_get('error_log');
+                $this->loggerFile = $config['log.FileName'] ?: ini_get('error_log');
                 $loggingLevel = strtoupper($config['log.LogLevel']);
                 $this->loggingLevel = (isset($loggingLevel) && defined("\\Psr\\Log\\LogLevel::$loggingLevel")) ?
                     constant("\\Psr\\Log\\LogLevel::$loggingLevel") :
@@ -72,7 +70,7 @@ class PayPalLogger extends AbstractLogger
         }
     }
 
-    public function log($level, string|\Stringable $message, array $context = []): void
+    public function log($level, $message, array $context = []): void
     {
         if ($this->isLoggingEnabled) {
             // Checks if the message is at level below configured logging level

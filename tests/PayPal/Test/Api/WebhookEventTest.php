@@ -20,7 +20,7 @@ class WebhookEventTest extends TestCase
      * Gets Json String of Object WebhookEvent
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"id":"TestSample","create_time":"TestSample","resource_type":"TestSample","event_version":"TestSample","event_type":"TestSample","summary":"TestSample","resource":"TestSampleObject","status":"TestSample","transmissions":"TestSampleObject","links":' .LinksTest::getJson() . '}';
     }
@@ -29,7 +29,7 @@ class WebhookEventTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return WebhookEvent
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\WebhookEvent
     {
         return new WebhookEvent(self::getJson());
     }
@@ -39,7 +39,7 @@ class WebhookEventTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return WebhookEvent
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\WebhookEvent
     {
         $obj = new WebhookEvent(self::getJson());
         $this->assertNotNull($obj);
@@ -61,7 +61,7 @@ class WebhookEventTest extends TestCase
      * @depends testSerializationDeserialization
      * @param WebhookEvent $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getId(), "TestSample");
         $this->assertEquals($obj->getCreateTime(), "TestSample");
@@ -79,9 +79,9 @@ class WebhookEventTest extends TestCase
      * @dataProvider mockProvider
      * @param WebhookEvent $obj
      */
-    public function testGet($obj, $mockApiContext)
+    public function testGet(\PayPal\Api\WebhookEvent $obj, $mockApiContext): void
     {
-        $mockPPRestCall = $this->getMockBuilder('\PayPal\Transport\PayPalRestCall')
+        $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -98,9 +98,9 @@ class WebhookEventTest extends TestCase
      * @dataProvider mockProvider
      * @param WebhookEvent $obj
      */
-    public function testResend($obj, $mockApiContext)
+    public function testResend(\PayPal\Api\WebhookEvent $obj, $mockApiContext): void
     {
-        $mockPPRestCall = $this->getMockBuilder('\PayPal\Transport\PayPalRestCall')
+        $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -111,16 +111,16 @@ class WebhookEventTest extends TestCase
             ));
         $eventResend = EventResendTest::getObject();
 
-        $result = $obj->resend($eventResend, $mockApiContext, $mockPPRestCall);
+        $result = $obj->resend($eventResend, $mockApiContext);
         $this->assertNotNull($result);
     }
     /**
      * @dataProvider mockProvider
      * @param WebhookEvent $obj
      */
-    public function testList($obj, $mockApiContext)
+    public function testList(\PayPal\Api\WebhookEvent $obj, $mockApiContext): void
     {
-        $mockPPRestCall = $this->getMockBuilder('\PayPal\Transport\PayPalRestCall')
+        $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -129,21 +129,21 @@ class WebhookEventTest extends TestCase
             ->will($this->returnValue(
                     WebhookEventListTest::getJson()
             ));
-        $params = array();
+        $params = [];
 
         $result = $obj->all($params, $mockApiContext, $mockPPRestCall);
         $this->assertNotNull($result);
     }
 
-    public function mockProvider()
+    public function mockProvider(): array
     {
         $obj = self::getObject();
         $mockApiContext = $this->getMockBuilder('ApiContext')
                     ->disableOriginalConstructor()
                     ->getMock();
-        return array(
-            array($obj, $mockApiContext),
-            array($obj, null)
-        );
+        return [
+            [$obj, $mockApiContext],
+            [$obj, null]
+        ];
     }
 }

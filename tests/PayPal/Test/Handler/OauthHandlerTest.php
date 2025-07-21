@@ -31,7 +31,7 @@ class OauthHandlerTest extends TestCase
      */
     public $config;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->apiContext = new ApiContext(
             new OAuthTokenCredential(
@@ -41,14 +41,14 @@ class OauthHandlerTest extends TestCase
         );
     }
 
-    public function modeProvider()
+    public function modeProvider(): array
     {
-        return array(
-            array( array('mode' => 'sandbox') ),
-            array( array('mode' => 'live')),
-            array( array( 'mode' => 'sandbox','oauth.EndPoint' => 'http://localhost/')),
-            array( array('mode' => 'sandbox','service.EndPoint' => 'http://service.localhost/'))
-        );
+        return [
+            [ ['mode' => 'sandbox'] ],
+            [ ['mode' => 'live']],
+            [ [ 'mode' => 'sandbox','oauth.EndPoint' => 'http://localhost/']],
+            [ ['mode' => 'sandbox','service.EndPoint' => 'http://service.localhost/']]
+        ];
     }
 
 
@@ -56,12 +56,12 @@ class OauthHandlerTest extends TestCase
      * @dataProvider modeProvider
      * @param $configs
      */
-    public function testGetEndpoint($configs)
+    public function testGetEndpoint(array $configs): void
     {
-        $config = $configs + array(
+        $config = $configs + [
             'cache.enabled' => true,
             'http.headers.header1' => 'header1value'
-        );
+        ];
         $this->apiContext->setConfig($config);
         $this->httpConfig = new PayPalHttpConfig(null, 'POST', $config);
         $this->handler = new OauthHandler($this->apiContext);

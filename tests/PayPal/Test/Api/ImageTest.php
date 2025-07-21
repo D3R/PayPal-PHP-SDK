@@ -16,7 +16,7 @@ class ImageTest extends TestCase
      * Gets Json String of Object Patch
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"image":"TestSample"}';
     }
@@ -25,7 +25,7 @@ class ImageTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return Image
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\Image
     {
         return new Image(self::getJson());
     }
@@ -35,7 +35,7 @@ class ImageTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return Image
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\Image
     {
         $obj = new Image(self::getJson());
         $this->assertNotNull($obj);
@@ -48,7 +48,7 @@ class ImageTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Image $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getImage(), "TestSample");
     }

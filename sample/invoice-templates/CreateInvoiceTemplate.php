@@ -44,7 +44,7 @@ $settingDate
 // ### Template
 $invoiceTemplate = new Template();
 $invoiceTemplate
-    ->setName("Hours Template" . rand())
+    ->setName("Hours Template" . random_int(0, mt_getrandmax()))
     ->setDefault(true)
     ->setUnitOfMeasure("HOURS")
     ->setTemplateData($invoiceTemplateData)
@@ -60,9 +60,9 @@ try {
     // Create an invoice by calling the invoice->create() method
     // with a valid ApiContext (See bootstrap.php for more on `ApiContext`)
     $invoiceTemplate->create($apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Create Invoice Template", "Template", null, $request, $ex);
+    ResultPrinter::printError("Create Invoice Template", "Template", null, $request, $exception);
     exit(1);
 }
 

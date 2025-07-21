@@ -9,15 +9,15 @@
 // ## Get Webhook Instance
 
 /** @var \PayPal\Api\Webhook $webhook */
-$webhook = require 'CreateWebhook.php';
+$webhook = require __DIR__ . '/CreateWebhook.php';
 
 
 // ### Delete Webhook
 try {
     $output = $webhook->delete($apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Delete a Webhook", "Webhook", null, $webhookId, $ex);
+    ResultPrinter::printError("Delete a Webhook", "Webhook", null, $webhookId, $exception);
     exit(1);
 }
 

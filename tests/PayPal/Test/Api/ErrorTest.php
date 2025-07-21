@@ -17,7 +17,7 @@ class ErrorTest extends TestCase
      *
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"name":"TestSample","purchase_unit_reference_id":"TestSample","message":"TestSample","code":"TestSample","details":' . ErrorDetailsTest::getJson() . ',"processor_response":' . ProcessorResponseTest::getJson() . ',"fmf_details":' . FmfDetailsTest::getJson() . ',"information_link":"TestSample","debug_id":"TestSample","links":' . LinksTest::getJson() . '}';
     }
@@ -26,7 +26,7 @@ class ErrorTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return Error
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\Error
     {
         return new Error(self::getJson());
     }
@@ -36,7 +36,7 @@ class ErrorTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return Error
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\Error
     {
         $obj = new Error(self::getJson());
         $this->assertNotNull($obj);
@@ -58,7 +58,7 @@ class ErrorTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Error $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getName(), "TestSample");
         $this->assertEquals($obj->getPurchaseUnitReferenceId(), "TestSample");

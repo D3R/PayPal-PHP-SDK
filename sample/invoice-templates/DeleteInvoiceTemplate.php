@@ -5,7 +5,7 @@
 // an invoice template
 
 /** @var Template $template */
-$template = require 'CreateInvoiceTemplate.php';
+$template = require __DIR__ . '/CreateInvoiceTemplate.php';
 
 use PayPal\Api\Template;
 
@@ -18,9 +18,9 @@ try {
     // notification object
     // (See bootstrap.php for more on `ApiContext`)
     $deleteStatus = $template->delete($apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Delete Invoice Template", "Template", null, $deleteStatus, $ex);
+    ResultPrinter::printError("Delete Invoice Template", "Template", null, $deleteStatus, $exception);
     exit(1);
 }
 

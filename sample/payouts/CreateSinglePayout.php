@@ -63,9 +63,9 @@ $request = clone $payouts;
 // ### Create Payout
 try {
     $output = $payouts->createSynchronous($apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Created Single Synchronous Payout", "Payout", null, $request, $ex);
+    ResultPrinter::printError("Created Single Synchronous Payout", "Payout", null, $request, $exception);
     exit(1);
 }
 

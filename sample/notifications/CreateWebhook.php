@@ -33,7 +33,7 @@ $webhook->setUrl("https://requestb.in/10ujt3c1?uniqid=" . uniqid());
 
 // # Event Types
 // Event types correspond to what kind of notifications you want to receive on the given URL.
-$webhookEventTypes = array();
+$webhookEventTypes = [];
 $webhookEventTypes[] = new \PayPal\Api\WebhookEventType(
     '{
         "name":"PAYMENT.AUTHORIZATION.CREATED"
@@ -52,31 +52,32 @@ $request = clone $webhook;
 // ### Create Webhook
 try {
     $output = $webhook->create($apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // ^ Ignore workflow code segment
-    if ($ex instanceof \PayPal\Exception\PayPalConnectionException) {
-        $data = $ex->getData();
+    if ($exception instanceof \PayPal\Exception\PayPalConnectionException) {
+        $data = $exception->getData();
         // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-        ResultPrinter::printError("Created Webhook Failed. Checking if it is Webhook Number Limit Exceeded. Trying to delete all existing webhooks", "Webhook", "Please Use <a style='color: red;' href='DeleteAllWebhooks.php' >Delete All Webhooks</a> Sample to delete all existing webhooks in sample", $request, $ex);
-        if (strpos($data, 'WEBHOOK_NUMBER_LIMIT_EXCEEDED') !== false) {
-            require 'DeleteAllWebhooks.php';
+        ResultPrinter::printError("Created Webhook Failed. Checking if it is Webhook Number Limit Exceeded. Trying to delete all existing webhooks", "Webhook", "Please Use <a style='color: red;' href='DeleteAllWebhooks.php' >Delete All Webhooks</a> Sample to delete all existing webhooks in sample", $request, $exception);
+        if (str_contains($data, 'WEBHOOK_NUMBER_LIMIT_EXCEEDED')) {
+            require __DIR__ . '/DeleteAllWebhooks.php';
             try {
                 $output = $webhook->create($apiContext);
-            } catch (Exception $ex) {
+            } catch (Exception $exception) {
                 // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-                ResultPrinter::printError("Created Webhook", "Webhook", null, $request, $ex);
+                ResultPrinter::printError("Created Webhook", "Webhook", null, $request, $exception);
                 exit(1);
             }
         } else {
             // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-            ResultPrinter::printError("Created Webhook", "Webhook", null, $request, $ex);
+            ResultPrinter::printError("Created Webhook", "Webhook", null, $request, $exception);
             exit(1);
         }
     } else {
         // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-        ResultPrinter::printError("Created Webhook", "Webhook", null, $request, $ex);
+        ResultPrinter::printError("Created Webhook", "Webhook", null, $request, $exception);
         exit(1);
     }
+
     // Print Success Result
 }
 

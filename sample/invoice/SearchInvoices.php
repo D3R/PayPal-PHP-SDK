@@ -5,7 +5,7 @@
 // search invoices from history.
 
 /** @var Invoice $invoice */
-$invoice = require 'CreateInvoice.php';
+$invoice = require __DIR__ . '/CreateInvoice.php';
 use PayPal\Api\Invoice;
 use PayPal\Api\Search;
 
@@ -29,10 +29,11 @@ try {
     // Refer the method doc for valid values for keys
     // (See bootstrap.php for more on `ApiContext`)
     $invoices = Invoice::search($search, $apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Search Invoice", "Invoice", null, null, $ex);
+    ResultPrinter::printError("Search Invoice", "Invoice", null, null, $exception);
     exit(1);
 }
+
 // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
  ResultPrinter::printResult("Search Invoice", "Invoice", null, $search, $invoices);

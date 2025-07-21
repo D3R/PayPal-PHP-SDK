@@ -17,9 +17,9 @@ $webhook = require_once __DIR__ . '/../bootstrap.php';
 // ### Get List of All Webhooks
 try {
     $output = \PayPal\Api\Webhook::getAll($apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("List all webhooks", "WebhookList", null, $webhookId, $ex);
+    ResultPrinter::printError("List all webhooks", "WebhookList", null, $webhookId, $exception);
     exit(1);
 }
 

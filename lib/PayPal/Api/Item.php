@@ -365,10 +365,10 @@ class Item extends PayPalModel
     public function addSupplementaryData($nameValuePair)
     {
         if (!$this->getSupplementaryData()) {
-            return $this->setSupplementaryData(array($nameValuePair));
+            return $this->setSupplementaryData([$nameValuePair]);
         } else {
             return $this->setSupplementaryData(
-                array_merge($this->getSupplementaryData(), array($nameValuePair))
+                array_merge($this->getSupplementaryData(), [$nameValuePair])
             );
         }
     }
@@ -382,7 +382,7 @@ class Item extends PayPalModel
     public function removeSupplementaryData($nameValuePair)
     {
         return $this->setSupplementaryData(
-            array_diff($this->getSupplementaryData(), array($nameValuePair))
+            array_diff($this->getSupplementaryData(), [$nameValuePair])
         );
     }
 
@@ -418,10 +418,10 @@ class Item extends PayPalModel
     public function addPostbackData($nameValuePair)
     {
         if (!$this->getPostbackData()) {
-            return $this->setPostbackData(array($nameValuePair));
+            return $this->setPostbackData([$nameValuePair]);
         } else {
             return $this->setPostbackData(
-                array_merge($this->getPostbackData(), array($nameValuePair))
+                array_merge($this->getPostbackData(), [$nameValuePair])
             );
         }
     }
@@ -435,7 +435,7 @@ class Item extends PayPalModel
     public function removePostbackData($nameValuePair)
     {
         return $this->setPostbackData(
-            array_diff($this->getPostbackData(), array($nameValuePair))
+            array_diff($this->getPostbackData(), [$nameValuePair])
         );
     }
 

@@ -14,16 +14,16 @@ class PayPalHttpConfigTest extends TestCase
 
     protected $object;
 
-    private $config = array(
+    private array $config = [
         'http.ConnectionTimeOut' => '30',
         'http.Retry' => '5',
-    );
+    ];
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
     }
 
@@ -31,14 +31,14 @@ class PayPalHttpConfigTest extends TestCase
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
     }
 
     /**
      * @test
      */
-    public function testHeaderFunctions()
+    public function testHeaderFunctions(): void
     {
         $o = new PayPalHttpConfig();
         $o->addHeader('key1', 'value1');
@@ -65,20 +65,20 @@ class PayPalHttpConfigTest extends TestCase
     /**
      * @test
      */
-    public function testCurlOpts()
+    public function testCurlOpts(): void
     {
         $o = new PayPalHttpConfig();
-        $o->setCurlOptions(array('k' => 'v'));
+        $o->setCurlOptions(['k' => 'v']);
 
         $curlOpts = $o->getCurlOptions();
         $this->assertCount(1, $curlOpts);
         $this->assertEquals('v', $curlOpts['k']);
     }
 
-    public function testRemoveCurlOpts()
+    public function testRemoveCurlOpts(): void
     {
         $o = new PayPalHttpConfig();
-        $o->setCurlOptions(array('k' => 'v'));
+        $o->setCurlOptions(['k' => 'v']);
         $curlOpts = $o->getCurlOptions();
         $this->assertCount(1, $curlOpts);
         $this->assertEquals('v', $curlOpts['k']);
@@ -91,7 +91,7 @@ class PayPalHttpConfigTest extends TestCase
     /**
      * @test
      */
-    public function testUserAgent()
+    public function testUserAgent(): void
     {
         $ua = 'UAString';
         $o = new PayPalHttpConfig();
@@ -104,7 +104,7 @@ class PayPalHttpConfigTest extends TestCase
     /**
      * @test
      */
-    public function testSSLOpts()
+    public function testSSLOpts(): void
     {
         $sslCert = '../cacert.pem';
         $sslPass = 'passPhrase';
@@ -120,7 +120,7 @@ class PayPalHttpConfigTest extends TestCase
     /**
      * @test
      */
-    public function testProxyOpts()
+    public function testProxyOpts(): void
     {
         $proxy = 'http://me:secret@hostname:8081';
 
@@ -131,7 +131,7 @@ class PayPalHttpConfigTest extends TestCase
         $this->assertEquals('hostname:8081', $curlOpts[CURLOPT_PROXY]);
         $this->assertEquals('me:secret', $curlOpts[CURLOPT_PROXYUSERPWD]);
 
-        $this->setExpectedException('PayPal\Exception\PayPalConfigurationException');
+        $this->setExpectedException(\PayPal\Exception\PayPalConfigurationException::class);
         $o->setHttpProxy('invalid string');
     }
 }

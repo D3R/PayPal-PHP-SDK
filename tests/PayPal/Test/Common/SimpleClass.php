@@ -6,7 +6,7 @@ use PayPal\Common\PayPalModel;
 class SimpleClass extends PayPalModel
 {
 
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -16,7 +16,7 @@ class SimpleClass extends PayPalModel
         return $this->name;
     }
 
-    public function setDescription($description)
+    public function setDescription($description): void
     {
         $this->description = $description;
     }

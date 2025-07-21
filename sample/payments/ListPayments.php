@@ -20,12 +20,12 @@ use PayPal\Api\Payment;
 // Refer the method doc for valid values for keys
 // (See bootstrap.php for more on `ApiContext`)
 try {
-    $params = array('count' => 10, 'start_index' => 5);
+    $params = ['count' => 10, 'start_index' => 5];
 
     $payments = Payment::all($params, $apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("List Payments", "Payment", null, $params, $ex);
+    ResultPrinter::printError("List Payments", "Payment", null, $params, $exception);
     exit(1);
 }
 

@@ -7,16 +7,16 @@
 // ## Get Webhook Instance
 
 /** @var \PayPal\Api\WebhookList $webhookList */
-$webhookList = require 'ListWebhooks.php';
+$webhookList = require __DIR__ . '/ListWebhooks.php';
 
 // ### Delete Webhook
 try {
     foreach ($webhookList->getWebhooks() as $webhook) {
         $webhook->delete($apiContext);
     }
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Deleted all Webhooks", "WebhookList", null, null, $ex);
+    ResultPrinter::printError("Deleted all Webhooks", "WebhookList", null, null, $exception);
     exit(1);
 }
 

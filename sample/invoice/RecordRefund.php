@@ -5,7 +5,7 @@
 // an invoice as refunded.
 
 /** @var Invoice $invoice */
-$invoice = require 'RecordPayment.php';
+$invoice = require __DIR__ . '/RecordPayment.php';
 
 use PayPal\Api\Invoice;
 use PayPal\Api\RefundDetail;
@@ -28,9 +28,9 @@ try {
     // notification object
     // (See bootstrap.php for more on `ApiContext`)
     $refundStatus = $invoice->recordRefund($refund, $apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Refund for Invoice", "Invoice", null, null, $ex);
+    ResultPrinter::printError("Refund for Invoice", "Invoice", null, null, $exception);
     exit(1);
 }
 
@@ -45,9 +45,9 @@ try {
 // (See bootstrap.php for more on `ApiContext`)
 try {
     $invoice = Invoice::get($invoice->getId(), $apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Get Invoice (Not Required - For Sample Only)", "Invoice", $invoice->getId(), $invoice->getId(), $ex);
+    ResultPrinter::printError("Get Invoice (Not Required - For Sample Only)", "Invoice", $invoice->getId(), $invoice->getId(), $exception);
     exit(1);
 }
 

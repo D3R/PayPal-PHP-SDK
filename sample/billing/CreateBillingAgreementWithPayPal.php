@@ -9,7 +9,7 @@
 // Retrieving the Plan from the Create Update Sample. This would be used to
 // define Plan information to create an agreement. Make sure the plan you are using is in active state.
 /** @var Plan $createdPlan */
-$createdPlan = require 'UpdatePlan.php';
+$createdPlan = require __DIR__ . '/UpdatePlan.php';
 
 use PayPal\Api\Agreement;
 use PayPal\Api\Payer;
@@ -74,13 +74,13 @@ try {
     // the buyer to. Retrieve the url from the $agreement->getApprovalLink()
     // method
     $approvalUrl = $agreement->getApprovalLink();
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Created Billing Agreement.", "Agreement", null, $request, $ex);
+    ResultPrinter::printError("Created Billing Agreement.", "Agreement", null, $request, $exception);
     exit(1);
 }
 
 // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
- ResultPrinter::printResult("Created Billing Agreement. Please visit the URL to Approve.", "Agreement", "<a href='$approvalUrl' >$approvalUrl</a>", $request, $agreement);
+ ResultPrinter::printResult("Created Billing Agreement. Please visit the URL to Approve.", "Agreement", sprintf("<a href='%s' >%s</a>", $approvalUrl, $approvalUrl), $request, $agreement);
 
 return $agreement;

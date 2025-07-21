@@ -26,7 +26,7 @@ class PayoutsFunctionalTest extends TestCase
 
     public static $batchId;
 
-    public function setUp()
+    public function setUp(): void
     {
         $className = $this->getClassName();
         $testName = $this->getName();
@@ -44,9 +44,9 @@ class PayoutsFunctionalTest extends TestCase
      * Returns just the classname of the test you are executing. It removes the namespaces.
      * @return string
      */
-    public function getClassName()
+    public function getClassName(): string
     {
-        return join('', array_slice(explode('\\', get_class($this)), -1));
+        return join('', array_slice(explode('\\', static::class), -1));
     }
 
     public function testCreate()
@@ -57,7 +57,7 @@ class PayoutsFunctionalTest extends TestCase
             $obj->getSenderBatchHeader()->setSenderBatchId(uniqid());
         }
         PayoutsFunctionalTest::$batchId = $obj->getSenderBatchHeader()->getSenderBatchId();
-        $params = array('sync_mode' => 'true');
+        $params = ['sync_mode' => 'true'];
         $result = $obj->create($params, $this->apiContext, $this->mockPayPalRestCall);
         $this->assertNotNull($result);
         $this->assertEquals(PayoutsFunctionalTest::$batchId, $result->getBatchHeader()->getSenderBatchHeader()->getSenderBatchId());
@@ -88,7 +88,7 @@ class PayoutsFunctionalTest extends TestCase
      * @param $payoutBatch PayoutBatch
      * @return PayoutBatch
      */
-    public function testGetItem($payoutBatch)
+    public function testGetItem($payoutBatch): void
     {
         $items = $payoutBatch->getItems();
         $item = $items[0];
@@ -105,7 +105,7 @@ class PayoutsFunctionalTest extends TestCase
      * @param $payoutBatch PayoutBatch
      * @return PayoutBatch
      */
-    public function testCancel($payoutBatch)
+    public function testCancel($payoutBatch): void
     {
         $items = $payoutBatch->getItems();
         $item = $items[0];

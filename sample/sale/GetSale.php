@@ -18,9 +18,9 @@ try {
     // Pass the ID of the sale
     // transaction from your payment resource.
     $sale = Sale::get($saleId, $apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Look Up A Sale", "Sale", $sale->getId(), null, $ex);
+    ResultPrinter::printError("Look Up A Sale", "Sale", $sale->getId(), null, $exception);
     exit(1);
 }
 

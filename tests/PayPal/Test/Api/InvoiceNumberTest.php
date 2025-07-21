@@ -16,7 +16,7 @@ class InvoiceNumberTest extends TestCase
      * Gets Json String of Object Cost
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"number":"1234"}';
     }
@@ -25,7 +25,7 @@ class InvoiceNumberTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return InvoiceNumber
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\InvoiceNumber
     {
         return new InvoiceNumber(self::getJson());
     }
@@ -35,7 +35,7 @@ class InvoiceNumberTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return InvoiceNumber
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\InvoiceNumber
     {
         $obj = new InvoiceNumber(self::getJson());
         $this->assertNotNull($obj);
@@ -48,7 +48,7 @@ class InvoiceNumberTest extends TestCase
      * @depends testSerializationDeserialization
      * @param InvoiceNumber $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getNumber(), "1234");
     }

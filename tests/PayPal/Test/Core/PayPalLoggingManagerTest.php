@@ -17,7 +17,7 @@ class PayPalLoggingManagerTest extends TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = PayPalLoggingManager::getInstance('InvoiceTest');
     }
@@ -26,14 +26,14 @@ class PayPalLoggingManagerTest extends TestCase
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
     }
 
     /**
      * @test
      */
-    public function testError()
+    public function testError(): void
     {
         $this->object->error('Test Error Message');
     }
@@ -41,7 +41,7 @@ class PayPalLoggingManagerTest extends TestCase
     /**
      * @test
      */
-    public function testWarning()
+    public function testWarning(): void
     {
         $this->object->warning('Test Warning Message');
     }
@@ -49,7 +49,7 @@ class PayPalLoggingManagerTest extends TestCase
     /**
      * @test
      */
-    public function testInfo()
+    public function testInfo(): void
     {
         $this->object->info('Test info Message');
     }
@@ -57,7 +57,7 @@ class PayPalLoggingManagerTest extends TestCase
     /**
      * @test
      */
-    public function testFine()
+    public function testFine(): void
     {
         $this->object->fine('Test fine Message');
     }

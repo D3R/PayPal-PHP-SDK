@@ -5,7 +5,7 @@
 // an invoice.
 
 /** @var Invoice $invoice */
-$invoice = require 'CreateInvoice.php';
+$invoice = require __DIR__ . '/CreateInvoice.php';
 use PayPal\Api\Invoice;
 
 // For Sample Purposes Only.
@@ -25,9 +25,9 @@ try {
     // Update an invoice by calling the invoice->update() method
     // with a valid ApiContext (See bootstrap.php for more on `ApiContext`)
     $invoice->update($apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Invoice Updated", "Invoice", null, $request, $ex);
+    ResultPrinter::printError("Invoice Updated", "Invoice", null, $request, $exception);
     exit(1);
 }
 
@@ -42,9 +42,9 @@ try {
 // (See bootstrap.php for more on `ApiContext`)
 try {
     $invoice = Invoice::get($invoice->getId(), $apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Get Invoice (Not Required - For Sample Only)", "Invoice", $invoice->getId(), $invoice->getId(), $ex);
+    ResultPrinter::printError("Get Invoice (Not Required - For Sample Only)", "Invoice", $invoice->getId(), $invoice->getId(), $exception);
     exit(1);
 }
 

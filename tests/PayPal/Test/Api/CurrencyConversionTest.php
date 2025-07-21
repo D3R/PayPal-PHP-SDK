@@ -17,7 +17,7 @@ class CurrencyConversionTest extends TestCase
      *
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"conversion_date":"TestSample","from_currency":"TestSample","from_amount":"TestSample","to_currency":"TestSample","to_amount":"TestSample","conversion_type":"TestSample","conversion_type_changeable":true,"web_url":"http://www.google.com","links":' . LinksTest::getJson() . '}';
     }
@@ -27,7 +27,7 @@ class CurrencyConversionTest extends TestCase
      *
      * @return CurrencyConversion
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\CurrencyConversion
     {
         return new CurrencyConversion(self::getJson());
     }
@@ -38,7 +38,7 @@ class CurrencyConversionTest extends TestCase
      *
      * @return CurrencyConversion
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\CurrencyConversion
     {
         $obj = new CurrencyConversion(self::getJson());
         $this->assertNotNull($obj);
@@ -59,7 +59,7 @@ class CurrencyConversionTest extends TestCase
      * @depends testSerializationDeserialization
      * @param CurrencyConversion $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getConversionDate(), "TestSample");
         $this->assertEquals($obj->getFromCurrency(), "TestSample");
@@ -76,13 +76,13 @@ class CurrencyConversionTest extends TestCase
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage WebUrl is not a fully qualified URL
      */
-    public function testUrlValidationForWebUrl()
+    public function testUrlValidationForWebUrl(): void
     {
         $obj = new CurrencyConversion();
         $obj->setWebUrl(null);
     }
 
-    public function testUrlValidationForWebUrlDeprecated()
+    public function testUrlValidationForWebUrlDeprecated(): void
     {
         $obj = new CurrencyConversion();
         $obj->setWebUrl(null);

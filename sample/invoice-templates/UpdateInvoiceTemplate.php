@@ -5,7 +5,7 @@
 // an invoice.
 
 /** @var Template $template */
-$template = require 'GetInvoiceTemplate.php';
+$template = require __DIR__ . '/GetInvoiceTemplate.php';
 use PayPal\Api\Template;
 
 
@@ -23,9 +23,9 @@ try {
     // Update an invoice by calling the invoice->update() method
     // with a valid ApiContext (See bootstrap.php for more on `ApiContext`)
     $template->update($apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Invoice Template Updated", "Invoice", null, $request, $ex);
+    ResultPrinter::printError("Invoice Template Updated", "Invoice", null, $request, $exception);
     exit(1);
 }
 
