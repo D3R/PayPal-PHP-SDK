@@ -36,7 +36,7 @@ $item2->setName('Granola bars')
     ->setPrice(2);
 
 $itemList = new ItemList();
-$itemList->setItems(array($item1, $item2));
+$itemList->setItems([$item1, $item2]);
 
 // ### Additional payment details
 // Use this optional field to set additional
@@ -71,8 +71,8 @@ $transaction->setAmount($amount)
 // payment approval/ cancellation.
 $baseUrl = getBaseUrl();
 $redirectUrls = new RedirectUrls();
-$redirectUrls->setReturnUrl("$baseUrl/OrderGet.php?success=true")
-    ->setCancelUrl("$baseUrl/OrderGet.php?success=false");
+$redirectUrls->setReturnUrl($baseUrl . '/OrderGet.php?success=true')
+    ->setCancelUrl($baseUrl . '/OrderGet.php?success=false');
 
 // ### Payment
 // A Payment Resource; create one using
@@ -81,7 +81,7 @@ $payment = new Payment();
 $payment->setIntent("order")
     ->setPayer($payer)
     ->setRedirectUrls($redirectUrls)
-    ->setTransactions(array($transaction));
+    ->setTransactions([$transaction]);
 
 
 // For Sample Purposes Only.
@@ -96,9 +96,9 @@ $request = clone $payment;
 // for payment approval
 try {
     $payment->create($apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Created Payment Order Using PayPal. Please visit the URL to Approve.", "Payment", null, $request, $ex);
+    ResultPrinter::printError("Created Payment Order Using PayPal. Please visit the URL to Approve.", "Payment", null, $request, $exception);
     exit(1);
 }
 
@@ -109,6 +109,6 @@ try {
 $approvalUrl = $payment->getApprovalLink();
 
 // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
- ResultPrinter::printResult("Created Payment Order Using PayPal. Please visit the URL to Approve.", "Payment", "<a href='$approvalUrl' >$approvalUrl</a>", $request, $payment);
+ ResultPrinter::printResult("Created Payment Order Using PayPal. Please visit the URL to Approve.", "Payment", sprintf("<a href='%s' >%s</a>", $approvalUrl, $approvalUrl), $request, $payment);
 
 return $payment;

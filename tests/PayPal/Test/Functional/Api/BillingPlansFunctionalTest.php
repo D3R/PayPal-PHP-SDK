@@ -28,14 +28,14 @@ class BillingPlansFunctionalTest extends TestCase
 
     public $apiContext;
 
-    public function setUp()
+    public function setUp(): void
     {
         $className = $this->getClassName();
         $testName = $this->getName();
         $this->setupTest($className, $testName);
     }
 
-    public function setupTest($className, $testName)
+    public function setupTest($className, $testName): void
     {
         $operationString = file_get_contents(__DIR__ . "/../resources/$className/$testName.json");
         $this->operation = json_decode($operationString, true);
@@ -70,9 +70,9 @@ class BillingPlansFunctionalTest extends TestCase
      * Returns just the classname of the test you are executing. It removes the namespaces.
      * @return string
      */
-    public function getClassName()
+    public function getClassName(): string
     {
-        return join('', array_slice(explode('\\', get_class($this)), -1));
+        return join('', array_slice(explode('\\', static::class), -1));
     }
 
     public function testCreate()
@@ -104,7 +104,7 @@ class BillingPlansFunctionalTest extends TestCase
         $result = Plan::get($plan->getId(), $this->apiContext, $this->mockPayPalRestCall);
         $this->assertNotNull($result);
         $this->assertEquals($plan->getId(), $result->getId());
-        $this->assertEquals($plan, $result, "", 0, 10, true);
+        $this->assertEquals($plan, $result, "");
         return $result;
     }
 
@@ -112,9 +112,9 @@ class BillingPlansFunctionalTest extends TestCase
      * @depends testGet
      * @param $plan Plan
      */
-    public function testGetList($plan)
+    public function testGetList($plan): void
     {
-        $result = Plan::all(array('page_size' => '20', 'total_required' => 'yes'), $this->apiContext, $this->mockPayPalRestCall);
+        $result = Plan::all(['page_size' => '20', 'total_required' => 'yes'], $this->apiContext, $this->mockPayPalRestCall);
         $this->assertNotNull($result);
         $totalPages = $result->getTotalPages();
         $found = false;
@@ -128,7 +128,7 @@ class BillingPlansFunctionalTest extends TestCase
                 }
             }
             if (!$found) {
-                $result = Plan::all(array('page' => --$totalPages, 'page_size' => '20', 'total_required' => 'yes'), $this->apiContext, $this->mockPayPalRestCall);
+                $result = Plan::all(['page' => --$totalPages, 'page_size' => '20', 'total_required' => 'yes'], $this->apiContext, $this->mockPayPalRestCall);
             }
         } while ($totalPages > 0 && $found == false);
         $this->assertTrue($found, "The Created Plan was not found in the get list");
@@ -139,7 +139,7 @@ class BillingPlansFunctionalTest extends TestCase
      * @depends testGet
      * @param $plan Plan
      */
-    public function testUpdateChangingMerchantPreferences($plan)
+    public function testUpdateChangingMerchantPreferences($plan): void
     {
         /** @var Patch[] $request */
         $request = $this->operation['request']['body'][0];
@@ -147,7 +147,7 @@ class BillingPlansFunctionalTest extends TestCase
         $patch->setOp($request['op']);
         $patch->setPath($request['path']);
         $patch->setValue($request['value']);
-        $patches = array();
+        $patches = [];
         $patches[] = $patch;
         $patchRequest = new PatchRequest();
         $patchRequest->setPatches($patches);
@@ -159,7 +159,7 @@ class BillingPlansFunctionalTest extends TestCase
      * @depends testGet
      * @param $plan Plan
      */
-    public function testUpdateChangingPD($plan)
+    public function testUpdateChangingPD($plan): void
     {
         /** @var Patch[] $request */
         $request = $this->operation['request']['body'][0];
@@ -168,7 +168,7 @@ class BillingPlansFunctionalTest extends TestCase
         $paymentDefinitions = $plan->getPaymentDefinitions();
         $patch->setPath('/payment-definitions/' . $paymentDefinitions[0]->getId());
         $patch->setValue($request['value']);
-        $patches = array();
+        $patches = [];
         $patches[] = $patch;
         $patchRequest = new PatchRequest();
         $patchRequest->setPatches($patches);
@@ -181,7 +181,7 @@ class BillingPlansFunctionalTest extends TestCase
      * @param $plan Plan
      * @return Plan
      */
-    public function testUpdateChangingState($plan)
+    public function testUpdateChangingState($plan): \PayPal\Api\Plan
     {
         /** @var Patch[] $request */
         $request = $this->operation['request']['body'][0];
@@ -189,7 +189,7 @@ class BillingPlansFunctionalTest extends TestCase
         $patch->setOp($request['op']);
         $patch->setPath($request['path']);
         $patch->setValue($request['value']);
-        $patches = array();
+        $patches = [];
         $patches[] = $patch;
         $patchRequest = new PatchRequest();
         $patchRequest->setPatches($patches);

@@ -16,7 +16,7 @@ class CountryCodeTest extends TestCase
      * Gets Json String of Object CountryCode
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"country_code":"TestSample"}';
     }
@@ -25,7 +25,7 @@ class CountryCodeTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return CountryCode
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\CountryCode
     {
         return new CountryCode(self::getJson());
     }
@@ -35,7 +35,7 @@ class CountryCodeTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return CountryCode
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\CountryCode
     {
         $obj = new CountryCode(self::getJson());
         $this->assertNotNull($obj);
@@ -48,7 +48,7 @@ class CountryCodeTest extends TestCase
      * @depends testSerializationDeserialization
      * @param CountryCode $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getCountryCode(), "TestSample");
     }

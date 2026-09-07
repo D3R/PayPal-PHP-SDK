@@ -16,7 +16,7 @@ class RelatedResourcesTest extends TestCase
      * Gets Json String of Object RelatedResources
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"sale":' . SaleTest::getJson() . ',"authorization":' . AuthorizationTest::getJson() . ',"order":' . OrderTest::getJson() . ',"capture":' . CaptureTest::getJson() . ',"refund":' . RefundTest::getJson() . '}';
     }
@@ -25,7 +25,7 @@ class RelatedResourcesTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return RelatedResources
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\RelatedResources
     {
         return new RelatedResources(self::getJson());
     }
@@ -35,7 +35,7 @@ class RelatedResourcesTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return RelatedResources
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\RelatedResources
     {
         $obj = new RelatedResources(self::getJson());
         $this->assertNotNull($obj);
@@ -52,7 +52,7 @@ class RelatedResourcesTest extends TestCase
      * @depends testSerializationDeserialization
      * @param RelatedResources $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getSale(), SaleTest::getObject());
         $this->assertEquals($obj->getAuthorization(), AuthorizationTest::getObject());

@@ -7,7 +7,7 @@
 // API used: GET /v1/payments/payouts/<Payout-Batch-Id>
 
 /** @var \PayPal\Api\PayoutBatch $payoutBatch */
-$payoutBatch = require 'CreateBatchPayout.php';
+$payoutBatch = require __DIR__ . '/CreateBatchPayout.php';
 // ## Payout Batch ID
 // You can replace this with your Payout Batch Id on already created Payout.
 $payoutBatchId = $payoutBatch->getBatchHeader()->getPayoutBatchId();
@@ -15,9 +15,9 @@ $payoutBatchId = $payoutBatch->getBatchHeader()->getPayoutBatchId();
 // ### Get Payout Batch Status
 try {
     $output = \PayPal\Api\Payout::get($payoutBatchId, $apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Get Payout Batch Status", "PayoutBatch", null, $payoutBatchId, $ex);
+    ResultPrinter::printError("Get Payout Batch Status", "PayoutBatch", null, $payoutBatchId, $exception);
     exit(1);
 }
 

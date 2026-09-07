@@ -7,34 +7,34 @@ use PHPUnit\Framework\TestCase;
 class ArgumentValidatorTest extends TestCase
 {
 
-    public static function positiveProvider()
+    public static function positiveProvider(): array
     {
-        return array(
-            array("1"),
-            array("something here"),
-            array(1),
-            array(array(1,2,3)),
-            array(0.123),
-            array(true),
-            array(false),
-            array(array()),
-        );
+        return [
+            ["1"],
+            ["something here"],
+            [1],
+            [[1,2,3]],
+            [0.123],
+            [true],
+            [false],
+            [[]],
+        ];
     }
 
-    public static function invalidProvider()
+    public static function invalidProvider(): array
     {
-        return array(
-            array(null),
-            array(''),
-            array('     ')
-        );
+        return [
+            [null],
+            [''],
+            ['     ']
+        ];
     }
 
     /**
      *
      * @dataProvider positiveProvider
      */
-    public function testValidate($input)
+    public function testValidate(string|int|float|bool|array $input): void
     {
         $this->assertTrue(ArgumentValidator::validate($input, "Name"));
     }
@@ -44,7 +44,7 @@ class ArgumentValidatorTest extends TestCase
      * @dataProvider invalidProvider
      * @expectedException \InvalidArgumentException
      */
-    public function testInvalidDataValidate($input)
+    public function testInvalidDataValidate(?string $input): void
     {
         $this->assertTrue(ArgumentValidator::validate($input, "Name"));
     }

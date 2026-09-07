@@ -12,16 +12,16 @@ class Setup
 
     public static $mode = 'mock';
 
-    public static function SetUpForFunctionalTests(TestCase &$test)
+    public static function SetUpForFunctionalTests(TestCase &$test): void
     {
-        $configs = array(
+        $configs = [
             'mode' => 'sandbox',
             'http.ConnectionTimeOut' => 30,
             'log.LogEnabled' => true,
             'log.FileName' => '../PayPal.log',
             'log.LogLevel' => 'FINE',
             'validation.level' => 'log'
-        );
+        ];
         $test->apiContext = new ApiContext(
             new OAuthTokenCredential('AYSq3RDGsmBLJE-otTkBtM-jBRd1TCQwFf9RGfwddNXWz0uFU9ztymylOhRS', 'EGnHDxD_qRPdaLdZz8iCr8N7_MzF-YHPTkjs6NKYQvQSBngp4PTTVWkPZRbL')
         );
@@ -31,11 +31,11 @@ class Setup
         //PayPalConfigManager::getInstance()->addConfigs($configs);
         PayPalCredentialManager::getInstance()->setCredentialObject(PayPalCredentialManager::getInstance()->getCredentialObject('acct1'));
 
-        self::$mode = getenv('REST_MODE') ? getenv('REST_MODE') : 'mock';
+        self::$mode = getenv('REST_MODE') ?: 'mock';
         if (self::$mode != 'sandbox') {
 
             // Mock PayPalRest Caller if mode set to mock
-            $test->mockPayPalRestCall = $test->getMockBuilder('\PayPal\Transport\PayPalRestCall')
+            $test->mockPayPalRestCall = $test->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
                 ->disableOriginalConstructor()
                 ->getMock();
 

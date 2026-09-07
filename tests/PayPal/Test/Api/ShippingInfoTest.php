@@ -16,7 +16,7 @@ class ShippingInfoTest extends TestCase
      * Gets Json String of Object ShippingInfo
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"first_name":"TestSample","last_name":"TestSample","business_name":"TestSample","address":' .AddressTest::getJson() . '}';
     }
@@ -25,7 +25,7 @@ class ShippingInfoTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return ShippingInfo
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\ShippingInfo
     {
         return new ShippingInfo(self::getJson());
     }
@@ -35,7 +35,7 @@ class ShippingInfoTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return ShippingInfo
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\ShippingInfo
     {
         $obj = new ShippingInfo(self::getJson());
         $this->assertNotNull($obj);
@@ -51,7 +51,7 @@ class ShippingInfoTest extends TestCase
      * @depends testSerializationDeserialization
      * @param ShippingInfo $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getFirstName(), "TestSample");
         $this->assertEquals($obj->getLastName(), "TestSample");

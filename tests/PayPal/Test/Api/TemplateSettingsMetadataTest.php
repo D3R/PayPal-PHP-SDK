@@ -17,7 +17,7 @@ class TemplateSettingsMetadataTest extends TestCase
      * Gets Json String of Object TemplateSettingsMetadata
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"hidden":true}';
     }
@@ -26,7 +26,7 @@ class TemplateSettingsMetadataTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return TemplateSettingsMetadata
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\TemplateSettingsMetadata
     {
         return new TemplateSettingsMetadata(self::getJson());
     }
@@ -36,7 +36,7 @@ class TemplateSettingsMetadataTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return TemplateSettingsMetadata
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\TemplateSettingsMetadata
     {
         $obj = new TemplateSettingsMetadata(self::getJson());
         $this->assertNotNull($obj);
@@ -49,7 +49,7 @@ class TemplateSettingsMetadataTest extends TestCase
      * @depends testSerializationDeserialization
      * @param TemplateSettingsMetadata $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getHidden(), true);
     }

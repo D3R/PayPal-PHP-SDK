@@ -15,52 +15,58 @@ use PHPUnit\Framework\TestCase;
 class FormatConverterTest extends TestCase
 {
 
-    public static function classMethodListProvider()
+    public static function classMethodListProvider(): array
     {
-        return array(
-            array(new Item(), 'Price'),
-            array(new Item(), 'Tax'),
-            array(new Amount(), 'Total'),
-            array(new Currency(), 'Value'),
-            array(new Details(), 'Shipping'),
-            array(new Details(), 'SubTotal'),
-            array(new Details(), 'Tax'),
-            array(new Details(), 'Fee'),
-            array(new Details(), 'ShippingDiscount'),
-            array(new Details(), 'Insurance'),
-            array(new Details(), 'HandlingFee'),
-            array(new Details(), 'GiftWrap'),
-            array(new InvoiceItem(), 'Quantity'),
-            array(new Tax(), 'Percent')
-        );
+        return [
+            [new Item(), 'Price'],
+            [new Item(), 'Tax'],
+            [new Amount(), 'Total'],
+            [new Currency(), 'Value'],
+            [new Details(), 'Shipping'],
+            [new Details(), 'SubTotal'],
+            [new Details(), 'Tax'],
+            [new Details(), 'Fee'],
+            [new Details(), 'ShippingDiscount'],
+            [new Details(), 'Insurance'],
+            [new Details(), 'HandlingFee'],
+            [new Details(), 'GiftWrap'],
+            [new InvoiceItem(), 'Quantity'],
+            [new Tax(), 'Percent']
+        ];
     }
 
-    public static function CurrencyListWithNoDecimalsProvider()
+    public static function CurrencyListWithNoDecimalsProvider(): array
     {
-        return array(
-            array('JPY'),
-            array('TWD'),
-            array('HUF')
-        );
+        return [
+            ['JPY'],
+            ['TWD'],
+            ['HUF']
+        ];
     }
 
-    public static function apiModelSettersProvider()
+    /**
+     * @return list<array>
+     */
+    public static function apiModelSettersProvider(): array
     {
-        $provider = array();
+        $provider = [];
         foreach (NumericValidatorTest::positiveProvider() as $value) {
             foreach (self::classMethodListProvider() as $method) {
-                $provider[] = array_merge($method, array($value));
+                $provider[] = array_merge($method, [$value]);
             }
         }
         return $provider;
     }
 
-    public static function apiModelSettersInvalidProvider()
+    /**
+     * @return list<array>
+     */
+    public static function apiModelSettersInvalidProvider(): array
     {
-        $provider = array();
+        $provider = [];
         foreach (NumericValidatorTest::invalidProvider() as $value) {
             foreach (self::classMethodListProvider() as $method) {
-                $provider[] = array_merge($method, array($value));
+                $provider[] = array_merge($method, [$value]);
             }
         }
         return $provider;
@@ -70,7 +76,7 @@ class FormatConverterTest extends TestCase
      *
      * @dataProvider \PayPal\Test\Validation\NumericValidatorTest::positiveProvider
      */
-    public function testFormatToTwoDecimalPlaces($input, $expected)
+    public function testFormatToTwoDecimalPlaces($input, $expected): void
     {
         $result = FormatConverter::formatToNumber($input);
         $this->assertEquals($expected, $result);
@@ -79,7 +85,7 @@ class FormatConverterTest extends TestCase
     /**
      * @dataProvider CurrencyListWithNoDecimalsProvider
      */
-    public function testPriceWithNoDecimalCurrencyInvalid($input)
+    public function testPriceWithNoDecimalCurrencyInvalid(string $input): void
     {
         try {
             FormatConverter::formatToPrice("1.234", $input);
@@ -91,7 +97,7 @@ class FormatConverterTest extends TestCase
     /**
      * @dataProvider CurrencyListWithNoDecimalsProvider
      */
-    public function testPriceWithNoDecimalCurrencyValid($input)
+    public function testPriceWithNoDecimalCurrencyValid(string $input): void
     {
         $result = FormatConverter::formatToPrice("1.0000000", $input);
         $this->assertEquals("1", $result);
@@ -101,20 +107,20 @@ class FormatConverterTest extends TestCase
      *
      * @dataProvider \PayPal\Test\Validation\NumericValidatorTest::positiveProvider
      */
-    public function testFormatToNumber($input, $expected)
+    public function testFormatToNumber($input, $expected): void
     {
         $result = FormatConverter::formatToNumber($input);
         $this->assertEquals($expected, $result);
     }
 
-    public function testFormatToNumberDecimals()
+    public function testFormatToNumberDecimals(): void
     {
         $result = FormatConverter::formatToNumber("0.0", 4);
         $this->assertEquals("0.0000", $result);
     }
 
 
-    public function testFormat()
+    public function testFormat(): void
     {
         $result = FormatConverter::format("12.0123", "%0.2f");
         $this->assertEquals("12.01", $result);
@@ -127,7 +133,7 @@ class FormatConverterTest extends TestCase
      * @param string $method Method Name where the format is being applied
      * @param array $values array of ['input', 'expectedResponse'] is provided
      */
-    public function testSettersOfKnownApiModel($class, $method, $values)
+    public function testSettersOfKnownApiModel($class, string $method, array $values): void
     {
         $obj = new $class();
         $setter = "set" . $method;
@@ -140,7 +146,7 @@ class FormatConverterTest extends TestCase
      * @dataProvider apiModelSettersInvalidProvider
      * @expectedException \InvalidArgumentException
      */
-    public function testSettersOfKnownApiModelInvalid($class, $methodName, $values)
+    public function testSettersOfKnownApiModelInvalid($class, string $methodName, $values): void
     {
         $obj = new $class();
         $setter = "set" . $methodName;

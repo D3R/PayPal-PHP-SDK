@@ -12,21 +12,20 @@
 class ResultPrinter
 {
 
-    private static $printResultCounter = 0;
+    private static int $printResultCounter = 0;
 
     /**
      * Prints HTML Output to web page.
      *
-     * @param string     $title
      * @param string    $objectName
      * @param string    $objectId
      * @param mixed     $request
      * @param mixed     $response
      * @param string $errorMessage
      */
-    public static function printOutput($title, $objectName, $objectId = null, $request = null, $response = null, $errorMessage = null)
+    public static function printOutput(string $title, $objectName, $objectId = null, $request = null, $response = null, $errorMessage = null): void
     {
-        if (PHP_SAPI == 'cli') {
+        if (PHP_SAPI === 'cli') {
             self::$printResultCounter++;
             printf("\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
             printf("(%d) %s", self::$printResultCounter, strtoupper($title));
@@ -34,6 +33,7 @@ class ResultPrinter
             if ($objectId) {
                 printf("Object with ID: %s \n", $objectId);
             }
+
             printf("-------------------------------------------------------------\n");
             printf("\tREQUEST:\n");
             self::printConsoleObject($request);
@@ -42,12 +42,13 @@ class ResultPrinter
             printf("\n-------------------------------------------------------------\n\n");
         } else {
             if (self::$printResultCounter == 0) {
-                include "header.html";
+                include __DIR__ . "/header.html";
                 echo '
                   <div class="row header"><div class="col-md-5 pull-left"><br /><a href="../index.php"><h1 class="home">&#10094;&#10094; Back to Samples</h1></a><br /></div> <br />
                   <div class="col-md-4 pull-right"><img src="https://www.paypalobjects.com/webstatic/developer/logo2_paypal_developer_2x.png" class="logo" width="300"/></div> </div>';
                 echo '<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">';
             }
+
             self::$printResultCounter++;
             echo '
         <div class="panel panel-default">
@@ -62,7 +63,7 @@ class ResultPrinter
             ';
 
             if ($objectId) {
-                echo "<div>" . ($objectName ? $objectName : "Object") . " with ID: $objectId </div>";
+                echo "<div>" . ($objectName ?: "Object") . sprintf(' with ID: %s </div>', $objectId);
             }
 
             echo '<div class="row hidden-xs hidden-sm hidden-md"><div class="col-md-6"><h4>Request Object</h4>';
@@ -84,19 +85,19 @@ class ResultPrinter
             </div>
         </div>';
         }
+
         flush();
     }
 
     /**
      * Prints success response HTML Output to web page.
      *
-     * @param string     $title
      * @param string    $objectName
      * @param string    $objectId
      * @param mixed     $request
      * @param mixed     $response
      */
-    public static function printResult($title, $objectName, $objectId = null, $request = null, $response = null)
+    public static function printResult(string $title, $objectName, $objectId = null, $request = null, $response = null): void
     {
         self::printOutput($title, $objectName, $objectId, $request, $response, false);
     }
@@ -106,16 +107,15 @@ class ResultPrinter
      *
      * @param      $title
      * @param      $objectName
-     * @param null $objectId
-     * @param null $request
      * @param \Exception $exception
      */
-    public static function printError($title, $objectName, $objectId = null, $request = null, $exception = null)
+    public static function printError(string $title, $objectName, $objectId = null, $request = null, $exception = null): void
     {
         $data = null;
         if ($exception instanceof \PayPal\Exception\PayPalConnectionException) {
             $data = $exception->getData();
         }
+
         self::printOutput($title, $objectName, $objectId, $request, $data, $exception->getMessage());
     }
 
@@ -124,6 +124,7 @@ class ResultPrinter
         if ($error) {
             echo 'ERROR:'. $error;
         }
+
         if ($object) {
             if (is_a($object, 'PayPal\Common\PayPalModel')) {
                 /** @var $object \PayPal\Common\PayPalModel */
@@ -147,6 +148,7 @@ class ResultPrinter
              $error.
             '</p>';
         }
+
         if ($object) {
             if (is_a($object, 'PayPal\Common\PayPalModel')) {
                 /** @var $object \PayPal\Common\PayPalModel */
@@ -170,21 +172,21 @@ class ResultPrinter
  * ### getBaseUrl function
  * // utility function that returns base url for
  * // determining return/cancel urls
- *
- * @return string
  */
-function getBaseUrl()
+function getBaseUrl(): string
 {
-    if (PHP_SAPI == 'cli') {
+    if (PHP_SAPI === 'cli') {
         $trace=debug_backtrace();
-        $relativePath = substr(dirname($trace[0]['file']), strlen(dirname(dirname(__FILE__))));
-        echo "Warning: This sample may require a server to handle return URL. Cannot execute in command line. Defaulting URL to http://localhost$relativePath \n";
+        $relativePath = substr(dirname($trace[0]['file']), strlen(dirname(__FILE__, 2)));
+        echo "Warning: This sample may require a server to handle return URL. Cannot execute in command line. Defaulting URL to http://localhost{$relativePath} \n";
         return "http://localhost" . $relativePath;
     }
+
     $protocol = 'http';
-    if ($_SERVER['SERVER_PORT'] == 443 || (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on')) {
+    if ($_SERVER['SERVER_PORT'] == 443 || (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) === 'on')) {
         $protocol .= 's';
     }
+
     $host = $_SERVER['HTTP_HOST'];
     $request = $_SERVER['PHP_SELF'];
     return dirname($protocol . '://' . $host . $request);

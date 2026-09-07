@@ -16,7 +16,7 @@ class TemplateDataTest extends TestCase
      * Gets Json String of Object TemplateData
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"merchant_info":' .MerchantInfoTest::getJson() . ',"billing_info":' .BillingInfoTest::getJson() . ',"shipping_info":' .ShippingInfoTest::getJson() . ',"items":' .InvoiceItemTest::getJson() . ',"payment_term":' .PaymentTermTest::getJson() . ',"reference":"TestSample","discount":' .CostTest::getJson() . ',"shipping_cost":' .ShippingCostTest::getJson() . ',"custom":' .CustomAmountTest::getJson() . ',"allow_partial_payment":true,"minimum_amount_due":' .CurrencyTest::getJson() . ',"tax_calculated_after_discount":true,"tax_inclusive":true,"terms":"TestSample","note":"TestSample","merchant_memo":"TestSample","logo_url":"http://www.google.com","total_amount":' .CurrencyTest::getJson() . ',"attachments":' .FileAttachmentTest::getJson() . '}';
     }
@@ -25,7 +25,7 @@ class TemplateDataTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return TemplateData
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\TemplateData
     {
         return new TemplateData(self::getJson());
     }
@@ -35,7 +35,7 @@ class TemplateDataTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return TemplateData
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\TemplateData
     {
         $obj = new TemplateData(self::getJson());
         $this->assertNotNull($obj);
@@ -66,7 +66,7 @@ class TemplateDataTest extends TestCase
      * @depends testSerializationDeserialization
      * @param TemplateData $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getMerchantInfo(), MerchantInfoTest::getObject());
         $this->assertEquals($obj->getBillingInfo(), BillingInfoTest::getObject());
@@ -93,7 +93,7 @@ class TemplateDataTest extends TestCase
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage LogoUrl is not a fully qualified URL
      */
-    public function testUrlValidationForLogoUrl()
+    public function testUrlValidationForLogoUrl(): void
     {
         $obj = new TemplateData();
         $obj->setLogoUrl(null);

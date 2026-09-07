@@ -24,7 +24,7 @@ $invoice = new Invoice();
 // required for invoice APIs
 $invoice
     ->setMerchantInfo(new MerchantInfo())
-    ->setBillingInfo(array(new BillingInfo()))
+    ->setBillingInfo([new BillingInfo()])
     ->setNote("Medical Invoice 16 Jul, 2013 PST")
     ->setPaymentTerm(new PaymentTerm())
     ->setShippingInfo(new ShippingInfo());
@@ -73,7 +73,7 @@ $billing[0]->getAddress()
 // ### Items List
 // You could provide the list of all items for
 // detailed breakdown of invoice
-$items = array();
+$items = [];
 $items[0] = new InvoiceItem();
 $items[0]
     ->setName("Sutures")
@@ -153,9 +153,9 @@ try {
     // Create an invoice by calling the invoice->create() method
     // with a valid ApiContext (See bootstrap.php for more on `ApiContext`)
     $invoice->create($apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Create Invoice", "Invoice", null, $request, $ex);
+    ResultPrinter::printError("Create Invoice", "Invoice", null, $request, $exception);
     exit(1);
 }
 

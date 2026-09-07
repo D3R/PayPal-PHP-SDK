@@ -16,7 +16,7 @@ class PaymentDefinitionTest extends TestCase
      * Gets Json String of Object PaymentDefinition
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"id":"TestSample","name":"TestSample","type":"TestSample","frequency_interval":"TestSample","frequency":"TestSample","cycles":"TestSample","amount":' .CurrencyTest::getJson() . ',"charge_models":' .ChargeModelTest::getJson() . '}';
     }
@@ -25,7 +25,7 @@ class PaymentDefinitionTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return PaymentDefinition
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\PaymentDefinition
     {
         return new PaymentDefinition(self::getJson());
     }
@@ -35,7 +35,7 @@ class PaymentDefinitionTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return PaymentDefinition
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\PaymentDefinition
     {
         $obj = new PaymentDefinition(self::getJson());
         $this->assertNotNull($obj);
@@ -55,7 +55,7 @@ class PaymentDefinitionTest extends TestCase
      * @depends testSerializationDeserialization
      * @param PaymentDefinition $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getId(), "TestSample");
         $this->assertEquals($obj->getName(), "TestSample");

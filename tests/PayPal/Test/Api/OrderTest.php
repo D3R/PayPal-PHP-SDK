@@ -17,7 +17,7 @@ class OrderTest extends TestCase
      * Gets Json String of Object Order
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"id":"TestSample","reference_id":"TestSample","amount":' .AmountTest::getJson() . ',"payment_mode":"TestSample","state":"TestSample","reason_code":"TestSample","pending_reason":"TestSample","protection_eligibility":"TestSample","protection_eligibility_type":"TestSample","parent_payment":"TestSample","fmf_details":' .FmfDetailsTest::getJson() . ',"create_time":"TestSample","update_time":"TestSample","links":' .LinksTest::getJson() . '}';
     }
@@ -26,7 +26,7 @@ class OrderTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return Order
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\Order
     {
         return new Order(self::getJson());
     }
@@ -36,7 +36,7 @@ class OrderTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return Order
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\Order
     {
         $obj = new Order(self::getJson());
         $this->assertNotNull($obj);
@@ -62,7 +62,7 @@ class OrderTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Order $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getId(), "TestSample");
         $this->assertEquals($obj->getReferenceId(), "TestSample");
@@ -84,9 +84,9 @@ class OrderTest extends TestCase
      * @dataProvider mockProvider
      * @param Order $obj
      */
-    public function testGet($obj, $mockApiContext)
+    public function testGet(\PayPal\Api\Order $obj, $mockApiContext): void
     {
-        $mockPPRestCall = $this->getMockBuilder('\PayPal\Transport\PayPalRestCall')
+        $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -103,9 +103,9 @@ class OrderTest extends TestCase
      * @dataProvider mockProvider
      * @param Order $obj
      */
-    public function testCapture($obj, $mockApiContext)
+    public function testCapture(\PayPal\Api\Order $obj, $mockApiContext): void
     {
-        $mockPPRestCall = $this->getMockBuilder('\PayPal\Transport\PayPalRestCall')
+        $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -123,9 +123,9 @@ class OrderTest extends TestCase
      * @dataProvider mockProvider
      * @param Order $obj
      */
-    public function testVoid($obj, $mockApiContext)
+    public function testVoid(\PayPal\Api\Order $obj, $mockApiContext): void
     {
-        $mockPPRestCall = $this->getMockBuilder('\PayPal\Transport\PayPalRestCall')
+        $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -142,9 +142,9 @@ class OrderTest extends TestCase
      * @dataProvider mockProvider
      * @param Order $obj
      */
-    public function testAuthorize($obj, $mockApiContext)
+    public function testAuthorize(\PayPal\Api\Order $obj, $mockApiContext): void
     {
-        $mockPPRestCall = $this->getMockBuilder('\PayPal\Transport\PayPalRestCall')
+        $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -159,15 +159,15 @@ class OrderTest extends TestCase
         $this->assertNotNull($result);
     }
 
-    public function mockProvider()
+    public function mockProvider(): array
     {
         $obj = self::getObject();
         $mockApiContext = $this->getMockBuilder('ApiContext')
                     ->disableOriginalConstructor()
                     ->getMock();
-        return array(
-            array($obj, $mockApiContext),
-            array($obj, null)
-        );
+        return [
+            [$obj, $mockApiContext],
+            [$obj, null]
+        ];
     }
 }

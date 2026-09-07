@@ -17,7 +17,7 @@ class AuthorizationCacheTest extends TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
     }
 
@@ -25,30 +25,30 @@ class AuthorizationCacheTest extends TestCase
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
     }
 
-    public static function EnabledProvider()
+    public static function EnabledProvider(): array
     {
-        return array(
-            array(array('cache.enabled' => 'true'), true),
-            array(array('cache.enabled' => true), true),
-        );
+        return [
+            [['cache.enabled' => 'true'], true],
+            [['cache.enabled' => true], true],
+        ];
     }
 
-    public static function CachePathProvider()
+    public static function CachePathProvider(): array
     {
-        return array(
-            array(array('cache.FileName' => 'temp.cache'), 'temp.cache')
-        );
+        return [
+            [['cache.FileName' => 'temp.cache'], 'temp.cache']
+        ];
     }
 
     /**
      *
      * @dataProvider EnabledProvider
      */
-    public function testIsEnabled($config, $expected)
+    public function testIsEnabled(array $config, bool $expected): void
     {
         $result = AuthorizationCache::isEnabled($config);
         $this->assertEquals($expected, $result);
@@ -57,22 +57,22 @@ class AuthorizationCacheTest extends TestCase
     /**
      * @dataProvider CachePathProvider
      */
-    public function testCachePath($config, $expected)
+    public function testCachePath(array $config, string $expected): void
     {
         $result = AuthorizationCache::cachePath($config);
         $this->assertContains($expected, $result);
     }
 
-    public function testCacheDisabled()
+    public function testCacheDisabled(): void
     {
         // 'cache.enabled' => true,
-        AuthorizationCache::push(array('cache.enabled' => false), 'clientId', 'accessToken', 'tokenCreateTime', 'tokenExpiresIn');
-        AuthorizationCache::pull(array('cache.enabled' => false), 'clientId');
+        AuthorizationCache::push('clientId', 'accessToken', 'tokenCreateTime', 'tokenExpiresIn', ['cache.enabled' => false]);
+        AuthorizationCache::pull(['cache.enabled' => false], 'clientId');
     }
 
-    public function testCachePush()
+    public function testCachePush(): void
     {
-        AuthorizationCache::push(array('cache.enabled' => true, 'cache.FileName' => AuthorizationCacheTest::CACHE_FILE), 'clientId', 'accessToken', 'tokenCreateTime', 'tokenExpiresIn');
+        AuthorizationCache::push('clientId', 'accessToken', 'tokenCreateTime', 'tokenExpiresIn', ['cache.enabled' => true, 'cache.FileName' => AuthorizationCacheTest::CACHE_FILE]);
         $contents = file_get_contents(AuthorizationCacheTest::CACHE_FILE);
         $tokens = json_decode($contents, true);
         $this->assertNotNull($contents);
@@ -82,18 +82,18 @@ class AuthorizationCacheTest extends TestCase
         $this->assertEquals('tokenExpiresIn', $tokens['clientId']['tokenExpiresIn']);
     }
 
-    public function testCachePullNonExisting()
+    public function testCachePullNonExisting(): void
     {
-        $result = AuthorizationCache::pull(array('cache.enabled' => true, 'cache.FileName' => AuthorizationCacheTest::CACHE_FILE), 'clientIdUndefined');
+        $result = AuthorizationCache::pull(['cache.enabled' => true, 'cache.FileName' => AuthorizationCacheTest::CACHE_FILE], 'clientIdUndefined');
         $this->assertNull($result);
     }
 
     /**
      * @depends testCachePush
      */
-    public function testCachePull()
+    public function testCachePull(): void
     {
-        $result = AuthorizationCache::pull(array('cache.enabled' => true, 'cache.FileName' => AuthorizationCacheTest::CACHE_FILE), 'clientId');
+        $result = AuthorizationCache::pull(['cache.enabled' => true, 'cache.FileName' => AuthorizationCacheTest::CACHE_FILE], 'clientId');
         $this->assertNotNull($result);
         $this->assertInternalType('array', $result);
         $this->assertEquals('clientId', $result['clientId']);

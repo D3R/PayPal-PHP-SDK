@@ -33,29 +33,29 @@ $paymentDefinition->setName('Regular Payments')
     ->setFrequency('Month')
     ->setFrequencyInterval("2")
     ->setCycles("12")
-    ->setAmount(new Currency(array('value' => 100, 'currency' => 'USD')));
+    ->setAmount(new Currency(['value' => 100, 'currency' => 'USD']));
 
 // Charge Models
 $chargeModel = new ChargeModel();
 $chargeModel->setType('SHIPPING')
-    ->setAmount(new Currency(array('value' => 10, 'currency' => 'USD')));
+    ->setAmount(new Currency(['value' => 10, 'currency' => 'USD']));
 
-$paymentDefinition->setChargeModels(array($chargeModel));
+$paymentDefinition->setChargeModels([$chargeModel]);
 
 $merchantPreferences = new MerchantPreferences();
 $baseUrl = getBaseUrl();
 // ReturnURL and CancelURL are not required and used when creating billing agreement with payment_method as "credit_card".
 // However, it is generally a good idea to set these values, in case you plan to create billing agreements which accepts "paypal" as payment_method.
 // This will keep your plan compatible with both the possible scenarios on how it is being used in agreement.
-$merchantPreferences->setReturnUrl("$baseUrl/ExecuteAgreement.php?success=true")
-    ->setCancelUrl("$baseUrl/ExecuteAgreement.php?success=false")
+$merchantPreferences->setReturnUrl($baseUrl . '/ExecuteAgreement.php?success=true')
+    ->setCancelUrl($baseUrl . '/ExecuteAgreement.php?success=false')
     ->setAutoBillAmount("yes")
     ->setInitialFailAmountAction("CONTINUE")
     ->setMaxFailAttempts("0")
-    ->setSetupFee(new Currency(array('value' => 1, 'currency' => 'USD')));
+    ->setSetupFee(new Currency(['value' => 1, 'currency' => 'USD']));
 
 
-$plan->setPaymentDefinitions(array($paymentDefinition));
+$plan->setPaymentDefinitions([$paymentDefinition]);
 $plan->setMerchantPreferences($merchantPreferences);
 
 // For Sample Purposes Only.
@@ -64,9 +64,9 @@ $request = clone $plan;
 // ### Create Plan
 try {
     $output = $plan->create($apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Created Plan", "Plan", null, $request, $ex);
+    ResultPrinter::printError("Created Plan", "Plan", null, $request, $exception);
     exit(1);
 }
 

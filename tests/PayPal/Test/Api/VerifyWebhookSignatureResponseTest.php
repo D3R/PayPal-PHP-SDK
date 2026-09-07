@@ -17,7 +17,7 @@ class VerifyWebhookSignatureResponseTest extends TestCase
      * Gets Json String of Object VerifyWebhookSignatureResponse
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"verification_status":"TestSample"}';
     }
@@ -26,7 +26,7 @@ class VerifyWebhookSignatureResponseTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return VerifyWebhookSignatureResponse
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\VerifyWebhookSignatureResponse
     {
         return new VerifyWebhookSignatureResponse(self::getJson());
     }
@@ -36,7 +36,7 @@ class VerifyWebhookSignatureResponseTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return VerifyWebhookSignatureResponse
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\VerifyWebhookSignatureResponse
     {
         $obj = new VerifyWebhookSignatureResponse(self::getJson());
         $this->assertNotNull($obj);
@@ -49,7 +49,7 @@ class VerifyWebhookSignatureResponseTest extends TestCase
      * @depends testSerializationDeserialization
      * @param VerifyWebhookSignatureResponse $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getVerificationStatus(), "TestSample");
     }

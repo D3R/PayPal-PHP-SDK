@@ -5,7 +5,7 @@
 // an invoice.
 
 /** @var Invoice $invoice */
-$invoice = require 'CreateInvoice.php';
+$invoice = require __DIR__ . '/CreateInvoice.php';
 use PayPal\Api\Invoice;
 
 $invoiceId = $invoice->getId();
@@ -18,9 +18,9 @@ $invoiceId = $invoice->getId();
 // (See bootstrap.php for more on `ApiContext`)
 try {
     $invoice = Invoice::get($invoiceId, $apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Get Invoice", "Invoice", $invoice->getId(), $invoiceId, $ex);
+    ResultPrinter::printError("Get Invoice", "Invoice", $invoice->getId(), $invoiceId, $exception);
     exit(1);
 }
 

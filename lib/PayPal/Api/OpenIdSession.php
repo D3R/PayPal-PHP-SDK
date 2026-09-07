@@ -25,27 +25,27 @@ class OpenIdSession
      */
     public static function getAuthorizationUrl($redirectUri, $scope, $clientId, $nonce = null, $state = null, $apiContext = null)
     {
-        $apiContext = $apiContext ? $apiContext : new ApiContext();
+        $apiContext = $apiContext ?: new ApiContext();
         $config = $apiContext->getConfig();
 
         if ($apiContext->get($clientId)) {
             $clientId = $apiContext->get($clientId);
         }
 
-        $clientId = $clientId ? $clientId : $apiContext->getCredential()->getClientId();
+        $clientId = $clientId ?: $apiContext->getCredential()->getClientId();
 
-        $scope = count($scope) != 0 ? $scope : array('openid', 'profile', 'address', 'email', 'phone',
-            'https://uri.paypal.com/services/paypalattributes', 'https://uri.paypal.com/services/expresscheckout');
+        $scope = count($scope) != 0 ? $scope : ['openid', 'profile', 'address', 'email', 'phone',
+            'https://uri.paypal.com/services/paypalattributes', 'https://uri.paypal.com/services/expresscheckout'];
         if (!in_array('openid', $scope)) {
             $scope[] = 'openid';
         }
 
-        $params = array(
+        $params = [
             'client_id' => $clientId,
             'response_type' => 'code',
             'scope' => implode(" ", $scope),
             'redirect_uri' => $redirectUri
-        );
+        ];
 
         if ($nonce) {
             $params['nonce'] = $nonce;
@@ -75,11 +75,11 @@ class OpenIdSession
         }
         $config = $apiContext->getConfig();
 
-        $params = array(
+        $params = [
             'id_token' => $idToken,
             'redirect_uri' => $redirectUri,
             'logout' => 'true'
-        );
+        ];
         return sprintf("%s/webapps/auth/protocol/openidconnect/v1/endsession?%s", self::getBaseUrl($config), http_build_query($params));
     }
 

@@ -6,7 +6,7 @@
 
 use PayPal\Api\Template;
 
-$invoiceTemplate = require 'CreateInvoiceTemplate.php';
+$invoiceTemplate = require __DIR__ . '/CreateInvoiceTemplate.php';
 
 /** @var Template $invoiceTemplate */
 $templateId = $invoiceTemplate->getTemplateId();
@@ -19,9 +19,9 @@ $templateId = $invoiceTemplate->getTemplateId();
 // (See bootstrap.php for more on `ApiContext`)
 try {
     $template = Template::get($templateId, $apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Get Invoice Template", "Template", $template->getTemplateId(), $templateId, $ex);
+    ResultPrinter::printError("Get Invoice Template", "Template", $template->getTemplateId(), $templateId, $exception);
     exit(1);
 }
 

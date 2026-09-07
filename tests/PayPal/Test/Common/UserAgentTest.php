@@ -6,10 +6,10 @@ use PHPUnit\Framework\TestCase;
 class UserAgentTest extends TestCase
 {
 
-    public function testGetValue()
+    public function testGetValue(): void
     {
         $ua = PayPalUserAgent::getValue("name", "version");
-        list($id, $version, $features) = sscanf($ua, "PayPalSDK/%s %s (%[^[]])");
+        [$id, $version, $features] = sscanf($ua, "PayPalSDK/%s %s (%[^[]])");
 
         // Check that we pass the useragent in the expected format
         $this->assertNotNull($id);

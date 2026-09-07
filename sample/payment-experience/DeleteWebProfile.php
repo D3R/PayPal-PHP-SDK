@@ -9,7 +9,7 @@
 // The CreateWebProfile.php will create a web profile for us, and return a CreateProfileResponse,
 // that contains the web profile ID.
 /** @var \PayPal\Api\CreateProfileResponse $result */
-$createProfileResponse = require_once 'CreateWebProfile.php';
+$createProfileResponse = require_once __DIR__ . '/CreateWebProfile.php';
 
 // Create a new instance of web Profile ID, and set the ID.
 $webProfile = new \PayPal\Api\WebProfile();
@@ -18,9 +18,9 @@ $webProfile->setId($createProfileResponse->getId());
 try {
     // Execute the delete method
     $webProfile->delete($apiContext);
-} catch (\PayPal\Exception\PayPalConnectionException $ex) {
+} catch (\PayPal\Exception\PayPalConnectionException $payPalConnectionException) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Deleted Web Profile", "Web Profile", $createProfileResponse->getId(), null, $ex);
+    ResultPrinter::printError("Deleted Web Profile", "Web Profile", $createProfileResponse->getId(), null, $payPalConnectionException);
     exit(1);
 }
 

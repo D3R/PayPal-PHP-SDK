@@ -20,7 +20,7 @@ class TemplatesTest extends TestCase
      * Gets Json String of Object Templates
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"addresses":' .AddressTest::getJson() . ',"emails":"TestSample","phones":' .PhoneTest::getJson() . ',"templates":' .TemplateTest::getJson() . ',"links":' .LinksTest::getJson() . '}';
     }
@@ -29,7 +29,7 @@ class TemplatesTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return Templates
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\Templates
     {
         return new Templates(self::getJson());
     }
@@ -39,7 +39,7 @@ class TemplatesTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return Templates
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\Templates
     {
         $obj = new Templates(self::getJson());
         $this->assertNotNull($obj);
@@ -56,7 +56,7 @@ class TemplatesTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Templates $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getAddresses(), AddressTest::getObject());
         $this->assertEquals($obj->getEmails(), "TestSample");
@@ -69,9 +69,9 @@ class TemplatesTest extends TestCase
      * @dataProvider mockProvider
      * @param Templates $obj
      */
-    public function testGet($obj, $mockApiContext)
+    public function testGet(\PayPal\Api\Templates $obj, $mockApiContext): void
     {
-        $mockPPRestCall = $this->getMockBuilder('\PayPal\Transport\PayPalRestCall')
+        $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -88,9 +88,9 @@ class TemplatesTest extends TestCase
      * @dataProvider mockProvider
      * @param Templates $obj
      */
-    public function testGetAll($obj, $mockApiContext)
+    public function testGetAll(\PayPal\Api\Templates $obj, $mockApiContext): void
     {
-        $mockPPRestCall = $this->getMockBuilder('\PayPal\Transport\PayPalRestCall')
+        $mockPPRestCall = $this->getMockBuilder(\PayPal\Transport\PayPalRestCall::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -99,21 +99,21 @@ class TemplatesTest extends TestCase
             ->will($this->returnValue(
                     TemplatesTest::getJson()
             ));
-        $params = array();
+        $params = [];
 
         $result = $obj->getAll($params, $mockApiContext, $mockPPRestCall);
         $this->assertNotNull($result);
     }
 
-    public function mockProvider()
+    public function mockProvider(): array
     {
         $obj = self::getObject();
         $mockApiContext = $this->getMockBuilder('ApiContext')
                     ->disableOriginalConstructor()
                     ->getMock();
-        return array(
-            array($obj, $mockApiContext),
-            array($obj, null)
-        );
+        return [
+            [$obj, $mockApiContext],
+            [$obj, null]
+        ];
     }
 }

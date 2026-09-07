@@ -5,7 +5,7 @@
 // a legitimate invoice to the payer
 
 /** @var Invoice $invoice */
-$invoice = require 'CreateInvoice.php';
+$invoice = require __DIR__ . '/CreateInvoice.php';
 
 use PayPal\Api\Invoice;
 
@@ -15,9 +15,9 @@ try {
     // Send a legitimate invoice to the payer
     // with a valid ApiContext (See bootstrap.php for more on `ApiContext`)
     $sendStatus = $invoice->send($apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Send Invoice", "Invoice", null, null, $ex);
+    ResultPrinter::printError("Send Invoice", "Invoice", null, null, $exception);
     exit(1);
 }
 
@@ -32,9 +32,9 @@ try {
 // (See bootstrap.php for more on `ApiContext`)
 try {
     $invoice = Invoice::get($invoice->getId(), $apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Get Invoice (Not Required - For Sample Only)", "Invoice", $invoice->getId(), $invoice->getId(), $ex);
+    ResultPrinter::printError("Get Invoice (Not Required - For Sample Only)", "Invoice", $invoice->getId(), $invoice->getId(), $exception);
     exit(1);
 }
 

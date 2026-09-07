@@ -7,38 +7,38 @@ use PHPUnit\Framework\TestCase;
 class UrlValidatorTest extends TestCase
 {
 
-    public static function positiveProvider()
+    public static function positiveProvider(): array
     {
-        return array(
-            array("https://www.paypal.com"),
-            array("http://www.paypal.com"),
-            array("https://paypal.com"),
-            array("https://www.paypal.com/directory/file"),
-            array("https://www.paypal.com/directory/file?something=1&other=true"),
-            array("https://www.paypal.com?value="),
-            array("https://www.paypal.com/123123"),
-            array("https://www.subdomain.paypal.com"),
-            array("https://www.sub-domain-with-dash.paypal-website.com"),
-            array("https://www.paypal.com?value=space%20separated%20value"),
-            array("https://www.special@character.com"),
-        );
+        return [
+            ["https://www.paypal.com"],
+            ["http://www.paypal.com"],
+            ["https://paypal.com"],
+            ["https://www.paypal.com/directory/file"],
+            ["https://www.paypal.com/directory/file?something=1&other=true"],
+            ["https://www.paypal.com?value="],
+            ["https://www.paypal.com/123123"],
+            ["https://www.subdomain.paypal.com"],
+            ["https://www.sub-domain-with-dash.paypal-website.com"],
+            ["https://www.paypal.com?value=space%20separated%20value"],
+            ["https://www.special@character.com"],
+        ];
     }
 
-    public static function invalidProvider()
+    public static function invalidProvider(): array
     {
-        return array(
-            array("www.paypal.com"),
-            array(""),
-            array(null),
-            array("https://www.sub_domain_with_underscore.paypal.com"),
-        );
+        return [
+            ["www.paypal.com"],
+            [""],
+            [null],
+            ["https://www.sub_domain_with_underscore.paypal.com"],
+        ];
     }
 
     /**
      *
      * @dataProvider positiveProvider
      */
-    public function testValidate($input)
+    public function testValidate(string $input): void
     {
         UrlValidator::validate($input, "Test Value");
     }
@@ -48,7 +48,7 @@ class UrlValidatorTest extends TestCase
      * @dataProvider invalidProvider
      * @expectedException \InvalidArgumentException
      */
-    public function testValidateException($input)
+    public function testValidateException(?string $input): void
     {
         UrlValidator::validate($input, "Test Value");
     }

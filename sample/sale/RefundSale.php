@@ -7,7 +7,7 @@
 // API used: /v1/payments/sale/{sale-id}/refund
 
 /** @var Sale $sale */
-$sale = require 'GetSale.php';
+$sale = require __DIR__ . '/GetSale.php';
 $saleId = $sale->getId();
 
 use PayPal\Api\Amount;
@@ -41,9 +41,9 @@ try {
     // Refund the sale
     // (See bootstrap.php for more on `ApiContext`)
     $refundedSale = $sale->refundSale($refundRequest, $apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Refund Sale", "Sale", null, $refundRequest, $ex);
+    ResultPrinter::printError("Refund Sale", "Sale", null, $refundRequest, $exception);
     exit(1);
 }
 

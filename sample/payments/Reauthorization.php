@@ -30,9 +30,9 @@ try {
     $authorization->setAmount($amount);
 
     $reAuthorization = $authorization->reauthorize($apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Reauthorize Payment", "Payment", null, null, $ex);
+    ResultPrinter::printError("Reauthorize Payment", "Payment", null, null, $exception);
     exit(1);
 }
 

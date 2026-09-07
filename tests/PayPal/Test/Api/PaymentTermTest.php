@@ -16,7 +16,7 @@ class PaymentTermTest extends TestCase
      * Gets Json String of Object PaymentTerm
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"term_type":"TestSample","due_date":"TestSample"}';
     }
@@ -25,7 +25,7 @@ class PaymentTermTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return PaymentTerm
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\PaymentTerm
     {
         return new PaymentTerm(self::getJson());
     }
@@ -35,7 +35,7 @@ class PaymentTermTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return PaymentTerm
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\PaymentTerm
     {
         $obj = new PaymentTerm(self::getJson());
         $this->assertNotNull($obj);
@@ -49,7 +49,7 @@ class PaymentTermTest extends TestCase
      * @depends testSerializationDeserialization
      * @param PaymentTerm $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getTermType(), "TestSample");
         $this->assertEquals($obj->getDueDate(), "TestSample");

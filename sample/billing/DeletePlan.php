@@ -8,15 +8,15 @@
 
 // Retrieving the Plan object from Create Plan Sample
 /** @var Plan $createdPlan */
-$createdPlan = require 'CreatePlan.php';
+$createdPlan = require __DIR__ . '/CreatePlan.php';
 
 use PayPal\Api\Plan;
 
 try {
     $result = $createdPlan->delete($apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Deleted a Plan", "Plan", $createdPlan->getId(), null, $ex);
+    ResultPrinter::printError("Deleted a Plan", "Plan", $createdPlan->getId(), null, $exception);
     exit(1);
 }
 

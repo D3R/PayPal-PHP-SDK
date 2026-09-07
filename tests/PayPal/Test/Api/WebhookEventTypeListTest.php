@@ -17,7 +17,7 @@ class WebhookEventTypeListTest extends TestCase
      * Gets Json String of Object WebhookEventTypeList
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"event_types":' .WebhookEventTypeTest::getJson() . '}';
     }
@@ -26,7 +26,7 @@ class WebhookEventTypeListTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return WebhookEventTypeList
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\WebhookEventTypeList
     {
         return new WebhookEventTypeList(self::getJson());
     }
@@ -36,7 +36,7 @@ class WebhookEventTypeListTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return WebhookEventTypeList
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\WebhookEventTypeList
     {
         $obj = new WebhookEventTypeList(self::getJson());
         $this->assertNotNull($obj);
@@ -49,7 +49,7 @@ class WebhookEventTypeListTest extends TestCase
      * @depends testSerializationDeserialization
      * @param WebhookEventTypeList $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getEventTypes(), WebhookEventTypeTest::getObject());
     }

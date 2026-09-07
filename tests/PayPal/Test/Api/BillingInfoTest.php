@@ -16,7 +16,7 @@ class BillingInfoTest extends TestCase
      * Gets Json String of Object BillingInfo
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"email":"TestSample","first_name":"TestSample","last_name":"TestSample","business_name":"TestSample","address":' .InvoiceAddressTest::getJson() . ',"language":"TestSample","additional_info":"TestSample","notification_channel":"TestSample","phone":' .PhoneTest::getJson() . '}';
     }
@@ -25,7 +25,7 @@ class BillingInfoTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return BillingInfo
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\BillingInfo
     {
         return new BillingInfo(self::getJson());
     }
@@ -35,7 +35,7 @@ class BillingInfoTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return BillingInfo
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\BillingInfo
     {
         $obj = new BillingInfo(self::getJson());
         $this->assertNotNull($obj);
@@ -56,7 +56,7 @@ class BillingInfoTest extends TestCase
      * @depends testSerializationDeserialization
      * @param BillingInfo $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getEmail(), "TestSample");
         $this->assertEquals($obj->getFirstName(), "TestSample");

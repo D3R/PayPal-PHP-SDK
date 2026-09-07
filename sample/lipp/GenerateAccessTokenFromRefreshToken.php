@@ -10,10 +10,10 @@ $refreshToken = 'yzX4AkmMyBKR4on7vB5he-tDu38s24Zy-kTibhSuqA8kTdy0Yinxj7NpAyULx0b
 
 try {
     $tokenInfo = new OpenIdTokeninfo();
-    $tokenInfo = $tokenInfo->createFromRefreshToken(array('refresh_token' => $refreshToken), $apiContext);
-} catch (Exception $ex) {
+    $tokenInfo = $tokenInfo->createFromRefreshToken(['refresh_token' => $refreshToken], $apiContext);
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Obtained Access Token From Refresh Token", "Access Token", null, null, $ex);
+    ResultPrinter::printError("Obtained Access Token From Refresh Token", "Access Token", null, null, $exception);
     exit(1);
 }
 

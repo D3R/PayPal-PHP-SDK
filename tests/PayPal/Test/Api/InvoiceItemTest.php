@@ -16,7 +16,7 @@ class InvoiceItemTest extends TestCase
      * Gets Json String of Object InvoiceItem
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"name":"TestSample","description":"TestSample","quantity":"12.34","unit_price":' .CurrencyTest::getJson() . ',"tax":' .TaxTest::getJson() . ',"date":"TestSample","discount":' .CostTest::getJson() . ',"image_url":"http://www.google.com","unit_of_measure":"TestSample"}';
     }
@@ -25,7 +25,7 @@ class InvoiceItemTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return InvoiceItem
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\InvoiceItem
     {
         return new InvoiceItem(self::getJson());
     }
@@ -35,7 +35,7 @@ class InvoiceItemTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return InvoiceItem
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\InvoiceItem
     {
         $obj = new InvoiceItem(self::getJson());
         $this->assertNotNull($obj);
@@ -56,7 +56,7 @@ class InvoiceItemTest extends TestCase
      * @depends testSerializationDeserialization
      * @param InvoiceItem $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getName(), "TestSample");
         $this->assertEquals($obj->getDescription(), "TestSample");
@@ -73,7 +73,7 @@ class InvoiceItemTest extends TestCase
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage ImageUrl is not a fully qualified URL
      */
-    public function testUrlValidationForImageUrl()
+    public function testUrlValidationForImageUrl(): void
     {
         $obj = new InvoiceItem();
         $obj->setImageUrl(null);

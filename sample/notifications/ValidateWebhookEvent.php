@@ -21,7 +21,7 @@ $requestBody = '{"id":"WH-7MU294299R542214K-4N1831857K851783H","event_version":"
 /** @var String $bodyReceived */
 // $bodyReceived = file_get_contents('php://input');
      
- $headers = array (
+ $headers =  [
   'Client-Pid' => '14910',
   'Cal-Poolstack' => 'amqunphttpdeliveryd:UNPHTTPDELIVERY*CalThreadId=0*TopLevelTxnStartTime=1579e71daf8*Host=slcsbamqunphttpdeliveryd3001',
   'Correlation-Id' => '958be65120106',
@@ -34,7 +34,7 @@ $requestBody = '{"id":"WH-7MU294299R542214K-4N1831857K851783H","event_version":"
   'Paypal-Transmission-Time' => '2019-08-29T10:49:33Z',
   'Paypal-Transmission-Id' => 'afa30d40-ca4a-11e9-ab68-7d4e2605c70c',
   'Accept' => '*/*',
-);
+];
 
 /**
 * Receive HTTP headers that you received from PayPal webhook.
@@ -63,9 +63,9 @@ $request = clone $signatureVerification;
 try {
     /** @var \PayPal\Api\VerifyWebhookSignatureResponse $output */
     $output = $signatureVerification->post($apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Validate Received Webhook Event", "WebhookEvent", null, $request->toJSON(), $ex);
+    ResultPrinter::printError("Validate Received Webhook Event", "WebhookEvent", null, $request->toJSON(), $exception);
     exit(1);
 }
 

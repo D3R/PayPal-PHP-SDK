@@ -4,7 +4,7 @@
 // This sample code demonstrate how you can retrieve
 // the next invoice number.
 
-require '../bootstrap.php';
+require __DIR__ . '/../bootstrap.php';
 use PayPal\Api\Invoice;
 
 // ### Get Next Invoice Number
@@ -12,9 +12,9 @@ use PayPal\Api\Invoice;
 // (See bootstrap.php for more on `ApiContext`)
 try {
     $number = Invoice::generateNumber($apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Get Next Invoice Number", "InvoiceNumber", null, null, $ex);
+    ResultPrinter::printError("Get Next Invoice Number", "InvoiceNumber", null, null, $exception);
     exit(1);
 }
 

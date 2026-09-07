@@ -16,7 +16,7 @@ class TermsTest extends TestCase
      * Gets Json String of Object Terms
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"id":"TestSample","type":"TestSample","max_billing_amount":' .CurrencyTest::getJson() . ',"occurrences":"TestSample","amount_range":' .CurrencyTest::getJson() . ',"buyer_editable":"TestSample"}';
     }
@@ -25,7 +25,7 @@ class TermsTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return Terms
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\Terms
     {
         return new Terms(self::getJson());
     }
@@ -35,7 +35,7 @@ class TermsTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return Terms
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\Terms
     {
         $obj = new Terms(self::getJson());
         $this->assertNotNull($obj);
@@ -53,7 +53,7 @@ class TermsTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Terms $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getId(), "TestSample");
         $this->assertEquals($obj->getType(), "TestSample");

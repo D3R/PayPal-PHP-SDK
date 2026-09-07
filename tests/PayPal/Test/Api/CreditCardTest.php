@@ -17,7 +17,7 @@ class CreditCardTest extends TestCase
      *
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"id":"TestSample","number":"TestSample","type":"TestSample","expire_month":123,"expire_year":123,"cvv2":"TestSample","first_name":"TestSample","last_name":"TestSample","billing_address":' . AddressTest::getJson() . ',"external_customer_id":"TestSample","state":"TestSample","valid_until":"TestSample","links":' . LinksTest::getJson() . '}';
     }
@@ -26,7 +26,7 @@ class CreditCardTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return CreditCard
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\CreditCard
     {
         return new CreditCard(self::getJson());
     }
@@ -37,7 +37,7 @@ class CreditCardTest extends TestCase
      *
      * @return CreditCard
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\CreditCard
     {
         $obj = new CreditCard(self::getJson());
         $this->assertNotNull($obj);
@@ -62,7 +62,7 @@ class CreditCardTest extends TestCase
      * @depends testSerializationDeserialization
      * @param CreditCard $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getId(), "TestSample");
         $this->assertEquals($obj->getNumber(), "TestSample");

@@ -8,7 +8,7 @@
 
 // Retrieving the Agreement object from Get Billing Agreement. This may not be necessary if you are trying to search for transactions of already created Agreement.
 /** @var Agreement $agreement */
-$agreement = require 'GetBillingAgreement.php';
+$agreement = require __DIR__ . '/GetBillingAgreement.php';
 
 // Replace this with your AgreementId to search transactions based on your agreement.
 $agreementId = $agreement->getId();
@@ -16,13 +16,13 @@ $agreementId = $agreement->getId();
 use PayPal\Api\Agreement;
 
 // Adding Params to search transaction within a given time frame.
-$params = array('start_date' => date('Y-m-d', strtotime('-15 years')), 'end_date' => date('Y-m-d', strtotime('+5 days')));
+$params = ['start_date' => date('Y-m-d', strtotime('-15 years')), 'end_date' => date('Y-m-d', strtotime('+5 days'))];
 
 try {
     $result = Agreement::searchTransactions($agreementId, $params, $apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Search for Transactions", "AgreementTransaction", $agreementId, null, $ex);
+    ResultPrinter::printError("Search for Transactions", "AgreementTransaction", $agreementId, null, $exception);
     exit(1);
 }
 

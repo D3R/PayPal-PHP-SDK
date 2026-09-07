@@ -5,7 +5,7 @@
 // an invoice.
 
 /** @var Invoice $invoice */
-$invoice = require 'CreateInvoice.php';
+$invoice = require __DIR__ . '/CreateInvoice.php';
 
 use PayPal\Api\Invoice;
 
@@ -18,9 +18,9 @@ try {
     // notification object
     // (See bootstrap.php for more on `ApiContext`)
     $deleteStatus = $invoice->delete($apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Delete Invoice", "Invoice", null, $deleteStatus, $ex);
+    ResultPrinter::printError("Delete Invoice", "Invoice", null, $deleteStatus, $exception);
     exit(1);
 }
 

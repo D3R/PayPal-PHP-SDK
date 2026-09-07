@@ -11,7 +11,7 @@
 
 // Retrieving the Plan object from Create Plan Sample to demonstrate the List
 /** @var Plan $createdPlan */
-$createdPlan = require 'CreatePlan.php';
+$createdPlan = require __DIR__ . '/CreatePlan.php';
 
 use PayPal\Api\Patch;
 use PayPal\Api\PatchRequest;
@@ -34,9 +34,9 @@ try {
     $createdPlan->update($patchRequest, $apiContext);
 
     $plan = Plan::get($createdPlan->getId(), $apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Updated the Plan to Active State", "Plan", null, $patchRequest, $ex);
+    ResultPrinter::printError("Updated the Plan to Active State", "Plan", null, $patchRequest, $exception);
     exit(1);
 }
 

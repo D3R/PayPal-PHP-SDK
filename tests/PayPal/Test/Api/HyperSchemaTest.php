@@ -16,7 +16,7 @@ class HyperSchemaTest extends TestCase
      * Gets Json String of Object HyperSchema
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"fragmentResolution":"TestSample","readonly":true,"contentEncoding":"TestSample","pathStart":"TestSample","mediaType":"TestSample"}';
     }
@@ -25,7 +25,7 @@ class HyperSchemaTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return HyperSchema
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\HyperSchema
     {
         return new HyperSchema(self::getJson());
     }
@@ -35,7 +35,7 @@ class HyperSchemaTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return HyperSchema
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\HyperSchema
     {
         $obj = new HyperSchema(self::getJson());
         $this->assertNotNull($obj);
@@ -53,7 +53,7 @@ class HyperSchemaTest extends TestCase
      * @depends testSerializationDeserialization
      * @param HyperSchema $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getLinks(), LinksTest::getObject());
         $this->assertEquals($obj->getFragmentResolution(), "TestSample");

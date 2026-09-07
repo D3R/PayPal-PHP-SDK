@@ -5,7 +5,7 @@
 // an invoice as paid.
 
 /** @var Invoice $invoice */
-$invoice = require 'SendInvoice.php';
+$invoice = require __DIR__ . '/SendInvoice.php';
 
 use PayPal\Api\Invoice;
 use PayPal\Api\PaymentDetail;
@@ -29,9 +29,9 @@ try {
     // notification object
     // (See bootstrap.php for more on `ApiContext`)
     $recordStatus = $invoice->recordPayment($record, $apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Payment for Invoice", "Invoice", null, null, $ex);
+    ResultPrinter::printError("Payment for Invoice", "Invoice", null, null, $exception);
     exit(1);
 }
 
@@ -46,9 +46,9 @@ try {
 // (See bootstrap.php for more on `ApiContext`)
 try {
     $invoice = Invoice::get($invoice->getId(), $apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Get Invoice (Not Required - For Sample Only)", "Invoice", $invoice->getId(), $invoice->getId(), $ex);
+    ResultPrinter::printError("Get Invoice (Not Required - For Sample Only)", "Invoice", $invoice->getId(), $invoice->getId(), $exception);
     exit(1);
 }
 

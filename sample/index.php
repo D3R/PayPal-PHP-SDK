@@ -1,16 +1,16 @@
 <!-- Welcome to PayPal REST SDK -- >
 <?php
-if (PHP_SAPI == 'cli') {
+if (PHP_SAPI === 'cli') {
     // If the index.php is called using console, we would try to host
     // the built in PHP Server
-    if (version_compare(phpversion(), '5.4.0', '>=') === true) {
+    if (version_compare(phpversion(), '5.4.0', '>=')) {
         //exec('php -S -t ' . __DIR__ . '/');
         $cmd = "php -S localhost:5000 -t " . __DIR__;
-        $descriptors = array(
-            0 => array("pipe", "r"),
+        $descriptors = [
+            0 => ["pipe", "r"],
             1 => STDOUT,
             2 => STDERR,
-        );
+        ];
         $process = proc_open($cmd, $descriptors, $pipes);
         if ($process === false) {
             fprintf(STDERR,

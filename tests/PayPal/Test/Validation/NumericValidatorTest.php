@@ -7,45 +7,45 @@ use PHPUnit\Framework\TestCase;
 class NumericValidatorTest extends TestCase
 {
 
-    public static function positiveProvider()
+    public static function positiveProvider(): array
     {
-        return array(
-            array(".5", "0.50"),
-            array(".55", "0.55"),
-            array("0", "0.00"),
-            array(null, null),
-            array("01", "1.00"),
-            array("01.1", "1.10"),
-            array("10.0", "10.00"),
-            array("0.0", "0.00"),
-            array("00.00", "0.00"),
-            array("000.111", "0.11"),
-            array("000.0001", "0.00"),
-            array("-0.001", "0.00"),
-            array("-0", "0.00"),
-            array("-00.00", "0.00"),
-            array("-10.00", "-10.00"),
-            array("", null),
-            array("  ", null),
-            array(1.20, "1.20")
-        );
+        return [
+            [".5", "0.50"],
+            [".55", "0.55"],
+            ["0", "0.00"],
+            [null, null],
+            ["01", "1.00"],
+            ["01.1", "1.10"],
+            ["10.0", "10.00"],
+            ["0.0", "0.00"],
+            ["00.00", "0.00"],
+            ["000.111", "0.11"],
+            ["000.0001", "0.00"],
+            ["-0.001", "0.00"],
+            ["-0", "0.00"],
+            ["-00.00", "0.00"],
+            ["-10.00", "-10.00"],
+            ["", null],
+            ["  ", null],
+            [1.20, "1.20"]
+        ];
     }
 
-    public static function invalidProvider()
+    public static function invalidProvider(): array
     {
-        return array(
-            array("01.j"),
-            array("j.10"),
-            array("empty"),
-            array("null")
-        );
+        return [
+            ["01.j"],
+            ["j.10"],
+            ["empty"],
+            ["null"]
+        ];
     }
 
     /**
      *
      * @dataProvider positiveProvider
      */
-    public function testValidate($input)
+    public function testValidate(string|float|null $input): void
     {
         $this->assertTrue(NumericValidator::validate($input, "Test Value"));
     }
@@ -55,7 +55,7 @@ class NumericValidatorTest extends TestCase
      * @dataProvider invalidProvider
      * @expectedException \InvalidArgumentException
      */
-    public function testValidateException($input)
+    public function testValidateException(string $input): void
     {
         NumericValidator::validate($input, "Test Value");
     }

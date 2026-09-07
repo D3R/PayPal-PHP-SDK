@@ -36,9 +36,9 @@ try {
     // ### Refund the Capture 
     $captureRefund = $capture->refundCapturedPayment($refundRequest, $apiContext);
 
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Refund Capture", "Capture", null, $refundRequest, $ex);
+    ResultPrinter::printError("Refund Capture", "Capture", null, $refundRequest, $exception);
     exit(1);
 }
 

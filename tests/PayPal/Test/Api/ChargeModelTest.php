@@ -16,7 +16,7 @@ class ChargeModelTest extends TestCase
      * Gets Json String of Object ChargeModels
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"id":"TestSample","type":"TestSample","amount":' .CurrencyTest::getJson() . '}';
     }
@@ -25,7 +25,7 @@ class ChargeModelTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return ChargeModel
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\ChargeModel
     {
         return new ChargeModel(self::getJson());
     }
@@ -35,7 +35,7 @@ class ChargeModelTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return ChargeModel
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\ChargeModel
     {
         $obj = new ChargeModel(self::getJson());
         $this->assertNotNull($obj);
@@ -50,7 +50,7 @@ class ChargeModelTest extends TestCase
      * @depends testSerializationDeserialization
      * @param ChargeModel $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getId(), "TestSample");
         $this->assertEquals($obj->getType(), "TestSample");

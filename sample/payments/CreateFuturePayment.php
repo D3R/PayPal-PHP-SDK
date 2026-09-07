@@ -42,8 +42,8 @@ $transaction->setAmount($amount)
 // payment approval/ cancellation.
 $baseUrl = getBaseUrl();
 $redirectUrls = new RedirectUrls();
-$redirectUrls->setReturnUrl("$baseUrl/ExecutePayment.php?success=true")
-    ->setCancelUrl("$baseUrl/ExecutePayment.php?success=false");
+$redirectUrls->setReturnUrl($baseUrl . '/ExecutePayment.php?success=true')
+    ->setCancelUrl($baseUrl . '/ExecutePayment.php?success=false');
 
 // ### Payment
 // A Payment Resource; create one using
@@ -52,7 +52,7 @@ $payment = new FuturePayment();
 $payment->setIntent("authorize")
     ->setPayer($payer)
     ->setRedirectUrls($redirectUrls)
-    ->setTransactions(array($transaction));
+    ->setTransactions([$transaction]);
 
 // ### Get Refresh Token
 // You need to get a permanent refresh token from the authorization code, retrieved from the mobile sdk.
@@ -84,9 +84,9 @@ try {
     // for payment approval
     // Please note that currently future payments works only with PayPal as a funding instrument.
     $payment->create($apiContext, $clientMetadataId);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Future Payment", "Payment", null, $payment, $ex);
+    ResultPrinter::printError("Future Payment", "Payment", null, $payment, $exception);
     exit(1);
 }
 

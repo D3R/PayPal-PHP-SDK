@@ -16,7 +16,7 @@ class MerchantInfoTest extends TestCase
      * Gets Json String of Object MerchantInfo
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"email":"TestSample","first_name":"TestSample","last_name":"TestSample","address":' .AddressTest::getJson() . ',"business_name":"TestSample","phone":' .PhoneTest::getJson() . ',"fax":' .PhoneTest::getJson() . ',"website":"TestSample","tax_id":"TestSample","additional_info_label":"TestSample","additional_info":"TestSample"}';
     }
@@ -25,7 +25,7 @@ class MerchantInfoTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return MerchantInfo
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\MerchantInfo
     {
         return new MerchantInfo(self::getJson());
     }
@@ -35,7 +35,7 @@ class MerchantInfoTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return MerchantInfo
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\MerchantInfo
     {
         $obj = new MerchantInfo(self::getJson());
         $this->assertNotNull($obj);
@@ -58,7 +58,7 @@ class MerchantInfoTest extends TestCase
      * @depends testSerializationDeserialization
      * @param MerchantInfo $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getEmail(), "TestSample");
         $this->assertEquals($obj->getFirstName(), "TestSample");

@@ -19,9 +19,9 @@ $authorizationId = "<your authorization id here>";
 try {
     // Retrieve the authorization
     $result = Authorization::get($authorizationId, $apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Get Authorization", "Authorization", null, null, $ex);
+    ResultPrinter::printError("Get Authorization", "Authorization", null, null, $exception);
     exit(1);
 }
 

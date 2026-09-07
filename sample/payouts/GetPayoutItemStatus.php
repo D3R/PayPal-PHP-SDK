@@ -7,7 +7,7 @@
 // API used: GET /v1/payments/payouts-item/<Payout-Item-Id>
 
 /** @var \PayPal\Api\PayoutBatch $payoutBatch */
-$payoutBatch = require 'GetPayoutBatchStatus.php';
+$payoutBatch = require __DIR__ . '/GetPayoutBatchStatus.php';
 // ## Payout Item ID
 // You can replace this with your Payout Batch Id on already created Payout.
 $payoutItems = $payoutBatch->getItems();
@@ -17,9 +17,9 @@ $payoutItemId = $payoutItem->getPayoutItemId();
 // ### Get Payout Item Status
 try {
     $output = \PayPal\Api\PayoutItem::get($payoutItemId, $apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Get Payout Item Status", "PayoutItem", null, $payoutItemId, $ex);
+    ResultPrinter::printError("Get Payout Item Status", "PayoutItem", null, $payoutItemId, $exception);
     exit(1);
 }
 

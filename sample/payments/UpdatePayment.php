@@ -10,7 +10,7 @@
 // API used: PATCH /v1/payments/payment/<Payment-Id>
 
 /** @var Payment $createdPayment */
-$createdPayment = require 'CreatePaymentUsingPayPal.php';
+$createdPayment = require __DIR__ . '/CreatePaymentUsingPayPal.php';
 use PayPal\Api\Payment;
 
 $paymentId = $createdPayment->getId();
@@ -70,7 +70,7 @@ $patchAdd->setOp('add')
                 }'));
 
 $patchRequest = new \PayPal\Api\PatchRequest();
-$patchRequest->setPatches(array($patchReplace, $patchAdd));
+$patchRequest->setPatches([$patchReplace, $patchAdd]);
 
 
 // ### Update payment
@@ -81,9 +81,9 @@ $patchRequest->setPatches(array($patchReplace, $patchAdd));
 // (See bootstrap.php for more on `ApiContext`)
 try {
     $result = $createdPayment->update($patchRequest, $apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Update Payment", "PatchRequest", null, $patchRequest, $ex);
+    ResultPrinter::printError("Update Payment", "PatchRequest", null, $patchRequest, $exception);
     exit(1);
 }
 
@@ -109,7 +109,7 @@ foreach ($result->getLinks() as $link) {
 }
 
 // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
- ResultPrinter::printResult("Created Payment Using PayPal. Please visit the URL to Approve.", "Payment", "<a href='$approvalUrl' >$approvalUrl</a>", $request, $result);
+ ResultPrinter::printResult("Created Payment Using PayPal. Please visit the URL to Approve.", "Payment", sprintf("<a href='%s' >%s</a>", $approvalUrl, $approvalUrl), $request, $result);
 }
 
 return $result;

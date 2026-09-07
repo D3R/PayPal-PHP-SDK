@@ -16,7 +16,7 @@ class NotificationTest extends TestCase
      * Gets Json String of Object Notification
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"subject":"TestSample","note":"TestSample","send_to_merchant":true}';
     }
@@ -25,7 +25,7 @@ class NotificationTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return Notification
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\Notification
     {
         return new Notification(self::getJson());
     }
@@ -35,7 +35,7 @@ class NotificationTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return Notification
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\Notification
     {
         $obj = new Notification(self::getJson());
         $this->assertNotNull($obj);
@@ -50,7 +50,7 @@ class NotificationTest extends TestCase
      * @depends testSerializationDeserialization
      * @param Notification $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getSubject(), "TestSample");
         $this->assertEquals($obj->getNote(), "TestSample");

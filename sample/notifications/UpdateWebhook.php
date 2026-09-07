@@ -10,7 +10,7 @@
 // In samples we are using CreateWebhook.php sample to get the created instance of webhook.
 // However, in real case scenario, we could use just the ID from database or use an already existing webhook.
 /** @var \PayPal\Api\Webhook $webhook */
-$webhook = require 'CreateWebhook.php';
+$webhook = require __DIR__ . '/CreateWebhook.php';
 // Updating the webhook as per given request
 //
 //      [
@@ -45,9 +45,9 @@ $patchRequest->addPatch($patch)->addPatch($patch2);
 // ### Get Webhook
 try {
     $output = $webhook->update($patchRequest, $apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Updated a Webhook", "Webhook", null, $patchRequest, $ex);
+    ResultPrinter::printError("Updated a Webhook", "Webhook", null, $patchRequest, $exception);
     exit(1);
 }
 

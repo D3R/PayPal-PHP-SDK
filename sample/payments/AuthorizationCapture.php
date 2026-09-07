@@ -32,9 +32,9 @@ try {
 
     // Perform a capture
     $getCapture = $authorization->capture($capture, $apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Capture Payment", "Authorization", null, $capture, $ex);
+    ResultPrinter::printError("Capture Payment", "Authorization", null, $capture, $exception);
     exit(1);
 }
 

@@ -22,7 +22,7 @@ class CreditCardHistoryTest extends TestCase
     public static $firstName = "V";
     public static $lastName = "C";
 
-    public static function createCreditCard()
+    public static function createCreditCard(): \PayPal\Api\CreditCard
     {
         $card = new CreditCard();
         $card->setType(self::$cardType);
@@ -38,31 +38,31 @@ class CreditCardHistoryTest extends TestCase
         return $card;
     }
 
-    public function setup()
+    public function setup(): void
     {
         $card = self::createCreditCard();
         $card->setBillingAddress(AddressTest::getObject());
-        $card->setLinks(array(LinksTest::getObject()));
+        $card->setLinks([LinksTest::getObject()]);
         $this->cards['full'] = $card;
 
         $card = self::createCreditCard();
         $this->cards['partial'] = $card;
     }
 
-    public function testGetterSetters()
+    public function testGetterSetters(): void
     {
         $cardHistory = new CreditCardHistory();
-        $cardHistory->setCreditCards(array($this->cards['partial'], $this->cards['full']));
+        $cardHistory->setCreditCards([$this->cards['partial'], $this->cards['full']]);
         $cardHistory->setCount(2);
 
         $this->assertCount(2, $cardHistory->getCreditCards());
     }
 
 
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): void
     {
         $cardHistory = new CreditCardHistory();
-        $cardHistory->setCreditCards(array($this->cards['partial'], $this->cards['full']));
+        $cardHistory->setCreditCards([$this->cards['partial'], $this->cards['full']]);
         $cardHistory->setCount(2);
 
         $cardHistoryCopy = new CreditCardHistory();

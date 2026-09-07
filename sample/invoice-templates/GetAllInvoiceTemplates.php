@@ -2,13 +2,13 @@
 
 use PayPal\Api\Templates;
 
-require 'CreateInvoiceTemplate.php';
+require __DIR__ . '/CreateInvoiceTemplate.php';
 
 try {
-    $templates = Templates::getAll(array("fields" => "all"), $apiContext);
-}  catch (Exception $ex) {
+    $templates = Templates::getAll(["fields" => "all"], $apiContext);
+}  catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Get all Templates", "Templates", null, null, $ex);
+    ResultPrinter::printError("Get all Templates", "Templates", null, null, $exception);
     exit(1);
 }
 

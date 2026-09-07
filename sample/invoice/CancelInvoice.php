@@ -5,7 +5,7 @@
 // an invoice.
 
 /** @var Invoice $invoice */
-$invoice = require 'SendInvoice.php';
+$invoice = require __DIR__ . '/SendInvoice.php';
 
 use PayPal\Api\CancelNotification;
 use PayPal\Api\Invoice;
@@ -31,9 +31,9 @@ try {
     // notification object
     // (See bootstrap.php for more on `ApiContext`)
     $cancelStatus = $invoice->cancel($notify, $apiContext);
-} catch (Exception $ex) {
+} catch (Exception $exception) {
     // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Cancel Invoice", "Invoice", null, $notify, $ex);
+    ResultPrinter::printError("Cancel Invoice", "Invoice", null, $notify, $exception);
     exit(1);
 }
 

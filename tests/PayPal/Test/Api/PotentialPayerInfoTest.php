@@ -16,7 +16,7 @@ class PotentialPayerInfoTest extends TestCase
      * Gets Json String of Object PotentialPayerInfo
      * @return string
      */
-    public static function getJson()
+    public static function getJson(): string
     {
         return '{"email":"TestSample","external_remember_me_id":"TestSample","account_number":"TestSample","billing_address":' .AddressTest::getJson() . '}';
     }
@@ -25,7 +25,7 @@ class PotentialPayerInfoTest extends TestCase
      * Gets Object Instance with Json data filled in
      * @return PotentialPayerInfo
      */
-    public static function getObject()
+    public static function getObject(): \PayPal\Api\PotentialPayerInfo
     {
         return new PotentialPayerInfo(self::getJson());
     }
@@ -35,7 +35,7 @@ class PotentialPayerInfoTest extends TestCase
      * Tests for Serialization and Deserialization Issues
      * @return PotentialPayerInfo
      */
-    public function testSerializationDeserialization()
+    public function testSerializationDeserialization(): \PayPal\Api\PotentialPayerInfo
     {
         $obj = new PotentialPayerInfo(self::getJson());
         $this->assertNotNull($obj);
@@ -51,7 +51,7 @@ class PotentialPayerInfoTest extends TestCase
      * @depends testSerializationDeserialization
      * @param PotentialPayerInfo $obj
      */
-    public function testGetters($obj)
+    public function testGetters($obj): void
     {
         $this->assertEquals($obj->getEmail(), "TestSample");
         $this->assertEquals($obj->getExternalRememberMeId(), "TestSample");
